@@ -18,6 +18,21 @@ ERA_LABEL = {
 
 FM = re.compile(r"^---\n(.*?)\n---\n", re.S)
 
+# Normalisation used before hashing a body to detect duplication.
+# An adversarial review defeated the duplication check by appending an HTML
+# comment, which renders as nothing, to each of 2,391 documents: the declared
+# count honestly went to zero and the gate honestly verified zero, while the
+# corpus still held 1,226 redundant copies. Strip anything invisible first, so
+# a normalisation pass or a per-file id stamp cannot silently erase the finding.
+_COMMENT_RE = re.compile(r"<!--.*?-->", re.S)
+_WS_RE = re.compile(r"\s+")
+
+
+def normalise_body(body):
+    b = _COMMENT_RE.sub(" ", body or "")
+    return _WS_RE.sub(" ", b).strip().lower()
+
+
 # Retrieval characteristic that matters more than any other in this corpus:
 # 48% of documents are property or dialog-box reference, only 20% are procedural.
 # Title-only search therefore lands on a property table about half the time, when
@@ -82,7 +97,8 @@ def main():
             body = body.strip()
             entries.append({
                 "path": rel,
-                "body_sha1": hashlib.sha1(body.encode("utf-8")).hexdigest() if body else "",
+                "body_sha1": (hashlib.sha1(normalise_body(body).encode("utf-8")).hexdigest()
+                              if normalise_body(body) else ""),
                 "body_chars": len(body),
                 # The unversioned bucket is not one era: it mixes pre- and
                 # post-rename articles. Flagging the pre-rename naming lets a

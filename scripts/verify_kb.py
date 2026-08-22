@@ -72,6 +72,21 @@ SMOKE = [
 
 FM_RE = re.compile(r"^---\n(.*?)\n---\n", re.S)
 
+# Normalisation used before hashing a body to detect duplication.
+# An adversarial review defeated the duplication check by appending an HTML
+# comment, which renders as nothing, to each of 2,391 documents: the declared
+# count honestly went to zero and the gate honestly verified zero, while the
+# corpus still held 1,226 redundant copies. Strip anything invisible first, so
+# a normalisation pass or a per-file id stamp cannot silently erase the finding.
+_COMMENT_RE = re.compile(r"<!--.*?-->", re.S)
+_WS_RE = re.compile(r"\s+")
+
+
+def normalise_body(body):
+    b = _COMMENT_RE.sub(" ", body or "")
+    return _WS_RE.sub(" ", b).strip().lower()
+
+
 
 def split_doc(path):
     """Return (title_lower, body_lower) with frontmatter REMOVED from the body.
@@ -167,27 +182,95 @@ def check_manifest(man, disk):
     dset, lset = set(disk), set(listed)
     missing = sorted(lset - dset)     # manifest names a file that is not there
     orphan = sorted(dset - lset)      # file on disk that the manifest never names
-    record("manifest_matches_disk", not missing and man.get("document_count") == len(listed),
-           "%d manifest entries have no file (%s); count field %s vs %d entries"
-           % (len(missing), missing[:3], man.get("document_count"), len(listed))
-           if (missing or man.get("document_count") != len(listed))
-           else "%d entries, all resolve, count field agrees" % len(listed))
+    # An adversarial review rewrote every field except `path` and the gate did
+    # not notice: era collapsed to "current" on all 13,235 docs, titles
+    # fabricated, source_url pointed at evil.example.com, is_canonical set true
+    # on all 1,226 duplicates. Verify the fields against disk, not just the path.
+    problems = list(missing[:3])
+    if man.get("document_count") != len(listed):
+        problems.append("count field %s vs %d entries"
+                        % (man.get("document_count"), len(listed)))
+    fm_re = re.compile(r"^---\n(.*?)\n---\n", re.S)
+    checked = mismatched = 0
+    for d in man.get("documents", []):
+        rel = d.get("path", "")
+        full = os.path.join(KB, rel)
+        if not os.path.isfile(full):
+            continue
+        checked += 1
+        # era must be derivable from the path, not asserted
+        parts = rel.split(os.sep)
+        path_era = parts[1] if len(parts) > 1 else ""
+        if d.get("era") != path_era:
+            mismatched += 1
+            if len(problems) < 6:
+                problems.append("%s: era %r but path says %r"
+                                % (rel, d.get("era"), path_era))
+            continue
+        raw = open(full, encoding="utf-8", errors="replace").read()
+        m = fm_re.match(raw)
+        if not m:
+            continue
+        fm_title = ""
+        fm_url = ""
+        for line in m.group(1).split("\n"):
+            if line.startswith("title:"):
+                fm_title = line.split(":", 1)[1].strip().strip('"')
+            elif line.startswith("url:"):
+                fm_url = line.split(":", 1)[1].strip()
+        if d.get("title") != fm_title:
+            mismatched += 1
+            if len(problems) < 6:
+                problems.append("%s: manifest title %r != frontmatter %r"
+                                % (rel, str(d.get("title"))[:30], fm_title[:30]))
+            continue
+        if d.get("source_url") != fm_url:
+            mismatched += 1
+            if len(problems) < 6:
+                problems.append("%s: manifest source_url does not match the document"
+                                % rel)
+            continue
+        body = raw[m.end():].strip()
+        nb = normalise_body(body)
+        if d.get("body_sha1") != (hashlib.sha1(nb.encode("utf-8")).hexdigest()
+                                  if nb else ""):
+            mismatched += 1
+            if len(problems) < 6:
+                problems.append("%s: body_sha1 does not match the file" % rel)
+    record("manifest_matches_disk", not problems,
+           "%d problems: %s" % (len(missing) + mismatched, problems[:6]) if problems
+           else "%d entries; path, era, title, source_url and body_sha1 all verified "
+                "against disk for %d" % (len(listed), checked))
     record("no_orphan_files", not orphan,
            "%d docs on disk absent from manifest: %s" % (len(orphan), orphan[:3])
            if orphan else "no orphans")
 
 
 def check_llms(disk):
+    """llms.txt is the navigation index an agent reads to find anything.
+
+    The previous version was one-directional: every link it named had to
+    resolve, but nothing required it to name any. An adversarial review replaced
+    the whole 13,643-line index with three lines listing zero documents and the
+    check reported a pass. It must cover the corpus, not merely avoid lying
+    about the part it mentions."""
     p = os.path.join(KB, "llms.txt")
     if not os.path.exists(p):
         record("llms_txt_resolves", False, "llms.txt missing")
         return
-    dead = []
-    for m in re.finditer(r"\]\((docs/[^)]+)\)", open(p, encoding="utf-8").read()):
-        if not os.path.exists(os.path.join(KB, m.group(1))):
-            dead.append(m.group(1))
-    record("llms_txt_resolves", not dead,
-           "%d dead links: %s" % (len(dead), dead[:3]) if dead else "all llms.txt paths resolve")
+    text = open(p, encoding="utf-8").read()
+    linked = set(re.findall(r"\]\((docs/[^)]+)\)", text))
+    dead = sorted(l for l in linked if not os.path.exists(os.path.join(KB, l)))
+    uncovered = len(set(disk) - linked)
+    problems = []
+    if dead:
+        problems.append("%d dead links: %s" % (len(dead), dead[:3]))
+    if uncovered:
+        problems.append("%d of %d documents are not listed in llms.txt"
+                        % (uncovered, len(disk)))
+    record("llms_txt_resolves", not problems,
+           "; ".join(problems) if problems
+           else "indexes all %d documents, every link resolves" % len(linked))
 
 
 def check_api_sources():
@@ -405,7 +488,7 @@ def check_duplication(man, disk):
     for rel in disk:
         raw = open(os.path.join(KB, rel), encoding="utf-8", errors="replace").read()
         m = fm.match(raw)
-        body = (raw[m.end():] if m else raw).strip()
+        body = normalise_body(raw[m.end():] if m else raw)
         if len(body) > 200:
             groups[hashlib.sha1(body.encode("utf-8")).hexdigest()] += 1
     actual_redundant = sum(n - 1 for n in groups.values() if n > 1)
