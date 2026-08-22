@@ -202,11 +202,20 @@ The separation is total:
   (board 520). Logi Info is a third, REPDEV.
 - Different repositories: `jreport-*` on Bitbucket under the logianalytics org.
 - Different documentation sites, and different Salesforce support dashboards.
-- **Zero shared documentation surface.** Grepping the current Composer v25 and
-  v26 documentation (1,774 files) for "Logi Report", "JReport", "Jinfonet",
-  "pixel-perfect" and "Report Designer" returns zero files for each. In the
-  other direction, the devnet Logi Report corpus never mentions Logi Composer,
-  Logi Info, Dundas, Izenda, Exago or Zoomdata.
+- **Zero shared documentation surface, verified in both directions.** Grepping
+  the current Composer v25 and v26 documentation (1,774 files) for "Logi Report",
+  "JReport", "Jinfonet", "pixel-perfect" and "Report Designer" returns zero files
+  for each. In the other direction, all 13,235 Logi Report articles in this repo,
+  v15 through v26, mention Logi Composer, Logi Info, Dundas, Izenda, Exago and
+  Zoomdata exactly zero times each. Two product families documented as though the
+  other does not exist. Reproduce with:
+
+  ```
+  cd ~/logi-report-kb
+  for t in "Logi Composer" "Logi Info" "Dundas" "Izenda" "Exago" "Zoomdata"; do
+    echo "$t -> $(grep -ril "$t" docs | wc -l)"
+  done
+  ```
 - They share the number 26 because both sit on a common calendar release train.
   A customer seeing v26 on both must not infer a single product.
 
