@@ -1,0 +1,23 @@
+---
+title: "Security for Report Resources"
+id: 28891679593997
+section: "Report Server Security System Report Server v25"
+category: "Logi Report"
+url: https://docs-report.zendesk.com/hc/en-us/articles/28891679593997-Security-for-Report-Resources
+updated_at: 2026-02-26T02:13:47Z
+source_host: docs-report.zendesk.com
+---
+# 
+Security for Report Resources 
+
+This topic describes how you can use report security and server security.
+
+In Report Server, there are two types of security mechanisms for managing access and visibility of report resources. One is to control access and visibility of different subsets of data based on user identity. 
+You define this control during the design step, carry it forward when you publish reports to Server, and Server handles it at runtime without any special administrative action. The other is based on administrative operations in Report Server to define the access rules for report resources in the runtime environment. 
+This involves registering users, groups, and roles in the server security system, and assigning them permissions on report resources.
+
+Select the following links to view the topics:
+
+- Report Security System
+
+- Server Security System

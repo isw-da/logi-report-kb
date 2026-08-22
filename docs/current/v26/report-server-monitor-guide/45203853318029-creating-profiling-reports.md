@@ -1,0 +1,26 @@
+---
+title: "Creating Profiling Reports"
+id: 45203853318029
+section: "Report Server Monitor Guide"
+category: "Logi Report"
+url: https://logi-report-v26.insightsoftware.com/hc/en-us/articles/45203853318029-Creating-Profiling-Reports
+updated_at: 2026-04-30T14:07:37Z
+source_host: logi-report-v26.insightsoftware.com
+---
+# 
+Creating Profiling Reports
+
+Server Monitor can generate a performance statistic report to inspect the performance of Server during a certain period of time. This topic introduces what information the report may contain and how you can create report on Server Monitor.
+
+There can be two types of profiling reports: one collects report running information and the other obtains a specified number of frequently accessed reports. The profiling report that collects report running information categories the reports into three groups: All, Page Report, and Non Page Report. Server records all page reports running in Page Report Studio and other formats and all web reports on-demand running in the PDF, Excel, and HTML formats. However, the profiling report does not record web reports running in Web Report Studio. 
+
+Server Monitor generates the performance statistic report using the information that Server collects and saves to its own database. Whether or not Server collects profiling information is controlled by the property server.profiling.enable=true/false in the server.properties file in <server_install_root>\bin. Before Server Monitor can inspect the performance of Server, you must first make sure that  Server has collected its report-running information. To make certain of this, make sure that the property server.profiling.enable is set to true.
+
+To create a profiling report:
+
+- Select a Server node in the left tree, and then select the Profiling tab.
+
+- Specify the time period for Server Monitor to get related data.
+    If you want to create a profiling report for the topN most frequently viewed reports, in the Top box, specify how many most frequently accessed reports are to be recorded. Make sure that the number specified here must be valid. If not, the latest used number will be applied.
+
+- Select Submit to create the report.

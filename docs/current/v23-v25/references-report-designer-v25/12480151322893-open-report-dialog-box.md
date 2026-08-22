@@ -1,0 +1,92 @@
+---
+title: "Open Report Dialog Box"
+id: 12480151322893
+section: "References - Report Designer v25"
+category: "Logi Report"
+url: https://docs-report.zendesk.com/hc/en-us/articles/12480151322893-Open-Report-Dialog-Box
+updated_at: 2026-02-25T23:49:00Z
+source_host: docs-report.zendesk.com
+---
+# 
+Open Report Dialog Box
+
+You can use the Open Report dialog box to open the saved reports, or import report tabs from another report into the current page report. This topic describes the options in the dialog box.
+    
+
+Designer displays the Open Report dialog box when you navigate to File > Open or File > Import > Page Report.
+
+Designer displays these options:
+
+Catalog
+
+This option shows the directory of the current catalog that you are using now. You can also select Browse to specify another catalog.
+
+ If you are going to import report tabs into the current page report, you can only choose from reports in the same catalog. In this case, Designer disables the Browse button.
+
+Reports tab
+
+This tab lists all the reports that you have saved in the specified catalog, based on the type you select from the Report of Type drop-down list. Select one or more reports to open, or one report to import report tabs from it into the current report.
+
+- 
+List icon
+Select to lists the reports in the List mode in which Designer only displays the names of the files.
+
+- 
+Details icon
+Select to lists the reports in the Details mode in which Designer displays the files with detailed information such as name, size, type, and last modified time.
+
+- 
+Name
+This column shows the name of all the reports that you have saved in this catalog, based on the type you select from the Report of Type drop-down list.
+
+- 
+Size
+This column shows the size of the reports.
+
+- 
+Type
+This column shows the type of the reports.
+
+- 
+Modified
+This column shows the time when you modified the reports the last time.
+
+- 
+Report Name
+This option shows the names of the selected reports.
+
+- 
+Report of Type
+Select the type of the reports.
+
+Recent tab
+
+This tab lists the reports that you have opened recently. Select one or more reports to open, or one report to import report tabs from it into the current report.
+
+- 
+Report Name
+This column shows the names of the reports.
+
+- 
+Catalog Name
+This column shows the name of the catalog file that the reports use with its full path.
+
+- 
+Report Location
+This column shows the location where you have saved the reports. 
+
+Open
+
+- Select to open the specified reports and close the dialog box if you are using the dialog box for opening reports. When you select a self-contained page report, Designer prompts you to specify the way to open the report.
+            
+
+- Select to open the Select Report Tab dialog box to select the report tabs in the specified report which you want to import into the current report, if you are using the Open Report dialog box for importing report tabs.
+            
+
+Cancel
+
+Select to close the dialog box without saving any changes.
+
+Help
+
+Select to view information about the dialog box.

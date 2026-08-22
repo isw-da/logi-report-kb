@@ -1,0 +1,268 @@
+---
+title: "Field Properties"
+id: 45203956047117
+section: "Dialog Boxes in Report Server"
+category: "Logi Report"
+url: https://logi-report-v26.insightsoftware.com/hc/en-us/articles/45203956047117-Field-Properties
+updated_at: 2026-04-30T14:09:39Z
+source_host: logi-report-v26.insightsoftware.com
+---
+# 
+Field Properties
+
+This topic describes how you can use the Field Properties dialog box to update the properties of a field. Server displays the dialog box when you right-click a field and select Properties from the shortcut menu.
+
+This topic contains the following sections:
+
+- General Tab Properties
+
+- Font Tab Properties
+
+- Border Tab Properties
+
+You see these elements on all the tabs:
+
+OK
+
+Select to apply any changes you made here and close the dialog box.
+
+Cancel
+
+Select to close the dialog box without saving any changes.
+
+Help button
+
+Select to view information about the dialog box.
+
+Close button
+
+Select to close the dialog box without saving any changes.
+
+## 
+General Tab Properties
+
+Specify the general properties of the field.
+
+Name
+
+Specify the display name of the field.
+
+Show NLS Value
+
+Select to show the translated name for the display name of the object in the Name text box if you have enabled the NLS feature and translated it, and when you have not modified the display name of the object.
+
+Format
+
+Specify the format of the field.
+
+Rotation(deg)
+
+Specify the rotation degree of the text.
+
+Auto Scale in Number
+
+When you select Auto fit, Outside Top Inside, Top or Inside Bottom as static data labels' position, you can customize the spacing between the data label and the bar.
+
+The value auto means that the setting follows that of the parent data container. When you set the property to true, the specified format will apply to the integer part of the values after being scaled. If the specified format conflicts with the Number data type, Report will ignore the Auto Scale in Number setting.
+
+Width
+
+Specify the width of the object.
+
+Height
+
+Specify the height of the object.
+
+Position
+
+- 
+absolute
+
+Server locates the component  at the position that you specify by dragging and dropping or by setting its X and Y coordinate property values. The component insertion point does not change, for instance, it is not affected when you insert text before it.
+ The position of an object in a banded object can only be absolute.
+
+- 
+rotation(deg)
+
+Specify the rotation degree of the text. 
+
+- 
+static
+
+Server positions the component at the location where you insert it. The X and Y coordinate properties are disabled. You cannot move the component to another position other than by moving its insertion point. This can happen when the text flow preceding the insertion point expands.
+
+- 
+relative
+
+Server positions the component at an offset to the position at which you insert it. The offset is determined by the X and Y coordinate property values. This value is not available for some types of components.
+
+ Server displays relative in the default value list for the Position option, when the current position is relative. However, relative is no longer available in the value list after you apply static or absolute and reenter the dialog box.
+
+Top Padding
+
+Specify the space between the text of the object and its top border.
+
+Bottom Padding
+
+Specify the space between the text of the object and its bottom border.
+
+Left Padding
+
+Specify the space between the text of the object and its left border.
+
+Right Padding
+
+ Specify the space between the text of the object and its right border.
+
+Background
+
+Specify the background color of the object.
+
+To change the color, select the color indicator. Server displays the color palette. Select a color, or select More Colors to access the Color Picker dialog box in which you can specify a color within a wider range. 
+
+Foreground
+
+Specify the foreground color of the object.
+
+To change the color, select the color indicator. Server displays the color palette. Select a color, or select More Colors to access the Color Picker dialog box in which you can specify a color within a wider range.
+
+The following four options are available when the field contains image data, for example, a DBField with image as the data, or a formula field with the expression openBinFile() or openBinURL(). You can choose to use the original size of the image or customize the size by yourself.
+
+Original Size
+
+Server adopts the original size of the image by default. Clear this property if you want to scale the image, then specify the scaling mode.
+
+Scaling Mode
+
+Server enables this property when you clear Original Size.
+
+- 
+actual size
+
+Select to show the image in its actual size. If the display area  is smaller than the image, Server hides part of the image.
+
+- 
+fit image
+
+Select if you want the image to fill the display area and keep the original perspective ratio under the limitation of Max Ratio. 
+
+- 
+fit width
+
+Select if you want the image to fit the display area width under the limitation of Max Ratio. 
+
+- 
+fit height
+
+Select if you want the image to fit the display area height, under the limitation of Max Ratio. 
+
+- 
+customize
+
+Select if you want to specify the width and height of the image in the size fields.
+
+Image Height
+
+Specify the height of the area for displaying the image. This property is available when you clear Original Size.
+
+Image Width
+
+Specify the width of the area for displaying the image. This property is available when you clear Original Size.
+
+Artifact
+
+Specifies whether to add an artifact tag when exporting to PDF.
+
+## 
+Font Tab Properties
+
+Specify the font properties of the field. 
+
+Font
+
+Select the font face of the text. 
+
+Size
+
+Specify the font size of the text.
+
+Horizontal Alignment
+
+Select the horizontal alignment mode of the text in the object.
+
+Vertical Alignment
+
+Select the vertical alignment mode of the text in the object.
+
+Bold
+
+Enable this property if you want to make the text bold.
+
+Italic
+
+Enable this property if you want to make the text italic.
+
+Underline
+
+Enable this property if you want to underline the text.
+
+Strikethrough
+
+Enable this property if you want to attach a strikeout line to the text.
+
+Autofit
+
+Enable this property if you want to automatically expand the object width according to the maximum length of the contents.
+
+Reduce Width When Autofit
+
+Enable this property if you want to reduce the width of the object according to its content when you specify to automatically adjust its width (the object's Autofit being true) and the actual width of the content is smaller than that of the object. 
+
+ This property takes effect when you set Position of the object to absolute; but, it does not work if the Word Wrap property of the object is true.
+
+Word Wrap
+
+Enable this property if you want to wrap the text to the object width.
+
+Ignore HTML Tag
+
+Enable this property if you don't want Report Engine to parse the HTML tag elements in the text, at runtime or in the HTML output, so they display exactly as what they are in the report. 
+
+Disable this property if you want Engine to transfer the HTML tag elements to the web browser so the web browser translates them into HTML.
+
+## 
+Border Tab Properties
+
+Specify the border properties of the field.
+
+Color
+
+Specify the border color.
+
+Width
+
+Specify the border width in inches.
+
+Top Line
+
+Select the style of the top border line.
+
+Bottom Line
+
+Select the style of the bottom border line.
+
+Left Line
+
+Select the style of the left border line.
+
+Right Line
+
+Select the style of the right border line.
+
+Shadow
+
+Select if you want to add a shadow effect to the border. Web Report Studio and JDashboard cannot render the shadow effect. 
+
+Shadow Color
+
+Specify the color of the border shadow.

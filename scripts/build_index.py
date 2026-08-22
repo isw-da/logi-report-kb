@@ -34,35 +34,37 @@ def parse_frontmatter(path):
 
 
 def main():
+    # Walk to arbitrary depth. docs/<era>/<section>/ is two deep but
+    # docs/current/<line>/<section>/ is three, and indexing only two levels
+    # silently omitted every current document. The gate caught it; do not
+    # reintroduce a fixed depth here.
     entries = []
-    for era in sorted(os.listdir(DOCS)):
-        eradir = os.path.join(DOCS, era)
-        if not os.path.isdir(eradir):
-            continue
-        for section in sorted(os.listdir(eradir)):
-            secdir = os.path.join(eradir, section)
-            if not os.path.isdir(secdir):
+    for root, _, files in os.walk(DOCS):
+        for name in sorted(files):
+            if not name.endswith(".md"):
                 continue
-            for name in sorted(os.listdir(secdir)):
-                if not name.endswith(".md"):
-                    continue
-                full = os.path.join(secdir, name)
-                rel = os.path.relpath(full, KB)
-                fm = parse_frontmatter(full)
-                if fm is None:
-                    print("NO FRONTMATTER: %s" % rel, file=sys.stderr)
-                    fm = {}
-                entries.append({
-                    "path": rel,
-                    "title": fm.get("title", ""),
-                    "id": fm.get("id", ""),
-                    "section": fm.get("section", section),
-                    "product": fm.get("category", "Logi Report"),
-                    "era": era,
-                    "era_label": ERA_LABEL.get(era, era),
-                    "source_url": fm.get("url", ""),
-                    "updated_at": fm.get("updated_at", ""),
-                })
+            full = os.path.join(root, name)
+            rel = os.path.relpath(full, KB)
+            parts = rel.split(os.sep)
+            era = parts[1] if len(parts) > 1 else "unversioned"
+            section = parts[-2] if len(parts) > 2 else era
+            fm = parse_frontmatter(full)
+            if fm is None:
+                print("NO FRONTMATTER: %s" % rel, file=sys.stderr)
+                fm = {}
+            entries.append({
+                "path": rel,
+                "title": fm.get("title", ""),
+                "id": fm.get("id", ""),
+                "section": fm.get("section", section),
+                "product": fm.get("category", "Logi Report"),
+                "era": era,
+                "era_label": ERA_LABEL.get(era, era),
+                "source_url": fm.get("url", ""),
+                "updated_at": fm.get("updated_at", ""),
+                "source_host": fm.get("source_host", "devnet.logianalytics.com"),
+            })
+    entries.sort(key=lambda e: e["path"])
 
     manifest = {
         "name": "logi-report-kb",

@@ -1,0 +1,77 @@
+---
+title: "OLE Object Properties"
+id: 28898546889357
+section: "References - Report Designer v24"
+category: "Logi Report"
+url: https://docs-report.zendesk.com/hc/en-us/articles/28898546889357-OLE-Object-Properties
+updated_at: 2024-09-30T09:09:33Z
+source_host: docs-report.zendesk.com
+---
+Previous Topic  Next Topic
+
+# 
+OLE Object Properties
+
+This topic describes the properties of an OLE Object, that is, a multimedia object that you can use in page reports and web reports.
+
+Designer provides some properties only when you use the object in certain report types. You can get details from the Available For column in the property table.
+
+| Property Name | Available For | Description |
+| --- | --- | --- |
+| General |  |  |
+| Class Type | Query Page Report | Shows the class type of the object. Read only. |
+| Instance Name | Query Page Report | Shows the instance name of the object. Read only. |
+| Geometry |  |  |
+| Height | Page Report, Web Report | Specifies the height of the object. Type a numeric value to change the height. Data type: Float |
+| Width | Page Report, Web Report | Specifies the width of the object. Type a numeric value to change the width. Data type: Float |
+| X | Page Report, Web Report | Specifies the horizontal coordinate of the object's top left corner, relative to its parent container, when the object is not in static position in the container. Type a numeric value to change the coordinate. Data type: Float |
+| Y | Page Report, Web Report | Specifies the vertical coordinate of the object's top left corner, relative to its parent container, when the object is not in static position in the container. Type a numeric value to change the coordinate. Data type: Float |
+| Color |  |  |
+| Background | Page Report, Web Report | Specifies the background color of the object. Choose a color from the drop-down list, or select Custom to customize a color in the Pick a Color dialog box. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| CSS |  |  |
+| Class | Page Report, Web Report | Specifies the name of the Class Selector to apply to the object, which you define in the CSS file of the style the report applies. For example, if you define the CSS file as follows: @charset "GBK"; TextField {Background: #ff0000} /*Style=LabelX*/ TextField[Style="LabelX"]{Background: #0000FF} /*ID=W*/ TextField#W{Background: #FFFF00} /*class=C*/ TextField.C{Background: #00FFFF} To apply the Class Selector in the file to the object, type C in the value cell. Data type: String |
+| Style | Page Report, Web Report | Specifies the style you want to apply to the object. You can specify the style in two ways: Type the style which should be an Attribute Selector whose attribute is "style" in the CSS file of the style the report applies. For example, to apply the style in the preceding sample CSS file to the object, type LabelX in the value cell. Choose a style from the drop-down list when you have specified the Style Group property for the report tab or web report, and there are styles in the style group that are applicable to the object. Data type: String |
+| Others |  |  |
+| Export to CSV | Page Report, Web Report | Specifies whether to include the object in the CSV output. Data type: Boolean |
+| Export to Excel | Page Report, Web Report | Specifies whether to include the object in the Excel output. Data type: Boolean |
+| Export to HTML | Page Report, Web Report | Specifies whether to include the object in the HTML output. Data type: Boolean |
+| Export to PDF | Page Report, Web Report | Specifies whether to include the object in the PDF output. Data type: Boolean |
+| Export to PostScript | Page Report, Web Report | Specifies whether to include the object in the PostScript output. Data type: Boolean |
+| Export to Report Result | Page Report, Web Report | Specifies whether to include the object when you preview the report in the Page Report Result format for a page report or Web Report Result for a web report in Designer, and when users run the report in the same format at runtime. Data type: Boolean |
+| Export to RTF | Page Report, Web Report | Specifies whether to include the object in the RTF output. Data type: Boolean |
+| Export to Text | Page Report, Web Report | Specifies whether to include the object in the Text output. Data type: Boolean |
+| Export to XML | Page Report, Web Report | Specifies whether to include the object in the XML output. Data type: Boolean |
+| Invisible | Page Report, Web Report | Specifies whether to hide the object in the design area and in the report. Report Engine performs all calculations that involve the object regardless of whether the object is visible or not. Data type: Boolean |
+| Position | Page Report, Web Report | Designer enables this property when the object is in a flow layout container, such as the report body or a tabular cell, text box, or KPI. You can use it to specify the position of the object in the container. Choose an option from the drop-down list. Data type: Enumeration |
+| Record Location | Page Report, Web Report | Specifies the calculation point for the properties of the object that are controlled by formulas. This property takes effect only when the object is in a banded object. Choose an option from the drop-down list. default Select to calculate values of the properties in the default location where the object is placed. page header Select to calculate values of the properties in the banded page header panel. page footer Select to calculate values of the properties in the banded page footer panel. See Example 2: Showing a Label on Every Page Except the Last. Data type: Enumeration |
+| Suppress | Query Page Report | Specifies whether to suppress the object in the design area and in the report. If you suppress an object, Report Engine skips all formulas and calculations that involve the object. This property has higher priority over Invisible. Data type: Boolean |
+| Suppress When No Records | Query Page Report | Specifies whether to suppress the object in the report when no record is returned to its parent data component. Data type: Boolean |
+| Excel |  |  |
+| Column Index | Page Report, Web Report | Specifies the X coordinate of the object relative to its parent container in the Excel and CSV outputs, measured in cells. Data type: Integer This property takes effect when you set the page report tab or web report's Columned property to "true" and the object's Position property is not "static". |
+| Row Index | Page Report, Web Report | Specifies the Y coordinate of the object relative to its parent container in the Excel and CSV outputs, measured in cells. Data type: Integer This property takes effect when you set the page report tab or web report's Columned property to "true" and the object's Position property is not "static". |
+| Border |  |  |
+| Border Color | Page Report, Web Report | Specifies the color for the border of the object. Choose a color from the drop-down list, or select Custom to customize a color in the Pick a Color dialog box. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| Border Thickness | Page Report, Web Report | Specifies the width for the border of the object. Type a numeric value to change the thickness. Data type: Float |
+| Bottom Line | Page Report, Web Report | Specifies the line style for the bottom border of the object. Choose an option from the drop-down list. Data type: Enumeration |
+| Left Line | Page Report, Web Report | Specifies the line style for the left border of the object. Choose an option from the drop-down list. Data type: Enumeration |
+| Right Line | Page Report, Web Report | Specifies the line style for the right border of the object. Choose an option from the drop-down list. Data type: Enumeration |
+| Top Line | Page Report, Web Report | Specifies the line style for the top border of the object. Choose an option from the drop-down list. Data type: Enumeration |
+| Object Settings |  |  |
+| Access Key | Page Report, Web Report | Specifies the accelerator key for the object. Data type: String |
+| Alternate Text | Page Report, Web Report | Specifies the text you want to show instead when the object cannot display. Data type: String |
+| Archive | Page Report, Web Report | Specifies the character string that can be used to implement your own archive functionality for the object. Data type: String |
+| Class ID | Page Report, Web Report | Specifies the class identifier of the object. Data type: String |
+| Code Base | Page Report, Web Report | Specifies the base path you want to use to resolve the relative URIs specified by the Class ID and Archive properties. Report Engine applies the base URI of the current report when the property value is null. Data type: String |
+| Declare | Page Report, Web Report | Specifies whether to make the current object definition a declaration only. The object must be instantiated by a subsequent object definition referring to this declaration. Data type: Boolean |
+| Horizontal Space | Page Report, Web Report | Specifies the horizontal margin for the object. Data type: Float |
+| Name | Page Report, Web Report | Specifies the name of the object. Data type: String |
+| Stand By | Page Report, Web Report | Specifies the message you want to display while the object is being loaded. Data type: String |
+| Tab Index | Page Report, Web Report | Specifies the index that defines the tab order for the object. Data type: Integer |
+| Title | Page Report, Web Report | Specifies the tool tip that displays when you point to the object in HTML output or at runtime. Data type: String |
+| Use Map | Page Report, Web Report | Specifies the URL, often with a bookmark extension (#name), to use as a client-side image map. Data type: String |
+| Value Type | Page Report, Web Report | Specifies the MIME (Multipurpose Internet Mail Extensions) type of the object. Data type: String |
+| Vertical Space | Page Report, Web Report | Specifies the vertical margin for the object. Data type: Float |
+| Accessibility |  |  |
+| External CSS Class Selector | Query Page Report | Specifies the name of the Class Selector for the object in the HTML output.Data type: String |
+
+Previous Topic  Next Topic

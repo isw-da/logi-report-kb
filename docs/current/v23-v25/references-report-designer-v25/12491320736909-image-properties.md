@@ -1,0 +1,131 @@
+---
+title: "Image Properties"
+id: 12491320736909
+section: "References - Report Designer v25"
+category: "Logi Report"
+url: https://docs-report.zendesk.com/hc/en-us/articles/12491320736909-Image-Properties
+updated_at: 2026-02-25T23:51:11Z
+source_host: docs-report.zendesk.com
+---
+# 
+Image Properties
+
+This topic describes the properties of an Image object.
+
+Designer provides some properties only when you use the object in certain report types. You can get details from the Available For column in the property table.
+
+| Property Name | Available For | Description |
+| --- | --- | --- |
+| General |  |  |
+| Class Type | Query Page Report | Shows the class type of the object. Read only. |
+| Instance Name | Query Page Report | Shows the instance name of the object. Read only. |
+| Geometry |  |  |
+| Height | Page Report, Web Report, Library Component | Specifies the height of the object. Type a numeric value to change the height. Data type: Float |
+| Width | Page Report, Web Report, Library Component | Specifies the width of the object. Type a numeric value to change the width. Data type: Float |
+| X | Page Report, Web Report, Library Component | Specifies the horizontal coordinate of the object's top left corner, relative to its parent container, when the object is not in static position in the container. Type a numeric value to change the coordinate. Data type: Float |
+| Y | Page Report, Web Report, Library Component | Specifies the vertical coordinate of the object's top left corner, relative to its parent container, when the object is not in static position in the container. Type a numeric value to change the coordinate. Data type: Float |
+| CSS |  |  |
+| Class | Page Report, Web Report, Library Component | Specifies the name of the Class Selector to apply to the object, which you define in the CSS file of the style the report applies. For example, if you define the CSS file as follows: @charset "GBK"; TextField {Background: #ff0000} /*Style=LabelX*/ TextField[Style="LabelX"]{Background: #0000FF} /*ID=W*/ TextField#W{Background: #FFFF00} /*class=C*/ TextField.C{Background: #00FFFF} To apply the Class Selector in the file to the object, type C in the value cell. Data type: String |
+| ID | Page Report, Web Report, Library Component | Specifies the name of the ID Selector to apply to the object, which you define in the CSS file of the style the report applies. For example, to apply the ID Selector in the preceding sample CSS file to the object, type W in the value cell.Data type: String |
+| Style | Page Report, Web Report, Library Component | Specifies the style you want to apply to the object. You can specify the style in two ways: Type the style which should be an Attribute Selector whose attribute is "style" in the CSS file of the style the report applies. For example, to apply the style in the preceding sample CSS file to the object, type LabelX in the value cell. Choose a style from the drop-down list when you have specified the Style Group property for the report tab or web report, and there are styles in the style group that are applicable to the object. Data type: String |
+| Others |  |  |
+| Detail Report | Query Page Report | Specifies the detail report that you want to link the object to. Select the ellipsis in the value cell to set the detail report. See Linking to a Detail Report. Data type: String |
+| Detail Target Frame | Query Page Report | Designer displays this property when the object is in the group header/footer panel of a banded object, and enables it after you set Go to Detail of the object to "true". You can use it to specify the target window or frame to display the detail information. Choose an option from the drop-down list.  Select to load the detail information according to the Pop Up New Window for Links property in the Page Report Studio Profile dialog box on Server. New Window Select to load the detail information into a new window. The window is not named. Whole Window Select to load the detail information into the full browser window. Same Frame Select to load the detail information into the same frame as the object. Parent Frame Select to load the detail information into the parent frame of the frame in which the object is. Other Frame Select to load the detail information into some other specified frame. Type the name of the frame you have defined in the value cell. If the frame name does not exist, Server loads the detail information into a new window. Data type: String |
+| Export to Excel | Page Report, Web Report, Library Component | Specifies whether to include the object in the Excel output. Data type: Boolean |
+| Export to HTML | Page Report, Web Report, Library Component | Specifies whether to include the object in the HTML output. Data type: Boolean |
+| Export to PDF | Page Report, Web Report, Library Component | Specifies whether to include the object in the PDF output. Data type: Boolean |
+| Export to PostScript | Page Report, Web Report, Library Component | Specifies whether to include the object in the PostScript output. Data type: Boolean |
+| Export to Report Result | Page Report, Web Report, Library Component | Specifies whether to include the object when you preview the report in the Page Report Result format for a page report or Web Report Result for a web report in Designer, and when users run the report in the same format or use the library component at runtime. Data type: Boolean |
+| Export to RTF | Page Report, Web Report, Library Component | Specifies whether to include the object in the RTF output. Data type: Boolean |
+| Go to Detail | Query Page Report | Designer displays this property when the object is in the group header/footer panel of a banded object. You can use it to specify whether to show the detail information about the group when users select the object in Page Report Studio. See Obtaining the Group Details in a Banded Object. Data type: Boolean |
+| Horizontal Alignment | Page Report, Web Report, Library Component | Specifies the horizontal alignment of the image in the container. Choose an option from the drop-down list. Data type: Enumeration |
+| Invisible | Page Report, Web Report, Library Component | Specifies whether to hide the object in the design area and in the report. Report Engine performs all calculations that involve the object regardless of whether the object is visible or not. Data type: Boolean |
+| Link | Page Report, Web Report, Library Component | Specifies the target that you want to link the object to, which can be another report, a website, an email address, or a Blob data type field. Select the ellipsis in the value cell to set the link target. See Adding Links in Reports. Data type: String |
+| Logic Column | Page Report, Web Report, Library Component | Designer displays this property when the object is in a table. You can use it to specify whether to show the object in the next visible table cell in the same row when the column that holds the object is hidden. Choose an option from the drop-down list. Data type: Enumeration The next visible table cell should be completely empty, that is, the cell should not hold any content including blank space. When you set this property for several objects in the same row to "next visible column", and the columns holding these objects are all hidden, only the object in the rightmost column shows in the next visible cell. |
+| Position | Page Report, Web Report, Library Component | Designer enables this property when the object is in a flow layout container, such as the report body or a tabular cell, text box, or KPI. You can use it to specify the position of the object in the container. Choose an option from the drop-down list. Data type: Enumeration |
+| Record Location | Page Report, Web Report, Library Component | Specifies the calculation point for the properties of the object that are controlled by formulas. This property takes effect only when the object is in a banded object. Choose an option from the drop-down list. default Select to calculate values of the properties in the default location where the object is placed. page header Select to calculate values of the properties in the banded page header panel. page footer Select to calculate values of the properties in the banded page footer panel. See Example 2: Showing a Label on Every Page Except the Last. Data type: Enumeration |
+| Suppress | Query Page Report | Specifies whether to suppress the object in the design area and in the report. If you suppress an object, Report Engine skips all formulas and calculations that involve the object. This property has higher priority over Invisible. Data type: Boolean |
+| Suppress When No Records | Query Page Report | Specifies whether to suppress the object in the report when no record is returned to its parent data component. Data type: Boolean |
+| Transfer Style | Page Report, Web Report, Library Component | Specifies whether to apply the style group of the primary report to the linked report, when the object is linked to another report. Data type: Boolean |
+| Vertical Alignment | Page Report, Web Report, Library Component | Specifies the vertical alignment of the image in the container. Choose an option from the drop-down list. Data type: Enumeration |
+| Excel |  |  |
+| Column Index | Page Report, Web Report | Specifies the X coordinate of the object relative to its parent container in the Excel output, measured in cells. Data type: Integer This property takes effect when you set the page report tab or web report's Columned property to "true" and the object's Position property is not "static". |
+| Column Number | Page Report, Web Report | Specifies the number of columns to determine the width of the object in the Excel output. Type an integer value to change the number. Data type: Integer This property takes effect when you set the page report tab or web report's Columned property to "true". |
+| Row Index | Page Report, Web Report | Specifies the Y coordinate of the object relative to its parent container in the Excel output, measured in cells.Data type: Integer This property takes effect when you set the page report tab or web report's Columned property to "true" and the object's Position property is not "static". |
+| Row Number | Page Report, Web Report | Specifies the number of rows to determine the height of the object in the Excel output. Type an integer value to change the number. Data type: Integer This property takes effect when you set the page report tab or web report's Columned property to "true". |
+| Image Property |  |  |
+| Alternate Text | Page Report, Web Report, Library Component | Specifies the text you want to show instead when the image cannot display. Data type: String |
+| Disabled | Page Report, Web Report, Library Component | Specifies whether to disable actions on the image. Data type: Boolean |
+| Image Name | Page Report, Web Report, Library Component | Specifies the file name of the image. The image can be one on your local file system or retrieved by using a URL. Data type: String |
+| Maximum Scaling Ratio | Page Report, Web Report, Library Component | Specifies the maximum scaling ratio of the image. By default, the scaling ratio of the image is not limited. If you set the ratio to any value greater than 0, the actual scaling ratio is less than or equal to it. Data type: Float |
+| Name | Page Report, Web Report, Library Component | Specifies the name of the image. Data type: String |
+| Rotation | Page Report, Web Report, Library Component | Specifies the angle at which to rotate the image, in degrees. 0 means no rotation; a positive value means to rotate the image clockwise; a negative value means to rotate the image anticlockwise. Data type: Float |
+| Scaling Mode | Page Report, Web Report, Library Component | Specifies the scaling mode of the image, which controls the image behavior when you adjust the size of the area for displaying the image. Choose an option from the drop-down list. actual size Select to show the image in its actual size. If the size of the area for displaying the image is smaller than that of the image, part of the image will be cut off. fit image Select to adjust the image to fill up the area for displaying the image, with its original perspective remained but under the limitation of Maximum Scaling Ratio. fit width Select to adjust the image to fit the width of the area for displaying the image but under the limitation of Maximum Scaling Ratio. fit height Select to adjust the image to fit the height of the area for displaying the image but under the limitation of Maximum Scaling Ratio. customize Select to adjust the image to fit the area for displaying the image, regardless of Maximum Scaling Ratio. Data type: Enumeration |
+| Tab Index | Page Report, Web Report, Library Component | Specifies the index that defines the tab order for the image. Data type: Integer |
+| Title | Page Report, Web Report, Library Component | Specifies the tool tip that displays when you point to the image in HTML output or at runtime. Data type: String |
+| Value | Page Report, Web Report, Library Component | Specifies the initial value of the image. Data type: String |
+| Event |  |  |
+| On Blur | Page Report, Web Report, Library Component | Specifies the action you want to trigger from the image at runtime when the image loses input focus. Data type: String |
+| On Click | Page Report, Web Report, Library Component | Specifies the action you want to trigger from the image at runtime when the user selects the left mouse button on the image. Data type: String |
+| On Double click | Page Report, Web Report, Library Component | Specifies the action you want to trigger from the image at runtime when the user double-clicks the image. Data type: String |
+| On Focus | Page Report, Web Report, Library Component | Specifies the action you want to trigger from the image at runtime when the image receives focus. Data type: String |
+| On Key Down | Page Report, Web Report, Library Component | Specifies the action you want to trigger from the image at runtime when the user presses a key. Data type: String |
+| On Key Press | Page Report, Web Report, Library Component | Specifies the action you want to trigger from the image at runtime when the user presses an alphanumeric key. Data type: String |
+| On Key Up | Page Report, Web Report, Library Component | Specifies the action you want to trigger from the image at runtime when the user releases a key. Data type: String |
+| On Mouse Down | Page Report, Web Report, Library Component | Specifies the action you want to trigger from the image at runtime when the user selects the image with either mouse button. Data type: String |
+| On Mouse Move | Page Report, Web Report, Library Component | Specifies the action you want to trigger from the image at runtime when the user moves the mouse over the image. Data type: String |
+| On Mouse Out | Page Report, Web Report, Library Component | Specifies the action you want to trigger from the image at runtime when the user moves the mouse pointer outside the boundaries of the image. Data type: String |
+| On Mouse Over | Page Report, Web Report, Library Component | Specifies the action you want to trigger from the image at runtime when the user moves the mouse pointer into the image. Data type: String |
+| On Mouse Up | Page Report, Web Report, Library Component | Specifies the action you want to trigger from the image at runtime when the user releases a mouse button while the mouse is over the image. Data type: String |
+| TOC (available when the image is in a banded object) |  |  |
+| Anchor Display Value | Page Report | Specifies the text you want to display as the object's TOC entry label, when you set the object's TOC Anchor property to "true". Data type: String |
+| TOC Anchor | Page Report | Specifies whether to include the object in the TOC of the report. Data type: Boolean |
+| Accessibility |  |  |
+| Artifact | Page Report, Web Report, Library Component | Specifies whether to add an artifact tag when exporting to PDF. Data type:Boolean. |
+| External AccessKey | Query Page Report | This property is mapped to the HTML attribute accesskey, as specified by w3.org.Data type: String |
+| External CSS Class Selector | Query Page Report | Specifies the name of the Class Selector for the object in the HTML output.Data type: String |
+| External ID | Query Page Report | This property is mapped to the HTML attribute id, as specified by w3.org. Data type: String |
+| External Style | Query Page Report | This property is mapped to the HTML attribute style, as specified by w3.org. Data type: String |
+| HrefLang | Query Page Report | This property is mapped to the HTML attribute hreflang, as specified by w3.org. You can use it to specify the base language of the resource designated by a link on the object, such as the target you define via the Link property. Data type: String |
+| Language | Query Page Report | This property is mapped to the HTML attribute lang, as specified by w3.org. Data type: String |
+| LongDesc | Query Page Report | This property is mapped to the HTML attribute longdesc, as specified by w3.org.Data type: String |
+
+## 
+Event
+
+The values for this group of properties are based on the Image Client API in Version 7. The following table lists their mapping values in current version. For more information about the descriptions and parameters of the mapping values, see Appendix 3: Parameters of User-Defined Web Actions.
+
+| Value | Mapping Name |
+| --- | --- |
+| exit(popwin) | user_exit() |
+| firstPage() | user_firstPage() |
+| lastPage() | user_lastPage() |
+| nextPage() | user_nextPage() |
+| oneStepfilter(columns, operators, values, logics) | user_oneStepfilter(columnMappingNames, operators, values, logics, instanceName) |
+| oneStepSearch(value, isContent, colName, isUp, matchcase, isWordOnly) | user_oneStepSearch(value, isContent, colName, isUp, matchcase, isWordOnly) |
+| oneStepSort(columns, sorts) | user_oneStepSort(columnMappingNames, orders, instanceName) |
+| prevPage() | user_prevPage() |
+| redo() | user_redo() |
+| refresh() | user_refresh() |
+| reset() | user_reset(instanceName) |
+| saveRpt() | user_saveRpt() |
+| searchNext(isFindTxt) | This API is not supported now. |
+| saveRst() | - |
+| showExportExcelDlg() | - |
+| showExportHTMLDlg() | - |
+| showExportPDFDlg() | - |
+| showExportPSDlg() | user_showSaveResultDialog() |
+| showExportRtfDlg() | - |
+| showExportTextDlg() | - |
+| showExportXmlDlg() | - |
+| showFilterPanel() | user_showFilterDialog() |
+| showHelp() | user_showHelp(null) |
+| showNavibar() | This API is not supported now. |
+| showPageSetupDlg() | user_showPageSetupDialog() |
+| showPrintDialog() | user_showPrintDialog() |
+| showSearchDlg() | user_showSearchDialog() |
+| showSortPanel() | user_showSortDialog() |
+| showTOC() | user_showTOC() |
+| showUserPanel() | user_showUserPanel() |
+| undo() | user_undo() |
+| zoom(value) | user_zoomTo(value) |

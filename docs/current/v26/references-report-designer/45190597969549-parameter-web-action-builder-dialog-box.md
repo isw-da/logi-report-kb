@@ -1,0 +1,118 @@
+---
+title: "Parameter - Web Action Builder Dialog Box"
+id: 45190597969549
+section: "References - Report Designer"
+category: "Logi Report"
+url: https://logi-report-v26.insightsoftware.com/hc/en-us/articles/45190597969549-Parameter-Web-Action-Builder-Dialog-Box
+updated_at: 2026-04-30T15:14:07Z
+source_host: logi-report-v26.insightsoftware.com
+---
+# 
+Parameter - Web Action Builder Dialog Box
+
+You can use the Parameter - Web Action Builder dialog box to build a Parameter web action on an object so as to run a specified report with the parameters defined in the dialog box when the event bound with the action is triggered at runtime. This topic describes the options in the dialog box.
+    
+
+Designer displays the Parameter - Web Action Builder dialog box when you select *Parameter and select OK in the Web Action List dialog box.
+
+Designer displays these options:
+
+Submit Action to Handler
+
+Specify the handler to receive the parameters of the web action.
+
+- 
+Default Handler in Current Server
+Select to submit the action to the current server to handle.
+
+- 
+Customized Path
+Select to submit the action to a customized path to handle, for example, http://127.0.0.1:8888/.
+
+Get Input From
+
+Select where to get the input.
+
+Apply Action To
+
+- 
+Report
+Specify the report to run with the parameters specified in the dialog box after the event bound with the action is triggered.
+      
+- 
+Browse
+Select to specify the report. You can also type the path and file name of the report in the text box. 
+
+- 
+Web Control
+Select to use a web control to retrieve the report name at runtime. 
+
+- 
+Target Frame
+    Select the window or frame to open the report.
+    
+- 
+<Input...>
+Select and type the window or frame name in the text box.
+
+- 
+Constant
+- 
+blank
+Select to load the report into a new blank window. This window is not named.
+
+- 
+self
+Select to load the report into the window in which the link is selected (the active window).
+
+- 
+parent
+Select to load the report into the immediate parent window of the active window. If there is no parent window, the active window is used.
+
+- 
+top
+Select to load the report into the topmost window.
+
+- 
+Refresh Current Report
+Select to rerun the current report using the parameter values defined in the dialog box when the event bound with the action is triggered.
+
+Add button
+
+Select to add a line to specify parameter value.
+
+Remove button
+
+ Select to delete the specified parameter line.
+
+Move Up button
+
+ Select to move the specified parameter line higher in the list.
+
+Move Down button
+
+  Select to move the specified parameter line lower in the list. 
+
+Parameter Name
+
+This column shows the parameters that you add to run the specified or current report with.
+
+Operator
+
+This column shows the operator to compose the parameter condition. It can only be "=".
+
+Value
+
+This column shows the values that you specify for the parameters.
+
+OK
+
+Select to apply your settings and close the dialog box.
+
+Cancel
+
+Select to close the dialog box without saving any changes.
+
+Help
+
+Select to view information about the dialog box.

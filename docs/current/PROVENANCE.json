@@ -1,0 +1,20 @@
+{
+ "pulled_utc": "2026-08-22T12:00:51Z",
+ "sources": [
+  {
+   "host": "docs-report.zendesk.com",
+   "label": "v23-v25",
+   "articles": 2418,
+   "sections": 81,
+   "status": "ok"
+  },
+  {
+   "host": "logi-report-v26.insightsoftware.com",
+   "label": "v26",
+   "articles": 1473,
+   "sections": 38,
+   "status": "ok"
+  }
+ ],
+ "total_articles": 3891
+}

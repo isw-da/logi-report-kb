@@ -1,0 +1,103 @@
+---
+title: "Insert Image Dialog Box Properties"
+id: 45203902224525
+section: "Dialog Boxes in Report Server"
+category: "Logi Report"
+url: https://logi-report-v26.insightsoftware.com/hc/en-us/articles/45203902224525-Insert-Image-Dialog-Box-Properties
+updated_at: 2026-04-30T14:08:31Z
+source_host: logi-report-v26.insightsoftware.com
+---
+# 
+Insert Image Dialog Box Properties
+
+You can use the Insert Image dialog box to select a image file to use in a report. It varies according to how you will use the image: as an image component in a report or as the pointer in a gauge chart. This topic describes the properties in the dialog box.
+
+When you open the Insert Image dialog box by selecting Menu > Insert > Image or dragging Image from the Toolbox panel into the current report, You can use it to insert an image into the report.
+
+Image From 
+
+Specify the source of the image file.
+
+- 
+Local File
+  Select to use an image from the local file system. Admin can define the types of the images on the Administration > Configuration > Upload page on the Server Console.
+    - 
+File Name
+      Specify the path and name of the image file. You can select Browse to locate the image file.
+
+- 
+Web URL
+   Select to use an image via URL.
+    - 
+Image URL
+      Specify the URL of the image file. Server records the latest 10 entered URLs in the list.
+
+- 
+Library
+   Select to use an existing image.  
+    
+- 
+My Images
+      The My Images folder is a virtual location where Server stores the images that you have once inserted into reports. Select the one you want to use.
+
+- 
+Preview
+      Server displays a preview of the selected image.
+
+OK
+
+ Select to insert the image in the report.
+
+Cancel
+
+Select to close the dialog box without the insertion.
+
+Help
+
+Select to view information about the dialog box.
+
+When you open the Insert Image dialog box by selecting Customized in the Value Pointer or Target Pointer list in the Format Bar Gauge, Format Dial Gauge, or Format Solid Gauge dialog box, or in the Value Pointer list in the Style List dialog box, You can use it to specify an image as the pointer in a gauge chart.
+
+Image From 
+
+Specify the source of the image file.
+
+- 
+Local File
+    Select to use an image from the local file system.
+ Admin can define the types of the images on the Administration > Configuration > Upload page on the Server Console.
+- 
+File Name
+          Specify the path and name of the image file. You can select Browse to locate the image file.
+
+- 
+Web URL
+       Select to use an image via URL.
+    - 
+File URL
+          Specify the URL of the image file.
+
+ If your Report Server is in an intranet which requires a proxy, to access the image via URL, you need to add the parameters -Dhttp.proxyHost=XXX -Dhttp.proxyPort=XX to the server's startup file JRServer.bat in <install_root>\bin. 
+
+- 
+Library
+       Select to use an existing image.
+    - 
+My Pictures
+          The My Pictures folder is a virtual location where Server stores the images that you have once inserted into reports. Select the image you want to use.
+
+Preview
+
+ Server displays a preview of the selected image.
+
+OK
+
+   Select to use the image as the pointer in the gauge chart.
+
+Cancel
+
+Select to close the dialog box without saving any changes.
+
+Select to view information about the dialog box.
+
+Select to close the dialog box without saving any changes.
