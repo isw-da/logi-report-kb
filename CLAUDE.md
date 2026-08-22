@@ -108,7 +108,34 @@ talking about a different product.
 Answer from the era the user is actually on. A v26 procedure given to someone on
 v16 is worse than saying you need to check.
 
-## Naming inside the product never changed
+## The product name has THREE stages, and current docs use the third
+
+This directly affects how you search. Counts are files whose BODY text (excluding
+this repo's own frontmatter) contains each phrase:
+
+| Era | files | "Logi JReport" | "Logi Report" | bare "Report Designer" |
+|---|---|---|---|---|
+| `jreport-v15-v16` | 2,637 | 1,462 | 1 | 659 |
+| `logi-report-v17-v19` | 5,039 | 8 | 2,275 | 6 |
+| `current/v23-v25` | 2,418 | 4 | 71 | 128 |
+| `current/v26` | 1,473 | 2 | 38 | 93 |
+
+So: **Logi JReport** (v15-v16), then **Logi Report** (v17-v19), then in the current
+documentation the "Logi" prefix is largely dropped and it is simply **Report
+Designer** and **Report Server**. All 35 v26 section titles are named that way;
+none contains "Logi".
+
+**Consequence: searching the current corpus for "Logi Report" finds almost
+nothing.** Only 38 of 1,473 v26 files use that phrase. Search for "Report
+Designer", "Report Server", or the feature name instead. Searching the v15/v16
+corpus has the mirror problem: search "JReport" there, not "Logi Report".
+
+The v26 Designer Guide overview states the lineage itself: "Report Designer
+(formerly Logi JReport Designer) is a Swing-based Integrated Development
+Environment". That parenthetical is the vendor's own acknowledgement, not a
+leftover.
+
+## Naming inside the code never changed
 
 The v17 rename was cosmetic and remains incomplete. These are still in the
 **current v26** documentation, so when you see them they are correct and current,
