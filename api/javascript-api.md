@@ -30,6 +30,35 @@ The whole API is one file, `jreportapi.js`, created by the server at
 
 The `id="j$vm"` attribute is part of the documented snippet in both eras, so keep it.
 
+## Verified against a running server, and one thing the docs do not tell you
+
+Checked on `logianalytics/logireport-server:latest` (26.2 SP1) on 22 Aug 2026.
+The file is served at `/webos/jsvm/lib/jreportapi.js` and is about 900KB.
+
+**The runtime global is `J$VM`, upper case.** The lower-case `j$vm` in the snippet
+is only the script tag's `id`. Browsers also expose an element id as a global, so
+`typeof j$vm` returns `"object"` whether or not the API ever initialised, and it
+resolves to the `<script>` element rather than the API. Testing it is a false
+positive that will send you hunting for the wrong fault. Test `typeof J$VM`.
+
+**`J$VM.Factory` is not populated at load time.** Immediately after the script
+tag runs, `Object.keys(J$VM.Factory)` is `["_classes"]`: the API lazily loads its
+classes from the server via `J$VM.boot`. `Factory.runReport` only exists once that
+has completed. So the correct guard before calling it is:
+
+```js
+if (typeof J$VM === "undefined") { /* the file did not load */ }
+else if (!J$VM.Factory || typeof J$VM.Factory.runReport !== "function") {
+  /* the file loaded but the runtime has not booted */
+}
+```
+
+**Diagnostic worth knowing:** an unlicensed or expired server still serves the
+static `jreportapi.js` with a 200, but redirects every runtime request to
+`/expired.jsp`. The symptom is exactly the second branch above: the API is
+present, `Factory` never gains its methods, and nothing renders. If you see that,
+check the licence before you debug your own code.
+
 ## Demos on a running server
 
 `<install_root>\public_html\webos\app\demo` holds `jreportapi-demo-rpt.html` for a page or
