@@ -1,5 +1,32 @@
 # Logi Report documentation, made machine-readable
 
+## Confidentiality: this repository must not be public
+
+Decided from an audit of its own contents, not assumed. Three reasons:
+
+1. **It mirrors 13,235 pages of insightsoftware's product documentation** (166MB).
+   The source help centres are publicly readable and their `robots.txt` permits
+   crawling `/hc/`, but crawling permission is not a redistribution licence, and
+   no public terms-of-use page could be located. Republishing a vendor's complete
+   documentation set is a decision for someone with authority to make it.
+2. **`ORIENTATION.md` cites internal Jira issues** (JREP-3018, JREP-4494,
+   JREP-7524, JREP-38712). Useful provenance internally, an information leak
+   publicly.
+3. **`ORIENTATION.md` describes an unapproved internal FY27 naming proposal**,
+   drawn from a personal Confluence space explicitly marked "Not yet approved".
+   It is clearly labelled as a proposal, and it still must not leave the company.
+
+Nothing here carries credentials. Two Confluence pages found during research do
+expose a licence key and host credentials in plain text; they were deliberately
+never cited and their contents were never copied into this repo. Whoever owns
+those pages should be told.
+
+Recommended home: a **private** repository under the `isw-da` organisation, where
+`composer-mcp` and `simba-intelligence-skill` already live. If a public version is
+ever wanted, strip the Jira citations and the FY27 proposal first, and settle the
+documentation licence question properly.
+
+
 A clean, searchable mirror of the Logi Report product documentation, organised so
 a person or an AI assistant can find the right page and answer from it, with the
 version era of every page stated on the page itself.
