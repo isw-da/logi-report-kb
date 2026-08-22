@@ -89,13 +89,22 @@ def check_frontmatter(disk):
         if not m:
             bad.append("%s: no frontmatter" % rel)
             continue
-        keys = {l.partition(":")[0].strip() for l in m.group(1).split("\n") if ":" in l}
-        for req in ("title", "id", "section", "url"):
-            if req not in keys:
-                bad.append("%s: missing %s" % (rel, req))
-                break
+        kv = {}
+        for l in m.group(1).split("\n"):
+            if ":" in l:
+                k, _, v = l.partition(":")
+                kv[k.strip()] = v.strip().strip('"')
+        missing = [r for r in ("title", "id", "section", "url") if not kv.get(r)]
+        if missing:
+            bad.append("%s: missing or EMPTY %s" % (rel, missing))
+            continue
+        # A document with frontmatter and no body is not a document.
+        body = head[m.end():]
+        if len(body.strip()) < 20:
+            bad.append("%s: frontmatter but effectively no body" % rel)
     record("frontmatter_valid", not bad,
-           "%d bad: %s" % (len(bad), bad[:4]) if bad else "%d docs have title/id/section/url" % len(disk))
+           "%d bad: %s" % (len(bad), bad[:4]) if bad
+           else "%d docs have non-empty title/id/section/url and a body" % len(disk))
 
 
 def check_manifest(man, disk):

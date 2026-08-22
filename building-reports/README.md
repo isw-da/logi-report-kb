@@ -1,7 +1,13 @@
 # Building reports: the task router
 
-Task-oriented layer over the 9,344-article Logi Report corpus in `../docs/`. Start
+Task-oriented layer over the 13,235-article Logi Report corpus in `../docs/`. Start
 here, find your task, follow the link.
+
+These guides were written against the v15 to v19 documentation, which is the most
+detailed the corpus holds. The current v23 to v26 documentation is in
+`../docs/current/` and covers the same ground more tersely. Check there before
+quoting a procedure to anyone on v23 or later, and note that current docs call the
+products simply "Report Designer" and "Report Server", dropping the Logi prefix.
 
 Logi Report is insightsoftware's Java paginated and embedded reporting product:
 Logi Report Designer (the IDE), Logi Report Server (the runtime), Page Report
