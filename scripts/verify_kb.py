@@ -9,6 +9,17 @@ import hashlib, json, os, re, sys, collections
 KB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS = os.path.join(KB, "docs")
 
+# Minimum number of checks this gate must run. Pinned separately from the list
+# below so that deleting an entry AND its call, which an adversarial review used
+# to turn RED into GREEN with exit 0, trips this instead.
+#
+# Honest limit, stated rather than hidden: a gate living in a repo that the
+# people it judges can edit cannot fully defend itself. Someone who also edits
+# this number defeats it. What this buys is that casual or partial removal is
+# loud. The real defence is reviewing the diff of THIS FILE at every merge and
+# counting deletions. Never lower MIN_CHECKS to make a run green.
+MIN_CHECKS = 13
+
 CHECK_MANIFEST = [
     "kb_structure_present",
     "frontmatter_valid",
@@ -31,20 +42,60 @@ REQUIRED_PATHS = [
     "scripts/build_index.py", "scripts/verify_kb.py",
 ]
 
-# The questions this repo exists to answer. Each must be answerable from a file
-# that actually contains the terms. Would fail if the content were deleted.
+# The questions this repo exists to answer.
+#
+# An adversarial review defeated the previous version of this check with twelve
+# files of lorem ipsum. Three reasons, all fixed below:
+#   1. it searched frontmatter as well as body, so the `url:` line every document
+#      carries satisfied the "URL invocation" question;
+#   2. it matched unanchored substrings, so "A flowchart on the toolbar" answered
+#      "charts in a report" via bar in toolbar;
+#   3. it stopped at the first hit and never required ten questions to be answered
+#      by ten DIFFERENT documents, so one keyword-soup file answered all ten.
+#
+# Now: body text only, whole-word matching, the answering document's TITLE must
+# be on topic, and every question must be answered by a distinct document.
+#
+# (label, title_terms, body_terms_all, body_terms_any)
 SMOKE = [
-    ("what a catalog is",            ["catalog"], ["business view", "data source"]),
-    ("creating a crosstab report",   ["crosstab"], ["column", "row"]),
-    ("charts in a report",           ["chart"],   ["bar", "legend"]),
-    ("scheduling a report task",     ["schedul"], ["task"]),
-    ("exporting to PDF",             ["export"],  ["pdf"]),
-    ("page report vs web report",    ["page report"], ["web report"]),
-    ("the Server API",               ["server api"], ["jet."]),
-    ("URL invocation of the server", ["url"], ["jrs.", "report"]),
-    ("report security",              ["security"], ["role", "user"]),
-    ("business views",               ["business view"], ["catalog"]),
+    ("what a catalog is",            ["catalog"],       ["catalog"],      ["business view", "data source", "connection"]),
+    ("creating a crosstab report",   ["crosstab"],      ["crosstab"],     ["column", "row", "aggregate"]),
+    ("charts in a report",           ["chart"],         ["chart"],        ["legend", "axis", "series"]),
+    ("scheduling a report task",     ["schedule"],      ["schedule"],     ["task", "trigger", "report"]),
+    ("exporting to PDF",             ["export", "pdf"], ["export", "pdf"], ["page", "format"]),
+    ("page report vs web report",    ["page report"],   ["page report"],  ["web report", "studio"]),
+    ("the Server API",               ["server api"],    ["server api"],   ["jet", "class", "java"]),
+    ("URL invocation of the server", ["url"],           ["url"],          ["jrs", "parameter", "server"]),
+    ("report security",              ["security"],      ["security"],     ["role", "privilege", "permission"]),
+    ("business views",               ["business view"], ["business view"], ["catalog", "element"]),
 ]
+
+FM_RE = re.compile(r"^---\n(.*?)\n---\n", re.S)
+
+
+def split_doc(path):
+    """Return (title_lower, body_lower) with frontmatter REMOVED from the body.
+    Indexing frontmatter is how the previous check was fooled: every document
+    carries a url: line and a category: "Logi Report" line."""
+    try:
+        raw = open(path, encoding="utf-8", errors="replace").read()
+    except Exception:
+        return "", ""
+    m = FM_RE.match(raw)
+    title = ""
+    if m:
+        for line in m.group(1).split("\n"):
+            if line.startswith("title:"):
+                title = line.split(":", 1)[1].strip().strip('"')
+        body = raw[m.end():]
+    else:
+        body = raw
+    return title.lower(), body.lower()
+
+
+def has_word(hay, needle):
+    """Whole-word (or whole-phrase) containment. 'bar' must not match 'toolbar'."""
+    return re.search(r"(?<![a-z0-9])" + re.escape(needle) + r"(?![a-z0-9])", hay) is not None
 
 results, failures = {}, []
 
@@ -189,36 +240,78 @@ def check_internal_links():
            "%d dead: %s" % (len(dead), dead[:5]) if dead else "all relative links resolve")
 
 
+def _authored_files():
+    """Every file a human or agent wrote in this repo. The previous version read
+    five paths out of 13,250 and an adversarial review put a conflation into
+    api/server-api.md unnoticed."""
+    out = []
+    for f in sorted(os.listdir(KB)):
+        if f.endswith(".md"):
+            out.append(f)
+    for sub in ("api", "building-reports"):
+        d = os.path.join(KB, sub)
+        if os.path.isdir(d):
+            for root, _, files in os.walk(d):
+                for f in sorted(files):
+                    if f.endswith(".md"):
+                        out.append(os.path.relpath(os.path.join(root, f), KB))
+    return out
+
+
+# Words that, in a sentence naming BOTH products, assert they are one thing.
+EQUIV = re.compile(
+    r"(same|identical|interchangeab|synonym|equivalent|renamed|new name|"
+    r"formerly|now called|also called|aka|rebrand|two brands|either doc|"
+    r"one product|the same product|is simply|is just|ships as|sold as|"
+    r"\bis\b|\bwas\b|\bare\b|\bbecame\b|"
+    # parenthetical rename: "Logi Report (now Logi Composer)"
+    r"\((?:now|formerly|previously|a\.?k\.?a\.?|renamed)\b)", re.I)
+SPLIT = re.compile(r"(?<=[.!?;:])\s+|\n")
+
+
 def check_composer_confusion():
-    """Logi Report and Logi Composer are separate products with no shared doc
-    surface. A KB that blurs them reproduces a real mislabelling that has already
-    happened in a live deal. Authored files must not equate them."""
-    patterns = [
-        r"Logi Report,? (?:also |now |formerly )?(?:known as|called|renamed to|is) Logi Composer",
-        r"Logi Composer,? (?:also |now |formerly )?(?:known as|called|renamed to|is) Logi Report",
-        r"Logi Report (?:and|or) Logi Composer are (?:the same|one product)",
-        r"Logi Report (?:was |has been )?(?:renamed|rebranded) (?:to|as) Logi Composer",
-    ]
+    """Logi Report and Logi Composer are separate products sharing no
+    documentation surface. Conflating them caused a real mislabelling on a
+    recorded sales call.
+
+    The previous version grepped five fixed phrasings in five files. An
+    adversarial review slipped 11 of 14 natural conflations past it. This works
+    the other way round: find any SENTENCE naming both products, and require it
+    to be explicitly contrastive. That is a broad net, so contrastive sentences
+    are whitelisted rather than conflations being blacklisted."""
+    CONTRAST = re.compile(
+        r"(separate|different|not the same|distinct|unlike|whereas|while|"
+        r"never|no shared|nothing here applies|does not apply|instead of|"
+        r"rather than|confus|mislabel|conflat|versus|\bvs\b|two products|"
+        r"another product|other product|do not|don't|neither)", re.I)
     hits = []
-    for name in ("README.md", "CLAUDE.md", "ORIENTATION.md", "api/README.md"):
-        p = os.path.join(KB, name)
-        if not os.path.exists(p):
+    for rel in _authored_files():
+        p = os.path.join(KB, rel)
+        try:
+            text = open(p, encoding="utf-8").read()
+        except Exception:
             continue
-        body = open(p, encoding="utf-8").read()
-        for pat in patterns:
-            for m in re.finditer(pat, body, re.I):
-                hits.append("%s: %r" % (name, m.group(0)[:60]))
-    for root, _, files in os.walk(os.path.join(KB, "building-reports")):
-        for f in files:
-            if not f.endswith(".md"):
+        in_code = False
+        for n, raw_line in enumerate(text.split("\n"), 1):
+            if raw_line.strip().startswith("```"):
+                in_code = not in_code
                 continue
-            body = open(os.path.join(root, f), encoding="utf-8").read()
-            for pat in patterns:
-                for m in re.finditer(pat, body, re.I):
-                    hits.append("building-reports/%s: %r" % (f, m.group(0)[:60]))
+            if in_code:
+                continue
+            for sent in SPLIT.split(raw_line):
+                has_r = re.search(r"Logi Report", sent) is not None
+                has_c = re.search(r"Logi Composer", sent) is not None
+                if not (has_r and has_c):
+                    continue
+                if CONTRAST.search(sent):
+                    continue
+                if EQUIV.search(sent):
+                    hits.append("%s:%d %r" % (rel, n, sent.strip()[:90]))
     record("no_composer_confusion", not hits,
-           "%d conflations: %s" % (len(hits), hits[:3]) if hits
-           else "no file equates Logi Report with Logi Composer")
+           "%d sentences equate the two products without contrast: %s"
+           % (len(hits), hits[:4]) if hits
+           else "%d authored files scanned; no sentence equates the products"
+                % len(_authored_files()))
 
 
 def check_era(man):
@@ -233,55 +326,62 @@ def check_era(man):
            else "every doc carries one of %d era labels" % len(allowed))
 
 
+def _answer(index, q, used):
+    """Find a document that genuinely answers q and has not already been used
+    for another question."""
+    label, title_terms, all_terms, any_terms = q
+    for rel, title, body in index:
+        if rel in used:
+            continue
+        if not all(has_word(title, t) or has_word(title, t + "s")
+                   or has_word(title, t.rstrip("e") + "ing")
+                   for t in title_terms):
+            continue
+        if not all(has_word(body, t) for t in all_terms):
+            continue
+        if not any(has_word(body, t) for t in any_terms):
+            continue
+        if len(body.strip()) < 400:
+            continue
+        return rel
+    return None
+
+
+def _run_smoke(index, name, scope_desc):
+    used, unanswered, answers = set(), [], {}
+    for q in SMOKE:
+        hit = _answer(index, q, used)
+        if hit:
+            used.add(hit)
+            answers[q[0]] = hit
+        else:
+            unanswered.append(q[0])
+    record(name, not unanswered,
+           "%d of %d unanswerable from %s: %s"
+           % (len(unanswered), len(SMOKE), scope_desc, unanswered) if unanswered
+           else "all %d questions answered by %d DISTINCT on-topic documents in %s"
+                % (len(SMOKE), len(used), scope_desc))
+
+
 def check_smoke(disk):
-    """The check that tests the real path: can this repo answer the questions it
-    exists to answer? Fails if the content were deleted."""
-    index = []
-    for rel in disk:
-        try:
-            index.append((rel, open(os.path.join(KB, rel), encoding="utf-8",
-                                    errors="replace").read().lower()))
-        except Exception:
-            pass
-    unanswered = []
-    for label, must, also in SMOKE:
-        hit = None
-        for rel, body in index:
-            if all(t in body for t in must) and any(t in body for t in also):
-                hit = rel
-                break
-        if not hit:
-            unanswered.append(label)
-    record("retrieval_smoke_test", not unanswered,
-           "%d of %d demo questions unanswerable: %s"
-           % (len(unanswered), len(SMOKE), unanswered)
-           if unanswered else "all %d demo questions answerable from the corpus" % len(SMOKE))
+    """Can this repo answer the questions it exists to answer? Body text only,
+    whole-word matching, the document's title must be on topic, the body must be
+    substantive, and each question must be answered by a DIFFERENT document."""
+    index = [(rel,) + split_doc(os.path.join(KB, rel)) for rel in disk]
+    _run_smoke(index, "retrieval_smoke_test", "the corpus")
 
 
-def check_demo_layer():
-    """The task-oriented layer is the reason this repo exists: a pile of 13,235
-    articles does not let an agent build a report. The gate passed once with
-    building-reports/ empty, which is exactly the failure the structure check
-    could not see, so this asks whether the feature is PRESENT rather than
-    whether the directory is."""
-    d = os.path.join(KB, "building-reports")
-    if not os.path.isdir(d):
-        record("demo_layer_present", False, "building-reports/ missing")
+def check_smoke_current(disk):
+    """Same, restricted to docs/current. The corpus skews old (9,344 of 13,235
+    articles describe v15-v19), so a KB used for demos must not silently fall
+    back on decade-old guidance."""
+    cur = [r for r in disk if r.startswith(os.path.join("docs", "current"))]
+    if not cur:
+        record("retrieval_current_era", False,
+               "docs/current is empty; run scripts/pull_docs.py")
         return
-    mds = [f for f in os.listdir(d) if f.endswith(".md")]
-    if "README.md" not in mds:
-        record("demo_layer_present", False,
-               "building-reports/README.md missing (%d other md files)" % len(mds))
-        return
-    substantive = [f for f in mds
-                   if len(open(os.path.join(d, f), encoding="utf-8").read()) > 400]
-    if len(substantive) < 3:
-        record("demo_layer_present", False,
-               "only %d substantive files in building-reports/; the demo layer "
-               "is the point of this repo" % len(substantive))
-        return
-    record("demo_layer_present", True,
-           "%d guides, %d substantive" % (len(mds), len(substantive)))
+    index = [(rel,) + split_doc(os.path.join(KB, rel)) for rel in cur]
+    _run_smoke(index, "retrieval_current_era", "docs/current (%d docs)" % len(cur))
 
 
 def check_duplication(man, disk):
@@ -317,31 +417,48 @@ def check_duplication(man, disk):
            else "%d redundant copies declared and verified" % actual_redundant)
 
 
-def check_smoke_current(disk):
-    """Stronger than retrieval_smoke_test: the same demo questions must be
-    answerable from docs/current alone. The corpus skews old (9,344 of 13,235
-    articles describe v15-v19), so a KB used for demos must not silently fall
-    back on decade-old guidance. If a refresh breaks the current pull, this is
-    the check that notices."""
-    cur = [r for r in disk if r.startswith(os.path.join("docs", "current"))]
-    if not cur:
-        record("retrieval_current_era", False, "docs/current is empty; run scripts/pull_docs.py")
+def check_demo_layer():
+    """The task-oriented layer is the reason this repo exists.
+
+    An adversarial review satisfied the previous version with three files of 401
+    bytes of lorem ipsum, taking the real repo from RED to GREEN in thirty
+    seconds. Byte count is not a proxy for substance. A guide now has to look
+    like a guide: cite source documents that resolve, and talk about the actual
+    product."""
+    d = os.path.join(KB, "building-reports")
+    if not os.path.isdir(d):
+        record("demo_layer_present", False, "building-reports/ missing")
         return
-    index = []
-    for rel in cur:
-        try:
-            index.append(open(os.path.join(KB, rel), encoding="utf-8",
-                              errors="replace").read().lower())
-        except Exception:
-            pass
-    unanswered = [label for label, must, also in SMOKE
-                  if not any(all(t in b for t in must) and any(t in b for t in also)
-                             for b in index)]
-    record("retrieval_current_era", not unanswered,
-           "%d of %d unanswerable from docs/current: %s"
-           % (len(unanswered), len(SMOKE), unanswered) if unanswered
-           else "all %d demo questions answerable from the %d current-era docs"
-                % (len(SMOKE), len(cur)))
+    mds = sorted(f for f in os.listdir(d) if f.endswith(".md"))
+    if "README.md" not in mds:
+        record("demo_layer_present", False,
+               "building-reports/README.md missing (%d other md files)" % len(mds))
+        return
+    TERMS = ("catalog", "report", "designer", "server", "dataset",
+             "business view", "chart", "crosstab", "studio")
+    good, why = [], []
+    for f in mds:
+        body = open(os.path.join(d, f), encoding="utf-8").read()
+        low = body.lower()
+        # must cite at least one source document, and it must resolve
+        cites = re.findall(r"\]\((\.\./docs/[^)]+\.md)\)", body)
+        live = [c for c in cites
+                if os.path.exists(os.path.normpath(os.path.join(d, c)))]
+        terms = sum(1 for t in TERMS if t in low)
+        if len(body) > 1200 and live and terms >= 3:
+            good.append(f)
+        else:
+            why.append("%s(chars=%d,cites=%d,terms=%d)"
+                       % (f, len(body), len(live), terms))
+    if len(good) < 5:
+        record("demo_layer_present", False,
+               "only %d of %d guides are substantive (need >1200 chars, a "
+               "resolving ../docs source citation, and 3+ product terms); "
+               "weak: %s" % (len(good), len(mds), why[:5]))
+        return
+    record("demo_layer_present", True,
+           "%d guides, %d substantive and citing resolving sources"
+           % (len(mds), len(good)))
 
 
 def main():
@@ -371,9 +488,36 @@ def main():
         print("  %-8s %-30s %s" % ("PASS" if ok else "FAIL", name, detail[:80]))
     skipped = [n for n in CHECK_MANIFEST if n not in results]
     unexpected = [n for n in results if n not in CHECK_MANIFEST]
+
+    # Self-scope defences, against a fleet editing the gate to reach green.
+    scope_errors = []
+    if len(CHECK_MANIFEST) < MIN_CHECKS:
+        scope_errors.append("CHECK_MANIFEST has %d entries, below the pinned "
+                            "minimum of %d: a check was deleted"
+                            % (len(CHECK_MANIFEST), MIN_CHECKS))
+    if len(set(CHECK_MANIFEST)) != len(CHECK_MANIFEST):
+        scope_errors.append("CHECK_MANIFEST contains duplicates, inflating its count")
+    # Every check_* function defined in this file must be represented and must
+    # be called from main(). Deleting a call without deleting the function is
+    # caught by the skipped list; deleting both is caught here.
+    try:
+        src = open(os.path.abspath(__file__), encoding="utf-8").read()
+        defined = set(re.findall(r"^def (check_[a-z_]+)\(", src, re.M))
+        called = set(re.findall(r"^    (check_[a-z_]+)\(", src, re.M))
+        orphan_defs = sorted(defined - called)
+        if orphan_defs:
+            scope_errors.append("check functions defined but never called: %s"
+                                % orphan_defs)
+    except Exception as e:
+        scope_errors.append("could not introspect the gate's own source: %s" % e)
     print("-" * 70)
     print("manifest: %d | ran: %d | skipped: %d | unexpected: %d"
           % (len(CHECK_MANIFEST), len(results), len(skipped), len(unexpected)))
+    if scope_errors:
+        print()
+        for e in scope_errors:
+            print("  SCOPE  " + e)
+        print("GATE: RED  (the gate's own scope was tampered with)"); return 1
     if skipped:
         print("GATE: RED  (%d named checks never ran)" % len(skipped)); return 1
     if unexpected:
