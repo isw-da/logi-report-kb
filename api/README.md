@@ -10,13 +10,30 @@ API question with Composer knowledge, or the reverse.
 
 ## Eras
 
-Every claim below is drawn from one of three source trees, and the tree is the era label:
+Every claim below is drawn from one of these source trees, and the tree is the era label:
 
 | Era directory | Product name in the text | Notes |
 | --- | --- | --- |
+| `../docs/current/v26/` | Report (product name dropped from headings) | v26, the current line. 55 API articles plus 9 on URL invocation |
+| `../docs/current/v23-v25/` | Report | v23, v24, v25 |
 | `../docs/jreport-v15-v16/` | Logi JReport | v15 and v16 |
 | `../docs/logi-report-v17-v19/` | Logi Report | v17, v17.1, v18, v19; the v19 set is the fullest |
 | `../docs/unversioned/` | mixed | some articles say Logi Report, some still say Logi JReport; no version in the path, so treat a claim sourced only from here as unversioned |
+
+**The per-surface files below were written against the v15 to v19 trees, which are
+the most detailed the corpus holds.** The current v23 to v26 documentation covers
+the same surfaces with the same class names. Check the current tree before quoting
+a detail to someone on v23 or later:
+
+- [Using the Server API, v26](../docs/current/v26/working-with-apis-report-server/45203849318285-using-the-server-api.md)
+- [Using Catalog API to Manage Catalogs, v26](../docs/current/v26/working-with-apis-report-server/45203848794381-using-catalog-api-to-manage-catalogs.md)
+- [Dynamic Security API, v26](../docs/current/v26/working-with-apis-report-server/45203849636365-dynamic-security-api.md)
+- [Working on Report Server via URL, v26](../docs/current/v26/working-on-report-server-via-url-report-server/45204046177165-working-on-report-server-via-url.md)
+- [URL properties for running, scheduling and viewing reports, v26](../docs/current/v26/working-on-report-server-via-url-report-server/45204033487757-url-properties-for-running-scheduling-and-viewing-reports-via-url.md)
+
+Note the v26 section headings drop the product name entirely: "Report Designer",
+not "Logi Report Designer". That is the same rename still working through the
+documentation, not a different product.
 
 The v17 rename changed the product name throughout the text. Where an API itself
 changed between eras, the per-surface file says so. Where the corpus does not let me
