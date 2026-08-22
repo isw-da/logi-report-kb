@@ -44,8 +44,9 @@ product name, even though insightsoftware's own public site still does.
 
 Start with the index, not with grep over 13,235 files.
 
-- `MANIFEST.json` — every document with title, id, section, era, source URL.
-  Machine-readable; filter it in code.
+- `MANIFEST.json` — every document with title, id, section, era, source URL,
+  body hash and duplicate grouping. **It is about 10MB. Never `cat` or `Read` it
+  whole; filter it in code.** `llms.txt` is 1.8MB, same warning.
 - `llms.txt` — the same index grouped by era and section, in the llms.txt
   convention.
 - `ORIENTATION.md` — what the product is, the version map, the lineage.
@@ -53,16 +54,27 @@ Start with the index, not with grep over 13,235 files.
 - `building-reports/README.md` — task-oriented routing. **Start here for
   anything of the form "how do I build X".**
 
+About 9% of the corpus is a byte-identical copy of another document, because
+upstream publishes the same article under several Zendesk ids, both across
+Designer and Server and across versions. Nothing has been deleted, because two
+identical articles in different versions tell you the topic did not change.
+Filter on `is_canonical` to collapse duplicates, and check `uses_jreport_naming`
+when you need to know whether an unversioned article predates the v17 rename.
+
 A reliable pattern:
 
 ```bash
 python3 -c "
 import json
-m=json.load(open('MANIFEST.json'))
+m = json.load(open('MANIFEST.json'))
 for d in m['documents']:
-    if 'crosstab' in d['title'].lower(): print(d['era'], d['path'])
+    if d['is_canonical'] and 'crosstab' in d['title'].lower():
+        print(d['era'], d['path'])
 "
 ```
+
+Prefer `docs/current/` when the user has not named a version, because 9,344 of
+the 13,235 articles describe v15 to v19 and unfiltered retrieval skews old.
 
 Then read the specific file. Prefer reading two or three whole documents over
 grepping fragments across hundreds.
