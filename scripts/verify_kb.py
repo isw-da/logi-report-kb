@@ -4,7 +4,7 @@
 A skip is not a pass. A traceback is not a pass. Named checks are tracked
 against a blessed manifest so a deleted check cannot hide behind an added one.
 """
-import json, os, re, sys, collections
+import hashlib, json, os, re, sys, collections
 
 KB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS = os.path.join(KB, "docs")
@@ -21,6 +21,8 @@ CHECK_MANIFEST = [
     "era_labelled",
     "retrieval_smoke_test",
     "retrieval_current_era",
+    "duplication_declared",
+    "demo_layer_present",
 ]
 
 REQUIRED_PATHS = [
@@ -247,6 +249,65 @@ def check_smoke(disk):
            if unanswered else "all %d demo questions answerable from the corpus" % len(SMOKE))
 
 
+def check_demo_layer():
+    """The task-oriented layer is the reason this repo exists: a pile of 13,235
+    articles does not let an agent build a report. The gate passed once with
+    building-reports/ empty, which is exactly the failure the structure check
+    could not see, so this asks whether the feature is PRESENT rather than
+    whether the directory is."""
+    d = os.path.join(KB, "building-reports")
+    if not os.path.isdir(d):
+        record("demo_layer_present", False, "building-reports/ missing")
+        return
+    mds = [f for f in os.listdir(d) if f.endswith(".md")]
+    if "README.md" not in mds:
+        record("demo_layer_present", False,
+               "building-reports/README.md missing (%d other md files)" % len(mds))
+        return
+    substantive = [f for f in mds
+                   if len(open(os.path.join(d, f), encoding="utf-8").read()) > 400]
+    if len(substantive) < 3:
+        record("demo_layer_present", False,
+               "only %d substantive files in building-reports/; the demo layer "
+               "is the point of this repo" % len(substantive))
+        return
+    record("demo_layer_present", True,
+           "%d guides, %d substantive" % (len(mds), len(substantive)))
+
+
+def check_duplication(man, disk):
+    """Roughly 9% of this corpus is a byte-identical copy of another document,
+    because upstream publishes the same article under several Zendesk ids. That
+    is not a defect to delete: two identical articles in different versions are
+    evidence the topic did not change. What IS a defect is failing to declare
+    it, because a consumer would then treat 13,235 as 13,235 distinct documents.
+    This check recomputes the duplication and fails if the manifest understates
+    it."""
+    if man is None:
+        record("duplication_declared", False, "no manifest")
+        return
+    decl = man.get("duplication")
+    if not decl:
+        record("duplication_declared", False,
+               "manifest does not declare duplication at all")
+        return
+    fm = re.compile(r"^---\n(.*?)\n---\n", re.S)
+    groups = collections.defaultdict(int)
+    for rel in disk:
+        raw = open(os.path.join(KB, rel), encoding="utf-8", errors="replace").read()
+        m = fm.match(raw)
+        body = (raw[m.end():] if m else raw).strip()
+        if len(body) > 200:
+            groups[hashlib.sha1(body.encode("utf-8")).hexdigest()] += 1
+    actual_redundant = sum(n - 1 for n in groups.values() if n > 1)
+    stated = decl.get("redundant_copies", -1)
+    ok = stated == actual_redundant
+    record("duplication_declared", ok,
+           "manifest states %s redundant copies, recount finds %d"
+           % (stated, actual_redundant) if not ok
+           else "%d redundant copies declared and verified" % actual_redundant)
+
+
 def check_smoke_current(disk):
     """Stronger than retrieval_smoke_test: the same demo questions must be
     answerable from docs/current alone. The corpus skews old (9,344 of 13,235
@@ -287,6 +348,8 @@ def main():
     check_era(man)
     check_smoke(disk)
     check_smoke_current(disk)
+    check_duplication(man, disk)
+    check_demo_layer()
 
     print("=" * 70)
     print("LOGI REPORT KB GATE   (%d documents on disk)" % len(disk))
