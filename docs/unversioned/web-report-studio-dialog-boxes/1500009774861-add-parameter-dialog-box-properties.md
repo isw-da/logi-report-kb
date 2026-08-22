@@ -1,0 +1,235 @@
+---
+title: "Add Parameter Dialog Box Properties"
+id: 1500009774861
+section: "Web Report Studio Dialog Boxes"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009774861-Add-Parameter-Dialog-Box-Properties
+updated_at: 2021-07-24T00:48:35Z
+---
+
+# Add Parameter Dialog Box Properties
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009746682-Add-Aggregation-Dialog-Box-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009774881-Aggregate-On-Dialog-Box-Properties)
+
+# Add Parameter Dialog Box Properties
+
+This topic describes how you can use the Add Parameter dialog box to [add a local parameter](https://devnet.logianalytics.com/hc/en-us/articles/1500009750082-Using-Dynamic-Resources-and-Local-Parameters-in-Web-Report-#Param) to a report.
+
+Server displays the dialog box when you select the button ![Enter Parameter Values button](https://devnet.logianalytics.com/hc/article_attachments/4404880189463/btn_dshbrd_prm.gif) in the Value text box of the [Query Filter](https://devnet.logianalytics.com/hc/en-us/articles/1500009747922-Query-Filter-Dialog-Box-Properties) dialog box or [Filter](https://devnet.logianalytics.com/hc/en-us/articles/1500009775301-Filter-Dialog-Box-Properties) dialog box and select <Add Parameter…> from the Local Parameters node of the drop-down list.
+
+![Add Parameter dialog](https://devnet.logianalytics.com/hc/article_attachments/4404880194967/addprm.gif)
+
+**Name**
+
+Specifies the name of the parameter.
+
+**Value Setting**
+
+Specifies the parameter type.
+
+* **Type-in Parameter**  
+  Using this type you can predefine parameter values by typing manually.
+* **Bind with Single Column**  
+  Using this type the parameter can be bound with a DBField. The values of the DBField will be retrieved as the parameter values.
+* **Bind with Cascading Columns**  
+  Using this type you can create a group of cascading parameters so as to achieve the function of filtering parameters with parameters in a simple way.
+
+**Value Type**
+
+Specifies the data type of the parameter.
+
+**Values**
+
+The section after Value Type varies with the type you select from the Value Setting drop-down list.
+
+* **For Type-in Parameter**
+  + **Value List**  
+    Lists the predefined parameter values.
+  + **Prompt Values** [format hint]   
+    Predefines the parameter values. The [format hint] shows what the predefined values should look like.
+
+    There can be more than one prompt value. All the prompt values must be of the same type as specified in the Value Type field.
+
+    - ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404880163351/btn_add1.gif)  
+      Adds a new prompt value to the list. Double-click in the value line to edit the value. If the parameter is of Date, DateTime, or Time type, you can also select the **Calendar** icon ![](https://devnet.logianalytics.com/hc/article_attachments/4404885317143/btn_clndr.gif) to set a date and time value using the calendar.
+    - ![Delete button](https://devnet.logianalytics.com/hc/article_attachments/4404885309335/btn_delete.gif)  
+      Removes the selected prompt value.
+    - ![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4404885326231/btn_mvup.gif)  
+      Adjusts the display sequence of selected value by moving it up a step.
+    - ![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4404880154263/btn_mvdown.gif)  
+      Adjusts the display sequence of selected value by moving it down a step.
+* **For Bind with Single Column**
+  + **Source**  
+    Specifies the business view in the current data source from which to retrieve data for the parameter.
+  + **Bind Column**  
+    Specifies the group or detail object in the selected business view to be bound with the parameter.
+  + **Display Column**  
+    Specifies the group or detail object in the selected business view the values of which will be displayed for specifying the parameter value.
+* **For Bind with Cascading Columns**
+  + **Source**  
+    Specifies the business view in the current data source from which to retrieve data for the parameter.
+  + **Value List**  
+    Defines a group of cascading parameters.
+    - ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404880163351/btn_add1.gif)  
+      Adds a new parameter.
+    - ![Delete button](https://devnet.logianalytics.com/hc/article_attachments/4404885309335/btn_delete.gif)  
+      Removes the selected parameter.
+    - ![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4404885326231/btn_mvup.gif)  
+      Adjusts the parameter level by moving it up a step. The higher the position is, the higher the level is. The lower level field values are controlled by the higher-level field values.
+    - ![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4404880154263/btn_mvdown.gif)  
+      Adjusts the parameter level by moving it down a step.
+    - **Bind Column**  
+      Specifies the group or detail object in the selected business view to be bound with the parameter.
+    - **Display Column**  
+      Specifies the group or detail object in the selected business view the values of which will be displayed for specifying the parameter value.
+    - **Parameter**  
+      Specifies whether to set a group of Bind Column and Display Column as a parameter which will become a member of the cascading parameter group. All parameters in the cascading group will be created as independent parameters.
+
+      The parameter name is provided by Logi Report automatically, and the format is *[The name specified as parameter name]-[Bind Column name]*.
+
+**Options**
+
+Specifies options for the parameter. The options vary with the type you select from the Value Setting drop-down list.
+
+* **Prompt Text**  
+  Specifies the text for prompting users to provide the value of the parameter.
+
+  **Tips:**
+
+  + To help users avoid typing a value out of range, you can add the value range to the end of the prompt text. For example, "Type a customer ID (1~100):".
+  + To help users avoid typing a value in a wrong pattern, you can add the value pattern to the end of the prompt text. For example, "Type an order date (MMM-dd-yy):".
+* **Minimum Value/Length**  
+  Specifies the minimum value allowed for the parameter. If the parameter value type is String, this option is defined as Minimum Length, which means that you can set the minimum allowed length of the string.
+* **Maximum Value/Length**  
+  Specifies the maximum value allowed for the parameter. If the parameter value type is String, this option is defined as Maximum Length, which means that you can set the maximum allowed length of the string.
+* **String Encoding**  
+  Specifies the encoding for the parameter. Available only when the parameter's data type is defined as String.
+* **User Defined Format**  
+  For certain types of parameters, the value format supplied by Logi Report may not satisfy your requirement. In this case, you can define your own preferred format. When you have defined the value format, all the values supplied for the parameter at runtime should be based on it, otherwise there will be an error message.
+
+  You should pay attention to the following when using user defined formats for parameter values:
+
+  + The date and time formats should follow the [JDK standard](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html).
+  + The user defined format will show different appearance under different locale, and you need input values according to the displayed format. For example, under the Spanish or French locale, ####.## will be displayed as #0,## and you should follow #0,## to input values.
+  + The user defined format only limits the format of the input value, which does not mean that the display value will be in the same format. To change the display format of a parameter, you will need to specify the [Format](https://devnet.logianalytics.com/hc/en-us/articles/1500009749382-Parameter-Field-Properties#Format) property of this parameter in the Inspector panel.
+  + Decimal number format syntax:
+
+    | Symbol | Meaning | Notes |
+    | --- | --- | --- |
+    | 0 | A digit |  |
+    | \* | A digit, zero shows as a star | Cannot mix 0, \*, and \_ in same format |
+    | \_ | A digit, zero shows as a space | Cannot mix 0, \*, and \_ in same format |
+    | # | A digit, zero shows as blank | The actual number may be much larger than the format provided |
+    | . | Placeholder for decimal separator, it may be a comma in some locales. |  |
+    | , | Placeholder for grouping delimiter, it may be a period in some locales. | Shows the interval to be used |
+    | ; | Separates formats | positive and negative. |
+    | - | If there is no explicit negative sign, - is prefixed | "#,##0.00" -> "#,##0.00;(#,##0.00)" |
+    | % | Divides by 100 and shows as a percentage |  |
+    | X | Any other characters can be used in the prefix or suffix |  |
+  + String format syntax:
+
+    | Symbol | Meaning | Example |
+    | --- | --- | --- |
+    | % | Any string of zero or more characters. | WHERE title LIKE '%computer%' finds all book titles with the word 'computer' anywhere in the book title. |
+    | \_ (underscore) | Any single character. | WHERE au\_fname LIKE '\_ean' finds all four-letter first names that end with ean (Dean, Sean, and so on). |
+    | [ ] | Any single character within the specified range ([a-f]) or set ([abcdef]). | WHERE au\_lname LIKE '[C-P]arsen' finds author last names ending with arsen and beginning with any single character between C and P, for example Carsen, Larsen, Karsen, and so on. |
+    | [^] | Any single character not within the specified range ([^a-f]) or set ([^abcdef]). | WHERE au\_lname LIKE 'de[^l]%' finds all author last names beginning with de and where the following letter is not l. |
+* **Required**  
+   If set to true, the parameter will be treated as a required parameter. A required parameter must be fulfilled, which means that you must supply a value for the parameter before the report can be run. If set to false, the parameter will be treated as an optional parameter. An optional parameter can be left blank, which means you can either type a value, or leave it as it is.
+
+  In the dialog box for specifying the parameter value, the prompt text of a required parameter will be marked with a \* sign.
+
+  ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404885305111/noteicon.jpg)If the parameter is optional and you do not expect it to take effect in your report, when specifying the parameter value, clear the content in the value text box. Any value left in the value text box will function in reports.
+* **Hide Parameter When Single Value Returned**  
+   When a parameter is bound with a column, you can choose to hide the parameter at runtime when only a single value is returned for the parameter, and the returned single value will be used as default value of the parameter.
+* **Allow Multiple Values**  
+   Enables multiple parameter values to be selected for the parameter.
+* **Enable the "All Values" Option**  
+   When Allow Multiple Values is true, this option is activated and its default value is true which will display the All Values option in the dialog box for specifying multiple values for the parameter.
+* **Treat Blank as Null**  
+   Available only when the parameter's data type is defined as String. If it is true, the parameter value will be null; if false, the default parameter value is "".
+* **Use Current Date-Time**   
+   If set to true, the current date time in your system will be used as value of the parameter. Available only when the parameter's data type is defined as Date, Time or DateTime.
+* **Use Current Date-Time When Blank**  
+   If set to true, when the value of the parameter is blank, the current date time in your system will be used as value of the parameter. Available only when the parameter's data type is defined as Date, Time or DateTime.
+
+  If the type of the parameter is set to Date, Time or DateTime, you can choose whether to get parameter value dynamically from the system's date time by enabling one of the above options - Use Current or Use Current When Blank. However, if you want to use this feature, you need to make sure your system's DateTime format is set to yyyy-MM-dd H:mm:ss as it is the only format Logi Report supports; otherwise, you need to make use of the User Defined Parameter Format feature. Also, if one of the two options is enabled, you need to provide the parameter's prompt value according to the data type of your parameter.
+
+  + When the data type of the parameter is Date, you can specify the value according to the format yyyy-MM-dd.
+    - yyyy-01-01: Year will be dynamically changed.
+    - 2007-MM-01: Month will be dynamically changed.
+    - 2007-01-dd: Date will be dynamically changed.
+    - yyyy-MM-01: Year and month will be dynamically changed.
+    - yyyy-01-dd: Year and date will be dynamically changed.
+    - yyyy-MM-dd: Year, month, and date will be dynamically changed.
+    - 2007-MM-dd: Month and date will be dynamically changed.
+  + When the data type of the parameter is Time, you can specify the value according to the format H:mm:ss.
+    - H:00:00: Hour will be dynamically changed.
+    - 12:mm:00: Minute will be dynamically changed.
+    - 12:00:ss: Second will be dynamically changed.
+    - H:mm:00: Hour and minute will be dynamically changed.
+    - 12:mm:ss: Minute and second will be dynamically changed.
+    - H:00:ss: Hour and second will be dynamically changed.
+    - H:mm:ss: Hour, minute and second will be dynamically changed.
+  + When the data type of the parameter is DateTime, specify the value in a combination of the above.
+* **Sort**  
+   Specifies how to sort values of cascading parameters.
+  + **Ascend**  
+     Sorts parameter values in an ascending order.
+  + **Descend**  
+     Sorts parameter values in a descending order.
+  + **No Sort**  
+     The parameter values are displayed in the original order as in database.
+  + **Sort By**  
+     Sorts parameter values by sorting other fields in the same data source as the cascading group. When Sort By is selected, Server displays the [Custom Sort](https://devnet.logianalytics.com/hc/en-us/articles/1500009775101-Custom-Sort-Dialog-Box-Properties) dialog box for specifying fields and their sorting orders.
+* **Distinct**  
+   If set to true, in the UI for specifying the parameter value, identical values will appear only once and no duplicate values will be listed.
+* **Allow Type-in of Value**  
+   Specifies whether to enable typing values in addition to selecting values when specifying the parameter value. The property is enabled for Type-in Parameter by default.
+* **When Out of Value Range**  
+   Specifies how Logi Report will respond if the typed value is out of the predefined value list. The property is enabled only when the option Allow Type-in of Value is set to true.
+
+  There are three solutions as follows:
+
+  + **Adopt directly**  
+     The typed value will be used directly.
+  + **Use default**  
+     The default value defined when creating the parameter will be used.
+  + **Warn**  
+     Displays a warning message telling that "Value xxx is out of the available value list".
+
+  ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404885305111/noteicon.jpg)For a multi-value parameter, if one of the input values is not in the value list, Server treats the whole input result as out of range.
+* **Get Value from API Only**  
+   Specifies whether the parameter values can be input via UI or not.
+
+  If true, the parameter values should only be obtained from API and there will be no parameter dialog boxes available on any Logi Report Designer or Server UI for inputting values. Users will have to give the values of the parameter by API such as URLs, coding, and sessions, otherwise the default value will be used.
+
+  If false, the parameter can be obtained from both UI and API.
+
+  If a member of a cascading parameter group is set to get values from API only, it means that all the higher-level members shall get values from API only. This also applies to parameters on which other parameters depend. If in JDashboard several parameters share values, when any of them is set to get values from API only, they will share the values from API.
+* **On Parameter Value Change**  
+   Specifies to define an action that will be called when the parameter value changes. Choose a formula from the drop-down list to develop an action, which will be called before the other actions defined in the report or library component. It can work as a parameter value validation rule.
+* **Encrypt Parameter Value**  
+   Specifies whether to encrypt the values of the parameter in the UI where the parameter is used or required (excluding parameter control and parameter form control) and in log files. However, when the parameter is bound with a column or when its [Allow Multiple Values](#AllowMultipleValues) property is true, its values will only be encrypted in log files.
+
+  ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404885305111/noteicon.jpg)When writing the value of a formula or string that references a parameter to log, Server may not encrypt the parameter value.
+* **Allow Showing Unencrypted Value**  
+   The property is enabled when Encrypt Parameter Value is true. It specifies whether to display the option Hide Parameter Value in the UI for specifying the parameter value to allow users to view the unencrypted values of the parameter after the values are encrypted.
+
+**OK**
+
+Applies all changes and closes the dialog box.
+
+**Cancel**
+
+Does not retain any changes and closes the dialog box.
+
+![Help button](https://devnet.logianalytics.com/hc/article_attachments/4404880314903/btn_help.gif)
+
+Displays the help document about this feature.
+
+![Close button](https://devnet.logianalytics.com/hc/article_attachments/4404885431447/btn_close.gif)
+
+Ignores the setting and closes this dialog box.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009746682-Add-Aggregation-Dialog-Box-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009774881-Aggregate-On-Dialog-Box-Properties)

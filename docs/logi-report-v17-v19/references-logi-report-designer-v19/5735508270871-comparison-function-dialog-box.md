@@ -1,0 +1,56 @@
+---
+title: "Comparison Function Dialog Box"
+id: 5735508270871
+section: "References - Logi Report Designer v19"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/5735508270871-Comparison-Function-Dialog-Box
+updated_at: 2022-11-02T08:16:25Z
+---
+
+# Comparison Function Dialog Box
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/9898402961815/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/5735522093463-Color-List-Dialog-Box)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/9898402971543/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/5735499987863-Conditional-Formatting-Dialog-Box)
+
+# Comparison Function Dialog Box
+
+You can use the Comparison Function dialog box to [add a comparison function](https://devnet.logianalytics.com/hc/en-us/articles/5735527527447-Modifying-Crosstabs#Comparison) as an aggregation for a crosstab. This topic describes the options in the dialog box.
+
+Designer displays the Comparison Function dialog box when you select Comparison Function in the Display screen of the crosstab wizard.
+
+![Comparison Function dialog box](https://devnet.logianalytics.com/hc/article_attachments/9898516576535/cmprsnfctn.gif)
+
+Designer displays these options:
+
+**Function**
+
+Select the function of the calculation: Percentage, Permillage, or Difference.
+
+**Comparison Function Spans on Row Direction**
+
+Select to place the comparison function into the column total cell of the crosstab.
+
+**Comparison Function Spans on Column Direction**
+
+Select to place the comparison function into the row total cell of the crosstab.
+
+**Break By**
+
+Select the first parameter of the comparison function.
+
+**Refer To**
+
+Select the other parameter of the comparison function.
+
+**OK**
+
+Select to apply your settings and close the dialog box.
+
+**Cancel**
+
+Select to close the dialog box without saving any changes.
+
+**Help**
+
+Select to view information about the dialog box.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/9898402961815/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/5735522093463-Color-List-Dialog-Box)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/9898402971543/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/5735499987863-Conditional-Formatting-Dialog-Box)

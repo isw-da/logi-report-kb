@@ -1,0 +1,39 @@
+---
+title: "Formatting the Scatter in a Scatter Chart"
+id: 1500010094581
+section: "Working with Components in Reports - Logi Report Designer v17.1"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500010094581-Formatting-the-Scatter-in-a-Scatter-Chart
+updated_at: 2021-07-23T19:14:41Z
+---
+
+# Formatting the Scatter in a Scatter Chart
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404856790679/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500010057002-Formatting-the-Radar-in-a-Radar-Chart)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404856790935/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500010094601-Formatting-the-Stock-in-a-Stock-Chart)
+
+# Formatting the Scatter in a Scatter Chart
+
+This topic describes how you can format a scatter chart.
+
+1. Right-click any scatter marker in the scatter chart and select **Format Scatter** on the shortcut menu, or double-click any scatter marker in the chart. Designer displays the [Format Scatter dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010097201-Format-Scatter-Dialog-Box).
+
+   ![Format Scatter dialog box - General](https://devnet.logianalytics.com/hc/article_attachments/4404856936855/fmtsctr_gnrl.gif)
+2. In the **General** tab, set the general properties of the scatter chart.
+
+   In the **Layout** box, select **None** if you do not want to use lines to connect the markers in the scatter chart, or select **Straight Line** or **Curved Line** to connect the markers using lines of the corresponding style.
+
+   In the **Line** box, specify the thickness of the lines that connect the markers in the scatter chart.
+
+   In the **Node** box, specify the style, width, and height of the markers in the scatter chart.
+3. In the **Fill** tab, set the color pattern to fill the scatter markers.
+
+   ![Format Scatter dialog box - Fill](https://devnet.logianalytics.com/hc/article_attachments/4404856937239/fmtsctr_fill.gif)
+
+   Make a choice for the **Self Settings** checkbox first: when Self Settings is unselected (the default behavior), Designer synchronizes the color pattern that you specify here with the [Pattern List property](https://devnet.logianalytics.com/hc/en-us/articles/1500010061902-Chart-Properties#Pattern) on the chart object in the Report Inspector, which data markers of other subtypes can also apply if the chart is a combo chart; when you select Self Settings, it indicates that the color pattern is private to the current data markers themselves (the scatter markers in this case), which Designer remembers and applies to the data markers of a new type automatically if later you change the type of the chart. Then, specify the color and transparency of the color schema to fill the selected scatter markers in the same data series (to change the color, select the color indicator and select a color from the [color palette,](https://devnet.logianalytics.com/hc/en-us/articles/1500010062922-Menu-Tabs#Palette) or type the hexadecimal value of a color in the text box). You can also select the **Color List** button to specify the color pattern for scatter markers in the same data series respectively in the [Color List dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010058302-Color-List-Dialog-Box).
+4. Skip the Data Label tab because Designer does not support displaying data labels in scatter charts.
+5. In the **Hint** tab, specify whether to include the category and series values and whether to scale big and small numbers in the scatter hint (you need to set the [Show Tips](https://devnet.logianalytics.com/hc/en-us/articles/1500010100301-Chart-Paper-Properties#ShowTips) property on the chart paper to "true" in the Report Inspector if you want to show the hint). A hint displays the value a marker in the scatter chart represents when you point the mouse pointer at the marker in Designer view mode, in HTML output, or at runtime.
+
+   ![Format Scatter - Hint](https://devnet.logianalytics.com/hc/article_attachments/4404856937495/fmtsctr_hint.gif)
+6. Select **OK** to apply the settings and close the dialog box.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404856790679/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500010057002-Formatting-the-Radar-in-a-Radar-Chart)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404856790935/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500010094601-Formatting-the-Stock-in-a-Stock-Chart)

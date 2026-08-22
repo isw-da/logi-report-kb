@@ -1,0 +1,505 @@
+---
+title: "Using Design API to Design Reports"
+id: 1500009605122
+section: "Working with APIs - Logi Report Designer v17"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009605122-Using-Design-API-to-Design-Reports
+updated_at: 2022-10-14T07:41:36Z
+---
+
+# Using Design API to Design Reports
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404911578903/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009628161-Using-Catalog-API-to-Manage-Catalogs) [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404911579543/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009605142-Exit-Functions)
+
+# Using Design API to Design Reports
+
+Besides editing reports in the design area in Logi Report Designer, you can also edit them with the Design API. By creating a Designer instance in your Java program, you can design and modify a report with the Design API methods all in code, for example, you can change the property values, or modify the report by inserting objects such as tables, crosstabs, chart, DBFields, formulas, labels, images, and so on. Logi Report Design API fully realizes designing a report programmatically. This topic describes how to install the Design API and use it to edit a report in various ways.
+
+This topic includes the following sections:
+
+* [Design API Packages and License](#Package)
+* [Installing the Design API](#Install)
+* [Preparations Before Using the Design API](#Prep)
+* [Getting Started Using the Design API](#Start)
+* [Using the Design API](#Use)
+  + [Creating, Opening, Closing, and Deleting a Report](#Report)
+  + [Inserting, Creating, Moving, and Deleting an Object in a Report](#Insert)
+  + [Getting and Setting Object Property Information](#Property)
+  + [Getting Report Metadata Information](#Metadata)
+  + [Getting Objects and Object Information](#ObjectInfo)
+  + [Getting Editing Information](#EditInfo)
+  + [Working with Library Components](#LC)
+* [Design API Samples](#Sample)
+
+## Design API Packages and License
+
+There are two Logi Report Design API packages: the workstation version and the server version. The workstation package is the Design API, and the server package is the Server Design API. The main difference between these two packages is that when invoking the special methods for editing catalogs, queries, reports, and parameters in the Server Design API, you also have to provide an additional parameter: UID (used to distinguish between different users, and can be a Number or a String). However when invoking them in the Design API, you do not need to provide this parameter.
+
+Logi Report Design API and Logi Report Server Design API use an independent license from other Logi Report products. You need to contact Logi Analytics sales to obtain this special license key if you want to use either Logi Report Design API or Logi Report Server Design API on your machine with Logi Report Designer or Logi Report Server. Logi Report will apply the license to your program instead of applying it to the installation of Logi Report Design API or Logi Report Server Design API.
+
+The keys for Logi Report Design API and Logi Report Server Design API are different. For example, you cannot use the Logi Report Design API key on Logi Report Server Design API, and vice versa. Which key is required is based on where you set your class path at runtime. If the classes are obtained from `<server_install_root>\lib` you need to use the Server Design API key. If the classes are obtained from `<designer_install_root>\lib` you need to use the Design API key.
+
+To use the key you need to create a DesignerUserInfo instance. Use the following constructor to provide the user ID and the Server Designer License Key or Designer License Key you received when you purchased Logi Report.
+
+`DesignerUserInfo userInfo=new DesignerUserInfo(Uid, key);  
+ Designer desg = new Designer(catalogPath, catalogName, userInfo);`
+
+If you want to use Logi Report Design API or Logi Report Server Design API package for workstations without using Logi Report Designer and Logi Report Server, you will need to obtain a valid license for each work station.
+
+## Installing the Design API
+
+Logi Report Designer and Logi Report Server include the full Design API packages. Logi Report Designer includes a single threaded Design API, while Logi Report Server includes a multi-threaded Design API. You can also download and install the Design API and Server Design API packages on your local machine. After which, you can then program with them without having to install any other Logi Report products.
+
+**To install the Design API by Logi Report Designer:**
+
+When you install Logi Report Designer, the Design API is also installed at the same time. After installation, you will have the following components in `<designer_install_root>\lib`:
+
+* JREngine.jar
+* report.jar
+* sac-1.3.jar
+* log4j-core-2.12.1.jar and  log4j-api-2.12.1.jar (for the Logi Report logging system)
+
+![Critical icon](https://devnet.logianalytics.com/hc/article_attachments/4404856819991/criticalicon.gif) In the second week of December 2021, a Log4j vulnerability was announced that may affect some customers using our products. Resolving/mitigating this issue is a high priority! We will continue to issue information to help you with this vulnerability. For more information, select this link: *[Statement on Log4j and Log4Net Vulnerabilities](https://devnet.logianalytics.com/hc/en-us/articles/4415781801751)*.
+
+The Design API classes are stored in the archive files: report.jar and JREngine.jar. You will need to take the following steps before you can compile and run the program:
+
+1. Set the classpath environment variable. Append the following string to your class path that starts the Design API (make sure that the path of JREngine.jar is before that of report.jar):
+
+   `<designer_install_root>\lib\JREngine.jar;<designer_install_root>\lib\report.jar;<designer_install_root>\lib\log4j-core-2.12.1.jar;<designer_install_root>\lib\log4j-api-2.12.1.jar;<designer_install_root>\lib\sac-1.3.jar;`
+2. Add the jar files for your DBMS JDBC drivers.
+3. Set the -Dreporthome parameter to be the same as the root path of Logi Report Designer.
+4. You will need to register the Design API licensed user and license key in your source code.
+
+**To install the Design API by Logi Report Server:**
+
+When you install Logi Report Server, the Server Design API is also installed at the same time. After installation, you will have the following components in `<server_install_root>\lib`:
+
+* JREngine.jar
+* JREServlets.jar
+* sac-1.3.jar
+* log4j-core-2.12.1.jar and  log4j-api-2.12.1.jar (for the Logi Report logging system)
+
+The Server Design API classes are stored in the archive files: JRESServlets.jar and JREngine.jar. You will need to take the following steps before you can compile and run the program:
+
+1. Set the classpath environment variable. Append the following string to your class path that starts the Design API:
+
+   `<server_install_root>\lib\JRESServlets.jar;<server_install_root>\lib\JREngine.jar;<server_install_root>\lib\log4j-core-2.12.1.jar;<server_install_root>\lib\log4j-api-2.12.1.jar;<server_install_root>\lib\sac-1.3.jar;`
+2. Add the jar files for our DBMS JDBC drivers.
+3. Set the -Dreporthome parameter to be the same as the root path of Logi Report Server.
+4. You will need to register the Server Design API licensed user and license key in your source code.
+
+**To install independent Logi Report Design API:**
+
+Ask the Logi Analytics Support ([support@logianalytics.com](mailto:support@logianalytics.com)) for the independent Design API installation file. Then, run the file and follow the prompts to install.
+
+After you have installed Logi Report Design API by running the installation file, you will need to take the following steps before you compile and run the program:
+
+1. Set the classpath environment variable. Then, append the following string to your class path that starts the Design API:
+
+   `<designAPI_install_root>\lib\designAPI.jar;<designAPI_install_root>\lib\log4j-core-2.12.1.jar;<designAPI_install_root>\lib\log4j-api-2.12.1.jar;<designAPI_install_root>\lib\sac-1.3.jar;<designAPI_install_root>\lib\hsqldb-2.4.0.jar`
+2. Set the -Dreporthome parameter equal to the root path of the Design API.
+
+**To install independent Logi Report Server Design API:**
+
+Ask the Logi Analytics Support ([support@logianalytics.com](mailto:support@logianalytics.com)) for the independent Server Design API installation file. Then, run the file and follow the prompts to install. We don't recommend using these libraries, instead we recommend you use the Design API libraries included in Logi Report Server.
+
+After you have installed Logi Report Server Design API by running the installation file, you will need to take the following steps before you compile and run the program:
+
+1. Set the classpath environment variable. Then, append the following string to your class path that starts the Server Design API:
+
+   `<svrdesignAPI_install_root>\lib\serverDesignAPI.jar;<svrdesignAPI_install_root>\lib\log4j-core-2.12.1.jar;<svrdesignAPI_install_root>\lib\log4j-api-2.12.1.jar;<svrdesignAPI_install_root>\lib\sac-1.3.jar;<svrdesignAPI_install_root>\lib\hsqldb-2.4.0.jar`
+2. Set the -Dreporthome parameter to be the same as the root path of the Server Design API.
+
+## Preparations Before Using the Design API
+
+Before you can use the Design API to perform certain tasks, you need to first make the following preparations.
+
+**Setting the license key**
+
+You can set the license information using the method *setUserInfo(String uid, String key)*, where *uid* is the user ID, and *key* is the license key. You should call this method before you can call any other Design API methods. The UID is the license user ID you received with the purchase of Logi Report Server and Logi Report Designer. The license key will be either Server Designer License Key or Designer License Key depending on your class path setting to `<server_install_root>\lib` or `<designer_install_root>\lib` respectively.
+
+`DesignerUserInfo userInfo=new DesignerUserInfo(Uid, key);  
+ Designer desg = new Designer(catalogPath, catalogName, userInfo); // For creating page report   
+ MultipliedDesigner md = new MultipliedDesigner(path, catName, Designer.CAT, userInfo); // For creating web report`
+
+**Getting a Catalog API instance**
+
+Before working with reports using the Design API, you need to specify the catalog in which they are saved. You can use the method *public CatalogAPI getCatalogAPI()* to get a Catalog API instance.
+
+**Getting handle information**
+
+All the objects in a report are organized into and browsed from a tree structure. For each report, the Report Inspector consists of a report object tree and the corresponding object properties. Selecting any object node on the tree also selects the same element in the report design area. The following diagrams cover all objects that can be used in a report with their relationships.
+
+![Report Set Diagram](https://devnet.logianalytics.com/hc/article_attachments/4404904482839/wkapi_dsgnapi_handle1.gif)
+
+![Banded Object Diagram](https://devnet.logianalytics.com/hc/article_attachments/4404904483095/wkapi_dsgnapi_handle2.gif)
+
+![Table Diagram](https://devnet.logianalytics.com/hc/article_attachments/4404904483351/wkapi_dsgnapi_handle3.gif)
+
+![Crosstab Diagram](https://devnet.logianalytics.com/hc/article_attachments/4404916842391/wkapi_dsgnapi_handle4.gif)
+
+Every node and object in the above trees is identified by a HANDLE in the Design API. Therefore, before you can create or edit a report with the Design API, you will first have to get the handle information. Super class API provides the following methods to get handles of different nodes and different types.
+
+* getHandles() - Gets all the handles of a report and returns a handle array.
+* getHandles(String handle) - Gets handles of the sub node in the current node and returns a handle array. If it fails, it will return null.
+* getHandles(String handle, int type) - Gets sub node handles of the same types for the given node and returns a handle array. If it fails, it will return null.
+* getHandles(String handle, int type, int depth) - Gets sub node handles of the same types for the given node and returns a handle array. The depth is described below. If it fails, it will return null.
+* getParent(String handle) - Gets the parent handle of an object and returns the parent handle. If it fails, it will return null.
+
+The following are the parameters used in the methods:
+
+* handle - Parent node handle when getting sub node handles. Object handle when getting parent handle.
+* type - Class type value defined in the API class.
+* depth - This is related to the current level in the report tree. When the depth is -1, all handles in the report will be returned. When the depth is 0, the handles of the current level will be returned. When the depth is number n, the handles of n levels and the current level will be returned.
+
+## Getting Started Using the Design API
+
+To help you start using the Design API, here is a simple example which shows how to use the Logi Report Design API package to compile and run a Java class that returns the connection information from a catalog file.
+
+1. Compile the sample code TellMeConnection.java in `<install_root>\help\samples\APICatalog` (make sure that the path of the file JREngine.jar is before that of the file report.jar).
+
+   `javac -classpath <install_root>\lib\JREngine.jar;<install_root>\lib\sac-1.3.jar;<install_root>\lib\report.jar TellMeConnection.java`
+2. Set the license key for Design API using the method *dr.setUserInfo("UID","XXXXXXXXXXX")* in TellMeConnection.java.
+3. Run the sample code.
+
+   `java -classpath ".;<install_root>\lib\JREngine.jar;<install_root>\lib\report.jar;<install_root>\lib\sac-1.3.jar;<install_root>\lib\log4j-core-2.12.1.jar;<install_root>\lib\log4j-api-2.12.1.jar" -Dreporthome=<install_root> TellMeConnection –path=<catalog path> -catalog=<catalog name>`
+
+   For example,
+
+   `java -classpath "C:\LogiReport\Designer\lib\JREngine.jar;C:\LogiReport\Designer\lib\report.jar;C:\LogiReport\Designer\lib\sac-1.3.jar;C:\LogiReport\Designer\lib\log4j-core-2.12.1.jar;C:\LogiReport\Designer\lib\log4j-api-2.12.1.jar;C:\LogiReport\Designer\lib\hsqldb-2.4.0.jar" -Dreporthome=C:\LogiReport\Designer TellMeConnection -path=C:\LogiReport\Designer\Demo\Reports\TutorialReports -catalog=JinfonetGourmetJava.cat`
+
+   And the output should be as follows:
+
+   **Name:** Logi Report demo  
+   **Driver:** org.hsqldb.jdbcDriver  
+   **URL:**`jdbc:hsqldb:C:\LogiReport\Designer\Demo\db\JRDemo`  
+   **User:** sa  
+   **Password**  
+   **TimestampFormat:** yyyy-MM-dd HH:mm:ss.SSS  
+   **TimeFormat:** HH:mm:ss  
+   **DateFormat:** yyyy-MM-dd  
+   **ExtraNamePattern:** Default(JDBC)
+
+## Using the Design API
+
+The class API is the root of the class hierarchy of Logi Report Design API (Design API and Catalog API). It is an abstract class and provides a series of editing methods for users. The Design API class has an API as a super class.
+
+Designer is the principal class that manipulates reports. The application creates a Designer instance and calls Designer methods to create or modify a report. For details of summary of FIELD, CONSTRUCTOR and METHOD, refer to the jet.api package in the Logi Report Javadoc.
+
+Note that after finishing using the Design API, you need to call the following methods to exiting from the editing status.
+
+* exit() - Exits from the editing status, releases all the resources and saves all reports and the catalog.
+
+* quit() - Quits the editing status without saving and releases all resources. It will return false if it fails, otherwise true.
+
+### Creating, Opening, Closing, and Deleting a Report
+
+When creating reports, you should create the reports based on an existing catalog file, otherwise you will get an error.
+
+* createReportSet(String name) - Creates a new page report with the specified name.
+* addReport(String reportsetHandle, String name) - Creates a new report tab with the specified name in the specified page report.
+* createWebReportSet(String reportsetName, String reportTabName) - Creates a new web report with the specified name. Creating a web report will create a report tab in the web report automatically.
+* open(String name) - Opens an existing report and returns the handle of the report.
+* close(String handle) - Saves any changes and closes the open report tab in the current page report.
+* closeReportSet() - Saves any changes and closes the current report.
+* quit(String handle) - Closes an open report without saving any changes.
+* deleteReport(java.lang.String name) - Deletes an existing report with the specified name, and returns true if the report has been successfully removed.
+
+**Parameters**
+
+* name - The name of the report or page report tab that is to be created, opened or deleted.
+* reportsetHandle - The handle of the page report into which the report tab will be added.
+* reportsetName - The name of the web report that is to be created.
+* reportTabName - The report tab name in the web report that is to be created. Optional.
+* handle - Ancestor handle of the open report or report tab.
+
+### Inserting, Creating, Moving, and Deleting an Object in a Report
+
+To insert an object in a report, you can use the following methods:
+
+* insert(String parent, int type, String name) - Inserts an object into the parent node.
+* insert(String parent, int type, String name, String mapping) - Inserts a DBField, parameter, formula or summary into the parent node.
+* insertTable(String parent, TableTemplateInfo info, boolean increasePanel) - Inserts a table into the parent node.
+* insert(String parent, String name, CTRowColFieldInfo colInfo[], CTRowColFieldInfo rowInfo[], CTAggFieldInfo aggInfo[]) - Insert a crosstab object and its children into the parent node.
+* insert(String parent, CTRowColFieldInfo colInfo, CTRowColFieldInfo rowInfo, CTAggFieldInfo aggInfo) - Inserts crosstab children into the crosstab.
+* insert(String parent, String name, String paperName, int charttype, String gName1, String gName2, String value, ChartLegendInfo chartLegendInfo, ChartLabelInfo chartLabelInfo) - Inserts a chart object and its children into the parent node.
+* insert (String parent, int type, String name, String topSection , String bottomSection) - Inserts a shape object into the report and returns the handle of the new shape.
+* insert(String parent, String name, GroupInfo groupInfo) - Inserts a group/sort into the parent node.
+
+To create and modify dynamic resources in a report, use the following methods:
+
+* addDynamicFormula(String reportHandle, String datasetHandle, String formulaName, String expression, int useType, boolean isRawExpression) - Creates a dynamic formula in a report.
+* addDynamicAggregation(String reportHandle, String datasetHandle, String aggregationName, String basedFieldName, String function) - Creates a dynamic aggregation in a report.
+* modifyDynamicFormula(String formulaHandle, FormulaInfo formulaInfo, int useType, boolean isRawExpression) - Changes the definition of a dynamic formula according to the new information.
+* modifyDynamicAggregation(String aggHandle, BVAggregationInfo aggInfo) - Changes the definition or display name of a dynamic aggregation.
+* compileDynamicFormulas(String objHandle) - Compiles the dynamic formulas for an object. If the object is a report, all the dynamic formulas in the report will be compiled.
+
+To change the position of an object, use the following method:
+
+* public boolean changeZOrder(String objectHandle, int zorderType) - Moves an object to front/back, or forward/backward
+
+To delete an object from a report, use the following method:
+
+* delete(String handle) - Deletes an object from its parent node.
+
+**Parameters**
+
+* parent - Parent handle node.
+* type - Class type that you want to insert.
+* name - Instance name of the new object.
+* mapping - Mapping name of the database field, parameter, formula or summary.
+* info - The table information including the information of the data, group, or columns in the table.
+* increasePanel - Indicates whether to increase the bounds when the table is out of the panel bounds. If it is true, the page width will be increased according to the table's width and position. If it is false, the table and its columns' width will be adjusted to fit the page.
+* colInfo - Field information array of the column.
+* rowInfo - Field information array of the row.
+* aggInfo - Field information array of the aggregate.
+* paperName - Instance name of ChartCoordinatepaper object.
+* charttype - Type of the chart.
+* group1 - Mapping name of the first group.
+* group2- Mapping name of the second group. It can be null.
+* value - Mapping name of a summary.
+* chartLegendInfo - Field information array of the chart legend.
+* chartLabelInfo - Field information array of the chart title and notes.
+* topSection - Handle of the top section attached by the shape.
+* bottomSection - Handle of the bottom section attached by the shape.
+* groupInfo - The group information.
+* reportHandle - The handle of a report.
+* datasetHandle - The handle of a dataset.
+* formulaName - The display name of a dynamic formula.
+* expression - The expression and function in String format.
+* useType - The element type that a dynamic formula will be used as, which can be a detail, group, or an aggregation object.
+* isRawExpression - Specifies whether to create an uncompiled formula or not. If it is false, the formula expression will be compiled and a javac thread will be started.
+* aggregationName - The display name of a dynamic aggregation.
+* basedFieldName - The qualified display name of a field.
+* function - The function name of a dynamic aggregation.
+* formulaHandle - The handle of a dynamic formula.
+* formulaInfo - The new information of a dynamic formula.
+* aggHandle - The handle of a dynamic aggregation.
+* aggInfo - The new information of a dynamic aggregation.
+* objHandle - The handle of an object.
+* objectHandle - Handle of the object whose z-order will be moved.
+* zorderType - Direction to which the object will be moved.
+* handle - Handle of the object that is to be deleted.
+
+### Getting and Setting Object Property Information
+
+You can use the following methods to get the property values of different types and return the property value:
+
+* getInt(String handle, String name)
+* getLong(String handle, String name)
+* getFloat(String handle, String name)
+* getDouble(String handle, String name)
+* getString(String handle, String name)
+* getBool(String handle, String name)
+* getColor(String handle, String name)
+
+**Note:** The getControlFields(String handle, String name) method is used for getting fields that can control property values at runtime.
+
+You can use the following methods to get the property name and type, and check property name:
+
+* getPropType(String handle, String name) - Gets and returns the property type defined in the Designer class.
+* getPropnames(String handle) - Gets property names and returns a name array.
+* containPropName(String handle, String name) - Checks whether the property name exists. If it exists, it will return true.
+
+You can use the following methods to change the property values of different types. They will return true if the value is changed.
+
+* set(String handle, String name, Boolean value)
+* set(String handle, String name, int value)
+* set(String handle, String name, long value)
+* set(String handle, String name, float value)
+* set(String handle, String name, double value)
+* set(String handle, String name, String value)
+* set(String handle, String name, Color value)
+* setReference(String handle, String name, String refHandle) - Changes the reference property value of an object.
+
+You can use the following methods to get and set the property values using fields and formulas.
+
+* getControlField(String handle, String propertyName) - Gets the field or expression that controls the property value at runtime.
+* getControlFields(String handle, String propertyName) - Gets all available fields that can be used to control the property value at runtime.
+* setControlFields(String handle, String propertyName, String field) - Sets the field to control the property value at runtime.
+* getAvailableDynamicFormulas(String handle, String propertyName) - Gets all available dynamic formulas that can be used to control the value of a property of an object at runtime.
+* setControlledByDynamicFormula(String handle, String propertyName, String fmlDisplayName) - Sets the dynamic formula to control the property value at runtime.
+* setControlledByExpression(String handle, String propertyName, String expression) - Sets the expression to control the property value at runtime.
+* isPropertyControlledByOther(String handle, String propertyName) - Indicates whether or not the specified property value is controlled by the runtime value.
+
+**Parameters**
+
+* handle - Object handle.
+* propertyName - The property name.
+* value - Property value.
+* refHandle - Referenced object handle.
+* field - The mapping name of a DBField or qualified display name of a business view element.
+* fmlDisplayName - The display name of a dynamic formula.
+* expression - The expression statement.
+
+### Getting Report Metadata Information
+
+You can use the method *getDataSet()* to get the dataset information. The method returns the dataset object. Then you can get the following report metadata information from the dataset: basic information, query information, business view information, and data buffer information.
+
+You can use the following methods to get the basic information:
+
+* getName() - Returns the dataset name.
+* getDataSourceName() - Returns the name of the data source used to build the data component.
+* getResourceType() - Returns the resource type. 1 means query, 2 means business view, and 3 means business/report cube.
+* getBlName() - Returns the information of the query, imported SQL, stored procedure, user defined data source, business view, or business/report cube used to build the data component.
+* getMaxRecords() - Returns the maximum number of records you want to display for all of the data components using this dataset.
+* setMaxRecords(int maxRecords) - Sets the maximum number of records.
+* getDataDriver() - Returns the path of the cached query result file that is used as the data resource.
+* setDataDriver(String dataDriver) - Sets the path of the cached query result file.
+* getSecurityPolicyName() - Returns the security policy name that is applied to the data component.
+* setSecurityPolicyName(String securityPolicyName) - Sets the security policy name.
+
+You can use the following methods to get information of the query, imported SQL, or other data objects that are used to create the dataset.
+
+* getQueriableName() - Returns the name of the query, imported SQL, stored procedure, or user defined data source.
+* getDataFieldNames() - Returns a collection of data field mapping names that the dataset uses.
+
+You can use the following methods to get the business view information that is used to create the dataset.
+
+* getBVName() - Returns the business view name.
+* getQueriableName() - Returns the name of the query, imported SQL, stored procedure, or user defined data source that is used to create the business view.
+* getElementNames() - Returns a collection of the qualified names of the business view elements that the dataset uses.
+* getDisplayName(String qualifiedName) - Returns the display name of the business view element that has the qualified name.
+* getMappingName(String qualifiedName) - Returns the mapping name of the queriable object data field used to create business view element that has the qualified name.
+
+You can use the following methods to get the data buffer information:
+
+* getMaxPageNumber() - Returns the maximum number of pages in the data buffer.
+* setMaxPageNumber(int maxPageNumber) - Sets the maximum number of pages.
+* getRecordsPerPage() - Returns the number of records in each page in the data buffer.
+* setRecordsPerPage(int recordsPerPage) - Sets the number of records in each page.
+
+### Getting Objects and Object Information
+
+* getDBFields(String handle) - Gets DBFields that can be used in the report and returns a mapping name array.
+* getFormulae(String handle) - Gets formulas that can be used in the report and returns a mapping name array.
+* getSummaries(String handle) - Gets summaries that can be used in the report and returns a mapping name array.
+* getParameter() - Gets parameters in the catalog and returns a mapping name array.
+* getQueries() - Gets queries in the catalog and returns a mapping name array.
+* getQueryName(String handle) - Gets the query name of a report.
+* getProcedures() - Gets stored procedures in the catalog and returns a mapping name array.
+* getSections(String handle, boolean visible), getSections(String handle) - Gets handles of sections in a report.
+* getGroups(String handle) - Gets handles of groups in a report.
+* getGroupInfo(String handle) - Gets the group information in a report.
+* getReportSortInfo(String handle) - Gets the sort information of a report.
+* getSortInfo(java.lang.String handle) - Gets the sort information of a group.
+* getSQLs() - Gets the SQLs in the catalog.
+* getUDS() - Gets the UDSs in the catalog.
+* getViews() - Gets the viewss in the catalog.
+* getObjectType(String handle) - Gets the type information of an object.
+* getObjectInfo(String handle) - Gets the handle of an object in a report.
+* getInstanceName(String handle) - Gets the instance name of an object, and returns the instance name. If it fails, it will return null.
+* getClassType(String handle) - Gets the class type of an object and returns one of the class type values that are defined in the Designer class. If an error or a warning occurs, it will return UNKNOWN.
+* getDataSetInfo(String objHandle) - Gets the dataset information of an object.
+* getDataSetInfos(String reportHandle) - Gets the dataset information of a report.
+* getAvailableDynamicFormulas(String handle) - Gets all available dynamic formulas for an object.
+* getDynamicFormulaInfo(String fmlHandle) - Gets the information of a dynamic formula.
+* getDynamicFormulaNames(String reportHandle, String datasetHandle) - Gets the display names of all dynamic formulas defined for a report and dataset.
+* getDynamicFormulaHandles(String reportHandle, String datasetHandle) - Gets the handles of all dynamic formulas defined for a report and dataset.
+* getDynamicAggregationInfo(String aggHandle) - Gets the information of a dynamic aggregation.
+* getDynamicAggregationNames(String reportHandle, String datasetHandle) - Gets the display names of all dynamic aggregations defined for a report and dataset.
+* getDynamicAggregationHandles(String reportHandle, String datasetHandle) - Gets the handles of all dynamic aggregations defined for a report and dataset.
+
+**Parameters**
+
+* handle/objHandle - Object handle.
+* visible - A Boolean type parameter which specifies that the section is visible.
+* reportHandle - The handle of a report.
+* fmlHandle - The handle of a dynamic formula.
+* datasetHandle - The handle of a dataset.
+* aggHandle - The handle of a dynamic aggregation.
+
+### Getting Editing Information
+
+* getWarning() - Gets and returns the warning message. If the operation is successful, it will return null.
+* clearWarning() - Clears the warning message.
+* getError() - Gets and returns the error message. If the operation is successful, it will return null.
+* clearError() - Clears the error message.
+* clearMsg() - Clears all warning and error messages.
+* setLog(OutputStream log, String encoding) - Sets the log to get error, debug and other information.
+* writeLog(String msg) - Writes all messages to the log.
+* closeLog() throws IOException - Closes the log.
+
+### Working with Library Components
+
+The entry API for working with library components is *getLCEditor()*. All the following operations use it as the entry.
+
+* createLC(String titleText) - Creates a new library component.
+* addDataset(String name, String datasourceName, String BVName) - Creates a new dataset from a business view.
+* setDataset(String objHandle, String datasetHandle) - Applies an existing dataset used in the library component to the data component. It returns true if the dataset is bound to the data component successfully; otherwise false.
+* insertTable(TableTemplateInfo info, boolean increasePanel) - Inserts a new table into the library component.
+* insertChart(ChartInfo info, String datasetName) - Inserts a new chart into the library component.
+* insertCrossTab(CrossTabInfo info) - Inserts a new crosstab into the library component.
+* insertImage(String imageName) - Inserts an image into the library component. The image must be in the same folder as the catalog.
+* insertLabel(String text) - Inserts a label into the library component.
+* insertSpecialField(int fieldType) - Inserts a special field into the library component.
+* saveLC(String lcFileName) - Saves the library component into the specified file (.lc).
+* loadLC(String lcFileName) - Loads the library component from the specified file (.lc).
+* close(String handle) - Closes the specified library component and clears all resources of the library component. It returns true if the library component is closed successfully; otherwise false.
+* quit() - Quits from the library component editor and clears all resources of the editor.
+
+**Parameters**
+
+* titleText - The title of the library component to be created.
+* name - The dataset's instance name.
+* datasourceName - The name of the data source that the required query belongs to.
+* BVName - The name of the business view that the dataset is based on.
+* objHandle - The handler string of the data component.
+* datasetHandle - The handler string of the existing dataset.
+* info - The class that defines the information of the table, chart, or crosstab, such as its data, properties, columns, rows, groups, aggregations, and their properties.
+* increasePanel - Indicates whether to increase the bounds when the table is out of the panel bounds. If it is true, the page width will be increased according to the table's width and position. If false, the table and its columns' width will be adjusted to fit the page.
+* datasetName - The dataset's instance name.
+* imageName - The name of the image to be inserted.
+* text - The text of the label to be inserted.
+* fieldType - The int value of the field type. The constants can be:
+  + USERNAME
+  + PRINTDATE
+  + PRINTTIME
+  + FETCHDATE
+  + FETCHTIME
+  + MODIFIEDDATE
+  + MODIFIEDTIME
+  + RECORDNUMBER
+  + GROUPNAME
+  + GROUPNUMBER
+  + GROUPNUMBERS
+  + PAGENUMBER
+  + PAGENUMBERS
+  + SQLSTATMENT
+* lcFileName - The library component file name (.lc) with full path.
+* handle - The handle of the library component object.
+
+## Design API Samples
+
+Logi Report provides you with the following sample programs which demonstrate how to create and edit reports using the Design API. You can get the samples in `<insatll_root>\help\samples\APIDesign`.
+
+* **CreateLCSample.java**  
+  An example of creating a library component with a table, a crosstab, and a chart.
+* **CreateWebReportSample.java**  
+  An example of creating a web report with a table, a crosstab, and a chart arranged in a tabular.
+* **TestDesignEditInvoice.java**  
+  An example of how to modify an existing page report template.
+* **TestDesignGraph.java**  
+  An example of designing a report with a chart.
+* **TestDesignInvoice.java**  
+  An example of designing a report containing a banded object.
+* **TestDesignSubreport.java**  
+  An example of designing a report with a subreport.
+* **TestInsertCrossTabIntoBanded.java**  
+  An example of inserting a crosstab into a banded object.
+* **TestInsertCrossTabIntoReport.java**  
+  An example of designing a report with a crosstab.
+
+To compile and run the sample programs, you should add jar files with their paths into the class path. Different jar files are required according to how [the Design API is installed](#Install).
+
+For example, you can use the following command to compile the sample program TestDesignInvoice.java:
+
+`C:\LogiReport\Designer\help\samples\APIDesign>javac -classpath "C:\LogiReport\Designer\lib\JREngine.jar;C:\LogiReport\Designer\lib\sac-1.3.jar;C:\LogiReport\Designer\lib\report.jar;C:\LogiReport\Designer\lib\log4j-core-2.12.1.jar；C:\LogiReport\Designer\lib\log4j-api-2.12.1.jar" TestDesignInvoice.java`
+
+When you run the sample programs, you need to provide two or three parameters. If you want to use two parameters, they should be catalog path and catalog name; if you want to use three parameters, they should be catalog path, catalog name, and log file with a full path name.
+
+The following example uses three parameters to run TestDesignInvoice.java. Here, it is assumed that Logi Report Designer has been installed to `C:\LogiReport\Designer`, and the current directory when you execute these commands is `C:\LogiReport\Designer\help\samples\APIDesign` (location of the sample programs). After running the program, you will find a newly created file TestInvoice.cls in `C:\LogiReport\Designer\Demo\Reports\TutorialReports`.
+
+`C:\LogiReport\Designer\help\samples\APIDesign>java -Dreporthome="C:\LogiReport\Designer" -classpath "C:\LogiReport\Designer\lib\JREngine.jar;C:\LogiReport\Designer\lib\sac-1.3.jar;C:\LogiReport\Designer\lib\report.jar;C:\LogiReport\Designer\lib\log4j-core-2.12.1.jar;C:\LogiReport\Designer\lib\log4j-api-2.12.1.jar;C:\LogiReport\Designer\lib\resource_en_US.jar;C:\LogiReport\Designer\lib\hsqldb-2.4.0.jar" TestDesignInvoice -path=C:\LogiReport\Designer\Demo\Reports\TutorialReports -catalog=JinfonetGourmetJava.cat -report=TestInvoice.cls -log=C:\LogiReport\Designer\logs\designer.log`
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404911578903/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009628161-Using-Catalog-API-to-Manage-Catalogs) [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404911579543/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009605142-Exit-Functions)

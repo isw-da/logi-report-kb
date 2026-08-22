@@ -1,0 +1,56 @@
+---
+title: "Mapping Table Dialog Box Properties"
+id: 1500009776081
+section: "Web Report Studio Dialog Boxes"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009776081-Mapping-Table-Dialog-Box-Properties
+updated_at: 2021-07-24T00:48:17Z
+---
+
+# Mapping Table Dialog Box Properties
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009747702-Label-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009747722-Navigation-Control-Properties)
+
+# Mapping Table Dialog Box Properties
+
+This topic describes how you can use the Mapping Table dialog box to define the [mapping relationship](https://devnet.logianalytics.com/hc/en-us/articles/1500009778801-Adding-Links-in-Web-Report#Map) based on which Server passes the on-screen filters in the primary report to the linked report. Server displays the dialog box when you select the button Mapping Table in the [Insert Link](https://devnet.logianalytics.com/hc/en-us/articles/1500009747642-Insert-Link-Dialog-Box-Properties) dialog box or [Edit Link](https://devnet.logianalytics.com/hc/en-us/articles/1500009775181-Edit-Link-Dialog-Box-Properties) dialog box.
+
+![Mapping Table dialog](https://devnet.logianalytics.com/hc/article_attachments/4404880164887/mptbl.gif)
+
+**Fields (Primary)**
+
+Specifies the fields in the primary report to set up the mapping relationship.
+
+All fields in the business view used by the trigger component in the primary report are listed. Select a field that is bound with an on-screen filter to define the mapping relationship.
+
+**Fields (Linked)**
+
+Specifies the fields in the linked report to set up the mapping relationship.
+
+The drop-down list contains all the fields in the business view used by the selected component in the linked report which are of the same data type as the specified primary report field. Select a field whose values are the same as those of the specified primary report field, then when the link is triggered, the corresponding on-screen filter in the primary report will be applied on the selected linked report field.
+
+![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404880163351/btn_add1.gif)
+
+Adds a mapping line.
+
+![Delete button](https://devnet.logianalytics.com/hc/article_attachments/4404885309335/btn_delete.gif)
+
+Removes the selected mapping lines.
+
+**OK**
+
+Applies the settings and closes the dialog box.
+
+**Cancel**
+
+Cancels the settings and closes the dialog box.
+
+![Help button](https://devnet.logianalytics.com/hc/article_attachments/4404880314903/btn_help.gif)
+
+Displays the help document about this feature.
+
+![Close button](https://devnet.logianalytics.com/hc/article_attachments/4404885431447/btn_close.gif)
+
+Ignores the setting and closes this dialog box.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009747702-Label-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009747722-Navigation-Control-Properties)

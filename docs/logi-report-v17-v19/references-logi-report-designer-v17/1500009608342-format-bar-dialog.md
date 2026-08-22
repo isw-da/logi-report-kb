@@ -1,0 +1,464 @@
+---
+title: "Format Bar Dialog"
+id: 1500009608342
+section: "References - Logi Report Designer v17"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009608342-Format-Bar-Dialog
+updated_at: 2021-07-24T16:04:38Z
+---
+
+# Format Bar Dialog
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404911578903/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009608322-Format-Area-Dialog) [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404911579543/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009631281-Format-Bar-Gauge-Dialog)
+
+# Format Bar Dialog
+
+The Format Bar dialog helps you to [format the bars](https://devnet.logianalytics.com/hc/en-us/articles/1500009628561-Formatting-the-Bars-in-a-Bar-Bench-Chart) of a 2-D or 3-D bar/bench chart. It appears when you right-click a bar/bench in a bar/bench chart and select Format Bar from the shortcut menu, or double-click a bar/bench of a bar/bench chart.
+
+The dialog contains the following tabs: [General](#General), [Size](#Size), [Fill](#Fill), [Border](#Border), [Data Label](#Data), [Hint](#Hint) and [Behaviors](#Behaviors) (the Behaviors tab is available to charts in library components only).
+
+**OK**
+
+Applies the changes and closes the dialog.
+
+**Cancel**
+
+Does not retain any changes and closes the dialog.
+
+**Apply**
+
+Applies all changes and leaves the dialog open.
+
+**Help**
+
+Displays the help document about this feature.
+
+## General
+
+Specifies the general format of the bar/bench chart. The options on the tab vary for [2-D bar/bench charts](#2D) and [3-D bar/bench charts](#3D).
+
+### For 2-D bar/bench charts
+
+![Format Bar - General 2-D](https://devnet.logianalytics.com/hc/article_attachments/4404904334743/fmtbar_gnrl_1.gif)
+
+**Style**
+
+Specifies the style of the bars in the chart. It can be Normal or Cylinder.
+
+**Layout**
+
+Specifies the layout of the chart.
+
+* **Clustered - 2-D**  
+   Displays and compares data values across categories.
+* **Stacked - 2-D**  
+   Displays and compares the contribution of each data value to a total across categories.
+* **100% Stacked - 2-D**  
+   Displays and compares the percentage that each data value contributes to a total across categories.
+
+**Depth**
+
+Specifies the depth properties for bars of the chart.
+
+* **Use Depth**  
+   Specifies whether to make the bars in the chart three-dimensional. You can also [use a formula to control the property](https://devnet.logianalytics.com/hc/en-us/articles/1500009634221-Using-Formulas-to-Control-Object-Properties) if the chart uses a query resource as the data resource.
+  + **Depth**  
+     Specifies the depth of the bars, in pixels.
+  + **Direction**  
+     Specifies the direction for depth of the bars, in degrees.
+
+### For 3-D bar/bench charts
+
+![Format Bar - General 3-D](https://devnet.logianalytics.com/hc/article_attachments/4404916802967/fmtbar_gnrl_2.gif)
+
+**Size**
+
+Specifies the size of bars in the chart.
+
+* **Bar Width**  
+   Specifies the bar width as a percentage of the unit width.
+
+**Layout**
+
+Specifies the layout of the chart.
+
+* **Clustered Bar 3-D**  
+   Specifies to apply clustered bar with a 3-D visual effect to the chart.
+* **Stacked Bar 3-D**  
+   Specifies to apply stacked bar with a 3-D visual effect to the chart.
+* **100% Stacked Bar 3-D**  
+   Specifies to apply 100% stacked bar with a 3-D visual effect to the chart.
+* **Array 3-D**  
+   Specifies to apply array bar with a 3-D visual effect to the chart.
+
+## Size
+
+Specifies the size of the bars in the chart. Not supported on 3-D bar/bench charts. The options on the tab vary when using [dynamic bar width](#Dynamic) or [fixed bar width](#Fix).
+
+### Using dynamic bar width
+
+To use dynamic bar width, make sure Fixed Bar Width is unselected.
+
+![Format Bar - Size for dynamic bar width](https://devnet.logianalytics.com/hc/article_attachments/4404904335383/fmtbar_size_dynmc.gif)
+
+**Bar Width**
+
+Specifies the general bar width as a percentage of the unit width.
+
+**Bar Gap**
+
+Specifies the distance between two bars within a group as a percentage of the unit width. Activated only to clustered bar/bench chart which contains data on the series axis or has more than one value on the value axis.
+
+**Individual Bar Width**
+
+Specifies properties of the individual bars. Activated only to clustered bar/bench chart which contains data on the series axis or has more than one value on the value axis.
+
+* ![Wider button](https://devnet.logianalytics.com/hc/article_attachments/4404911684119/btn_wider.gif)/![Narrower button](https://devnet.logianalytics.com/hc/article_attachments/4404911684375/btn_narrower.gif)  
+   Specifies how much the selected bars in the same data series is wider/narrower than a general bar, in percentage.
+* **Size List**  
+   Opens the [Size List](https://devnet.logianalytics.com/hc/en-us/articles/1500009610222-Size-List-Dialog) dialog to specify the width and gap for the bars in the same data series respectively.
+
+### Using fixed bar width
+
+To use fixed bar width, make sure Fixed Bar Width is selected.
+
+![Format Bar - Size for fixed bar width](https://devnet.logianalytics.com/hc/article_attachments/4404904335639/fmtbar_size_fix.gif)
+
+**Bar Width**
+
+Specifies the general bar width.
+
+**Bar Gap**
+
+Specifies the distance between two bars within a group. Available only to clustered bar/bench chart which contains data on the series axis or has more than one value on the value axis.
+
+**Outer Gap**
+
+Specifies the distance between bars out of a group. Available only to clustered bar/bench chart which contains data on the series axis or has more than one value on the value axis.
+
+**Individual Bar Width**
+
+Specifies properties of the individual bars. Available only to clustered bar/bench chart which contains data on the series axis or has more than one value on the value axis.
+
+* **Width**  
+   Specifies the width of the selected bars in the same data series.
+* **Gap**  
+   Specifies the gap between the selected bars in the same data series and the bars beside it.
+* **Size List**  
+   Opens the [Size List](https://devnet.logianalytics.com/hc/en-us/articles/1500009610222-Size-List-Dialog) dialog to specify the width and gap for the bars in the same data series respectively.
+
+![Formula button](https://devnet.logianalytics.com/hc/article_attachments/4404904189591/btn_fmla.gif)
+
+Indicates the value of an option can be [controlled by a formula](https://devnet.logianalytics.com/hc/en-us/articles/1500009634221-Using-Formulas-to-Control-Object-Properties).
+
+**![This image notes any new content for version 17 of the product. For more information please see the Release Notes or What's New topics.](https://devnet.logianalytics.com/hc/article_attachments/4404911621015/___newv17.jpg "New for version 17.")Fixed Bar Gap**
+
+Specifies whether to use a fixed bar gap. You can clear this option and then customize the percentages of the bar width and bar gap within a group.
+
+* **Bar Width**  
+   Specifies the width of the bars within a group as a percentage of the unit width between the two adjacent tick marks on the X-axis.
+* **Bar Gap**  
+   Specifies the distance between the two adjacent bars within a group as a percentage of the width of a bar. The option takes effect in a clustered bar/bench chart which contains data on the series axis or has more than one value on the value axis.
+
+## Fill
+
+Specifies the color, fill effect and transparency for bars of the chart.
+
+![Format Bar - Fill](https://devnet.logianalytics.com/hc/article_attachments/4404904336023/fmtbar_fill.gif)
+
+**Use Single Color**
+
+If the option is selected, the bars will use the single color pattern.
+
+* **Self Settings**  
+  Specifies whether to edit the color pattern for the bars themselves. When the option is unselected, the color settings defined here will be synchronized to the [Pattern List property](https://devnet.logianalytics.com/hc/en-us/articles/1500009612122-Chart-Properties#Pattern) on the chart object in the Report Inspector, which can also be applied by data markers of other subtypes if the chart is a combo chart.
+* **Color**  
+  Specifies the color schema. To edit the color, select the color indicator and select a color from the [color palette](https://devnet.logianalytics.com/hc/en-us/articles/1500009613582-Menu-Tabs#Palette) or input the hexadecimal value (for example, 0xff0000) of a color in the text box.
+* **Transparency**  
+  Specifies the transparency of the color schema.
+* **Vary Colors by Color List**  
+  Available only for clustered bar types and when the chart has no series field. It specifies whether or not to make each bar take a different color schema.
+* **Color List**  
+  Opens the [Color List](https://devnet.logianalytics.com/hc/en-us/articles/1500009630161-Color-List-Dialog) dialog to modify the color pattern for bars in the same data series respectively.
+
+**Use Single Color with Condition**
+
+If the option is selected, each bar can have its single color pattern based on defined conditions. You can select the Advanced or Normal button to switch between the two editing modes to edit the conditions.
+
+* **Normal**
+  + **Select Field**  
+    Lists all the available fields to which the conditional fill can be applied. Select the field on which you want to define the conditions from the drop-down list.
+  + **Value**  
+    Specifies the value of the condition. Available when you select a category or series field or a field whose return value is not a number from the Select Field drop-down list.
+  + **Start Value**  
+    Specifies the start value of the condition. Available only when you select a value field or a field that returns a number from the Select Field drop-down list.
+  + **End Value**  
+     Specifies the end value of the condition. Available only when you select a value field or a field that returns a number from the Select Field drop-down list.
+  + **Color**  
+    Specifies the color that will be applied to the values which meet the condition.
+  + **Transparency**  
+    Specifies the transparency for the color of the condition.
+  + ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404904181783/btn_add.gif)  
+    Adds a new condition.
+  + ![Remove button](https://devnet.logianalytics.com/hc/article_attachments/4404904239767/btn_rmv1.gif)  
+     Removes the selected condition.
+  + **Label**  
+    If the option is selected, you can modify the condition expression of the selected condition which will be shown as the legend entry label.
+  + **Value**  
+    Specifies to display data in the condition expression as value. Available only when you select a value field or a field that returns a number from the Select Field drop-down list.
+  + **Percent**  
+    Specifies to display data in the condition expression in percent. Available only when you select a value field or a field that returns a number from the Select Field drop-down list and takes effect only on 100% Stacked Bar/Bench 2-D chart and 100% Stacked Bar/Bench 3-D chart.
+* **Advanced**
+  + **Condition**  
+    Displays the condition you have defined in the Edit Condition dialog.
+  + **Color**  
+    Specifies the color that will be applied to the values which meet the condition.
+  + **Transparency**  
+    Specifies the transparency for the color of the condition.
+  + ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404904181783/btn_add.gif)  
+     Opens the [Edit Conditions](https://devnet.logianalytics.com/hc/en-us/articles/1500009607862-Edit-Conditions-Dialog#Chart) dialog to create a new condition.
+  + ![Edit button](https://devnet.logianalytics.com/hc/article_attachments/4404911588375/btn_edit.gif)  
+    Opens the [Edit Conditions](https://devnet.logianalytics.com/hc/en-us/articles/1500009607862-Edit-Conditions-Dialog#Chart) dialog to edit the selected condition.
+  + **Label**  
+    If the option is selected, you can modify the condition expression of the selected condition which will be shown as the legend entry label.
+  + **Value**  
+    Specifies to display data in the condition expression as value. Available only when you select a value field or a field that returns a number from the Select Field drop-down list.
+  + **Percent**  
+     Specifies to display data in the condition expression in percent. Available only when you select a value field or a field that returns a number from the Select Field drop-down list and takes effect only on 100% Stacked Bar/Bench 2-D chart and 100% Stacked Bar/Bench 3-D chart.
+
+**Use Multiple Colors with Condition**
+
+If the option is selected, each bar can have multiple color patterns based on defined conditions. You can divide each bar into different parts based on different value ranges, along the direction of the value axis, and then specify different conditional colors to different value ranges for distinguishing.
+
+* **Select Field**  
+  Lists all the available fields to which the conditional fill can be applied. Select the field on which you want to define the conditions from the drop-down list.
+* **Start Value**  
+  Specifies the start value of the condition.
+* **End Value**  
+  Specifies the end value of the condition.
+* **Color**  
+  Specifies the color that will be applied to the values which meet the condition.
+* **Transparency**  
+  Specifies the transparency for the color of the condition.
+* ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404904181783/btn_add.gif)  
+  Adds a new condition.
+* ![Remove button](https://devnet.logianalytics.com/hc/article_attachments/4404904239767/btn_rmv1.gif)  
+  Removes the selected condition.
+* **Label**  
+  If the option is selected, you can modify the condition expression of the selected condition which will be shown as the legend entry label.
+
+**Sample**
+
+Displays a preview sample of your selection.
+
+## Border
+
+Specifies properties for the border of the bars.
+
+![Format Bar - Border](https://devnet.logianalytics.com/hc/article_attachments/4404904336279/fmtbar_border.gif)
+
+**Show Border**
+
+Specifies whether to show the border of the bars. When it is selected, the other border properties in the tab will be enabled.
+
+**Color**
+
+Specifies the color for border of the bars.
+
+**Transparency**
+
+Specifies the transparency for color of the border.
+
+**Line Style**
+
+Specifies the line style to apply to border of the bars.
+
+**Thickness**
+
+Specifies the thickness of the border, in pixels.
+
+**End Caps**
+
+Specifies the ending style of the border line.
+
+* **butt**  
+  Ends unclosed sub paths and dash segments with no added decoration.
+* **round**  
+  Ends unclosed sub paths and dash segments with a round decoration that has a radius equal to half of the width of the pen.
+* **square**  
+  Ends unclosed sub paths and dash segments with a square projection that extends beyond the end of the segment to a distance equal to half of the line width.
+
+**Line Joint**
+
+Specifies the line joint style for the border line.
+
+* **miter**  
+  Joins path segments by extending their outside edges until they meet.
+* **round**  
+  Joins path segments by rounding off the corner at a radius of half the line width.
+* **bevel**  
+  Joins path segments by connecting the outer corners of their wide outlines with a straight segment.
+
+**Sample**
+
+Displays a preview sample of your selection.
+
+**Path**
+
+Specifies the fill pattern of the border line.
+
+* **Outline Path**  
+   Specifies the fill pattern of the border line to be outline path.
+* **Fill Path**  
+  Specifies the fill pattern of the border line to be whole path.
+
+**Dash**
+
+Specifies the dash size of the border line.
+
+* **Auto Adjust Dash**  
+   If selected, the dash size will be adjusted automatically.
+* **Fixed Dash Size**  
+   If selected, the dash size will be fixed size.
+
+## Data Label
+
+Specifies properties for data labels displayed on the bars.
+
+![Format Bar - Data Label](https://devnet.logianalytics.com/hc/article_attachments/4404904336791/fmtbar_data.gif)
+
+**Static Data Label**
+
+Specifies properties of the static data labels on the bars. Not supported on 3-D bar/bench charts.
+
+* **Show Static Data Label**  
+  Specifies whether or not to show the static data labels on the bars. Only when it is selected can the following static data label related properties be enabled.
+* **Position**  
+  Specifies the position of the static data labels on the bars.
+  + **auto fit**  
+    Specifies to display the static data labels automatically.
+  + **outside top**   
+    Specifies to display the static data labels on the outside top of the bars.
+  + **inside top**  
+    Specifies to display the static data labels on the inside top of the bars.
+  + **inside center**  
+    Specifies to display the static data labels at the inside center of the bars.
+  + **inside bottom**  
+    Specifies to display the static data labels at the inside bottom of the bars.
+* **Data Label Type**  
+  Specifies in which way to display the data values in the static data labels.
+  + **value**  
+    Shows the value for each bar.
+  + **percent**  
+    Shows the percentage of each bar to the total.
+  + **value and percent**  
+    Shows the value and the percentage for each bar.
+* **Auto Scale in Number**  
+  Specifies whether to automatically scale the static data labels that are of the Number data type when the label values fall into the two ranges:
+  + When 1000 <= value < 10^15, the following quantity unit symbols of the International System of Units are used to scale the values: K (10^3), M (10^6), G (10^9), and T (10^12).
+  + When 0 < value < 0.001 or value >= 10^15, scientific notation is used to scale the values.
+
+  By default it is set to auto which means that the setting follows [that of the chart](https://devnet.logianalytics.com/hc/en-us/articles/1500009612122-Chart-Properties#AutoScale).
+* **Auto Arrange**  
+  Specifies whether to display the static data labels inside the bars at the best position. Available only when the static data label's position is set to one of the following: inside center, inside top and inside bottom.
+  + **true**  
+    The static data labels will be displayed horizontally at the specified position if the bar has enough room horizontally, otherwise, will be displayed vertically. If a bar does not have enough room both vertically and horizontally, its static data label will not be displayed.
+  + **false**  
+    The static data labels will be displayed at the specified position, and if the labels get overlapping, some of them will not be displayed.
+* **Suppress Label When 0**  
+  If true, the static data label whose value is 0 will not be displayed on the chart.
+
+**Font**
+
+Specifies the font format of text in the data labels.
+
+* **Font list**  
+  Lists all the available font faces that can be selected to apply to the text.
+* **Font Size**  
+  Specifies the font size of the text.
+* **Font Color**  
+  Specifies the font color of the text.
+* **Transparency**  
+  Specifies the color transparency of the text.
+* **Rotation**  
+  Specifies the rotation angle of the text around its center, in degrees. The default value is 0.
+* **Shearing**  
+  Specifies the gradient of the text.
+
+**Effects**
+
+Specifies the special effects of text in the data labels.
+
+* **Style**  
+  Specifies the font style of the text. It can be one of the following: plain, bold, italic, and bold italic.
+* **Strikethrough**  
+  Specifies the style of the horizontal line with which the text is struck through. It can be one of the following: none, thin line, bold line, and double lines.
+* **Underline**  
+   Specifies the style of the horizontal line under the text. It can be one of the following: none, single, single lower, bold line, bold lower, double lines, bold double, patterned line, and bold patterned. When patterned line or bold patterned is selected, a line or bold line in the pattern of the text will be drawn.
+
+  **Note:** Web Report Studio and JDashboard do not support underlining chart text so this property will be ignored when the chart runs in Web Report Studio or is used in a dashboard.
+* **Superscript**  
+  Raises the text above the baseline and changes the text to a smaller font size, if a smaller size is available.
+* **Embossed**  
+  Makes the text appear to be raised off the page in relief.
+* **Outlined**  
+  Displays the inner and outer borders of each character.
+* **Subscript**  
+  Lowers the text below the baseline and changes the text to a smaller font size, if a smaller size is available.
+* **Engraved**  
+  Makes the text appear to be imprinted or pressed into the page.
+* **Shadowed**  
+  Adds a shadow beneath and to the right of the text.
+
+## Hint
+
+Specifies properties for the hint of the bars.
+
+![Format Bar - Hint](https://devnet.logianalytics.com/hc/article_attachments/4404916803351/fmtbar_hint.gif)
+
+**Show Category and Series**
+
+Specifies whether to include the category and series values in the hint.
+
+**Auto Scale in Number**
+
+Specifies whether to automatically scale the values displayed in the hint that are of the Number data type when the values fall into the two ranges:
+
+* When 1000 <= value < 10^15, the following quantity unit symbols of the International System of Units are used to scale the values: K (10^3), M (10^6), G (10^9), and T (10^12).
+* When 0 < value < 0.001 or value >= 10^15, scientific notation is used to scale the values.
+
+The option "auto" means that the property setting follows [that of the chart](https://devnet.logianalytics.com/hc/en-us/articles/1500009612122-Chart-Properties#AutoScale).
+
+## Behaviors
+
+Specifies web behaviors to the bars of the chart. This tab is only available to charts in library components.
+
+![Format Bar - Behaviors](https://devnet.logianalytics.com/hc/article_attachments/4404904337047/fmtbar_bhvr.gif)
+
+![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404904181783/btn_add.gif)
+
+Adds a new web behavior line.
+
+![Remove button](https://devnet.logianalytics.com/hc/article_attachments/4404904182167/btn_rmv.gif)
+
+Removes the selected web behavior.
+
+![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4404904182551/btn_mvup.gif)
+
+Moves the selected web behavior up a step.
+
+![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4404904182807/btn_mvdwn.gif)
+
+Moves the selected web behavior down a step.
+
+**Events**
+
+Specifies the trigger event.
+
+**Actions**  
+ Specifies the action you want the event to trigger.
+
+* ![Choose button](https://devnet.logianalytics.com/hc/article_attachments/4404904183063/btn_chsr1.gif)  
+   Opens the [Web Action List](https://devnet.logianalytics.com/hc/en-us/articles/1500009633961-Web-Action-List-Dialog) dialog to bind a web action to the event.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404911578903/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009608322-Format-Area-Dialog) [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404911579543/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009631281-Format-Bar-Gauge-Dialog)

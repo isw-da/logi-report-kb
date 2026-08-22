@@ -1,0 +1,103 @@
+---
+title: "Report Object Properties"
+id: 1500010069521
+section: "References - Logi JReport Designer v16"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500010069521-Report-Object-Properties
+updated_at: 2021-07-24T10:38:01Z
+---
+
+# Report Object Properties
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404901108631/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500010033442-Object-Property-Reference) [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404901037591/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500010033822-Arc-Shape-Properties)
+
+# Report Object Properties
+
+All the objects contained in a report are listed in a tree structure in the Report Inspector. You can edit the object properties here to change the appearance of your report. The topic lists the objects that a report may contain with their child objects in alphabetical order.
+
+Some objects are supported in specific report type only, and on the same object the availabilities of its properties could vary for different report types: Page Report, Web Report and Library Component, which is shown in the Available For column of the property table. In addition, page reports can be created using either query resources (Query Page Report) or business views (BV Page Report), and some properties are only available for page reports created using a specific data resource type. When a property is available for page reports created using both data resource types, it is marked Page Report in the Available For column; if it is available only for page reports created using a specific data resource type, you will see Query Page Report or BV Page Report in the Available For column.
+
+* [Arc Shape](https://devnet.logianalytics.com/hc/en-us/articles/1500010033822-Arc-Shape-Properties)
+* [Banded Object](https://devnet.logianalytics.com/hc/en-us/articles/1500010069541-Banded-Object-Properties)
+  + [Banded Footer](https://devnet.logianalytics.com/hc/en-us/articles/1500010033842-Banded-Footer-Properties)
+  + [Banded Header](https://devnet.logianalytics.com/hc/en-us/articles/1500010069561-Banded-Header-Properties)
+  + [Banded Page Panel](https://devnet.logianalytics.com/hc/en-us/articles/1500010069581-Banded-Page-Panel-Properties)
+    - [Banded Page Footer](https://devnet.logianalytics.com/hc/en-us/articles/1500010069601-Banded-Page-Footer-Properties)
+    - [Banded Page Header](https://devnet.logianalytics.com/hc/en-us/articles/1500010069661-Banded-Page-Header-Properties)
+    - [Group Panel](https://devnet.logianalytics.com/hc/en-us/articles/1500010033882-Group-Panel-Properties)
+      * [Detail Panel](https://devnet.logianalytics.com/hc/en-us/articles/1500010033902-Detail-Panel-Properties)
+      * [Group Footer Panel](https://devnet.logianalytics.com/hc/en-us/articles/1500010069621-Group-Footer-Panel-Properties)
+      * [Group Header Panel](https://devnet.logianalytics.com/hc/en-us/articles/1500010033922-Group-Header-Panel-Properties)
+        + [Group Control Image](https://devnet.logianalytics.com/hc/en-us/articles/1500010069641-Group-Control-Image-Properties)
+* [Body](https://devnet.logianalytics.com/hc/en-us/articles/1500010069681-Body-Properties)
+* [Box](https://devnet.logianalytics.com/hc/en-us/articles/1500010069701-Box-Properties)
+* [Chart](https://devnet.logianalytics.com/hc/en-us/articles/1500010069721-Chart-Properties)
+  + [Chart Label](https://devnet.logianalytics.com/hc/en-us/articles/1500010069741-Chart-Label-Properties)
+  + [Chart Legend](https://devnet.logianalytics.com/hc/en-us/articles/1500010033962-Chart-Legend-Properties)
+  + [Chart Paper](https://devnet.logianalytics.com/hc/en-us/articles/1500010033982-Chart-Paper-Properties)
+    - [Line](https://devnet.logianalytics.com/hc/en-us/articles/1500010069761-Line-Properties) (for organization charts)
+    - [Node](https://devnet.logianalytics.com/hc/en-us/articles/1500010034002-Node-Properties) (for organization charts)
+    - [Rectangle](https://devnet.logianalytics.com/hc/en-us/articles/1500010069781-Rectangle-Properties)
+      (for heat maps)
+      * [Rectangle Title](https://devnet.logianalytics.com/hc/en-us/articles/1500010034022-Rectangle-Title-Properties)
+* [Configuration](https://devnet.logianalytics.com/hc/en-us/articles/1500010034042-Configuration-Properties)
+* [Contents](https://devnet.logianalytics.com/hc/en-us/articles/1500010034062-Contents-Properties)
+* [Crosstab](https://devnet.logianalytics.com/hc/en-us/articles/1500010034082-Crosstab-Properties)
+  + [Column Compound Group/Row Compound Group/Summary Area](https://devnet.logianalytics.com/hc/en-us/articles/1500010069821-Column-Compound-Group-Row-Compound-Group-Summary-Area-Properties)
+* [Dataset](https://devnet.logianalytics.com/hc/en-us/articles/1500010069861-Dataset-Properties)
+  + [Refresh Object](https://devnet.logianalytics.com/hc/en-us/articles/1500010069881-Refresh-Object-Properties)
+* [DBField](https://devnet.logianalytics.com/hc/en-us/articles/1500010069841-DBField-Properties)
+* [Filter Control](https://devnet.logianalytics.com/hc/en-us/articles/1500010034102-Filter-Control-Properties)
+* [Form](https://devnet.logianalytics.com/hc/en-us/articles/1500010034142-Form-Properties)
+* [Formula Field](https://devnet.logianalytics.com/hc/en-us/articles/1500010034122-Formula-Field-Properties)
+* [Geo Map](https://devnet.logianalytics.com/hc/en-us/articles/1500010069901-Geo-Map-Properties)
+  + [Geo Area](https://devnet.logianalytics.com/hc/en-us/articles/1500010069921-Geo-Area-Properties)
+  + [Geo Marker](https://devnet.logianalytics.com/hc/en-us/articles/1500010069941-Geo-Marker-Properties)
+* [Geographic Map](https://devnet.logianalytics.com/hc/en-us/articles/1500010034162-Geographic-Map-Properties)
+  + [GMarker](https://devnet.logianalytics.com/hc/en-us/articles/1500010069961-GMarker-Properties)
+* [Image](https://devnet.logianalytics.com/hc/en-us/articles/1500010034202-Image-Properties)
+* [KPI](https://devnet.logianalytics.com/hc/en-us/articles/1500010034222-KPI-Properties)
+* [KPI Chart](https://devnet.logianalytics.com/hc/en-us/articles/1500010069981-KPI-Chart-Properties)
+  + [Chart Label](https://devnet.logianalytics.com/hc/en-us/articles/1500010070001-Chart-Label-Properties)
+  + [Chart Paper](https://devnet.logianalytics.com/hc/en-us/articles/1500010070021-Chart-Paper-Properties)
+* [Label](https://devnet.logianalytics.com/hc/en-us/articles/1500010070041-Label-Properties)
+* [Line](https://devnet.logianalytics.com/hc/en-us/articles/1500010070061-Line-Properties)
+* [Multi-Value Container](https://devnet.logianalytics.com/hc/en-us/articles/1500010070101-Multi-value-Container-Properties)
+* [Navigation Control](https://devnet.logianalytics.com/hc/en-us/articles/1500010034242-Navigation-Control-Properties)
+  + [Button](https://devnet.logianalytics.com/hc/en-us/articles/1500010034262-Button-Properties)
+* [OLE Object (Multimedia Object)](https://devnet.logianalytics.com/hc/en-us/articles/1500010070081-OLE-Object-Multimedia-Object-Properties)
+* [Oval Shape](https://devnet.logianalytics.com/hc/en-us/articles/1500010070141-Oval-Shape-Properties)
+* [Page Panel](https://devnet.logianalytics.com/hc/en-us/articles/1500010034282-Page-Panel-Properties)
+  + [Export Page Setting Object](https://devnet.logianalytics.com/hc/en-us/articles/1500010034322-Export-Page-Setting-Object-Properties)
+  + [Page Footer Panel](https://devnet.logianalytics.com/hc/en-us/articles/1500010070161-Page-Footer-Panel-Properties)
+  + [Page Header Panel](https://devnet.logianalytics.com/hc/en-us/articles/1500010034302-Page-Header-Panel-Properties)
+* [Page Report](https://devnet.logianalytics.com/hc/en-us/articles/1500010070181-Page-Report-Properties)
+* [Page Report Tab](https://devnet.logianalytics.com/hc/en-us/articles/1500010070201-Page-Report-Tab-Properties)
+* [Parameter Control](https://devnet.logianalytics.com/hc/en-us/articles/1500010070221-Parameter-Control-Properties)
+* [Parameter Field](https://devnet.logianalytics.com/hc/en-us/articles/1500010070241-Parameter-Field-Properties)
+* [Parameter Form Control](https://devnet.logianalytics.com/hc/en-us/articles/1500010070261-Parameter-Form-Control-Properties)
+* [Report Body](https://devnet.logianalytics.com/hc/en-us/articles/1500010070321-Report-Body-Properties)
+* [Round Box Shape](https://devnet.logianalytics.com/hc/en-us/articles/1500010070301-Round-Box-Shape-Properties)
+* [Shape Map](https://devnet.logianalytics.com/hc/en-us/articles/1500010070341-Shape-Map-Properties)
+* [Special Field](https://devnet.logianalytics.com/hc/en-us/articles/1500010070361-Special-Field-Properties)
+* [Subreport](https://devnet.logianalytics.com/hc/en-us/articles/1500010070381-Subreport-Properties)
+* [Summary Field](https://devnet.logianalytics.com/hc/en-us/articles/1500010034362-Summary-Field-Properties)
+* [Table](https://devnet.logianalytics.com/hc/en-us/articles/1500010034402-Table-Properties)
+  + [Table Cell](https://devnet.logianalytics.com/hc/en-us/articles/1500010034442-Table-Cell-Properties)
+  + [Table Column](https://devnet.logianalytics.com/hc/en-us/articles/1500010034462-Table-Column-Properties)
+  + [Table Footer](https://devnet.logianalytics.com/hc/en-us/articles/1500010070481-Table-Footer-Properties)
+  + [Table Group](https://devnet.logianalytics.com/hc/en-us/articles/1500010070501-Table-Group-Properties)
+    - [Table Detail](https://devnet.logianalytics.com/hc/en-us/articles/1500010070521-Table-Detail-Properties)
+    - [Table Group Footer](https://devnet.logianalytics.com/hc/en-us/articles/1500010070541-Table-Group-Footer-Properties)
+    - [Table Group Header](https://devnet.logianalytics.com/hc/en-us/articles/1500010070561-Table-Group-Header-Properties)
+  + [Table Header](https://devnet.logianalytics.com/hc/en-us/articles/1500010034482-Table-Header-Properties)
+* [Tabular](https://devnet.logianalytics.com/hc/en-us/articles/1500010070401-Tabular-Properties)
+  + [Tabular Cell](https://devnet.logianalytics.com/hc/en-us/articles/1500010070441-Tabular-Cell-Properties)
+  + [Tabular Row Group](https://devnet.logianalytics.com/hc/en-us/articles/1500010070461-Tabular-Row-Group-Properties)
+* [Text Box](https://devnet.logianalytics.com/hc/en-us/articles/1500010034502-Text-Box-Properties)
+* [TOC](https://devnet.logianalytics.com/hc/en-us/articles/1500010070581-TOC-Properties)
+* [UDO](https://devnet.logianalytics.com/hc/en-us/articles/1500010070601-UDO-Properties)
+* [Web Report](https://devnet.logianalytics.com/hc/en-us/articles/1500010034542-Web-Report-Properties)
+* [Wrapper](https://devnet.logianalytics.com/hc/en-us/articles/1500010070621-Wrapper-Properties)
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404901108631/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500010033442-Object-Property-Reference) [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404901037591/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500010033822-Arc-Shape-Properties)

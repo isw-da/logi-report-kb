@@ -1,0 +1,152 @@
+---
+title: "Adding an HDS to a Catalog"
+id: 1500009584741
+section: "Connecting to Your Data Sources - Logi JReport Designer v15"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009584741-Adding-an-HDS-to-a-Catalog
+updated_at: 2021-07-24T05:55:51Z
+---
+
+# Adding an HDS to a Catalog
+
+[![](https://devnet.logianalytics.com/hc/article_attachments/4404889273495/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009563962-Hierarchical-Data-Source-API)  [Next Topic![](https://devnet.logianalytics.com/hc/article_attachments/4404889273751/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009584761-Developing-Reports-from-HDS)
+
+# Adding an HDS to a Catalog
+
+There are two ways to add an HDS to a catalog:
+
+* **Adding a general HDS**
+  1. [Create a catalog](https://devnet.logianalytics.com/hc/en-us/articles/1500009562722-Creating-a-Catalog) or [open a catalog](https://devnet.logianalytics.com/hc/en-us/articles/1500009562822-Opening-a-Catalog).
+  2. In the Catalog Manager, right-click the node of a data source and choose **New General Hierarchical Data Source** from the shortcut menu.
+
+     If you want to add the HDS to a new data source in the catalog, select any of the existing catalog data source, select **New Data Source** on the Catalog Manager toolbar, then in the New Data source dialog, specify the name of the data source, select the **Hierarchical**connection type and select **OK**.
+  3. In the [New General Hierarchical Data Source](https://devnet.logianalytics.com/hc/en-us/articles/1500009588001-New-General-Hierarchical-Data-Source-Dialog) dialog, select the **Browse** button to specify the HDS class name, and type a number in the Parameter box.
+
+     ![New General Hierarchical Data Source dialog](https://devnet.logianalytics.com/hc/article_attachments/4404893864343/nwhds.gif)
+  4. Select **Load Tree**. The data source tree will then be parsed. Modify the column properties in the Columns box as required.
+  5. Select **OK** to add the HDS.
+* **Importing an HDS from an XML file**
+  1. Create a catalog or open a catalog.
+  2. In the Catalog Manager, right-click the node of a data source and choose **New XML Hierarchical Data Source** from the shortcut menu.
+
+     If you want to add the HDS to a new data source in the catalog, select any of the existing catalog data source, select **New Data Source** on the Catalog Manager toolbar, then in the New Data source dialog, specify the name of the data source, select the **XML**connection type, check the **Hierarchical Data Source** radio button and select **OK**.
+  3. In the [New XML Hierarchical Data Source](https://devnet.logianalytics.com/hc/en-us/articles/1500009566922-New-XML-Hierarchical-Data-Source-Dialog) dialog, select the **Browse** buttons to specify the XML URI and XSD URI as required.
+
+     ![New XML Hierarchical Data Source dialog](https://devnet.logianalytics.com/hc/article_attachments/4404889327127/nwxmlhds.gif)
+  4. Select the **Load Tree** button to load the structure of the XML file. The root of the file will then be listed in the Root Name text box. Modify the column properties in the Columns box as required.
+  5. Select **OK** to import the HDS into the catalog.
+
+The following examples explain the above two methods in detail.
+
+## Example 1: Adding a general HDS
+
+There are three classes used in this example. Their source code files are HierarchicalDataSource.java, HierarchicalDatasetMetaData.java, and HierarchicalDataset.java, which are available in `<install_root>\help\samples\APIUDS\hierarchicalUDS`. In this example, the HierarchicalDataSource.java will return the result set from the demo HSQL DB.
+
+1. Copy the above three files to `<install_root>\help`. Modify the demo HSQL DB path in both HierarchicalDatasetMetaData.java and HierarchicalDataset.java.
+2. Compile the Java files to generate HierarchicalDataSource.class, HierarchicalDatasetMetaData.class, and HierarchicalDataset.class.
+3. Append the path `<install_root>\help` into the ADDCLASSPATH variable of the batch file setenv.bat in `<install_root>\bin`, so that at runtime HierarchicalDataSource can be found.
+4. Start Logi JReport Designer with the batch file you just modified and open an existing catalog.
+5. In the Catalog Manager, right-click the data source to which to add the HDS, then select **New General Hierarchical Data Source**  from the shortcut menu. The New General Hierarchical Data Source dialog appears.
+6. Select the **Browse** button to find the class HierarchicalDataSource.class.
+7. Type a number in the Parameter box. Then, only the records whose employee ID is less than this number will be fetched.
+8. Select **Load Tree**. The data source tree will then be parsed.
+9. Modify the column properties in the Columns box as required.
+10. Select **OK** to add the HDS.
+
+## Example 2: Importing an HDS from an XML file to a catalog
+
+To import an HDS from an XML file, follow the steps below:
+
+1. Start Logi JReport Designer and [open the catalog file](https://devnet.logianalytics.com/hc/en-us/articles/1500009562822-Opening-a-Catalog) SampleReports.cat in `<install_root>\Demo\Reports\SampleReports`.
+2. In the Catalog Manager, right-click the data source to which to add the HDS, and then select **New XML Hierarchical Data Source** from the shortcut menu. The New XML Hierarchical Data Source dialog appears.
+3. Provide the information respectively according to your data source information.
+
+   Logi JReport Designer supports all kinds of URI as the XML data source.
+
+   * If you want to specify a schema file for the XML data source file, you must first make sure that the schema file path specified in the XML data source file is consistent with the path you specified in the XSD URI field, and that this file actually exists. Select the **Load Tree** button to load the structure of the XML file. The root of the file will then be listed in the Root Name field. Modify the column properties in the Columns box as required.
+   * Logi JReport Designer supports static string inline with multiple parameters, for example:
+
+     `"http://localhost:8888/jrserver%2fSampleReports%2fSampleReports.cat/StockMarket.cls?jrs.cmd=jrs.try_vw&jrs.result_type=7&jrs.param$p_Year=2007&jrs.param$p_Month=2"`
+
+     It is the URL used to run the sample report StockMarket.cls to the XML format in Logi JReport Server. Type the URL into the XML URI text field, and select the **Load Tree**  button, the structure of the returned XML stream will be loaded in the Structure box (before doing so, make sure that Logi JReport Server is started). Modify the column properties in the Columns box as required.
+
+     The colon ':' and '@' symbols are used to identify Logi JReport parameter names. If these symbols are used in your XML URI and you do not want Logi JReport to parse them as parameters, you must add quotation marks to them. For example, when you browse to `d:\test\employee.xml`, you can quote it either as `"d:\test\employee.xml"` or `d":"\test\employee.xml`.
+
+     Note that you should check the No Security Checking option on the Logi JReport Server Administration > Configuration > Advanced page before parsing this URL. In addition, Logi JReport parameters can be dynamically referenced in the URI for setting different values at runtime.
+
+   When importing the XML file, you have to define the types of some data in the Format column. For example, if it is Date type, such as 1978-03-12, in the corresponding Format column, type in yyyy-MM-dd. If the data is $12,345.32, in the corresponding Format column, type in $##,###.##. By default, the value of the Scale column is 0, therefore, for decimal type data, you will have to specify the scale value in its corresponding Scale column, that is, modify this value to the number of digits that you want to appear to the right of the decimal point, for example, if the data is 123.23, then in the Scale column, modify this value to 2. For the Currency and Array columns, check them if required.
+4. Select **OK**  to import the HDS.
+
+### The XSD file
+
+When you import an XML format HDS with an XSD file, the XML file only provides the data to the Logi JReport Designer reports, while the structure, data type, and so on of the data from the XML file is defined in the XSD file. That is, the structure of the HDS is determined by the XSD file. You should be aware of the following points about the XSD file in order to generate a correct report based on an XML format HDS with an XSD file.
+
+**Data type conversion table**
+
+Before the data type defined in the XSD file can function with Logi JReport Designer, it should first be converted into a corresponding data type when the XML format hierarchical data source is imported, following the rules in the conversion table below.
+
+| XML Data Type | Logi JReport Data Type |
+| --- | --- |
+| SchemaSymbols.ATTVAL\_BOOLEAN | java.sql.Types.BIT |
+| SchemaSymbols.ATTVAL\_INT | java.sql.Types.INTEGER |
+| SchemaSymbols.ATTVAL\_SHORT | java.sql.Types.SMALLINT |
+| SchemaSymbols.ATTVAL\_BYTE | java.sql.Types.TINYINT |
+| SchemaSymbols.ATTVAL\_INTEGER | java.sql.Types.INTEGER |
+| SchemaSymbols.ATTVAL\_NONPOSITIVEINTEGER | java.sql.Types.INTEGER |
+| SchemaSymbols.ATTVAL\_NEGATIVEINTEGER | java.sql.Types.INTEGER |
+| SchemaSymbols.ATTVAL\_NONNEGATIVEINTEGER | java.sql.Types.INTEGER |
+| SchemaSymbols.ATTVAL\_UNSIGNEDLONG | java.sql.Types.BIGINT |
+| SchemaSymbols.ATTVAL\_LONG | java.sql.Types.BIGINT |
+| SchemaSymbols.ATTVAL\_UNSIGNEDINT, //4294967295 | java.sql.Types.BIGINT |
+| SchemaSymbols.ATTVAL\_UNSIGNEDSHORT, //65535 | java.sql.Types.INTEGER |
+| SchemaSymbols.ATTVAL\_UNSIGNEDBYTE, //255 | java.sql.Types.SMALLINT |
+| SchemaSymbols.ATTVAL\_POSITIVEINTEGER | java.sql.Types.INTEGER |
+| SchemaSymbols.ATTVAL\_FLOAT | java.sql.Types.FLOAT |
+| SchemaSymbols.ATTVAL\_DOUBLE | java.sql.Types.DOUBLE |
+| SchemaSymbols.ATTVAL\_DECIMAL | java.sql.Types.DECIMAL |
+| SchemaSymbols.ATTVAL\_STRING | java.sql.Types.VARCHAR |
+| SchemaSymbols.ATTVAL\_DATE | java.sql.Types.DATE |
+| SchemaSymbols.ATTVAL\_TIME | java.sql.Types.TIME |
+| SchemaSymbols.ATTVAL\_DATETIME | java.sql.Types.TIMESTAMP |
+| SchemaSymbols.ATTVAL\_HEXBINARY | java.sql.Types.LONGVARBINARY |
+
+**Note:**
+
+**XSD structure supported by Logi JReport Designer**
+
+In Logi JReport Designer, not all XSD structures can be supported. The following diagrams show which structures are supported by Logi JReport Designer.
+
+* **The ComplexType**
+
+  ![](https://devnet.logianalytics.com/hc/article_attachments/4404893971479/cnctn_xml_xsd1.gif)
+
+  The Element type in the diagram can be of simpleType, ref, or complexType (it is different from the ComplexType in the root of this diagram. It can be global complexType but cannot be the anonymous one. If you have defined a complexType named A, and in this complexType A redefined an element as complexType named B, then the elements belong to complexType B must be of the simpleType).
+
+  The Attribute type in the diagram should be of the anonymous type or of the schema built-in type, such as xs:string.
+* **The SimpleType**
+
+  ![](https://devnet.logianalytics.com/hc/article_attachments/4404889399319/cnctn_xml_xsd2.gif)
+
+  SimpleType here should be of the schema built-in type, such as xs:string. List type here cannot support some functions, such as minLength, and maxLength.
+* **The Element**
+
+  ![](https://devnet.logianalytics.com/hc/article_attachments/4404893971735/cnctn_xml_xsd3.gif)
+
+  ComplexType here can include both global and anonymous complexType. The anonymous type means you do not give a name to the type, for example:
+
+  |  |
+  | --- |
+  | ``` <xs:element name="aa">    <xs:simpleType>      <xs:restriction base="xs:string">        <xs:enumeration value="Julie P. Adams"/>      </xs:restriction>    </xs:simpleType>  </xs:element> ``` |
+
+  From the code above, you can see that the simpleType in the element aa has no name specified.
+
+**Notes:**
+
+* An XML data source file without any schema file is also allowed. That is, you can leave the XSD URI entry empty. However, the data type VARCHAR will be used for all the columns in the data source.
+* When you import data of List type from an XSD file, you can define the delimiter through the property List Delimiter in the Report Inspector.
+* Logi JReport Designer also supports dynamic XML URI. The XSD file defines the structure of the XML format HDS and the XML file in fact only provides the data, so one XSD file can match more than one XML file. That enables you to develop reports with dynamic XML URI. For details, see [Example 1: Developing a report from an HDS with dynamic XML URI](https://devnet.logianalytics.com/hc/en-us/articles/1500009584761-Developing-Reports-from-HDS#Example1).
+* When specifying a schema file for the XML data source file, due to the schema file being complex, there are some limitations:
+  + **Namespace**: Now, default namespace (3w) and target namespace are supported by Logi JReport Designer. You can define a prefix for the default namespace, such as xs, or xsd, but the value of elementFormDefault must be qualified. The value of attributeFormDefault should be unqualified, but Logi JReport Designer will not allow you to add prefixes before the attributes of the elements.
+  + **Type**: If a customized [complexType](#Complex) or [simpleType](#Simple) is used, do not add the prefix to the value of the type, while if the built-in simpleType or complexType is used, the prefix must be added.
+
+[![](https://devnet.logianalytics.com/hc/article_attachments/4404889273495/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009563962-Hierarchical-Data-Source-API)  [Next Topic![](https://devnet.logianalytics.com/hc/article_attachments/4404889273751/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009584761-Developing-Reports-from-HDS)

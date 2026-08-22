@@ -1,0 +1,273 @@
+---
+title: "To Chart Dialog Box Properties"
+id: 1500009748162
+section: "Web Report Studio Dialog Boxes"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009748162-To-Chart-Dialog-Box-Properties
+updated_at: 2021-07-24T00:48:08Z
+---
+
+# To Chart Dialog Box Properties
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009776501-Tabular-Properties-)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009776541-To-Crosstab-Dialog-Box-Properties)
+
+# To Chart Dialog Box Properties
+
+This topic describes how you can use the To Chart dialog box to specify settings for converting a crosstab into a chart excluding the organization chart. The dialog box varies with different chart types: [common chart types](#Common), [organization chart](#Org), and [heat map](#Map).
+
+Server displays the dialog box when you right-click a crosstab and then select **To Chart** on the shortcut menu or select Menu > Edit > To Chart.
+
+**OK**
+
+Select **OK** to apply the settings.
+
+**Cancel**
+
+Select **Cancel** to close the dialog box without saving any changes.
+
+![Help button](https://devnet.logianalytics.com/hc/article_attachments/4404880314903/btn_help.gif)
+
+Select to view information about the To Chart dialog box.
+
+![Close button](https://devnet.logianalytics.com/hc/article_attachments/4404885431447/btn_close.gif)
+
+Select to close the dialog box without saving any changes.
+
+## For Common Chart Types
+
+![To Chart dialog - Common](https://devnet.logianalytics.com/hc/article_attachments/4404880151703/tochart.gif)
+
+**Title**
+
+Specifies a title for the chart.
+
+![Font button](https://devnet.logianalytics.com/hc/article_attachments/4404885319959/btn_wbrpt_font.gif)
+
+Specifies the font properties of the chart title.
+
+After you select the button, Server displays the following dialog box for you to edit the font properties:
+
+![](https://devnet.logianalytics.com/hc/article_attachments/4404880315543/fontprpty.gif "Font Properties")
+
+* **Font**  
+  Specifies the font face of the title.
+* **Font Style**   
+  Specifies the font style of the title. It can be one of the following: regular, bold, italic, and bold italic.
+* **Size**  
+  Specifies the font size of the title.
+* **Align**  
+  Specifies the position of the title to be left, right, center, or justify.
+* **Font Color**  
+  Specifies the font color of the title.
+* **Background Color**  
+  Specifies the background color of the title.
+
+  To specify a color, select the color image to select a color from the color palette, or select **More Colors** in the color palette to select a color using the [Color Picker](../dlg_wbrpt_colorpkr.htm) dialog box.
+* **OK**  
+  Accepts the font settings and closes the dialog box.
+* **Cancel**  
+  Cancels editing the font properties and closes the dialog box.
+
+**Resources**
+
+Displays all the view elements used in the crosstab.
+
+![Sort button](https://devnet.logianalytics.com/hc/article_attachments/4404880135447/btn_sort.gif)
+
+Sorts the view elements in the specified order from the drop-down list. Once a user changes the order, it will be applied to all the resource trees where business view elements are listed for this user.
+
+The order can be one of the following:
+
+* **Predefined Order**  
+  Select if you want to sort the view elements in the order as in the Business View Editor of Designer.
+* **Resource Types**  
+  Select if you want to sort the view elements by resource type. Namely, category objects come first, then group objects, then aggregation objects, and at last detail objects.
+* **Alphabetical Order**  
+  Select if you want to sort the view elements in alphabetical order. Logi Report sorts the elements that are not in any category first, and then the categories. It also sorts the elements in each category alphabetically.
+
+![Search button](https://devnet.logianalytics.com/hc/article_attachments/4404880135831/btn_srch.gif)
+
+Launches the search bar to search for view elements.
+
+See the following options in the search bar:
+
+![Quick Search Toolbar](https://devnet.logianalytics.com/hc/article_attachments/4404880162071/btn_srchtlbr.gif)
+
+* **Text box**  
+  Type the text you want to search in the text box. Server lists the values that contain the matched text.
+* **X**  
+  Select to close the search bar or clear the typed text.
+* ![Search Options](https://devnet.logianalytics.com/hc/article_attachments/4404885330071/btn_srchtlbr_adv.gif)  
+  Select the button and Server displays more search options.
+  + **Highlight All**   
+    Select if you want to highlight all matched text.
+  + **Match Case**   
+    Select if you want to search for text that meets the case of the typed text.
+  + **Match Whole Word**   
+    Select if you want to search for text that looks the same as the typed text.
+* ![Previous Text](https://devnet.logianalytics.com/hc/article_attachments/4404880162711/btn_srchtlbr_prv.gif)  
+  When you selected **Highlight All**, you can use this button to go to the previous matched text.
+* ![Next Text](https://devnet.logianalytics.com/hc/article_attachments/4404880162967/btn_srchtlbr_nxt.gif)  
+   When you selected **Highlight All**, you can use this button to go to the next matched text.
+
+![Add Item button](https://devnet.logianalytics.com/hc/article_attachments/4404880170519/btn_additem.gif)
+
+Adds the selected group or aggregation object to be displayed in the chart.
+
+**Category box**
+
+The actual name of the box varies with different chart types, for example, it is X-Axis for a clustered bar chart. The box lists the group object ![Group Object](https://devnet.logianalytics.com/hc/article_attachments/4404880151447/btn_bvgrp.gif) that will be displayed on the category axis of the chart.
+
+**Series box**
+
+The actual name of the box varies with different chart types, for example, it is Clustering for a clustered bar chart. The box lists the group object ![Group Object](https://devnet.logianalytics.com/hc/article_attachments/4404880151447/btn_bvgrp.gif) that will be displayed on the series axis of the chart.
+
+**Value box**
+
+The actual name of the box varies with different chart types, for example, it is Bar Length for a clustered bar chart. The box specifies the types for chart and sets the values for the Primary Axis or Secondary Axis separately.
+
+* **Primary Axis**  
+   Adds a chart type to the primary axis.
+* **Secondary Axis**  
+   Adds a chart type to the secondary axis. Not available to gauge chart.
+* **X-Axis**  
+   Lists the value you want to show on the X axis of the bubble chart.
+* **Y-Axis**  
+   Lists the value you want to show on the Y axis of the bubble chart.
+* **Size**   
+   Lists the value you want to show as the bubble size.
+
+**Secondary Axis**
+
+Specifies whether to show the secondary axis in the chart. Not available to gauge chart.
+
+![Top N button](https://devnet.logianalytics.com/hc/article_attachments/4404880176279/btn_wbrpt_topn.gif)
+
+Opens the [Category Options](https://devnet.logianalytics.com/hc/en-us/articles/1500009746902-Category-Options-Dialog-Box-Properties) dialog box or [Series Options](https://devnet.logianalytics.com/hc/en-us/articles/1500009747962-Series-Options-Dialog-Box-Properties) dialog box to define the sort order of the category or series values and specify the number of the category or series values that will be displayed in the chart.
+
+![Add Combo Chart](https://devnet.logianalytics.com/hc/article_attachments/4404880175127/btn_wbrpt_adcmbtyp.gif)
+
+Adds a combo chart to the Primary Axis or Secondary Axis. Not available to gauge chart.
+
+![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4404885326231/btn_mvup.gif)
+
+Moves the selected view element one level up.
+
+![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4404880154263/btn_mvdown.gif)
+
+Moves the selected view element one level down.
+
+![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404880163351/btn_add1.gif)
+
+Adds a new pair of Y Axis and Radius for the bubble chart.
+
+![Delete button](https://devnet.logianalytics.com/hc/article_attachments/4404885309335/btn_delete.gif)
+
+Removes the selected view element.
+
+## For Organization Chart
+
+![To Chart dialog - Organization](https://devnet.logianalytics.com/hc/article_attachments/4404880316567/tochart_org.gif)
+
+**Chart Title**
+
+Specifies the title of the chart. The title is a special label bound with the chart. Though it can be positioned freely in a report, once you remove the chart from the report, the title will be removed too.
+
+![Font button](https://devnet.logianalytics.com/hc/article_attachments/4404885319959/btn_wbrpt_font.gif)
+
+Specifies the [font properties](#Font) of the chart title.
+
+**Resources**
+
+Displays the resources that can be added to the chart.
+
+![Sort button](https://devnet.logianalytics.com/hc/article_attachments/4404880135447/btn_sort.gif)
+
+Sorts the view elements in the specified [order](#Order) from the drop-down list. Once a user changes the order, it will be applied to all the resource trees where business view elements are listed for this user.
+
+![Search button](https://devnet.logianalytics.com/hc/article_attachments/4404880135831/btn_srch.gif)
+
+Launches the [search bar](#Search) to search for view elements.
+
+**Value box**
+
+* **Primary Axis**  
+   Select Org from the chart type drop-down menu.
+* **Node**  
+   Adds a field from the Resources box which identifies the entity by selecting both the field and Child and then selecting ![Add Item button](https://devnet.logianalytics.com/hc/article_attachments/4404880170519/btn_additem.gif).
+* **Parent**  
+   Adds a field from the Resources box which shows the "reporting to" relationship among the entity members, that is, which child node field member reports to or belongs to which child node field member, by selecting both the field and Parent and then selecting ![Add Item button](https://devnet.logianalytics.com/hc/article_attachments/4404880170519/btn_additem.gif).
+* ![Delete button](https://devnet.logianalytics.com/hc/article_attachments/4404885309335/btn_delete.gif)  
+   Removes the selected child node or parent field.
+
+**Properties**
+
+The Properties box presents a node model of the org chart. Data fields, labels and images can be inserted into the node as the information about the entity in the org chart, using ![Add Item button](https://devnet.logianalytics.com/hc/article_attachments/4404880170519/btn_additem.gif). By default, all added objects are placed at the left top of the node, you need to adjust their positions and sizes in the node. You can also resize the node.
+
+To remove an object from the node, select it and then select ![Remove Item button](https://devnet.logianalytics.com/hc/article_attachments/4404885336599/btn_rmvitem.gif).
+
+## For Heat Map
+
+![To Chart dialog - Heat Map](https://devnet.logianalytics.com/hc/article_attachments/4404880317207/tochart_htmp.gif)
+
+**Title**
+
+Specifies the title of the chart. The title is a special label bound with the chart. Though it can be positioned freely in a report, once you remove the chart from the report, the title will be removed too.
+
+![Font button](https://devnet.logianalytics.com/hc/article_attachments/4404885319959/btn_wbrpt_font.gif)
+
+Specifies the [font properties](#Font) of the chart title.
+
+**Resources**
+
+Displays the resources that can be added to the chart.
+
+![Sort button](https://devnet.logianalytics.com/hc/article_attachments/4404880135447/btn_sort.gif)
+
+Sorts the view elements in the specified [order](#Order) from the drop-down list. Once a user changes the order, it will be applied to all the resource trees where business view elements are listed for this user.
+
+![Search button](https://devnet.logianalytics.com/hc/article_attachments/4404880135831/btn_srch.gif)
+
+Launches the [search bar](#Search) to search for view elements.
+
+![Add Item button](https://devnet.logianalytics.com/hc/article_attachments/4404880170519/btn_additem.gif)
+
+Adds the selected field into the Area or Property box.
+
+![Remove Item button](https://devnet.logianalytics.com/hc/article_attachments/4404885336599/btn_rmvitem.gif)
+
+Removes the selected field from the Area or Property box.
+
+**Chart type drop-down list**
+
+Displays Heat Map as the selected chart type.
+
+**Area**
+
+Lists the fields used to group the data to different areas. There should be at least one group. When there are multiple groups, their levels are defined by their positions from top down. The group at the top is of the highest level and the bottom the lowest.
+
+* **Color by**  
+   Specifies whether to color by a group. 0-n groups can be used as the color-by fields.
+* **Label by**  
+   Specifies whether to show the group name in the innermost rectangle.
+* ![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4404885326231/btn_mvup.gif)  
+   Moves the selected group field one level up.
+* ![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4404880154263/btn_mvdown.gif)  
+   Moves the selected group field one level down.
+* ![Top N button](https://devnet.logianalytics.com/hc/article_attachments/4404880176279/btn_wbrpt_topn.gif)  
+   Opens the [Group Options](https://devnet.logianalytics.com/hc/en-us/articles/1500009775881-Group-Options-Dialog-Box-Properties) dialog box to define the sort order of the group values and specify the number of the group values that will be displayed in the chart.
+* ![Delete button](https://devnet.logianalytics.com/hc/article_attachments/4404885309335/btn_delete.gif)  
+   Removes the selected group field.
+
+**Property**
+
+Lists the summary fields used as size-by/color-by or displayed in the innermost rectangle.
+
+* **Size by**  
+   Specifies to size by one summary or none.
+* **Color by**  
+   Specifies to color by one summary or none.
+* **Label by**  
+   Specifies whether to show a summary in the innermost rectangle.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009776501-Tabular-Properties-)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009776541-To-Crosstab-Dialog-Box-Properties)

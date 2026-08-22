@@ -1,0 +1,879 @@
+---
+title: "Schedule Dialog Box Properties"
+id: 1500009774581
+section: "Logi Report Server Dialog Boxes"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009774581-Schedule-Dialog-Box-Properties
+updated_at: 2021-07-24T00:48:41Z
+---
+
+# Schedule Dialog Box Properties
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009746302-Result-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009746402-Select-Another-Catalog-Dialog-Box-Properties)
+
+# Schedule Dialog Box Properties
+
+This topic describes how you can use the Schedule dialog box to schedule a task to [run a report](https://devnet.logianalytics.com/hc/en-us/articles/1500009778481-Scheduling-to-Run-a-Report) or [multiple reports](https://devnet.logianalytics.com/hc/en-us/articles/1500009778461-Scheduling-to-Run-Multiple-Reports) at specific times and publish the report results to different destinations in various formats.
+
+This topic contains the following sections:
+
+* [General Tab Properties](#General)
+* [Parameter Tab Properties](#Parameter)
+* [Publish Tab Properties](#Publish)
+* [Conditions Tab Properties](#Conditions)
+* [Notification Tab Properties](#Notification)
+* [Duration Tab Properties](#Duration)
+
+You see these elements on all the tabs:
+
+**Back**
+
+Select **Back** to go back to the left tab.
+
+**Next**
+
+Select **Next** to go to the right tab.
+
+**Finish**
+
+Select **Finish** to submit the task with the settings you specified here.
+
+**Cancel**
+
+Select **Cancel** to close the dialog box without saving any changes.
+
+**Help**
+
+Select **Help** to view information about the Schedule dialog box.
+
+## General Tab Properties
+
+The General tab enables you to specify the general information of the schedule task. It varies when you schedule to run a [single report](#Single) or [multiple reports](#Multiple).
+
+### For Single Report
+
+![Schedule dialog - General tab](https://devnet.logianalytics.com/hc/article_attachments/4404880229655/sch_gen.gif)
+
+**Schedule Name**
+
+Specifies the name for the schedule task.
+
+**Select Report Tabs**
+
+The section is available for page reports only. It enables you to specify the report tabs you schedule to run. The selected report tabs will be exported in the list order. If the page report has only one report tab, it is selected by default.
+
+* **Export to One File**  
+   If the option is selected, the selected report tabs will be exported to one result file.
+* ![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4404885326231/btn_mvup.gif)**Move Up button**  
+   Moves the specified report tab higher in the list.
+* ![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4404880154263/btn_mvdown.gif)**Move Down button**  
+   Moves the specified report tab lower in the list.
+
+**Bursting Configuration**
+
+Available when scheduling a bursting report.
+
+* **Select Schema**  
+   Select one or more bursting schemas defined for the report to generate bursting results based on.
+
+**Non-bursting Result**
+
+Available when scheduling a bursting report. Specifies whether to generate non-bursting result based on whole data without data splitting.
+
+**Select Dynamic Connection**
+
+The section is available when there are multiple dynamic connections for the current log-in user. It enables you to specify a dynamic connection.
+
+* **Data Source**  
+   Displays the data source name in the catalog.
+* **Connection Name**  
+   Displays the dynamic connection name.
+* **Connection**  
+   Specifies a dynamic connection from the drop-down list.
+* **Connection Properties**  
+   Shows the [information](https://devnet.logianalytics.com/hc/en-us/articles/1500009745922-Edit-Dynamic-Connection-Dialog-Box-Properties) of the selected dynamic connection, which is read only.
+
+**Report Information**
+
+Specifies the report information.
+
+* **Report**  
+   Lists information about the report.
+* **Catalog**  
+   Lists the catalog information. Unavailable to [shared reports](https://devnet.logianalytics.com/hc/en-us/articles/1500009777281-Sharing-Web-Reports).
+  + **Select Another Catalog**  
+     Specifies another catalog for the report in the [Select Another Catalog](https://devnet.logianalytics.com/hc/en-us/articles/1500009746402-Select-Another-Catalog-Dialog-Box-Properties) dialog box.
+* **Report Version**  
+  Specifies the report version used for the schedule task. The default version is always the latest version. This option is unavailable to shared reports.
+* **Catalog Version**  
+   Specifies the catalog version used for the schedule task. The default version is always the latest version. This option is unavailable to shared reports.
+* **Priority**  
+   Specifies the priority level of the schedule task. The priority levels are from 1 to 10 in ascending order of lowest priority to highest priority. This property is available to administrators. By default, this property is ignored unless server.properties is modified to set queue.policy not equal to 0.
+
+**Advanced**
+
+Configures some advanced settings.
+
+* **Enable Style Group**  
+  If a style group has been specified via the [Override Style Group](https://devnet.logianalytics.com/hc/en-us/articles/1500009743782-Configuring-Server-Profile#Style) option in the server profile, this option gets selected by default and the specified default style group is selected in the Style Group drop-down list, which will be applied to run all the selected report tabs or web report for all export formats. You can also choose another style group from the Style Group drop-down list to run the page report tabs or web report.
+
+  When the <No Style> item is selected in the Override Style Group drop-down list, this option is unselected by default and the style group properties of the selected report tabs or web report for the corresponding export formats that are predefined in Logi Report Designer will be used in the schedule task. These predefined style group properties take effect when publishing to version, disk, e-mail, and FTP.
+* **Enable Converting Encoding**  
+  Specifies to enable the conversion of encoding. From the Before Converting and After Converting drop-down lists, select encodings as required.
+* **Enable NLS**  
+  Specifies whether to enable NLS for the report. If the option is selected, the Using Language drop-down list will be displayed for you to choose a language. If there is no NLS resource defined for the report, you can only run the report using the default language.
+* **Encoding**  
+  Specifies the encoding of the report from the drop-down list.
+* **Connect to [Data Source Name]**  
+   Specifies the DB user and password with which you want to connect to the data source the report uses.
+  + **Use the DB user and password defined in catalog**  
+     If the option is selected, the DB user and password defined in the catalog will be used.
+  + **Use the DB User**  
+     If the option is selected, you can then specify another DB user and password instead of the one defined in the catalog.
+* **Add TaskListener to be Invoked**  
+  Enables you to call a Java application before/after the report runs so as to obtain information about the report task.
+* **Specify a preferred server to run the task**  
+   Enables you to directly specify a server in a cluster to perform the schedule task instead of using load balancing. This option is available only when there are more than one active server in a cluster and when the [Identify Server Preference](https://devnet.logianalytics.com/hc/en-us/articles/1500009743782-Configuring-Server-Profile#Identify) option in the server profile.
+* **Enable Auto Recover Task**  
+   Specifies to enable the task to be auto recovered.
+  + **Maximum Retry Times**  
+     Specifies the maximum number of times in which to retry running the task in order to recover it.
+  + **Retry Interval**  
+    Specifies the interval between retries.
+  + **Recreate All Results**  
+     Specifies whether to recreate all or just the failed results when you published the task to multiple formats.
+* **Use User Defined Default On-screen Filter Values**  
+  Applies the default on-screen filter values specified to the report for the user. Unavailable when [Enable Setting Default On-screen Filter Values For](https://devnet.logianalytics.com/hc/en-us/articles/1500009743782-Configuring-Server-Profile#OnScreenFilter) the corresponding report type is not selected in the server profile.
+
+### For Multiple Reports
+
+![Schedule dialog - General Tab for Multiple Reports](https://devnet.logianalytics.com/hc/article_attachments/4404885504407/sch_gen_mtpl.gif)
+
+**Schedule Name**
+
+Specifies the name for the schedule task.
+
+**Report Information**
+
+Specifies the report information.
+
+* **Catalog**  
+   Lists the catalog used by the selected reports.
+* **Priority**  
+  Specifies the priority level of the schedule task. The priority levels are from 1 to 10 in ascending order of lowest priority to highest priority. This property is available to administrators. By default, this property is ignored unless server.properties is modified to set queue.policy not equal to 0.
+
+## Parameter Tab Properties
+
+The Parameter tab enables you to specify the parameter values if any to run the reports.
+
+![Schedule dialog - Parameter tab](https://devnet.logianalytics.com/hc/article_attachments/4404880415127/sch_prm.gif)
+
+**Enter Parameters**
+
+Lists all the parameters used by the reports. [Edit the values](https://devnet.logianalytics.com/hc/en-us/articles/1500009778361-Specifying-Parameter-Values) according to your requirement.
+
+If no parameter is used in the report, Server displays "No Parameter Needed" here.
+
+![Use Saved Values button](https://devnet.logianalytics.com/hc/article_attachments/4404880238871/btn_srv_ussvvlu.gif)**Use Saved Values**
+
+If it is available, you can select the previously saved parameter values to apply to the report and [save parameter values for reuse later](https://devnet.logianalytics.com/hc/en-us/articles/1500009778361-Specifying-Parameter-Values#Reuse).
+
+**Save as default**
+
+Select **Save as default** to save current parameter values as the default parameter values for the report. Server displays this option when you did not clear [Enable Setting Default Parameter Values For](https://devnet.logianalytics.com/hc/en-us/articles/1500009743782-Configuring-Server-Profile#DefaultParam) the corresponding report type in the server profile.
+
+This option is a user-report level setting. It is an action and takes effect after you submit the scheduled task. Its initial status is always cleared.
+
+## Publish Tab Properties
+
+The Publish tab enables you to specify the type of the task. There are two main tasks to publish your reports: Default Task and User Task. By default, Default Task is used to publish the reports. To use the User Task, select the User Task link in the Default Task page.
+
+**Default Task**
+
+If you select Default Task to publish your reports with, when specifying the task type, you can choose from the following sub tasks:
+
+* [To Version](#Version)  
+  Publishes the report result to the versioning system.
+* [To Disk](#Disk)  
+  Publishes the report result to the file system. This type is not supported to [organization users](https://devnet.logianalytics.com/hc/en-us/articles/1500009749922-Multitenancy-Supported-via-Organizations) or when you schedule to run multiple reports.
+* [To E-mail](#Mail)  
+  Publishes the report result to e-mail.
+* [To Printer](#Printer)  
+  Publishes the report result to a printer. This type is not supported for bursting result or when you schedule to run multiple reports.
+* [To Fax](#Fax)  
+  Publishes the report result to fax. This type is not supported for bursting result or when you schedule to run multiple reports.
+* [To FTP](#FTP)  
+  Publishes the report result to an FTP site. This type is not supported when you schedule to run multiple reports.
+
+![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404885305111/noteicon.jpg)If you are scheduling a bursting report, the **Publish** tab changes according to the bursting setting that you made in the **General** tab of the Schedule dialog box. For more information, see [Scheduling Bursting Reports](https://devnet.logianalytics.com/hc/en-us/articles/1500009778401-Scheduling-Bursting-Reports).
+
+**User Task**
+
+If you select User Task to publish your reports, you can implement a customized task with schedule properties. This option is unavailable to [organization users](https://devnet.logianalytics.com/hc/en-us/articles/1500009749922-Multitenancy-Supported-via-Organizations) or to bursting reports.
+
+* **User Task Class Name**  
+  Specifies the class name for the user task.
+* **Display Name**  
+  Specifies the display name for the user task.
+* **User Task Properties**  
+  Specifies user task properties to define tasks.
+* **Import User Task Properties from File**  
+   Imports a user task from a properties file.
+* **Upload Properties**  
+   Uploads the properties to Logi Report Server. The properties will be listed in the User Task Properties area.
+
+### To Version
+
+The To Version tab is for you to specify settings for publishing the report result to the versioning system.
+
+![Schedule dialog - Publish tab - To Version](https://devnet.logianalytics.com/hc/article_attachments/4404885504919/sch_pub_vrsn.gif)
+
+**Publish to Versioning System**
+
+Specifies to publish the report result to the versioning system. You can publish the result to the following formats:
+
+* **Logi Report Result**  
+  Publishes the page report to a Logi Report result file (RST file). RST files can be exported to HTML, PDF, Text, Excel, XML, RTF and Postscript formats via Logi Report Server. This option is unavailable for bursting result, or when the schedule task contains both page reports and web reports.
+  + **Zip Result**   
+    Specifies to compress the result to reduce the disk size and I/O; however, it uses more CPU resources.
+  + **Run Linked Report**  
+    Select **Run Linked Report** if you want to generate the linked reports (not including the detail reports) in the result when the report is linked with other reports. If you are only interested in the primary report, leave this option unselected. Generating linked reports at the same time will cause performance issue, especially when the linked reports contain a large amount of data.
+  + **Precision Level**  
+    Specifies the precision level with which to publish the report result.
+
+    ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404885305111/noteicon.jpg)Changing the default value may cause abnormalities in report layout.
+* **Page Report Result**  
+  Publishes the page report to a page report result file (RSD file) that can be viewed in a Page Report Studio window. Some reports cannot be published in the Page Report Result format, such as self-contained (CLX) reports, multi-level nested master and subreports, reports containing data objects, and reports developed from a dynamic query or hierarchical data source (HDS).
+  This option is unavailable for bursting result, or when the schedule task contains both page reports and web reports.
+
+  An RSD file is a middle result for page report that can preserve data and the working status of a page report and can be shared with others. Based on the RSD file, you can rebuild a page report to analyze data and to export to other formats. An RSD file is a standalone working file so all the useful information is added into it, such as catalog, report template, NLS, data, parameters and security. The security information of an RSD file is the user of the generator that creates it. When different users open the same RSD, they will get the same result based on the same security configuration. You cannot refresh a report viewed from an RSD file to refetch data from the database. When the system rebuilds a report according to the RSD file, it will only load data from the RSD file. When opening a report RSD, you cannot go back to the actions which the RSD generator took before generating the RSD file but can take actions based on the current RSD resources.
+
+  + **Zip Result**  
+    Specifies to compress the result. The compressed file's suffix will still be .rsd, its size will be smaller which reduces IO and disk usage; however, it uses more CPU resources.
+  + **Precision Level**  
+    Specifies the precision level with which to publish the report result.
+
+    ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404885305111/noteicon.jpg)Changing the default value may cause abnormalities in report layout.
+* **Web Report Result**  
+  Publishes the web report to a static web report result file (WST file). WST files can be exported to HTML, PDF, Text, Excel, XML, RTF, and Postscript formats via Logi Report Server. This option is unavailable for bursting result, or when the schedule task contains both page reports and web reports.
+  + **Zip Result**   
+    Specifies to compress the result to reduce the disk size and I/O; however, it uses more CPU resources.
+  + **Run Linked Report**  
+    Select **Run Linked Report** if you want to generate the linked reports (not including the detail reports) in the result when the report is linked with other reports. If you are only interested in the primary report, leave this option unselected. Generating linked reports at the same time will cause performance issue, especially when the linked reports contain a large amount of data.
+  + **Precision Level**  
+    Specifies the precision level with which to publish the web report result.
+
+    ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404885305111/noteicon.jpg)Changing the default value may cause abnormalities in report layout.
+* [**HTML**](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#HTML)  
+  Publishes the report result to the versioning system in HTML format.
+* [**PDF**](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#PDF)  
+  Publishes the report result to the versioning system in PDF format.
+* [**Excel**](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#Excel)  
+  Publishes the report result to the versioning system in Excel format.
+* [**Text**](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#Text)  
+  Publishes the report result to the versioning system in Text format.
+* [**RTF**](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#RTF)  
+  Publishes the report result to the versioning system in RTF format.
+* [**XML**](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#XML)  
+  Publishes the report result to the versioning system in XML format.
+* [**PostScript**](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#PS)  
+  Publishes the report result to the versioning system in PostScript format.
+
+**Archive Location**
+
+Specifies the location for the saved report result version. This option is unavailable for bursting result.
+
+* **Built-in Version Folder**  
+  Specifies to save the report result version to the built-in version folder. This option is not available to [organization users](https://devnet.logianalytics.com/hc/en-us/articles/1500009749922-Multitenancy-Supported-via-Organizations) when the report is in the Public Reports folder, and to [shared reports](https://devnet.logianalytics.com/hc/en-us/articles/1500009777281-Sharing-Web-Reports) either.
+* **My Reports Folder**  
+  Specifies to save the report result version to the My Reports folder.
+* **Public Reports Folder**   
+  Specifies to save the report result version to the Public Reports folder. Not available to organization users.
+* **Organization Reports Folder**  
+  Specifies to save the report result version to the Organization Reports folder. Available to organization users only.
+
+**Apply Archive Policy**
+
+Applies an archive policy to the report result version. Some of the following options are unavailable for bursting result.
+
+* **Archive as New Version**  
+  Specifies whether to use multiple versions for the report result.
+  + **Maximum Number of Versions**  
+    Specifies the maximum number of versions that will be listed in the version table of the report result. The default value is 0, which means that the version number is unlimited.
+* **Replace Old Version**   
+  Specifies to replace the old version when a new version is generated.
+
+**Result Auto-delete**
+
+Specifies the deleted date of the result. Set the result to be automatically deleted within one hundred years. If the time you specify exceeds one hundred years, Logi Report Server will keep the report result forever.
+
+* **Result Expires in N Days**  
+  Specifies a period after which the report result will be automatically deleted.
+* **Result Expires After**  
+  Specifies a certain day on which the report result will be automatically deleted.
+
+**Set Permissions**
+
+The option is unavailable when the schedule task is based on multiple reports.
+
+When the schedule task is based on a single report, the option is available only when the Archive Location is specified to be a public folder and when you have the Grant permission on the report. Select the link to open the [Set Permissions](https://devnet.logianalytics.com/hc/en-us/articles/1500009774321-Set-Permissions-Dialog-Box-Properties) dialog box to set user permissions to the specified report tabs in the page report or web report.
+
+### To Disk
+
+The To Disk tab is for you to specify settings for publishing the report result to the file system. It is not available to [organization users](https://devnet.logianalytics.com/hc/en-us/articles/1500009749922-Multitenancy-Supported-via-Organizations) or when you schedule to run multiple reports.
+
+![Schedule dialog - Publish tab - To Disk](https://devnet.logianalytics.com/hc/article_attachments/4404885505303/sch_pub_disk.gif)
+
+**Publish to Disk**
+
+Specifies to publish the report result to the file system. You can publish the report result to the following formats:
+
+* [Logi Report Result](#RST)  
+  Publishes the page report to a Logi Report result file (RST file). This option is unavailable for bursting result.
+* [Page Report Result](#RSD)   
+  Publishes the page report to a page report result file (RSD file). This option is unavailable for bursting result.
+* [Web Report Result](#WST)  
+  Publishes the web report to a static web report result file (WST file). This option is unavailable for bursting result.
+* [HTML](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#HTML)  
+  Publishes the report result to the file system in HTML format.
+* [PDF](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#PDF)  
+  Publishes the report result to the file system in PDF format.
+* [Excel](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#Excel)  
+  Publishes the report result to the file system in Excel format.
+* [Text](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#Text)  
+  Publishes the report result to the file system in Text format.
+  + **File Suffix**  
+    Specifies the suffix of the Text file, which can be .txt or .dat.
+* [RTF](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#RTF)  
+  Publishes the report result to the file system in RTF format.
+* [XML](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#XML)  
+  Publishes the report result to the file system in XML format.
+* [PostScript](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#PS)  
+  Publishes the report result to the file system in PostScript format.
+
+For each format, you can decide whether to publish the results to the server resource tree or to the server disk path. Then you need to type in the blank location text box root of the resource tree or disk path as shown in the examples below:
+
+* Example for server resource tree: `/report1.rst`
+* Example for server disk path: `C:\temp\report1.rst`
+
+When publishing a page report, if you choose the Logi Report Result and Page Report Result formats, you need only provide one file path because all selected report tabs will be output into one file. For other formats, if you leave the Export to One File option in the General tab unselected, you need to specify a file path for each selected report tab.
+
+### To E-Mail
+
+The To E-mail tab is for you to specify settings for publishing the report result to e-mail. Some options in the tab are unavailable for bursting result.
+
+![Schedule dialog - Publish tab - To E-mail](https://devnet.logianalytics.com/hc/article_attachments/4404880232087/sch_pub_mal.gif)
+
+**Mail To**
+
+Lists the e-mail addresses you have sent mail to.
+
+**New**
+
+Creates a new e-mail.
+
+* **To**  
+  Specifies the addresses you want to send the e-mail to.
+* **Cc**  
+  Specifies the addresses you want to send additional copies of the e-mail to.
+* **Bcc**  
+  Specifies the addresses you want to secretly send additional copies of the e-mail to. The recipients in the Bcc list are known to the sender and themselves only.
+* ![Schedule button](https://devnet.logianalytics.com/hc/article_attachments/4404880232343/btn_chsr5.gif)  
+  Opens the [Select Role, Group and User](https://devnet.logianalytics.com/hc/en-us/articles/1500009746482-Select-Role-Group-and-User-Dialog-Box-Properties) dialog box to select users, groups, and roles in the Logi Report Server security system to use their mail addresses to send the e-mail.
+* **Subject**  
+  Specifies the subject of the e-mail.
+* **Comments**  
+  Specifies the contents of the e-mail or comments to the contents.
+* **Use Default SMTP Account**  
+  Specifies whether to use the default SMTP account configured in the Administration > Configuration > [E-mail Server](https://devnet.logianalytics.com/hc/en-us/articles/1500009743742-Configuring-the-E-mail-Server) page in the Server Console as the e-mail publish account.
+
+  The option is selected by default. Clear it and you will be able to specify a different account using the following options:
+
+  + **E-mail Address**  
+    Specifies the e-mail address of the new SMTP account.
+  + **User Name**  
+    Specifies the user name of the new account.
+  + **Password**  
+    Specifies the password of the new account.
+* **Compress Attachment as Java Archive**  
+  Specifies whether to compress the mail attachment as Java Archive.
+* **E-mail Result in HTML E-mail Format**  
+  Sends the report result via e-mail to the specified address in HTML format. The report result will be shown in HTML format in the mail body.
+  + **Run Linked Report**  
+    Select **Run Linked Report** if you want to generate the linked reports (not including the detail reports) in the result when the report is linked with other reports. If you are only interested in the primary report, leave this option unselected. Generating linked reports at the same time will cause performance issue, especially when the linked reports contain a large amount of data.
+* **E-mail Result in Plain Text E-mail Format**  
+  Sends the report result via e-mail to the specified address in plain [text](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#Text) format. The report result will be shown in plain text format in the mail body with no other information such as color and images.
+
+  ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404885305111/noteicon.jpg)
+
+  + The two formats, **E-mail Result in HTML E-mail Format** and **E-mail Result in Plain Text Format**, cannot work concurrently.
+  + If you choose to send the mail in E-mail Result in HTML E-mail Format, the report result will overwrite the comments that you type for the mail.
+
+When you select one of the following formats, that is you want to send the report result as an attachment file, you can specify a file name for the file by setting the File Name option.
+
+* **Attachment in Logi Report Result Format**  
+  Sends the report result via e-mail to the specified address with a [Logi Report result](#RST) file as attachment. Unavailable when the schedule task contains both page reports and web reports.
+* **Attachment in Web Report Result Format**  
+  Sends the web report result via e-mail to the specified address with a [WST](#WST) file as attachment. Unavailable when the schedule task contains both page reports and web reports.
+* **Attachment in HTML Format**  
+  Sends the report result via e-mail to the specified address with an [HTML](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#HTML) file as attachment.
+* **Attachment in PDF Format**  
+  Sends the report result via e-mail to the specified address with a [PDF](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#PDF) file as attachment.
+
+  ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404885305111/noteicon.jpg)If an admin user enabled [Split PDF](https://devnet.logianalytics.com/hc/en-us/articles/1500009743702-Configuring-Export-Settings#SplitPDF) in the Administration > Configuration > Export > E-mail tab in the Server Console, Server disables the TOC and Sign options here.
+* **Attachment in Excel Format**  
+  Sends the report result via e-mail to the specified address with an [Excel](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#Excel) file as attachment.
+* **Attachment in Text Format**  
+  Sends the report result via e-mail to the specified address with a [Text](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#Text) file as attachment.
+  + **File Suffix**  
+    Specifies the suffix of the attached Text file, which can be .txt or .dat.
+* **Attachment in RTF Format**  
+   Sends the report result via e-mail to the specified address with a [RTF](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#RTF) file as attachment.
+* **Attachment in XML Format**  
+  Sends the report result via e-mail to the specified address with an [XML](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#XML) file as attachment.
+* **Attachment in PostScript Format**  
+  Sends the report result via e-mail to the specified address with a [PostScript](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#PS) file as attachment.
+* **OK**  
+  Retains the settings and adds the e-mail address into the Mail To list.
+* **Cancel**  
+  Cancels operations.
+
+**Edit**
+
+Edits the specified e-mail in the Mail To list.
+
+**Delete**
+
+Deletes the specified e-mail from the Mail To list.
+
+### To Printer
+
+The To Printer tab is for you to specify settings for publishing the report result to a printer. It is not available for bursting result or when you schedule to run multiple reports.
+
+![Schedule dialog - Publish tab - To Printer](https://devnet.logianalytics.com/hc/article_attachments/4404880232855/sch_pub_prnt.gif)
+
+**Publish to Printer**
+
+Specifies to publish the report result to a printer.
+
+**Select Print Method**
+
+Specifies the JDK print method to print the report result.
+
+**Printer**
+
+Specifies the name with the path of the printer. You can type it in the box or select it from the drop-down list.
+
+When JDK1.4 is selected in the Select Print Method drop-down list, the following options will be available.
+
+**Paper Size**
+
+Specifies the paper size.
+
+**Print Range**
+
+Specifies the pages to be printed.
+
+**Copies**
+
+Specifies the number of copies you want to print. The number of copies will be applied to all specified pages.
+
+**Print to File**
+
+Prints the document to a file instead of a printer. This kind of files can only be opened and printed by serial port printer on Windows via DOS command.
+
+* **File Name**  
+  Specifies the name of the file to which you print. If no path is provided in the file name, the file will be saved to the working directory of the server.
+
+**Job Attributes**
+
+Specifies the properties of the print task.
+
+* **Priority**  
+  Specifies the print priority for this task.
+* **Job Name**  
+  Specifies the name of the print task.
+* **User Name**  
+  Specifies the name of the user.
+
+**Orientation**
+
+Specifies the orientation for the printed result.
+
+* **Landscape**  
+  Prints the report result in a Landscape orientation.
+* **Portrait**  
+  Prints the report result in a Standard letter orientation.
+* **Reverse Landscape**  
+  Prints the report result in a Reverse Landscape orientation.
+* **Reverse Portrait**  
+  Prints the report result in a Reverse Portrait orientation.
+
+**Color Appearance**
+
+Specifies to print the report result in Monochrome or in Color.
+
+**Print Quality**
+
+Specifies the print quality. It can be Draft, Normal, or High.
+
+**Print Sides**
+
+Specifies the print sides for the report result.
+
+* **One Side**  
+  Imposes each consecutive print-stream page upon the same side of consecutive media sheets.
+* **Duplex**   
+  Imposes each consecutive pair of print-stream pages upon the front and back sides of consecutive media sheets, such that the orientation of each pair of print-stream pages on the medium is correct for the reader as if for binding on the long edge.
+* **Tumble**  
+  Imposes each consecutive pair of print-stream pages upon front and back sides of consecutive media sheets, such that the orientation of each pair of print-stream pages on the medium is correct for the reader as if for binding on the short edge.
+
+**Sheet collate**
+
+Specifies the printing order for printing multi-page report.
+
+* **Collated**  
+  If selected, when you print two copies of a three-page report, the page order is 1, 2, 3; 1, 2, 3.
+* **Uncollated**  
+  If selected, when you print two copies of a three-page report, the page order is 1, 1; 2, 2; 3, 3.
+
+**Margins**
+
+Specifies the paper margins for the report result (MM or Inch).
+
+**Media Tray**
+
+First select a printer, and then from the drop-down list, specify the media tray.
+
+### To Fax
+
+The To Fax tab is for you to specify settings for publishing the report result to fax. It is not available for bursting result or when you schedule to run multiple reports.
+
+![Schedule dialog - Publish tab - To Fax](https://devnet.logianalytics.com/hc/article_attachments/4404880233111/sch_pub_fax.gif)
+
+![Critical icon](https://devnet.logianalytics.com/hc/article_attachments/4404885352855/criticalicon.gif)Before you can fax the report result, you must configure your modem first, otherwise Server displays a warning message.
+
+**Publish to Fax**
+
+Specifies to publish the report result to fax.
+
+**Quality**
+
+Specifies the quality of the fax: Best, Normal, and Fast.
+
+**Include Cover Sheet**
+
+Specifies to send a cover sheet with the fax.
+
+The following items are displayed on the fax cover sheet.
+
+**To**
+
+Specifies the name of the recipient.
+
+**From**
+
+Specifies the name of the sender.
+
+**Company**
+
+Specifies the sender's company.
+
+**Date**
+
+Specifies the date on which the fax is to be sent. You can select the **Calendar** icon ![Calendar icon](https://devnet.logianalytics.com/hc/article_attachments/4404885317143/btn_clndr.gif) to select a date from the calendar.
+
+**Fax Number**
+
+Specifies the fax number of the recipient.
+
+**Phone Number**
+
+Specifies the phone number of the sender.
+
+**Re**
+
+Specifies the subject of the fax.
+
+**Comments**
+
+Specifies the comments of the fax.
+
+**Urgent**
+
+Specifies whether the fax is urgent or not.
+
+**For Review**
+
+Specifies that the recipient only needs to view the fax.
+
+**Please Comment**
+
+Specifies that the recipient is required to comment on the content of the fax.
+
+**Please Reply**
+
+Indicates that a reply is required for the fax.
+
+### To FTP
+
+The To FTP tab is for you to specify settings for sending the report result to an FTP site. It is not available when you schedule to run multiple reports. Some options in the tab are unavailable for bursting result.
+
+![Schedule dialog - Publish tab - To FTP](https://devnet.logianalytics.com/hc/article_attachments/4404885373079/sch_pub_ftp.gif)
+
+**FTP To**
+
+Lists the FTP sites you can send the report result to.
+
+**New**
+
+Creates a new FTP site.
+
+* **Protocol Type**  
+  Specifies the protocol type used for publishing the report result to FTP.
+  + **FTP (Standard File Transfer Protocol)**  
+    Files are transferred in a non-secure (plain text) style.
+  + **SFTP using SSH2**  
+    SFTP (SSH File Transfer Protocol, also known as Secure FTP) is a way of securely transferring files over remote systems and is supported by most Unix servers running SSH2. Ask your server administrator about availability.
+  + **SCP (Secure Copy)**  
+    This is a means of securely transferring computer files between a local and a remote host or between two remote hosts, using the Secure Shell (SSH) protocol. If this type is selected, you will not be able to create folders to the FTP server.
+  + **FTPS with TLS/SSL (Explicit)**  
+    Explicit connection type of FTP security with TLS/SSL.
+  + **FTPS with TLS/SSL (Implicit)**  
+    Implicit connection type of FTP security with TLS/SSL.
+* **FTP Site Name**  
+  A user defined name of the FTP site. It is optional.
+* **Host Address**  
+  The domain name or IP address of the FTP site. It cannot be null.
+* **Port**  
+  The port of the FTP server. It is optional, and by default 21 is used for Standard FTP and Explicit FTPS, 22 SCP and SFTP, and 990 for Implicit FTPS.
+* **Logon Type**  
+  The way to authenticate to the FTP server. Available when **SFTP using SSH2** is selected as the protocol type.
+  + **Normal**  
+    Uses a password to authenticate.
+  + **Key File**  
+    Uses a Secure Shell Protocol (SSH) key file to authenticate.
+* **User Name**  
+  The user name is valid to the authentication of the FTP server that can access the FTP site. If not specified, "anonymous" will be used as the user name by default.
+* **Password**  
+  The password is valid to the authentication of the FTP server that enables the user name to access the FTP site. Unavailable when Logon Type is set to Key File.
+* **Key File**  
+  The SSH key file used for authentication. Available when Logon Type is set to Key File.
+* **Passphrase**  
+  The passphrase to decrypt the SSH key file. Available when Logon Type is set to Key File.
+* **Account**  
+  The account of the FTP user if there exists.
+* **Folder Location**  
+  The location where to put the report result files on the FTP server. If not specified, the root path "/" of the FTP server will be used by default.
+* **Handler Class**  
+  A customized FTP-client handler class can be used instead of the one provided in Logi Report. You should specify a fully-qualified class name that is package name plus class name, for example, test.DemoJakartaFTPHandler.
+* **Formats**  
+  Specifies in which formats to send the report result file to the FTP site. You can specify one or more formats. For each format, you need to specify a name for the result file.
+  + [Logi Report Result](#RST)  
+    Sends the report result in a Logi Report result file to the specified FTP site.
+  + [Web Report Result](#WST)  
+    Sends the web report result in a WST file to the specified FTP site.
+  + [HTML](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#HTML)  
+    Sends the report result in an HTML file to the specified FTP site.
+  + [PDF](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#PDF)  
+    Sends the report result in a PDF file to the specified FTP site.
+  + [Excel](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#Excel)  
+    Sends the report result in an Excel file to the specified FTP site.
+  + [Text](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#Text)  
+    Sends the report result in a Text file to the specified FTP site.
+    - **File Suffix**  
+      Specifies the suffix of the Text file, which can be .txt or .dat.
+  + [RTF](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#RTF)  
+    Sends the report result in a RTF file to the specified FTP site.
+  + [XML](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#XML)  
+    Sends the report result in an XML file to the specified FTP site.
+  + [PostScript](https://devnet.logianalytics.com/hc/en-us/articles/1500009773921-Advanced-Run-Dialog-Box-Properties#PS)  
+    Sends the report result in a PostScript file to the specified FTP site.
+* **Check Connection**  
+  Checks whether to be able to connect to the specified FTP location with the specified user account.
+* **OK**  
+  Retains the settings and adds the FTP site into the FTP To list.
+* **Cancel**  
+  Cancels the creation of the new FTP site.
+
+**Edit**
+
+Edits the specified FTP site in the FTP To list.
+
+**Delete**
+
+Deletes the specified FTP site from the FTP To list.
+
+## Conditions Tab Properties
+
+The Conditions tab enables you to specify the conditions for the publishing task. It contains the following sections:
+
+* [Time Tab Properties](#Time)
+* [Trigger Tab Properties](#Trigger)
+
+### Time Tab Properties
+
+The Time tab enables you to set settings for specifying the time for when the task is to be performed.
+
+![Schedule dialog - Conditions tab - Time](https://devnet.logianalytics.com/hc/article_attachments/4404885370519/sch_cndtn_time.gif)
+
+**Time Zone**
+
+Specifies the time zone.
+
+**Time Type**
+
+Specifies when the task will be performed.
+
+* **Run this task immediately**  
+  Specifies to run the task as soon as you submit it.
+* **Run this task at**  
+  Specifies the time for when the task is to be performed once.
+  + **Date**   
+    Specifies the date to run the task. You can select the **Calendar** icon ![Calendar icon](https://devnet.logianalytics.com/hc/article_attachments/4404885317143/btn_clndr.gif) to select a date from the calendar.
+  + **Time**  
+    Specifies the time to run the task.
+* **Run this task periodically**  
+  Specifies the time for when the task is to be performed on a repeated basis.
+  + **Duration**  
+    Specifies the period during which the task is to be performed.  
+    - **Run after**  
+      Specifies the start date and time of the period.
+    - **Run until**  
+      Specifies the end date and time of the period.
+  + **Date**  
+    Specifies the dates on which the task is to be performed.
+    - **Daily**  
+      Performs the task every one day, two days, etc., or every weekday (from Monday to Friday).
+    - **Weekly**  
+      Performs the task every one week, two weeks, etc., and on Sunday, Monday, Tuesday, etc.
+    - **Monthly**  
+      Performs the task on the first day, second day, etc. of every one month, two months, etc., or on the first Sunday, Monday, etc. of every one month, two months, etc.
+    - **Show/Hide Exception**  
+      Shows/Hides the exception date box that lists the dates on which you do not want to run the task.
+      * **Add**  
+        Adds an exception date via the Select Condition dialog box.
+      * **Remove**  
+        Removes the selected exception dates.
+
+      ![Exception Date Box](https://devnet.logianalytics.com/hc/article_attachments/4404880230167/sch_cndtn_time_excpt.gif)
+  + **Time**  
+    Specifies the exact time at which the task is to be performed.
+
+  - **At**  
+    Specifies the time to run the task.
+  - **Hourly**  
+    Performs the task every one hour, two hours, etc., at a certain minute between the specified time period.
+  - **Minutely**  
+    Performs the task every one minute, two minutes, etc. between the specified time period.+ **Run missed task upon server restart**  
+    Specifies to run missed tasks when you restart the server.
+
+### Trigger Tab Properties
+
+The Trigger tab enables you to set settings for specifying a trigger for the task.
+
+![Schedule dialog - Conditions tab - Trigger](https://devnet.logianalytics.com/hc/article_attachments/4404885370903/sch_cndtn_trgr.gif)
+
+**Select a trigger to bind**
+
+Specifies the trigger from the drop-down list for the task.
+
+**New Trigger**
+
+Opens the [New Trigger](https://devnet.logianalytics.com/hc/en-us/articles/1500009774281-New-Trigger-Dialog-Box-Properties) dialog box for you to create a new trigger. This option is not available to [organization users](https://devnet.logianalytics.com/hc/en-us/articles/1500009749922-Multitenancy-Supported-via-Organizations).
+
+**Logic with time condition**
+
+Specifies the logic between time condition and trigger condition.
+
+* **Trigger Only**  
+  Performs the task only when the trigger is fired.
+* **Trigger and Time Condition**   
+  Performs the task when both time is up and the trigger is fired.
+
+  ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404885305111/noteicon.jpg)When you selected this logic:
+
+  + No matter which condition is ready, Server performs the task only when its counterpart is ready.
+  + If you specify to perform the task at a specific time, you must select the option **Run missed task upon server restart**, otherwise Server regards the task as expired and deletes it when the time condition is ready before the trigger condition.
+* **Time Condition after Trigger**   
+  Performs a task when time is up after the trigger is fired. If the time condition is ready before the trigger condition, the task will be regarded as expired and will be deleted.
+* **Time Condition or Trigger**  
+  Performs the task when either time is up or the trigger is fired.
+
+## Notification Tab Properties
+
+The Notification tab enables you to notify someone by e-mail when the task finishes running, regardless of whether it is successful or unsuccessful.
+
+![Schedule dialog - Notification tab](https://devnet.logianalytics.com/hc/article_attachments/4404880230679/sch_notif.gif)
+
+**Successful Task/Failed Task**
+
+Specifies to send an e-mail when the task is successful/unsuccessful.
+
+**Mail To**
+
+Lists the e-mail addresses you have sent mail to.
+
+**New**
+
+Creates a new e-mail.
+
+* **To**  
+  Specifies the address you want to send the e-mail to.
+* **Cc**  
+  Specifies the address you want to copy to.
+* **Bcc**  
+  Specifies the address you want to secretly copy to.
+* **Subject**  
+  Specifies the subject of the e-mail.
+* **Comments**  
+  Specifies the contents of the e-mail or comments to the contents.
+* **Use Default SMTP Account**  
+  Specifies whether to use the default SMTP account configured in the Administration > Configuration > [E-mail Server](https://devnet.logianalytics.com/hc/en-us/articles/1500009743742-Configuring-the-E-mail-Server) page in the Server Console as the e-mail publish account.
+
+  The option is selected by default. Clear it and you will be able to specify a different account using the following options:
+
+  + **E-mail Address**  
+     Specifies the e-mail address of the new SMTP account.
+  + **User Name**  
+     Specifies the user name of the new account.
+  + **Password**  
+     Specifies the password of the new account.
+* **OK**  
+  Retains the settings and adds the e-mail address into the Mail To list.
+
+* **Cancel**  
+  Cancels operations.
+
+**Edit**
+
+Edits the selected e-mail in the Mail To list.
+
+**Delete**
+
+Deletes the selected e-mail from the Mail To list.
+
+## Duration Tab Properties
+
+The Duration tab is available only when you have [enabled the task-level timeout mechanism](https://devnet.logianalytics.com/hc/en-us/articles/1500009777301-Managing-Report-Running-Tasks#Timeout). In this tab, you can specify a time duration for the task, and ask Logi Report Server to cancel the task or to notify you or someone else of the task status via e-mail if the task has not yet finished running when the task duration is up.
+
+![Schedule dialog - Duration tab](https://devnet.logianalytics.com/hc/article_attachments/4404880416407/sch_drtn.gif)
+
+The following are the available options:
+
+**Timeout**
+
+Specifies the time duration for the task.
+
+**Notify by e-mail after the specified time**
+
+Sends an e-mail about the task information when the specified time is up.
+
+* **Mail To**  
+  Specifies the e-mail address of the recipient.
+
+**Cancel the task after the specified time**
+
+Cancels the running task when the specified time is up.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009746302-Result-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009746402-Select-Another-Catalog-Dialog-Box-Properties)

@@ -1,0 +1,65 @@
+---
+title: "Select Component for Page Report Tab Dialog"
+id: 1500009588661
+section: "References - Logi JReport Designer 15"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009588661-Select-Component-for-Page-Report-Tab-Dialog
+updated_at: 2021-07-24T05:54:51Z
+---
+
+# Select Component for Page Report Tab Dialog
+
+[![](https://devnet.logianalytics.com/hc/article_attachments/4404889273495/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009567422-Select-Component-for-Page-Report-Dialog)  [Next Topic![](https://devnet.logianalytics.com/hc/article_attachments/4404889273751/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009588681-Select-Field-Dialog)
+
+# Select Component for Page Report Tab Dialog
+
+The Select Component for Page Report Tab dialog appears when you select New > Page Report Tab on the Home or File menu tab, or on the report tab bar, right-click an existing report tab and select Insert on the shortcut menu. It helps you to [create a report tab](https://devnet.logianalytics.com/hc/en-us/articles/1500009571062-Creating-Report-Tabs-in-a-Page-Report) in an existing report. [See the dialog](javascript:%20void(null)).
+
+![Select Component for Page Report Tab dialog](https://devnet.logianalytics.com/hc/article_attachments/4404889286295/slctcmpntpgrpttb.gif)
+
+The following are details about options in the dialog:
+
+**Report Title**
+
+Specifies the title of the new report tab.
+
+**Report layout**
+
+Specifies the layout with which to create the report tab.
+
+* **Banded**  
+   Creates a report containing a vertical banded object.
+* **Table (Group Above)**  
+   Creates a report containing a table with group information above the detail row.
+* **Table (Group Left)**  
+  Creates a report containing a table with group information left to the detail row.
+* **Table (Group Left Above)**  
+   Creates a report containing a table with group information left above the detail row.
+* **Summary Table**  
+   Creates a report containing a table with only group and summary information.
+* **Chart**  
+   Creates a report containing a chart.
+* **Crosstab**  
+   Creates a report containing a crosstab.
+* **Horizontal Banded**  
+   Creates a report containing a horizontal banded object. Not available when creating a report tab in a page report which uses business view as the data source.
+* **Mailing Label**  
+   Creates a report containing a banded object in the form of a mailing label layout. Not available when creating a report tab in a page report which uses business view as the data source.
+* **Tabular**  
+   Creates a report containing a tabular component. Not available when creating a report tab in a page report which uses business view as the data source.
+* **Blank**  
+   Creates a report with nothing in it.
+
+**OK**
+
+Creates a page report tab with the selected layout.
+
+**Cancel**
+
+Cancels the creation of a page report tab and closes the dialog.
+
+**Help**
+
+Displays the help document about this feature.
+
+[![](https://devnet.logianalytics.com/hc/article_attachments/4404889273495/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009567422-Select-Component-for-Page-Report-Dialog)  [Next Topic![](https://devnet.logianalytics.com/hc/article_attachments/4404889273751/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009588681-Select-Field-Dialog)

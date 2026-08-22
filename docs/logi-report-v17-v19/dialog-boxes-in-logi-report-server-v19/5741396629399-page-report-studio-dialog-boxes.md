@@ -1,0 +1,146 @@
+---
+title: "Page Report Studio Dialog Boxes"
+id: 5741396629399
+section: "Dialog Boxes in Logi Report Server v19"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/5741396629399-Page-Report-Studio-Dialog-Boxes
+updated_at: 2022-10-31T17:16:07Z
+---
+
+# Page Report Studio Dialog Boxes
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/9905574448535/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/5741421831831-Web-Report-Studio-Profile-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/9905574466839/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/5741396640407-Add-Aggregation-Dialog-Box-Properties)
+
+# Page Report Studio Dialog Boxes
+
+This topic references dialog boxes in Page Report Studio in alphabetical order:
+
+* [Add Aggregation Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741396640407-Add-Aggregation-Dialog-Box-Properties)
+* [Aggregate On Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741409960727-Aggregate-On-Dialog-Box-Properties)
+* [Apply Style Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741409991703-Apply-Style-Dialog-Box-Properties)
+* [Banded Object Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741387886999-Banded-Object-Properties)
+* [Banded Panel Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741416803223-Banded-Panel-Properties)
+* [Banded Wizard Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741416829079-Banded-Wizard-Properties)
+* [Bottom N Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741416842391-Bottom-N-Dialog-Box-Properties)
+* [Button Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741416868887-Button-Properties)
+* [Chart Definition Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741387958679-Chart-Definition-Dialog-Box-Properties)
+* [Chart Wizard Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741402177047-Chart-Wizard-Properties)
+* [Color List Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741402215575-Color-List-Dialog-Box-Properties)
+* [Color Picker Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741396895639-Color-Picker-Dialog-Box-Properties)
+* [Conditional Formatting Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741410129687-Conditional-Formatting-Dialog-Box-Properties)
+* [Crosstab Formula Editor Properties](https://devnet.logianalytics.com/hc/en-us/articles/7985329579031-Crosstab-Formula-Editor-Properties)
+* [Crosstab Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741402255511-Crosstab-Properties)
+* [Crosstab Wizard Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741424076567-Crosstab-Wizard-Properties)
+* [Customize Gauge Angle Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741396975255-Customize-Gauge-Angle-Dialog-Box-Properties)
+* [Customized Page Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741402280471-Customized-Page-Dialog-Box-Properties)
+* [Data Field Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741396989975-Data-Field-Properties)
+* [Edit Additional Values Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741417094423-Edit-Additional-Values-Dialog-Box-Properties)
+* [Edit Aggregation Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741410305943-Edit-Aggregation-Dialog-Box-Properties)
+* [Edit Conditions Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741397029783-Edit-Conditions-Dialog-Box-Properties)
+* [Edit Dataset Filter Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/7985324060055-Edit-Dataset-Filter-Dialog-Box-Properties)
+* [Edit Filter Control Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741410351255-Edit-Filter-Control-Dialog-Box-Properties)
+* [Encoding Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741388231447-Encoding-Dialog-Box-Properties)
+* [Enter Parameter Values Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741410399895-Enter-Parameter-Values-Dialog-Box-Properties)
+* [Enter Values Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741424278935-Enter-Values-Dialog-Box-Properties)
+* [Export Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741410455959-Export-Dialog-Box-Properties)
+* [Fetch Data Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741388802071-Fetch-Data-Dialog-Box-Properties)
+* [Fill Effects Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741410480023-Fill-Effects-Dialog-Box-Properties)
+* [Filter Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741402520855-Filter-Dialog-Box-Properties)
+* [Filter Control Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741402536087-Filter-Control-Properties)
+* [Format Activity Gauge Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741424370455-Format-Activity-Gauge-Dialog-Box-Properties)
+* [Format Area Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741424380439-Format-Area-Dialog-Box-Properties)
+* [Format Bar Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741397252247-Format-Bar-Dialog-Box-Properties)
+* [Format Bar Gauge Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741410633111-Format-Bar-Gauge-Dialog-Box-Properties)
+* [Format Bubble Gauge Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741424431511-Format-Bubble-Gauge-Dialog-Box-Properties)
+* [Format Category (X) Axis Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741388427671-Format-Category-X-Axis-Dialog-Box-Properties)
+* [Format Dial Gauge Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741388473367-Format-Dial-Gauge-Dialog-Box-Properties)
+* [Format Donut Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741402753303-Format-Donut-Dialog-Box-Properties)
+* [Format Gauge Label Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741397400343-Format-Gauge-Label-Dialog-Box-Properties)
+* [Format KPI Label Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741424509207-Format-KPI-Label-Dialog-Box-Properties)
+* [Format Label Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741388528535-Format-Label-Dialog-Box-Properties)
+* [Format Legend Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741397489431-Format-Legend-Dialog-Box-Properties)
+* [Format Line Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741410825239-Format-Line-Dialog-Box-Properties)
+* [Format Paper Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741397528087-Format-Paper-Dialog-Box-Properties)
+* [Format Pie Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741424579095-Format-Pie-Dialog-Box-Properties)
+* [Format Platform Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741397555095-Format-Platform-Dialog-Box-Properties)
+* [Format Pointer Label Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741388608791-Format-Pointer-Label-Dialog-Box-Properties)
+* [Format Radar Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741424620055-Format-Radar-Dialog-Box-Properties)
+* [Format Scatter Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741410929943-Format-Scatter-Dialog-Box-Properties)
+* [Format Solid Gauge Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741417768983-Format-Solid-Gauge-Dialog-Box-Properties)
+* [Format Stock Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741397682455-Format-Stock-Dialog-Box-Properties)
+* [Format Surface Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741424673815-Format-Surface-Dialog-Box-Properties)
+* [Format Target Label Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741417846807-Format-Target-Label-Dialog-Box-Properties)
+* [Format Value (Y) Axis Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741388736791-Format-Value-Y-Axis-Dialog-Box-Properties)
+* [Format Value (Y2) Axis Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741411089815-Format-Value-Y2-Axis-Dialog-Box-Properties)
+* [Formula Editor Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741410542999-Formula-Editor-Properties)
+* [Group Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741411157143-Group-Properties)
+* [Image Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741397863191-Image-Properties)
+* [Insert Aggregation Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741397883543-Insert-Aggregation-Dialog-Box-Properties)
+* [Insert Column Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741411222167-Insert-Column-Dialog-Box-Properties)
+* [Insert Detail Column Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741403268631-Insert-Detail-Column-Dialog-Box-Properties)
+* [Insert Filter Control Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741418075159-Insert-Filter-Control-Dialog-Box-Properties)
+* [Insert Group Column Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741424936087-Insert-Group-Column-Dialog-Box-Properties)
+* [Insert Image Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741411290263-Insert-Image-Dialog-Box-Properties)
+* [Insert Parameter Control Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741424980503-Insert-Parameter-Control-Dialog-Box-Properties)
+* [Insert Parameter Form Control Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741418144151-Insert-Parameter-Form-Control-Dialog-Box-Properties)
+* [Insert Row Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741418154647-Insert-Row-Dialog-Box-Properties)
+* [Insert Summary Column Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741411374231-Insert-Summary-Column-Dialog-Box-Properties)
+* [Label Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741398100375-Label-Properties)
+* [Manage Datasets Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/7985360431639-Manage-Datasets-Dialog-Box-Properties)
+* [Multivalue Container Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741403413527-Multivalue-Container-Properties)
+* [Navigation Control Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741425143447-Navigation-Control-Properties)
+* [New Page Report Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741398131991-New-Page-Report-Dialog-Box-Properties)
+* [New Report Tab Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741389145751-New-Report-Tab-Dialog-Box-Properties)
+* [New Toolbar Name Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741425135895-New-Toolbar-Name-Dialog-Box-Properties)
+* [Open Report Tabs Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741425155479-Open-Report-Tabs-Dialog-Box-Properties)
+* [Options Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741411515543-Options-Dialog-Box-Properties)
+* [Order/Select N Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741411534871-Order-Select-N-Dialog-Box-Properties)
+* [Page Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741440252183-Page-Properties)
+* [Parameter Control Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741425258519-Parameter-Control-Properties)
+* [Parameter Field Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741418543127-Parameter-Field-Properties)
+* [Parameter Form Control Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741425275799-Parameter-Form-Control-Properties)
+* [PDF Encrypt Option Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741425202711-PDF-Encrypt-Option-Dialog-Box-Properties)
+* [PDF Sign Option Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741389248919-PDF-Sign-Option-Dialog-Box-Properties)
+* [Printable Version Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741389268887-Printable-Version-Dialog-Box-Properties)
+* [Quick Schedule Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741411744023-Quick-Schedule-Dialog-Box-Properties)
+* [Rename Report Tab Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741440419223-Rename-Report-Tab-Dialog-Box-Properties)
+* [Report Body Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741425330711-Report-Body-Properties)
+* [Report Tab Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741411821463-Report-Tab-Properties)
+* [Save As Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741404115223-Save-As-Dialog-Box-Properties)
+* [Save Report Template Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741412182935-Save-Report-Template-Dialog-Box-Properties)
+* [Search Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741440487447-Search-Dialog-Box-Properties)
+* [Select Color Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741389405847-Select-Color-Dialog-Box-Properties)
+* [Select Fields Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741440574103-Select-Fields-Dialog-Box-Properties)
+* [Select Group Position Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741403945111-Select-Group-Position-Dialog-Box-Properties)
+* [Select Resource Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741440630295-Select-Resource-Dialog-Box-Properties)
+* [Select Values Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741412003735-Select-Values-Dialog-Box-Properties)
+* [Sort Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741418829463-Sort-Dialog-Box-Properties)
+* [Special Field Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741440707991-Special-Field-Properties)
+* [Split Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741404070167-Split-Dialog-Box-Properties)
+* [Style List Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741425606551-Style-List-Dialog-Box-Properties)
+* [Table Cell Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741440833303-Table-Cell-Properties)
+* [Table Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741412228503-Table-Properties)
+* [Table Row Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741440892695-Table-Row-Properties)
+* [Table Wizard Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741425746199-Table-Wizard-Properties)
+* [Tabular Cell Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741440922135-Tabular-Cell-Properties)
+* [Tabular Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741389758487-Tabular-Properties)
+* [Text Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741431809303-Text-Box-Properties)
+* [Top N Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741412406807-Top-N-Dialog-Box-Properties)
+* [To Chart Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741431766167-To-Chart-Dialog-Box-Properties)
+* [To Crosstab Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741412390295-To-Crosstab-Dialog-Box-Properties)
+* [Turn to Page Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741419052311-Turn-to-Page-Dialog-Box-Properties)
+* [User Defined Function Editor Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741419160855-User-Defined-Function-Editor-Properties)
+* [Zoom Dialog Box Properties](https://devnet.logianalytics.com/hc/en-us/articles/5741404399639-Zoom-Dialog-Box-Properties)
+
+![Note icon](https://devnet.logianalytics.com/hc/article_attachments/9905612785687/noteicon.jpg) The object properties dialog boxes might be different for an [advanced user](https://devnet.logianalytics.com/hc/en-us/articles/5741427459479-Page-Report-Studio-Profile-Properties#AdvUser) and for a normal user. An advanced user can modify some properties that a common user cannot, and can use formulas to control properties. The properties dialog boxes in this topic are based on an advanced user.
+
+To enable advanced user in the server profile:
+
+1. On the system toolbar of the Server Console, navigate to the My Profile > Customize Profile page.
+2. Select **Customize Profile**. Server displays the [Customize Profile dialog box](https://devnet.logianalytics.com/hc/en-us/articles/7985371543191-Customize-Profile-Dialog-Box-Properties).
+3. Select **Enable Customize Properties**.
+4. Navigate to the **Page Report Studio** > **Advanced** tab.
+5. Select  **Advanced User**.
+6. Select **OK** to accept the change.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/9905574448535/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/5741421831831-Web-Report-Studio-Profile-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/9905574466839/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/5741396640407-Add-Aggregation-Dialog-Box-Properties)

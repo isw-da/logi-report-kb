@@ -1,0 +1,130 @@
+---
+title: "Format Bench Dialog Box Properties"
+id: 1500009772261
+section: "Page Report Studio Dialog Boxes"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009772261-Format-Bench-Dialog-Box-Properties
+updated_at: 2021-07-24T00:49:16Z
+---
+
+# Format Bench Dialog Box Properties
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009744382-Format-Bar-Gauge-Dialog-Box-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009744402-Format-Bubble-Gauge-Dialog-Box-Properties)
+
+# Format Bench Dialog Box Properties
+
+You can use the Format Bench dialog box to format the bars of a bench chart. This topic describes the options in the dialog box.
+
+![Format Bench dialog](https://devnet.logianalytics.com/hc/article_attachments/4404885588759/fmtbnch.gif)
+
+**Style**
+
+Specifies the style of the bars in the chart.
+
+* **Normal**  
+   Specifies to make the bars be quadrate.
+* **Cylinder**  
+   Specifies to make the bars be columned. It takes effect only when the property Use Depth is selected below.
+* **Vary Colors**  
+   Specifies whether to make each bar of the chart take a different color schema. It takes effect only for clustered bench types and when the chart has no series field.
+
+**Size**
+
+Specifies the size of the bars in the chart.
+
+* **Bar Width**  
+   Specifies the bar height as a percentage of the unit height.
+
+**Depth**
+
+Specifies the depth properties for bars of the chart.
+
+* **Use Depth**  
+   Specifies whether to make the bars visually three-dimensional.
+  + **Depth**  
+     Specifies the depth of the bars, in inches.
+  + **Depth Direction**  
+     Specifies the angle of the axis along the depth of the bars, in degrees.
+
+**Static Data Label**
+
+Specifies the properties of the static data labels on the bars. Not supported on 3-D bench charts.
+
+* **Show Static Data Label**  
+   Specifies whether to show the static data labels on the bars. Only when it is true can the following static data label related properties work.
+* **Data Label Type**  
+   Specifies in which way to display the data values in the static data labels.
+  + **percent**  
+     Shows the percentage of each bar to the total.
+  + **value**  
+     Shows the value for each bar.
+  + **value and percent**  
+     Shows the value and the percentage for each bar.
+* **Position**  
+   Specifies the position of the static data labels on the bars.
+  + **Autofit**  
+     If selected, the static data labels will be displayed automatically.
+  + **Outside Top**   
+     If selected, the static data labels will be displayed on the outside top of the bars.
+  + **Inside Top**  
+     If selected, the static data labels will be displayed on the inside top of the bars.
+  + **Inside Center**  
+     If selected, the static data labels will be displayed at the inside center of the bars.
+  + **Inside Bottom**  
+     If selected, the static data labels will be displayed at the inside bottom of the bars.
+* **Auto Arrange**  
+   For a bench chart, no matter whether the value is true or false, the static data labels will be displayed horizontally at the specified position.
+* **Auto Scale in Number**
+
+  Specifies whether to
+  automatically scale the values that are of the Number data type when the values fall into the two ranges:
+
+  + When 1000 <= value < 10^15, Logi Report uses the following quantity unit symbols of the International System of Units to scale the values: K (10^3), M (10^6), G (10^9), and T (10^12).
+  + When 0 < value < 0.001 or value >= 10^15, Logi Report uses scientific notation to scale the values.
+
+  The default value **auto** means that the setting follows [that of the chart platform](https://devnet.logianalytics.com/hc/en-us/articles/1500009772421-Format-Platform-Dialog-Box-Properties#AutoScale).
+
+**Graph Border**
+
+Specifies the properties for the border of the bars.
+
+* **Show Border**  
+  Specifies whether to show the border of the bars. When the option is selected, the other border properties will be enabled.
+  + **Line Style**  
+     Specifies the line style to apply to the border.
+  + **Color**  
+     Specifies the color of the border.
+  + **Thickness**  
+     Specifies the thickness of the border.
+  + **Transparency**  
+     Specifies the transparency for color of the border.
+
+**Hint**
+
+Specifies the data marker hint properties.
+
+* **Show Category and Series**  
+   Specifies whether to include the category and series values in the data marker hint.
+* **Auto Scale in Number**
+
+  Specifies whether to
+  automatically scale the values that are of the Number data type when the values fall into the two ranges:
+
+  + When 1000 <= value < 10^15, Logi Report uses the following quantity unit symbols of the International System of Units to scale the values: K (10^3), M (10^6), G (10^9), and T (10^12).
+  + When 0 < value < 0.001 or value >= 10^15, Logi Report uses scientific notation to scale the values.
+
+  The default value **auto** means that the setting follows [that of the chart platform](https://devnet.logianalytics.com/hc/en-us/articles/1500009772421-Format-Platform-Dialog-Box-Properties#AutoScale).
+
+**OK**
+
+Applies the changes and closes the dialog box.
+
+**Cancel**
+
+Does not retain any changes and closes the dialog box.
+
+**Help**
+
+Displays the help document about this feature.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009744382-Format-Bar-Gauge-Dialog-Box-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009744402-Format-Bubble-Gauge-Dialog-Box-Properties)

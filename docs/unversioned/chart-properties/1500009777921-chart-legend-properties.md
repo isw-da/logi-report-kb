@@ -1,0 +1,88 @@
+---
+title: "Chart Legend Properties"
+id: 1500009777921
+section: "Chart Properties"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009777921-Chart-Legend-Properties
+updated_at: 2021-07-24T00:47:46Z
+---
+
+# Chart Legend Properties
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009777901-Chart-Label-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009749222-Chart-Paper-Properties)
+
+# Chart Legend Properties
+
+This topic describes the properties of the Chart Legend object.
+
+| Property | Description |
+| --- | --- |
+| General | |
+| Display Name | Specifies the display name of the object. Data type: String |
+| Instance Name | Shows the instance name of the object. This property is read only. |
+| Geometry | |
+| Height | Specifies the height of the object, in inches. Type a numeric value to change the height. Data type: Float |
+| Width | Specifies the width of the object, in inches. Type a numeric value to change the width. Data type: Float |
+| X | Specifies the horizontal coordinate of the top left corner of the object, relative to its parent container. Type a numeric value to change the position in inches. This property takes effect only when the [Placement](#Placement) property is set to customized. Data type: Float |
+| Y | Specifies the vertical coordinate of the top left corner of the object, relative to its parent container. Type a numeric value to change the position in inches. This property takes effect only when the [Placement](#Placement) property is set to customized. Data type: Float |
+| Legend | |
+| Auto Size | Specifies whether to resize the legend automatically. Data type: Boolean |
+| Bottom Margin | Specifies the distance between the legend labels and the bottom border of the legend, in inches. Type a numeric value to change the margin. Data type: Float |
+| Label Format Source | Specifies the data format option for the chart legend labels. Choose an option from the drop-down list.  * **Axis Data Format**  - If selected, the data format of the legend labels will follow that of the axis data: if the chart has series axis, the legend label format will be the same as the series axis data format; if not, the category axis data format will be used to the legend labels. * **Legend Data Format** - If selected, the data format of the legend labels will be controlled by the property [Legend Data Format](#LegendDataFormat).   Unavailable to heat maps that are colored only by summaries.  Data type: Enumeration |
+| Label Horizontal Spacing | Specifies the horizontal distance between two adjacent legend labels. Type a numeric value to change the distance. Unavailable to heat maps that are colored only by summaries.  Data type: Float |
+| Label Vertical Spacing | Specifies the vertical distance between two adjacent legend labels. Type a numeric value to change the distance. Unavailable to heat maps that are colored only by summaries.  Data type: Float |
+| Left Margin | Specifies the distance between the legend labels and the left border of the legend, in inches. Type a numeric value to change the margin. Data type: Float |
+| Legend Data Format | Specifies the data format of the legend labels. Applied when [Label Format Source](#LabelFormatSource) is set to Legend Data Format. Select Select Values in the value cell to specify the format in the [Data Format](https://devnet.logianalytics.com/hc/en-us/articles/1500009775121-Data-Format-Dialog-Box-Properties) dialog box. Data type: String |
+| Placement | Specifies the position of the legend to be on the left, right, top, bottom of the chart or customized by manually dragging in the chart. Choose an option from the drop-down list. Data type: Enumeration |
+| Right Margin | Specifies the distance between the legend labels and the right border of the legend, in inches. Type a numeric value to change the margin. Data type: Float |
+| Secondary Placement | Specifies the position of the legend further based on the setting of the property [Placement](#Placement). Choose an option from the drop-down list. Data type: Enumeration |
+| Show Scrollbar | Specifies whether to show a scrollbar on the legend to fully view the legend content when the content does not fit into the legend. Data type: Boolean |
+| Show Tips | Specifies whether to show the corresponding data information when the mouse pointer points at a legend entry in the chart. The tip is also available in HTML result。 Data type: Boolean |
+| Top Margin | Specifies the distance between the legend labels and the top border of the legend, in inches. Type a numeric value to change the margin. Data type: Float |
+| Truncate | Specifies whether to truncate the legend entry label text when the text overflow the labels. Data type: Boolean |
+| Background | |
+| Border Color | Specifies the color of the legend border. Choose a color from the drop-down list or select Custom to define a color in the [Color Picker](https://devnet.logianalytics.com/hc/en-us/articles/1500009746842-Color-Picker-Dialog-Box-Properties) dialog box. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| [Border End Caps](https://devnet.logianalytics.com/hc/en-us/articles/1500009777861-Chart-Properties#EndCaps) | Specifies the ending style of the legend border line. Choose an option from the drop-down list. Data type: Enumeration |
+| Border Style | Specifies the line style of the legend border. Choose an option from the drop-down list. Data type: Enumeration |
+| Border Thickness | Specifies the width of the legend border, in inches. Type a numeric value to change the thickness. Data type: Float |
+| Border Transparency | Specifies the color transparency of the legend border, in percent. Type a numeric value to change the transparency. Data type: Integer |
+| [Border Type](https://devnet.logianalytics.com/hc/en-us/articles/1500009777861-Chart-Properties#BorderType) | Specifies the border type of the legend. Choose an option from the drop-down list. Data type: Enumeration |
+| Border Variable Dash | Specifies whether to resize the dash automatically.  * **true** - If selected, the dash size will be adjusted automatically. * **false** - If selected, the dash size will be of fixed size.   Data type: Boolean |
+| Color | Specifies the color of the legend background. Applied when [Fill Type](#BackgroundFillType) of the legend background is set to Color. Choose a color from the drop-down list or select Custom to define a color in the [Color Picker](https://devnet.logianalytics.com/hc/en-us/articles/1500009746842-Color-Picker-Dialog-Box-Properties) dialog box. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| Fill Transparency | Specifies the transparency of the legend background color, in percent. Type a numeric value to change the transparency. Data type: Integer |
+| Fill Type | Specifies the fill pattern for the legend background. Choose an option from the drop-down list.  * **None** - No fill (default). * **Color** - Fills with a specified color. * **More Effects** - Specifies either a gradient or an image as the fill effect in the [Fill Effects](https://devnet.logianalytics.com/hc/en-us/articles/1500009747082-Fill-Effects-Dialog-Box-Properties) dialog box.   Data type: Enumeration |
+| Inset Bottom | Specifies the bottom position of the background area, measured in a percentage of the legend height, from the bottom edge of the legend. Data type: Float |
+| Inset Left | Specifies the left position of the background area, measured in a percentage of the legend width, from the left edge of the legend. Data type: Float |
+| Inset Right | Specifies the right position of the background area, measured in a percentage of the legend width, from the right edge of the legend. Data type: Float |
+| Inset Top | Specifies the top position of the background area, measured in a percentage of the legend height, from the top edge of the legend. Data type: Float |
+| Label | |
+| Auto Scale in Number | Specifies whether to automatically scale the values that are of the Number data type when the values fall into the two ranges:   * When 1000 <= value < 10^15, Logi Report uses the following quantity unit symbols of the International System of Units to scale the values: K (10^3), M (10^6), G (10^9), and T (10^12). * When 0 < value < 0.001 or value >= 10^15, Logi Report uses scientific notation to scale the values.   The value **auto** means the setting follows [that of the chart](https://devnet.logianalytics.com/hc/en-us/articles/1500009777861-Chart-Properties#AutoScale).  Data type: Boolean |
+| Color | Specifies the color of the label text. Applied when [Fill Type](#LabelFillType) of the label text is set to Color. Choose a color from the drop-down list or select Custom to define a color in the [Color Picker](https://devnet.logianalytics.com/hc/en-us/articles/1500009746842-Color-Picker-Dialog-Box-Properties) dialog box. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| Fill Transparency | Specifies the color transparency of the label text, in percent. Type a numeric value to change the transparency. Data type: Integer |
+| Fill Type | Specifies the fill pattern for the label text. Choose an option from the drop-down list.  * **None** - No fill (default). * **Color** - Fills with a specified color.   Data type: Enumeration |
+| Font Face | Specifies the font face for the label text. Choose an option from the drop-down list. Data type: Enumeration |
+| Font Rotation | Specifies the rotation angle of each legend label around its center, in degrees. The default value is 0. Type a numeric value to change the rotation. Data type: Float |
+| Font Size | Specifies the font size for the label text. Type an integer value to change the size. Data type: Integer |
+| Font Style | Specifies the font style for the label text. Choose an option from the drop-down list. Data type: Enumeration |
+| Outline Color | Specifies the color for the label text outline. Choose a color from the drop-down list or select Custom to define a color in the [Color Picker](https://devnet.logianalytics.com/hc/en-us/articles/1500009746842-Color-Picker-Dialog-Box-Properties) dialog box. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| [Outline End Caps](https://devnet.logianalytics.com/hc/en-us/articles/1500009777861-Chart-Properties#EndCaps) | Specifies the ending style for the label text outline. Choose an option from the drop-down list. Data type: Enumeration |
+| [Outline Joint](https://devnet.logianalytics.com/hc/en-us/articles/1500009777861-Chart-Properties#BorderJoint) | Specifies the joint style for the label text outline. Choose an option from the drop-down list. Data type: Enumeration |
+| Percent Format | Specifies the format of the percentage values on the legend. Applied when [Show Percent](#ShowPercent) is set to true. Select Select Values in the value cell to specify the format in the [Data Format](https://devnet.logianalytics.com/hc/en-us/articles/1500009775121-Data-Format-Dialog-Box-Properties) dialog box. Data type: String |
+| Reverse Labels | Specifies whether to reverse the order of the labels in the legend object. Data type: Boolean |
+| Show Percent | Specifies whether to show the percentage of each entry value to the total on the legend. Applies to pie, bar and bench charts that have only one value axis. Data type: Boolean |
+| Show Values | Specifies whether to show the values for the legend entries. Applies to pie, bar and bench charts that have only one value axis. Data type: Boolean |
+| Text of Total Value | Specifies the text of the total value label on the legend. Applies to pie, bar and bench charts that have only one value axis. Data type: String |
+| Value Format | Specifies the number format of the legend entry values. Applied when [Show Values](#ShowValue) is set to true. Select Select Values in the value cell to specify the format in the [Data Format](https://devnet.logianalytics.com/hc/en-us/articles/1500009775121-Data-Format-Dialog-Box-Properties) dialog box. Data type: String |
+| Icon | |
+| Border Color | Specifies the color of the icon borders. Choose a color from the drop-down list or select Custom to define a color in the [Color Picker](https://devnet.logianalytics.com/hc/en-us/articles/1500009746842-Color-Picker-Dialog-Box-Properties) dialog box. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| [Border End Caps](https://devnet.logianalytics.com/hc/en-us/articles/1500009777861-Chart-Properties#EndCaps) | Specifies the ending style of the icon border line. Choose an option from the drop-down list. Data type: Enumeration |
+| [Border Joint](https://devnet.logianalytics.com/hc/en-us/articles/1500009777861-Chart-Properties#BorderJoint) | Specifies the joint style of the icon border line. Choose an option from the drop-down list. Data type: Enumeration |
+| Border Style | Specifies the line style of the icon borders. Choose an option from the drop-down list. Data type: Enumeration |
+| Border Thickness | Specifies the width of the icon borders in inches. Type a numeric value to change the thickness. Data type: Float |
+| Border Transparency | Specifies the color transparency of the icon borders, in percent. Type a numeric value to change the transparency. Data type: Integer |
+| Border Variable Dash | Specifies whether to resize the dash automatically. If the property is set to true, the dash size will be adjusted automatically; otherwise, the dash size will be of fixed size. Data type: Boolean |
+| Height | Specifies the height of the icon, in inches. Type a numeric value to change the width. Data type: Float |
+| Icon Alignment | Specifies the relative position of the icon to the legend. Choose an option from the drop-down list. Data type: Enumeration |
+| Icon Text Gap | Specifies the distance between each legend label and icon. Type a numeric value to change the gap. Data type: Float |
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009777901-Chart-Label-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009749222-Chart-Paper-Properties)

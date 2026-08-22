@@ -1,0 +1,70 @@
+---
+title: "Group Options Dialog Box Properties"
+id: 1500009775881
+section: "Web Report Studio Dialog Boxes"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009775881-Group-Options-Dialog-Box-Properties
+updated_at: 2021-07-24T00:48:19Z
+---
+
+# Group Options Dialog Box Properties
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009775861-Group-Header-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009775901-Image-Properties)
+
+# Group Options Dialog Box Properties
+
+This topic describes how you can use the Group Options dialog box to [set the sort order of the group values and define the number of the group values to show](https://devnet.logianalytics.com/hc/en-us/articles/1500009750122-Inserting-Components-in-Web-Report#GroupOptions) in the chart.
+
+Server displays the dialog box after you select the Top N button ![Top N button](https://devnet.logianalytics.com/hc/article_attachments/4404880176279/btn_wbrpt_topn.gif) above the Area box when the chart type is Heat Map in the [Chart Wizard](https://devnet.logianalytics.com/hc/en-us/articles/1500009775021-Chart-Wizard-Properties#Map), [Insert Chart](https://devnet.logianalytics.com/hc/en-us/articles/1500009747582-Insert-Chart-Dialog-Box-Properties#Map) dialog box, [Convert to Chart](https://devnet.logianalytics.com/hc/en-us/articles/1500009746782-Convert-to-Chart-Dialog-Box-Properties#Map) dialog box, or [To Chart](https://devnet.logianalytics.com/hc/en-us/articles/1500009748162-To-Chart-Dialog-Box-Properties#Map) dialog box, or in the Bind Data screen of chart in the [Web Report Wizard](https://devnet.logianalytics.com/hc/en-us/articles/1500009776601-Web-Report-Wizard-Properties#Map).
+
+![Group Options dialog](https://devnet.logianalytics.com/hc/article_attachments/4404885454871/grpoptn.gif)
+
+**Group Order**
+
+Specifies in which manner to sort the group values.
+
+* **Ascend**  
+   Values will be sorted in an ascending order (A, B, C).
+* **Descend**  
+   Values will be sorted in a descending order (C, B, A).
+* **No Sort**  
+   Values will be sorted in the original order in database.
+
+**Group Selection**
+
+Specifies the number of group values that will be displayed in the chart.
+
+* **Select**  
+   Specifies the Select N condition to define the number of the group values that will be displayed.
+  + **All**  
+     If selected, all group values in the chart will be displayed.
+  + **Top N**   
+     If selected, specify a number in the field to the right and the first N group values in the chart will be displayed. You can also select a parameter from the drop-down list, which returns an integer, and then specify a value for the parameter when viewing the report to dynamically define the Top N condition.
+  + **Bottom** **N**  
+     If selected, specify a number in the field to the right and the last N group values in the chart will be displayed. You can also select a parameter from the drop-down list which returns an integer, and then specify a value for the parameter when viewing the report to dynamically define the Bottom N condition.
+* **Based On**  
+   If the option is selected, you can select a field added to the value axis of the chart to sort the group values based on this field, or select Custom Sort to customize the sort manner in the [Custom Sort](https://devnet.logianalytics.com/hc/en-us/articles/1500009775101-Custom-Sort-Dialog-Box-Properties) dialog box.
+* **Remaining Groups In**  
+   Enabled when Top N or Bottom N is selected from the Select drop-down list. Select this option and then type a character string in the text box to group all the group values beyond the top/bottom N range.
+* **Overall Series**  
+  Not supported on group values.
+* **Skip First**  
+   If you type a number M in the Skip First text box, the first M group values in the chart will be skipped and the Select N condition will take effect beginning with the M+1 value. The skipped values will be included in the remaining group together with all the group values beyond the top/bottom N range.
+
+**OK**
+
+Accepts the changes and exits the dialog box.
+
+**Cancel**
+
+Discards the changes and closes the dialog box.
+
+![Help button](https://devnet.logianalytics.com/hc/article_attachments/4404880314903/btn_help.gif)
+
+Displays the help document about this feature.
+
+![Close button](https://devnet.logianalytics.com/hc/article_attachments/4404885431447/btn_close.gif)
+
+Ignores the setting and closes this dialog box.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009775861-Group-Header-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009775901-Image-Properties)

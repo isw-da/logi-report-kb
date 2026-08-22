@@ -1,0 +1,523 @@
+---
+title: "Formatting the Gauge in a Gauge Chart"
+id: 1500010056922
+section: "Working with Components in Reports - Logi Report Designer v17.1"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500010056922-Formatting-the-Gauge-in-a-Gauge-Chart
+updated_at: 2021-07-23T19:14:39Z
+---
+
+# Formatting the Gauge in a Gauge Chart
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404856790679/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500010057022-Formatting-the-Rectangles-and-Rectangle-Titles-in-a-Heat-Map)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404856790935/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500010094621-Formatting-the-Surface-in-a-Surface-Chart)
+
+# Formatting the Gauge in a Gauge Chart
+
+Designer provides different format options for different gauge subtypes: Gauge Solid 2-D, Gauge Dial 2-D, Gauge Bar 2-D, Gauge Activity 2-D, and Gauge Bubble 2-D. This topic describes how you can format the different gauges and the labels in a gauge chart.
+
+This topic contains the following sections:
+
+* [Formatting a Solid Gauge](#Solid)
+* [Formatting a Dial Gauge](#Dial)
+* [Formatting a Bar Gauge](#Bar)
+* [Formatting an Activity Gauge](#Activity)
+* [Formatting a Bubble Gauge](#Bubble)
+* [Formatting the Pointer/Gauge/Target Labels](#Label)
+
+## Formatting a Solid Gauge
+
+1. Right-click any range in an arc in the solid gauge and select **Format Solid Gauge** on the shortcut menu, or double-click any arc range in the solid gauge. Designer displays the [Format Solid Gauge dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010097261-Format-Solid-Gauge-Dialog-Box).
+
+   ![Format Solid Gauge dialog box - Circular Graph](https://devnet.logianalytics.com/hc/article_attachments/4404856933015/fmtsldgauge_crculr.gif)
+2. In the **Circular Graph** tab, specify properties for the arcs in the solid gauge.
+
+   In the **Size** box, set the angle of the arcs (you can select the angle from the drop-down list or select **Customized** to open the [Customize Gauge Angle dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010096061-Customize-Gauge-Angle-Dialog-Box) to specify the start angle and stop angle), the width of the arcs, the hole size of the arcs (meaning the relative size of an arc in a percentage of the total arc size), and the styles of the start graph and end graph of the arcs.
+
+   In the **Fill** box,
+
+   * To apply the colors that you [define for the ranges](#SolidRangeColor) to the arcs, select **Use Range Color**, then in the **Background** text box, set the background color of the arcs (to change the color, select the color indicator and select a color from the [color palette,](https://devnet.logianalytics.com/hc/en-us/articles/1500010062922-Menu-Tabs#Palette) or type the hexadecimal value of a color in the text box).
+   * To specify colors for the arcs separately, leave Use Range Color unselected. Make a choice for the **Self Settings** checkbox: when Self Settings is unselected (the default behavior), Designer synchronizes the color pattern that you specify here with the [Pattern List property](https://devnet.logianalytics.com/hc/en-us/articles/1500010061902-Chart-Properties#Pattern) on the chart object in the Report Inspector, which data markers of other subtypes can also apply if the chart is a combo chart; when you select Self Settings, it indicates that the color pattern is private to the current data markers themselves (the arcs in this case), which Designer remembers and applies to the data markers of a new type automatically if later you change the type of the chart. Then, specify the color and the transparency of the color to fill the ranges in the arcs that are in the same data series as the arc range you have selected on to open the Format Solid Gauge dialog box, or select the **Color List** button to specify the color pattern for arc ranges in the same data series respectively in the [Color List dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010058302-Color-List-Dialog-Box). Set the background color of the arcs in the Background text box. The colors defined for the ranges also apply to the corresponding pointers if you specify to [display value pointers](#PointerColor) in the solid gauge in the Pointer tab.
+
+   In the **Border** box, set the line style, thickness, color, color transparency, ending style, and line joint style for border of the arcs.
+3. In the **Axis** tab, specify the properties of the axis in the solid gauge.
+   1. In the **Axis** sub tab, set the properties of the axis.
+
+      ![Format Solid Gauge dialog box - Axis - Axis1](https://devnet.logianalytics.com/hc/article_attachments/4404856933271/fmtsldgauge_axis_axis1.gif)
+
+      Select **Show Axis** to display axis in the solid gauge. Only when you select the option, it is meaningful to set the other options for the axis in this tab.
+
+      In the **Type** box, specify the position of the axis, which can be inside, outside, or in the center of the arcs.
+
+      In the **Option** box, specify the minimum and maximum values to display on the axis, or [use a formula to control the values](https://devnet.logianalytics.com/hc/en-us/articles/1500010061002-Using-Formulas-to-Control-Object-Properties). By default, Designer calculates the minimum and maximum values based on the real values in the chart using certain algorithm, which is the meaning of the default value "Auto"; if you set either value to 0, Designer applies it as "Auto".
+
+      In the **Line** box, specify the color and transparency of the color for the axis, or select **Use Range Color** to apply the color that you [define for the ranges](#SolidRangeColor) to the axis. Specify the style and thickness of the axis.
+
+      In the **Gap** box, specify the gap between the axis and the arc if the axis shows inside or outside the arcs.
+   2. In the **Tick Mark** sub tab, specify the properties of the tick marks on the axis.
+
+      ![Format Solid Gauge dialog box - Axis - Tick Mark](https://devnet.logianalytics.com/hc/article_attachments/4404856933527/fmtsldgauge_axis_tkmk.gif)
+
+      To display tick marks on the axis, select how to show it in the **Type** box: inside, outside, or in the center of the axis.
+
+      In the **Major Tick Mark Line** and **Minor Tick Mark Line** boxes, specify the distance between two adjacent tick marks on the axis, how many tick marks to display on the axis, and the color, style, color transparency, thickness, and the length of the tick marks respectively. Select **Correlate with Axis** if you want to apply the [line properties](#SolidAxisLine) that you define for the axis in the Axis sub tab to the tick mark lines.
+   3. In the **Label** sub tab, specify the properties for the data labels on the axis.
+
+      ![Format Solid Gauge dialog box - Axis - Label](https://devnet.logianalytics.com/hc/article_attachments/4404856933783/fmtsldgauge_axis_lbl.gif)
+
+      In the **Type** box, specify the type of the data labels.
+
+      * **None**  
+        Select if you do not want to display tick mark labels on the axis. It is meaningless to specify all the other tick mark label properties if you select this type.
+      * **Normal**  
+        Select it and the data labels display as you specify: in the **Label Every N Major Tick Marks** combo box, set the frequency at which to label the major tick marks; select **Auto** if you want to show all major tick mark on the axis, or **Fixed** to show only the specified number of major tick mark labels.
+      * **Range Value**  
+        Select to show the [range values](#SolidRangeColor) that you define in the Range Color tab in the data labels.
+      * **Min and Max Values**  
+        Select to show the [minimum value and maximum value](#SolidAxisValue) that you define in the Axis sub tab in the data labels.
+
+      In the **Gap** box, specify the distance between the data labels and the axis in pixels. Select **Best Effect** if you want to adjust the position of the labels automatically so as to place them in the best way; while, Designer hides some labels when they overlap for the best effect.
+
+      In the **Font** box, format the font of the data labels, including the font face, size, color, color transparency, rotation angle, and shearing angle.
+
+      In the **Effects** box, specify the font effects of the data labels, including the style, strikeout, underline, and so on.
+   4. In the **Format** sub tab, specify the data format of the data labels on the axis.
+
+      ![Format Solid Gauge dialog box - Axis - Format](https://devnet.logianalytics.com/hc/article_attachments/4404856934167/fmtsldgauge_axis_fmt.gif)
+
+      Select a category from the **Category** box, then select a format from the **Format** box and select **Add** to add it to the **Stack** box (for more information about each format, [select here](https://devnet.logianalytics.com/hc/en-us/articles/1500010096081-Data-Format-Dialog-Box#DataFormat)). If the formats that Designer provides in the Format box cannot meet your requirement, you can define the format in the **Properties** text box and add it as the format of the selected category. You can add more than one format, but for each category, only one format is allowed. If you do not need a format any more, select it in the Stack box and select **Remove** to clear it.
+
+      Set the **Auto Scale in Number** option to specify whether to automatically scale the big and small Number values.
+4. In the **Pointer** tab, specify the properties for the pointers of the arcs in the solid gauge.
+
+   ![Format Solid Gauge dialog box - Pointer](https://devnet.logianalytics.com/hc/article_attachments/4404856934679/fmtsldgauge_pnt.gif)
+
+   In the **Pointer Style** box,
+
+   * To use arrow as the pointer style, select **Arrow**, then select the arrow style and specify the width and height of the arrow. You can also select **Style List** to specify the style for pointers in the same data series respectively in the [Style List dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010098941-Style-List-Dialog-Box).
+   * To use mark as the pointer style, select **Mark**, then select the mark style, specify the width and height of the mark, the position of the pointers relative to the arcs, and the distance between the pointers and the arcs in pixels. You can also select **Style List** to specify the style for pointers in the same data series respectively in the [Style List dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010098941-Style-List-Dialog-Box).
+
+   In the **Pointer Color** box,
+
+   * To apply the colors that you [define for the ranges](#SolidRangeColor) to the pointers, select **Use Range Color**.
+   * To specify colors for the pointers separately, leave Use Range Color unselected. Make a choice for the **Self Settings** checkbox: when Self Settings is unselected (the default behavior), Designer synchronizes the color pattern that you specify here with the [Pattern List property](https://devnet.logianalytics.com/hc/en-us/articles/1500010061902-Chart-Properties#Pattern) on the chart object in the Report Inspector, which data markers of other subtypes can also apply if the chart is a combo chart; when you select Self Settings, it indicates that the color pattern is private to the current data markers themselves (the pointers in this case), which Designer remembers and applies to the data markers of a new type automatically if later you change the type of the chart. Then, specify the color and the transparency of the color to fill the pointers in the same data series as the arc range you have selected on to open the Format Solid Gauge dialog box, or select the **Color List** button to specify the color pattern for pointers in the same data series respectively in the [Color List dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010058302-Color-List-Dialog-Box). The colors defined for the pointers also apply to the corresponding [ranges in the arcs](#ArcColor).
+
+   In the **Pointer Value** box, specify whether to show values for the pointers and the position of the values relative to the pointers. If you select **customized** from the **Position** drop-down list, you can customize the position of the pointer values by dragging any pointer value in the design area.
+
+   In the **Pointer Border** box, select **Show Pointer Border** if you want to show the border of the pointers, then set the properties of the border including line style, thickness, color, and color transparency.
+5. In the **Target** tab, specify the properties of the target in the solid gauge.
+
+   ![Format Solid Gauge dialog box - Target](https://devnet.logianalytics.com/hc/article_attachments/4404848539031/fmtsldgauge_tgt.gif)
+
+   Select **Use Target Value** if you want to use target value for the solid gauge, then specify the target value in the **Target Value** text box or [use a formula to control the value](https://devnet.logianalytics.com/hc/en-us/articles/1500010061002-Using-Formulas-to-Control-Object-Properties).
+
+   In the **Pointer Style** box, select the style of the target pointer from the **Target Pointer** drop-down list. Specify the width and height of the target pointer, the position of the target pointer relative to the arcs, and the distance between the target pointer and the arcs.
+
+   In the **Pointer Color** box, specify the color and transparency of the color for the target pointer.
+
+   In the **Target Value** box, specify whether to show the target value on the solid gauge and the position of the target value relative to the arcs. If you select **customized** from the **Position** drop-down list, you can customize the position of the target value by dragging it in the design area.
+6. In the **Frame** tab, specify the properties for the frame of the solid gauge.
+
+   ![Format Solid Gauge dialog box - Frame](https://devnet.logianalytics.com/hc/article_attachments/4404856935191/fmtsldgauge_frm.gif)
+
+   In the **Size** box, specify the size of the frame.
+
+   In the **Fill** box, specify the color and the transparency of the color to fill the frame.
+
+   In the **Border** box, specify the properties for the border of the frame, including the type, color, line style, color transparency, thickness, ending style, line joint style, fill pattern, and dash size.
+
+   In the **Gauge Group Name** box, specify whether to show names for the arcs in the solid gauge which are values of the field on the category axis, and the position of the names relative to the arcs. If the solid gauge contains no category field, the group name shows "Report" by default.
+7. In the **Range Color** tab, specify the value ranges for the solid gauge and the color and name of each range.
+
+   ![Format Solid Gauge dialog box - Range Color](https://devnet.logianalytics.com/hc/article_attachments/4404856935447/fmtsldgauge_rgclr.gif)
+
+   By default, Designer provides three predefined value ranges and calculates the minimum and maximum values for each range using certain algorithm according to the minimum and maximum values that you [specify on the axis](#SolidAxisValue) in the Axis sub tab, which is the meaning of the default value "Auto". You can select the corresponding cells to edit the minimum and maximum values, colors from the [color palette](https://devnet.logianalytics.com/hc/en-us/articles/1500010062922-Menu-Tabs#Palette), and names for the ranges according to your own requirements. Select the **Add** button ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404848403095/btn_add.gif) to add and define more ranges, or select a range and select the **Remove** button ![Trash Can button](https://devnet.logianalytics.com/hc/article_attachments/4404848403351/btn_trashcan.gif) to delete it if not required.
+
+   In the **Others** box, specify the name and color for the values that do not fall into any of the ranges you define.
+
+   ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404856814359/noteicon.jpg) If you only edit the minimum and maximum values for one range but keep the default "Auto" value for all the rest ranges, Designer regards that there is only one value range in the solid gauge; therefore, you are recommended to either keep the default "Auto" value for all the ranges to let Designer calculates them for you, or edit them all to apply your own values.
+8. In the **Hint** tab, specify whether to include the category and series values and whether to scale big and small numbers in the gauge hint (you need to set the [Show Tips](https://devnet.logianalytics.com/hc/en-us/articles/1500010100301-Chart-Paper-Properties#ShowTips) property on the chart paper to "true" in the Report Inspector if you want to show the hint). A hint displays the value a range/pointer of an arc in the solid gauge represents when you point the mouse pointer at the range/pointer in Designer view mode, in HTML output, or at runtime.
+
+   ![Format Solid Gauge dialog box - Hint](https://devnet.logianalytics.com/hc/article_attachments/4404856935703/fmtsldgauge_hint.gif)
+9. For a solid gauge chart in a library component, you can define web behaviors on it in the **Behaviors** tab.
+   A web behavior contains a trigger event and a web action to be triggered when the event occurs on the arcs or pointers in the solid gauge at runtime. You can add as many web behaviors to the solid gauge as you need.
+
+   ![Format Solid Gauge dialog box - Behaviors](https://devnet.logianalytics.com/hc/article_attachments/4404848539287/fmtsldgauge_bhvr.gif)
+
+   To define the web behavior, select a [trigger event](https://devnet.logianalytics.com/hc/en-us/articles/1500010057562-Using-Basic-Web-Controls-in-a-Report#Event) from the drop-down list in the **Events** column, then select in the **Actions** column and select ![Choose button](https://devnet.logianalytics.com/hc/article_attachments/4404856823191/btn_ellipsis1.gif) in the text box. In the Web Action List dialog box, bind a web action [the same as you do to web controls](https://devnet.logianalytics.com/hc/en-us/articles/1500010057562-Using-Basic-Web-Controls-in-a-Report#Action) in the library component. The web actions you can bind include Filter, Sort, Parameter, Property, and SendMessage.
+
+   You can select ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404848403095/btn_add.gif) to add and define more web behaviors; if a web behavior is not required, select it and select ![Remove button](https://devnet.logianalytics.com/hc/article_attachments/4404848403351/btn_trashcan.gif) to delete it. Select a web behavior and select ![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4404848403735/btn_mvup.gif) or ![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4404856822935/btn_mvdwn.gif) to adjust the order of the behaviors, then at runtime, when an event that is bound with more than one action happens, JDashboard triggers the upper action first.
+10. Select **OK** to accept the changes and close the dialog box.
+
+## Formatting a Dial Gauge
+
+1. Right-click any pointer in a dial of the dial gauge and select **Format Dial Gauge** on the shortcut menu, or double-click any pointer in the dial gauge. Designer displays the [Format Dial Gauge dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010059182-Format-Dial-Gauge-Dialog-Box).
+
+   ![Format Dial Gauge dialog box - Circular Graph](https://devnet.logianalytics.com/hc/article_attachments/4404856954519/fmtdlgauge_crculr.gif)
+2. In the **Circular Graph** tab, specify properties for the dials in the dial gauge.
+
+   In the **Size** box, set the angle of the dials (you can select the angle from the drop-down list or select **Customized** to open the [Customize Gauge Angle dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010096061-Customize-Gauge-Angle-Dialog-Box) to specify the start angle and stop angle), the width of the dials, the relative size of a dial, and the styles of the start graph and end graph of the dials.
+
+   In the **Border** box, set the line style, thickness, color, color transparency, ending style, and line joint style for border of the dials.
+
+   Select **Show Range Name** if you want to show [the names of the ranges](#DialRangeColor) that you define in the Range Color tab in the dials, then specify the font formats and effects of the range names in the **Font** and **Effects** boxes.
+3. In the **Axis** tab, specify the properties of the axis in the dial gauge.
+   1. In the **Axis** sub tab, set properties of the axis.
+
+      ![Format Dial Gauge dialog box - Axis - Axis1](https://devnet.logianalytics.com/hc/article_attachments/4404848557207/fmtdlgauge_axis_axis1.gif)
+
+      Select **Show Axis** to display axis in the dial gauge. Only when you select the option, it is meaningful to set the other options for the axis in this tab.
+
+      In the **Type** box, specify the position of the axis, which can be inside, outside, or in the center of the dials.
+
+      In the **Option** box, specify the minimum and maximum values to display on the axis, or [use a formula to control the values](https://devnet.logianalytics.com/hc/en-us/articles/1500010061002-Using-Formulas-to-Control-Object-Properties). By default, Designer calculates the minimum and maximum values based on the real values in the chart using certain algorithm, which is the meaning of the default value "Auto"; if you set either value to 0, Designer applies it as "Auto".
+
+      In the **Line** box, specify the color and transparency of the color for the axis, or select **Use Range Color** to apply the color that you [define for the ranges](#DialRangeColor) to the axis. Specify the style and thickness of the axis.
+
+      In the **Gap** box, specify the gap between the axis and the dials if the axis shows inside or outside the dials.
+   2. In the **Tick Mark** sub tab, specify the properties of the tick marks on the axis.
+
+      ![Format Dial Gauge dialog box - Axis - Tick Mark](https://devnet.logianalytics.com/hc/article_attachments/4404856954775/fmtdlgauge_axis_tkmk.gif)
+
+      To display tick marks on the axis, select how to show it in the **Type** box: inside, outside, or in the center of the axis.
+
+      In the **Major Tick Mark Line** and **Minor Tick Mark Line** boxes, specify the distance between two adjacent tick marks on the axis, how many tick marks to display on the axis, and the color, style, color transparency, thickness, and length of the tick marks respectively. Select **Correlate with Axis** if you want to apply the [line properties](#DialAxisLine) that you define for the axis in the Axis sub tab to the tick mark lines.
+   3. In the **Label** sub tab, specify the properties for the data labels on the axis.
+
+      ![Format Dial Gauge dialog box - Axis - Label](https://devnet.logianalytics.com/hc/article_attachments/4404848557591/fmtdlgauge_axis_lbl.gif)
+
+      In the **Type** box, specify the type of the data labels.
+
+      * **None**  
+        Select if you do not want to display tick mark labels on the axis. It is meaningless to specify all the other tick mark label properties if you select this type.
+      * **Normal**  
+        Select it and the data labels display as you specify: in the **Label Every N Major Tick Marks** combo box, set the frequency at which to label the major tick marks; select **Auto** if you want to show all major tick mark on the axis, or **Fixed** to show only the specified number of major tick mark labels.
+      * **Range Value**  
+        Select to show the [range values](#DialRangeColor) that you define in the Range Color tab in the data labels.
+      * **Min and Max Values**  
+        Select to show the [minimum value and maximum value](#DialAxisValue) that you define in the Axis sub tab in the data labels.
+
+      In the **Gap** box, specify the distance between the data labels and the axis in pixels. Select **Best Effect** if you want to adjust the position of the labels automatically so as to place them in the best way; while, Designer hides some labels when they overlap for the best effect.
+
+      In the **Font** box, format the font of the data labels, including the font face, size, color, color transparency, rotation angle, and shearing angle.
+
+      In the **Effects** box, specify the font effects of the data labels, including the style, strikeout, underline, and so on.
+   4. In the **Format** sub tab, specify the data format of the data labels on the axis.
+
+      ![Format Dial Gauge dialog box - Axis - Format](https://devnet.logianalytics.com/hc/article_attachments/4404856955159/fmtdlgauge_axis_fmt.gif)
+
+      Select a category from the **Category** box, then select a format from the **Format** box and select **Add** to add it to the **Stack** box (for more information about each format, [select here](https://devnet.logianalytics.com/hc/en-us/articles/1500010096081-Data-Format-Dialog-Box#DataFormat)). If the formats that Designer provides in the Format box cannot meet your requirement, you can define the format in the **Properties** text box and add it as the format of the selected category. You can add more than one format, but for each category, only one format is allowed. If you do not need a format any more, select it in the Stack box and select **Remove** to clear it.
+
+      Set the **Auto Scale in Number** option to specify whether to automatically scale the big and small Number values.
+4. In the **Pointer** tab, specify the properties for the pointers of the dials in the dial gauge.
+
+   ![Format Dial Gauge dialog box - Pointer](https://devnet.logianalytics.com/hc/article_attachments/4404848558103/fmtdlgauge_pnt.gif)
+
+   In the **Pointer Style** box,
+
+   * To use arrow as the pointer style, select **Arrow**, then select the arrow style and specify the width and height of the arrow. You can also select **Style List** to specify the style for pointers in the same data series respectively in the [Style List dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010098941-Style-List-Dialog-Box).
+   * To use mark as the pointer style, select **Mark**, then select the mark style, specify the width and height of the mark, the position of the pointers relative to the dials, and the distance between the pointers and the dials in pixels. You can also select **Style List** to specify the style for pointers in the same data series respectively in the [Style List dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010098941-Style-List-Dialog-Box).
+
+   In the **Pointer Color** box,
+
+   * To apply the colors that you [define for the ranges](#DialRangeColor) to the pointers, select **Use Range Color**.
+   * To specify color for the pointers separately, leave Use Range Color unselected. Make a choice for the **Self Settings** checkbox: when Self Settings is unselected (the default behavior), Designer synchronizes the color pattern that you specify here with the [Pattern List property](https://devnet.logianalytics.com/hc/en-us/articles/1500010061902-Chart-Properties#Pattern) on the chart object in the Report Inspector, which data markers of other subtypes can also apply if the chart is a combo chart; when you select Self Settings, it indicates that the color pattern is private to the current data markers themselves (the pointers in this case), which Designer remembers and applies to the data markers of a new type automatically if later you change the type of the chart. Then, specify the color and the transparency of the color to fill the pointers in the same data series as the pointer you have selected on to open the Format Dial Gauge dialog box, or select the **Color List** button to specify the color pattern for pointers in the same data series respectively in the [Color List dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010058302-Color-List-Dialog-Box).
+
+   In the **Pointer Value** box, specify whether to show values for the pointers and the position of the values relative to the pointers. If you select **customized** from the **Position** drop-down list, you can customize the position of the pointer values by dragging any pointer value in the design area.
+
+   In the **Pointer Border** box, select **Show Pointer Border** if you want to show the border of the pointers, then set the properties of the border including line style, thickness, color, and color transparency.
+5. In the **Target** tab, specify the properties of the target in the dial gauge.
+
+   ![Format Dial Gauge dialog box - Target](https://devnet.logianalytics.com/hc/article_attachments/4404848558359/fmtdlgauge_tgt.gif)
+
+   Select **Use Target Value** if you want to use target value for the dial gauge, then specify the target value in the **Target Value** text box or [use a formula to control the value](https://devnet.logianalytics.com/hc/en-us/articles/1500010061002-Using-Formulas-to-Control-Object-Properties).
+
+   In the **Pointer Style** box, select the style of the target pointer from the **Target Pointer** drop-down list. Specify the width and height of the target pointer, the position of the target pointer relative to the dials, and the distance between the target pointer and the dials.
+
+   In the **Pointer Color** box, specify the color and transparency of the color for the target pointer.
+
+   In the **Target Value** box, specify whether to show the target value on the dial gauge and the position of the target value relative to the dials. If you select **customized** from the **Position** drop-down list, you can customize the position of the target value by dragging it in the design area.
+6. In the **Frame** tab, specify the properties for the frame of the dial gauge.
+
+   ![Format Dial Gauge dialog box - Frame](https://devnet.logianalytics.com/hc/article_attachments/4404848559127/fmtdlgauge_frm.gif)
+
+   In the **Size** box, specify the size of the frame.
+
+   In the **Fill** box, specify the color and the transparency of the color to fill the frame.
+
+   In the **Border** box, specify the properties for the border of the frame, including the type, color, line style, color transparency, thickness, ending style, line joint style, fill pattern, and dash size.
+
+   In the **Gauge Group Name** box, box, specify whether to show names for the dials in the dial gauge which are values of the field on the category axis, and the position of the names relative to the dials. If the dial gauge contains no category field, the group name shows "Report" by default.
+7. In the **Range Color** tab, specify the value ranges for the dial gauge and the color and name of each range.
+
+   ![Format Dial Gauge dialog box - Range Color](https://devnet.logianalytics.com/hc/article_attachments/4404856955671/fmtdlgauge_rgclr.gif)
+
+   By default, Designer provides three predefined value ranges and calculates the minimum and maximum values for each range using certain algorithm according to the minimum and maximum values that you [specify on the axis](#DialAxisValue) in the Axis sub tab, which is the meaning of the default value "Auto". You can select the corresponding cells to edit the minimum and maximum values, colors from the [color palette](https://devnet.logianalytics.com/hc/en-us/articles/1500010062922-Menu-Tabs#Palette), and names for the ranges according to your own requirements. Select ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404848403095/btn_add.gif) to add and define more ranges, or select a range and select ![Trash Can button](https://devnet.logianalytics.com/hc/article_attachments/4404848403351/btn_trashcan.gif) to delete it if not required.
+
+   In the **Others** box, specify the name and color for the values that do not fall into any of the ranges you define.
+
+   ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404856814359/noteicon.jpg) If you only edit the minimum and maximum values for one range but keep the default "Auto" value for all the rest ranges, Designer regards that there is only one value range in the dial gauge; therefore, you are recommended to either keep the default "Auto" value for all the ranges to let Designer calculates them for you, or edit them all to apply your own values.
+8. In the **Hint** tab, specify whether to include the category and series values and whether to scale big and small numbers in the gauge hint (you need to set the [Show Tips](https://devnet.logianalytics.com/hc/en-us/articles/1500010100301-Chart-Paper-Properties#ShowTips) property on the chart paper to "true" in the Report Inspector if you want to show the hint). A hint displays the value a pointer in the dial gauge represents when you point the mouse pointer at the dial pointer in Designer view mode, in HTML output, or at runtime.
+
+   ![Format Dial Gauge dialog box - Hint](https://devnet.logianalytics.com/hc/article_attachments/4404856955927/fmtdlgauge_hint.gif)
+9. For a dial gauge chart in a library component, you can define web behaviors on it in the **Behaviors** tab.
+   A web behavior contains a trigger event and a web action to be triggered when the event occurs on the dial pointers at runtime. You can add as many web behaviors to the dial gauge as you need.
+
+   ![Format Dial Gauge dialog box - Behaviors](https://devnet.logianalytics.com/hc/article_attachments/4404856956183/fmtdlgauge_bhvr.gif)
+
+   To define the web behavior, select a [trigger event](https://devnet.logianalytics.com/hc/en-us/articles/1500010057562-Using-Basic-Web-Controls-in-a-Report#Event) from the drop-down list in the **Events** column, then select in the **Actions** column and select ![Choose button](https://devnet.logianalytics.com/hc/article_attachments/4404856823191/btn_ellipsis1.gif) in the text box. In the Web Action List dialog box, bind a web action [the same as you do to web controls](https://devnet.logianalytics.com/hc/en-us/articles/1500010057562-Using-Basic-Web-Controls-in-a-Report#Action) in the library component. The web actions you can bind include Filter, Sort, Parameter, Property, and SendMessage.
+
+   You can select ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404848403095/btn_add.gif) to add and define more web behaviors; if a web behavior is not required, select it and select ![Remove button](https://devnet.logianalytics.com/hc/article_attachments/4404848403351/btn_trashcan.gif) to delete it. Select a web behavior and select ![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4404848403735/btn_mvup.gif) or ![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4404856822935/btn_mvdwn.gif) to adjust the order of the behaviors, then at runtime, when an event that is bound with more than one action happens, JDashboard triggers the upper action first.
+10. Select **OK** to accept the changes and close the dialog box.
+
+## Formatting a Bar Gauge
+
+1. Right-click any range in a bar in the bar gauge and select **Format Bar Gauge** from the shortcut menu, or double-click any pointer in the bar gauge. Designer displays the [Format Bar Gauge dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010059102-Format-Bar-Gauge-Dialog-Box).
+
+   ![Format Bar Gauge dialog box - Staff Graph](https://devnet.logianalytics.com/hc/article_attachments/4404856963223/fmtbargauge_stfgraph.gif)
+2. In the **Staff Graph** tab, specify properties for the bars in the bar gauge.
+
+   In the **Bar** box, specify the layout of the bars, vertical or horizontal, the thickness of the bars, and the style of the start graph and end graph of the bars.
+
+   In the **Range Border** box, set the color, line style, color transparency, and thickness of the bar border (to change the color, select the color indicator and select a color from the [color palette,](https://devnet.logianalytics.com/hc/en-us/articles/1500010062922-Menu-Tabs#Palette) or type the hexadecimal value of a color in the text box).
+
+   Select **Show Range Name** if you want to show [the names of the ranges](#BarRangeColor) that you define in the Range Color tab in the bars, then specify the font formats and effects of the range names in the **Font** and **Effect** boxes.
+3. In the **Axis** tab, specify the properties of the axis in the bar gauge.
+   1. In the **Axis** sub tab, set the properties of the axis.
+
+      ![Format Bar Gauge dialog box - Axis - Axis1](https://devnet.logianalytics.com/hc/article_attachments/4404856963479/fmtbargauge_axis_axis.gif)
+
+      Select **Show Axis** to display axis in the bar gauge. Only when you select the option, it is meaningful to set the other options for the axis in this tab.
+
+      In the **Type** box, specify the position of the axis, which can be on the top or bottom of the bar, or in the center of the bar.
+
+      In the **Option** box, specify the minimum and maximum values to display on the axis, or [use a formula to control the values](https://devnet.logianalytics.com/hc/en-us/articles/1500010061002-Using-Formulas-to-Control-Object-Properties). By default, Designer calculates the minimum and maximum values based on the real values in the chart using certain algorithm, which is the meaning of the default value "Auto"; if you set either value to 0, Designer applies it as "Auto".
+
+      In the **Line** box, specify the color and transparency of the color for the axis, or select **Use Range Color** to apply the color that you [define for the ranges](#BarRangeColor) to the axis. Specify the style and thickness of the axis.
+
+      In the **Gap** box, specify the gap between the axis and the bars if the axis shows inside or outside the bars.
+   2. In the **Tick Mark** sub tab, specify the properties of the tick marks on the axis.
+
+      ![Format Bar Gauge dialog box - Axis - Tick Mark](https://devnet.logianalytics.com/hc/article_attachments/4404856963863/fmtbargauge_axis_tkmk.gif)
+
+      To display tick marks on the axis, select how to show it in the **Type** box: on the top or bottom of the axis if you specify to display the bars horizontally in the [Staff Graph tab](#BarLayout), or on the left or right of the axis if the bars display vertically, or in the center of the axis.
+
+      In the **Major Tick Mark Line** and **Minor Tick Mark Line** boxes, specify the distance between two adjacent tick marks on the axis, how many tick marks to display on the axis, and the color, style, color transparency, thickness, and length of the tick marks respectively. Select **Correlate with Axis** if you want to apply the [line properties](#BarAxisLine) that you define for the axis in the Axis sub tab to the tick mark lines.
+   3. In the **Label** sub tab, specify the properties for the data labels on the axis.
+
+      ![Format Bar Gauge dialog box - Axis - Label](https://devnet.logianalytics.com/hc/article_attachments/4404856964119/fmtbargauge_axis_lbl.gif)
+
+      In the **Type** box, specify the type of the data labels.
+
+      * **None**  
+        Select if you do not want to display tick mark labels on the axis. It is meaningless to specify all the other tick mark label properties if you select this type.
+      * **Normal**  
+        Select it and the data labels display as you specify: in the **Label Every N Major Tick Marks** combo box, set the frequency at which to label the major tick marks; select **Auto** if you want to show all major tick mark on the axis, or **Fixed** to show only the specified number of major tick mark labels.
+      * **Range Value**  
+        Select to show the [range values](#BarRangeColor) that you define in the Range Color tab in the data labels.
+      * **Min and Max Values**  
+        Select to show the [minimum value and maximum value](#BarAxisValue) that you define in the Axis sub tab in the data labels.
+
+      In the **Gap** box, specify the distance between the data labels and the axis in pixels. Select **Best Effect** if you want to adjust the position of the labels automatically so as to place them in the best way; while, Designer hides some labels when they overlap for the best effect.
+
+      In the **Font** box, format the font of the data labels, including the font face, size, color, color transparency, rotation angle, and shearing angle.
+
+      In the **Effects** box, specify the font effects of the data labels, including the style, strikeout, underline, and so on.
+   4. In the **Format** sub tab, specify the data format of the data labels on the axis.
+
+      ![Format Bar Gauge dialog box - Axis - Format](https://devnet.logianalytics.com/hc/article_attachments/4404856964375/fmtbargauge_axis_fmt.gif)
+
+      Select a category from the **Category** box, then select a format from the **Format** box and select **Add** to add it to the **Stack** box (for more information about each format, [select here](https://devnet.logianalytics.com/hc/en-us/articles/1500010096081-Data-Format-Dialog-Box#DataFormat)). If the formats that Designer provides in the Format box cannot meet your requirement, you can define the format in the **Properties** text box and add it as the format of the selected category. You can add more than one format, but for each category, only one format is allowed. If you do not need a format any more, select it in the Stack box and select **Remove** to clear it.
+
+      Set the **Auto Scale in Number** option to specify whether to automatically scale the big and small Number values.
+4. In the **Pointer** tab, specify the properties of the pointers in the bar gauge.
+
+   ![Format Bar Gauge dialog box - Pointer](https://devnet.logianalytics.com/hc/article_attachments/4404856964631/fmtbargauge_pnt.gif)
+
+   Specify the way to show the pointer: pointer or color bar.
+
+   If you select **Use Pointer**, in the **Pointer Style** box, specify the style of the value pointers, the width and height of the pointers, the position of the pointers relative to the bars, and the distance between the pointers and the bars in pixels. You can select **Style List** to specify the style for pointers in the same data series respectively in the [Style List dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010098941-Style-List-Dialog-Box).
+
+   In the **Pointer Color** box,
+
+   * To apply the colors that you [define for the ranges](#BarRangeColor) to the pointers, select **Use Range Color**.
+   * To specify color for the pointers separately, leave Use Range Color unselected. Make a choice for the **Self Settings** checkbox: when Self Settings is unselected (the default behavior), Designer synchronizes the color pattern that you specify here with the [Pattern List property](https://devnet.logianalytics.com/hc/en-us/articles/1500010061902-Chart-Properties#Pattern) on the chart object in the Report Inspector, which data markers of other subtypes can also apply if the chart is a combo chart; when you select Self Settings, it indicates that the color pattern is private to the current data markers themselves (the pointers in this case), which Designer remembers and applies to the data markers of a new type automatically if later you change the type of the chart. Then, specify the color and the transparency of the color to fill the pointers in the same data series as the pointer you have selected on to open the Format Bar Gauge dialog box, or select the **Color List** button to specify the color pattern for pointers in the same data series respectively in the [Color List dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010058302-Color-List-Dialog-Box).
+
+   In the **Pointer Value** box, specify whether to show values for the pointers and the position of the values relative to the pointers. If you select **customized** from the **Position** drop-down list, you can customize the position of the pointer values by dragging any pointer value in the design area.
+
+   In the **Pointer Border** box, select **Show Pointer Border** if you want to show the border of the pointers, then set the properties of the border including line style, thickness, color, and color transparency.
+5. In the **Target** tab, specify the properties of the target in the bar gauge.
+
+   ![Format Bar Gauge dialog box - Target](https://devnet.logianalytics.com/hc/article_attachments/4404856964887/fmtbargauge_tgt.gif)
+
+   Select **Use Target Value** if you want to use target value for the bar gauge, then specify the target value in the **Target Value** text box or [use a formula to control the value](https://devnet.logianalytics.com/hc/en-us/articles/1500010061002-Using-Formulas-to-Control-Object-Properties).
+
+   In the **Pointer Style** box, select the style of the target pointer from the **Target Pointer** drop-down list. Specify the width and height of the target pointer, the position of the target pointer relative to the bars, and the distance between the target pointer and the bars.
+
+   In the **Pointer Color** box, specify the color and transparency of the color for the target pointer.
+
+   In the **Target Value** box, specify whether to show the target value on the bar gauge and the position of the target value relative to the bars. If you select **customized** from the Position drop-down list, you can customize the position of the target value by dragging it in the design area.
+6. In the **Frame** tab, specify the properties for the frame of the bar gauge.
+
+   ![Format Bar Gauge dialog box - Frame](https://devnet.logianalytics.com/hc/article_attachments/4404856965143/fmtbargauge_frm.gif)
+
+   In the **Size** box, specify the size of the frame.
+
+   In the **Fill** box, specify the color and the transparency of the color to fill the frame.
+
+   In the **Border** box, specify the properties for the border of the frame, including the type, color, line style, color transparency, thickness, ending style, line joint style, fill pattern, and dash size.
+
+   In the **Gauge Group Name** box, specify whether to show names for the bars in the bar gauge which are values of the field on the category axis, and the position of the names relative to the bars. If the bar gauge contains no category field, the group name shows "Report" by default.
+7. In the **Range Color** tab, specify the value ranges for the bar gauge and the color and name of each range.
+
+   ![Format Bar Gauge dialog box - Rane Color](https://devnet.logianalytics.com/hc/article_attachments/4404856965655/fmtbargauge_rgclr.gif)
+
+   By default, Designer provides three predefined value ranges and calculates the minimum and maximum values for each range using certain algorithm according to the minimum and maximum values that you [specify on the axis](#BarAxisValue) in the Axis sub tab, which is the meaning of the default value "Auto". You can select the corresponding cells to edit the minimum and maximum values, colors from the [color palette](https://devnet.logianalytics.com/hc/en-us/articles/1500010062922-Menu-Tabs#Palette), and names for the ranges according to your own requirements. Select ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404848403095/btn_add.gif) to add and define more ranges, or select a range and select ![Trash Can button](https://devnet.logianalytics.com/hc/article_attachments/4404848403351/btn_trashcan.gif) to delete it if not required.
+
+   In the **Others** box, specify the name and color for the values that do not fall into any of the ranges you define.
+
+   ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404856814359/noteicon.jpg) If you only edit the minimum and maximum values for one range but keep the default "Auto" value for all the rest ranges, Designer regards that there is only one value range in the bar gauge; therefore, you are recommended to either keep the default "Auto" value for all the ranges to let Designer calculates them for you, or edit them all to apply your own values.
+8. In the **Hint** tab, specify whether to include the category and series values and whether to scale big and small numbers in the gauge hint (you need to set the [Show Tips](https://devnet.logianalytics.com/hc/en-us/articles/1500010100301-Chart-Paper-Properties#ShowTips) property on the chart paper to "true" in the Report Inspector if you want to show the hint). A hint displays the value a pointer in the bar gauge represents when you point the mouse pointer at the pointer in Designer view mode, in HTML output, or at runtime.
+
+   ![Format Bar Gauge dialog box - Hint](https://devnet.logianalytics.com/hc/article_attachments/4404848569367/fmtbargauge_hint.gif)
+9. For a bar gauge chart in a library component, you can define web behaviors on it in the **Behaviors** tab.
+   A web behavior contains a trigger event and a web action to be triggered when the event occurs on the pointers of the bar gauge at runtime. You can add as many web behaviors to the bar gauge as you need.
+
+   ![Format Bar Gauge dialog box - Behaviors](https://devnet.logianalytics.com/hc/article_attachments/4404848569879/fmtbargauge_bhvr.gif)
+
+   To define the web behavior, select a [trigger event](https://devnet.logianalytics.com/hc/en-us/articles/1500010057562-Using-Basic-Web-Controls-in-a-Report#Event) from the drop-down list in the **Events** column, then select in the **Actions** column and select ![Choose button](https://devnet.logianalytics.com/hc/article_attachments/4404856823191/btn_ellipsis1.gif) in the text box. In the Web Action List dialog box, bind a web action [the same as you do to web controls](https://devnet.logianalytics.com/hc/en-us/articles/1500010057562-Using-Basic-Web-Controls-in-a-Report#Action) in the library component. The web actions you can bind include Filter, Sort, Parameter, Property, and SendMessage.
+
+   You can select ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404848403095/btn_add.gif) to add and define more web behaviors; if a web behavior is not required, select it and select ![Remove button](https://devnet.logianalytics.com/hc/article_attachments/4404848403351/btn_trashcan.gif) to delete it. Select a web behavior and select ![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4404848403735/btn_mvup.gif) or ![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4404856822935/btn_mvdwn.gif) to adjust the order of the behaviors, then at runtime, when an event that is bound with more than one action happens, JDashboard triggers the upper action first.
+10. Select **OK** to accept the changes and close the dialog box.
+
+## Formatting an Activity Gauge
+
+1. Right-click any range in a circle in the activity gauge and select **Format Solid Gauge** from the shortcut menu, or double-click any circle range in the activity gauge. Designer displays the [Format Activity Gauge dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010059082-Format-Activity-Gauge-Dialog-Box).
+
+   ![Format Activity Gauge dialog box - Circular Graph](https://devnet.logianalytics.com/hc/article_attachments/4404848574615/fmtactvtygauge_crculr.gif)
+2. In the **Circular Graph** tab, specify properties for the circles in the activity gauge.
+
+   In the **Size** box, specify the hole size of the circles (meaning the relative size of a circle in a percentage of the total circle size), the distance between the circles, and the styles and marks for the start graph and end graph of the circles.
+
+   In the **Fill** box,
+
+   * To apply the [colors that you define for the ranges](#ActivityRangeColor) to the circles, select **Use Range Color**.
+   * To specify color for the circles separately, leave Use Range Color unselected. Make a choice for the **Self Settings** checkbox: when Self Settings is unselected (the default behavior), Designer synchronizes the color pattern that you specify here with the [Pattern List property](https://devnet.logianalytics.com/hc/en-us/articles/1500010061902-Chart-Properties#Pattern) on the chart object in the Report Inspector, which data markers of other subtypes can also apply if the chart is a combo chart; when you select Self Settings, it indicates that the color pattern is private to the current data markers themselves (the circles in this case), which Designer remembers and applies to the data markers of a new type automatically if later you change the type of the chart. Then, specify the color and the transparency of the color to fill the circles in the same data series as the circle you have selected on to open the Format Activity Gauge dialog box, or select the **Color List** button to specify the color pattern for circles in the same data series respectively in the [Color List dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010058302-Color-List-Dialog-Box).
+
+   By default, Designer applies the color that is lighter than the color of the circles as the background color of the circles automatically. If you want to customize the background color by yourself, clear **Auto**, then in the **Background** text box, set the background color of the circles (to change the color, select the color indicator and select a color from the [color palette,](https://devnet.logianalytics.com/hc/en-us/articles/1500010062922-Menu-Tabs#Palette) or type the hexadecimal value of a color in the text box).
+
+   In the **Value** box, specify the minimum and maximum values to display in the activity chart, or [use a formula to control the values](https://devnet.logianalytics.com/hc/en-us/articles/1500010061002-Using-Formulas-to-Control-Object-Properties). By default, Designer calculates the minimum and maximum values based on the real values in the chart using certain algorithm, which is the meaning of the default value "Auto"; if you set either value to 0, Designer applies it as "Auto".
+3. In the **Pointer** tab, specify whether to show the pointer values and the position of the values relative to the pointers. If you select **customized** from the **Position** drop-down list, you can customize the position of the pointer values by dragging any pointer value in the design area.
+
+   ![Format Activity Gauge dialog box - Pointer](https://devnet.logianalytics.com/hc/article_attachments/4404856969751/fmtactvtygauge_pnt.gif)
+4. In the **Target** tab, select **Use Target Value** if you want to use target value for the activity gauge, then specify the target value in the **Target Value** text box or [use a formula to control the value](https://devnet.logianalytics.com/hc/en-us/articles/1500010061002-Using-Formulas-to-Control-Object-Properties). In the **Target Value** box, specify whether to show the target value on the activity gauge and the position of the target value relative to the circles. If you select **customized** from the Position drop-down list, you can customize the position of the target value by dragging it in the design area.
+
+   ![Format Activity Gauge dialog box - Target](https://devnet.logianalytics.com/hc/article_attachments/4404848574999/fmtactvtygauge_tgt.gif)
+5. In the **Frame** tab, specify properties for the frame of the activity gauge.
+
+   ![Format Activity Gauge dialog box - Frame](https://devnet.logianalytics.com/hc/article_attachments/4404848575511/fmtactvtygauge_frm.gif)
+
+   In the **Size** box, specify the size of the frame.
+
+   In the **Fill** box, specify the color and the transparency of the color to fill the frame.
+
+   In the **Border** box, specify the properties for the border of the frame, including the type, color, line style, color transparency, thickness, ending style, line joint style, fill pattern, and dash size.
+
+   In the **Gauge Group Name** box, specify whether to show names for the circles in the activity gauge which are values of the field on the category axis, and the position of the names relative to the circles. If the activity gauge contains no category field, the group name shows "Report" by default.
+6. In the **Range Color** tab, specify the value ranges for the activity gauge and the color and name of each range.
+
+   ![Format Activity Gauge dialog box - Range Color](https://devnet.logianalytics.com/hc/article_attachments/4404856970007/fmtactvtygauge_rgclr.gif)
+
+   By default, Designer provides three predefined value ranges and calculates the minimum and maximum values for each range using certain algorithm according to the minimum and maximum values that you [specify for the activity chart](#ActivityAxisValue) in the Circular Graph tab, which is the meaning of the default value "Auto". You can select the corresponding cells to edit the minimum and maximum values, colors from the [color palette](https://devnet.logianalytics.com/hc/en-us/articles/1500010062922-Menu-Tabs#Palette), and names for the ranges according to your own requirements. Select ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404848403095/btn_add.gif) to add and define more ranges, or select a range and select ![Trash Can button](https://devnet.logianalytics.com/hc/article_attachments/4404848403351/btn_trashcan.gif) to delete it if not required.
+
+   In the **Others** box, specify the name and color for the values that do not fall into any of the ranges you define.
+
+   ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404856814359/noteicon.jpg) If you only edit the minimum and maximum values for one range but keep the default "Auto" value for all the rest ranges, Designer regards that there is only one value range in the activity gauge; therefore, you are recommended to either keep the default "Auto" value for all the ranges to let Designer calculates them for you, or edit them all to apply your own values.
+7. In the **Hint** tab, specify whether to include the category and series values and whether to scale big and small numbers in the gauge hint (you need to set the [Show Tips](https://devnet.logianalytics.com/hc/en-us/articles/1500010100301-Chart-Paper-Properties#ShowTips) property on the chart paper to "true" in the Report Inspector if you want to show the hint). A hint displays the value a data range in a circle of the activity gauge represents when you point the mouse pointer at the range in Designer view mode, in HTML output, or at runtime.
+
+   ![Format Activity Gauge dialog box - Hint](https://devnet.logianalytics.com/hc/article_attachments/4404848575767/fmtactvtygauge_hint.gif)
+8. For an activity gauge chart in a library component, you can define web behaviors on it in the **Behaviors** tab.
+   A web behavior contains a trigger event and a web action to be triggered when the event occurs on the data ranges of the circles in the activity gauge at runtime. You can add as many web behaviors to the activity gauge as you need.
+
+   ![Format Activity Gauge dialog box - Behaviors](https://devnet.logianalytics.com/hc/article_attachments/4404856970519/fmtactvtygauge_bhvr.gif)
+
+   To define the web behavior, select a [trigger event](https://devnet.logianalytics.com/hc/en-us/articles/1500010057562-Using-Basic-Web-Controls-in-a-Report#Event) from the drop-down list in the **Events** column, then select in the **Actions** column and select ![Choose button](https://devnet.logianalytics.com/hc/article_attachments/4404856823191/btn_ellipsis1.gif) in the text box. In the Web Action List dialog box, bind a web action [the same as you do to web controls](https://devnet.logianalytics.com/hc/en-us/articles/1500010057562-Using-Basic-Web-Controls-in-a-Report#Action) in the library component. The web actions you can bind include Filter, Sort, Parameter, Property, and SendMessage.
+
+   You can select ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404848403095/btn_add.gif) to add and define more web behaviors; if a web behavior is not required, select it and select ![Remove button](https://devnet.logianalytics.com/hc/article_attachments/4404848403351/btn_trashcan.gif) to delete it. Select a web behavior and select ![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4404848403735/btn_mvup.gif) or ![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4404856822935/btn_mvdwn.gif) to adjust the order of the behaviors, then at runtime, when an event that is bound with more than one action happens, JDashboard triggers the upper action first.
+9. Select **OK** to accept the changes and close the dialog box.
+
+## Formatting a Bubble Gauge
+
+1. Right-click any bubble in the bubble gauge and select **Format Bubble Gauge** on the shortcut menu, or double-click any bubble in the bubble gauge. Designer displays the [Format Bubble Gauge dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010096981-Format-Bubble-Gauge-Dialog-Box).
+
+   ![Format Bubble Gauge dialog box - Staff Graph](https://devnet.logianalytics.com/hc/article_attachments/4404848564759/fmtbublgauge_stfgraph.gif)
+2. In the **Staff Graph** tab, set the properties for the bubbles in the chart.
+
+   In the **Bubbles** box, specify the gap between the left/top labels and left/top bubbles, the radius of the bubbles (meaning the relative size of a bubble in a percentage of the total bubble size), and whether or not to draw horizontal/vertical grids.
+
+   In the **Border** box, select **Show Border** if you want to show the border of the bubbles, then set the properties of the border including the line style, thickness, color, and color transparency.
+
+   In the **Value** box, specify the minimum and maximum values to display in the bubble chart, or [use a formula to control the values](https://devnet.logianalytics.com/hc/en-us/articles/1500010061002-Using-Formulas-to-Control-Object-Properties). By default, Designer calculates the minimum and maximum values based on the real values in the chart using certain algorithm, which is the meaning of the default value "Auto"; if you set either value to 0, Designer applies it as "Auto".
+3. In the **Frame** tab, specify the properties for the frame of the bubble gauge.
+
+   ![Format Bubble Gauge dialog box - Frame](https://devnet.logianalytics.com/hc/article_attachments/4404856961559/fmtbublgauge_frm.gif)
+
+   In the **Size** box, specify the size of the frame.
+
+   In the **Fill** box, specify the color and the transparency of the color to fill the frame.
+
+   In the **Border** box, specify the properties for the border of the frame, including the type, color, line style, color transparency, thickness, ending style, line joint style, fill pattern, and dash size.
+
+   In the **Gauge Group Name** box, specify whether to show names for the bubbles in the bubble gauge which are values of the field on the category axis, and the position of the names relative to the bubbles. If the bubble gauge contains no category field, the group name shows "Report" by default.
+4. In the **Range Color** tab, specify the value ranges for the bubble gauge and the color and name of each range.
+
+   ![Format Bubble Gauge dialog box - Range Color](https://devnet.logianalytics.com/hc/article_attachments/4404856961815/fmtbublgauge_rgclr.gif)
+
+   By default, Designer provides three predefined value ranges and calculates the minimum and maximum values for each range using certain algorithm according to the minimum and maximum values that you [specify for the bubble chart](#BubbleAxisValue) in the Staff Graph tab, which is the meaning of the default value "Auto". You can select the corresponding cells to edit the minimum and maximum values, colors from the [color palette](https://devnet.logianalytics.com/hc/en-us/articles/1500010062922-Menu-Tabs#Palette), and names for the ranges according to your own requirements. Select ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404848403095/btn_add.gif) to add and define more ranges, or select a range and select ![Trash Can button](https://devnet.logianalytics.com/hc/article_attachments/4404848403351/btn_trashcan.gif) to delete it if not required.
+
+   In the **Others** box, specify the name and color for the values that do not fall into any of the ranges you define.
+
+   ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4404856814359/noteicon.jpg) If you only edit the minimum and maximum values for one range but keep the default "Auto" value for all the rest ranges, Designer regards that there is only one value range in the bubble gauge; therefore, you are recommended to either keep the default "Auto" value for all the ranges to let Designer calculates them for you, or edit them all to apply your own values.
+5. In the **Hint** tab, specify whether to include the category and series values and whether to scale big and small numbers in the gauge hint (you need to set the [Show Tips](https://devnet.logianalytics.com/hc/en-us/articles/1500010100301-Chart-Paper-Properties#ShowTips) property on the chart paper to "true" in the Report Inspector if you want to show the hint). A hint displays the value a bubble in the bubble gauge represents when you point the mouse pointer at the bubble in Designer view mode, in HTML output, or at runtime.
+
+   ![Format Bubble Gauge dialog box - Hint](https://devnet.logianalytics.com/hc/article_attachments/4404856962071/fmtbublgauge_hint.gif)
+6. For a bubble gauge chart in a library component, you can define web behaviors on it in the **Behaviors** tab.
+   A web behavior contains a trigger event and a web action to be triggered when the event occurs on the bubbles of the bubble gauge at runtime. You can add as many web behaviors to the bubble gauge as you need.
+
+   ![Format Bubble Gauge dialog box - Behaviors](https://devnet.logianalytics.com/hc/article_attachments/4404848565527/fmtbublgauge_bhvr.gif)
+
+   To define the web behavior, select a [trigger event](https://devnet.logianalytics.com/hc/en-us/articles/1500010057562-Using-Basic-Web-Controls-in-a-Report#Event) from the drop-down list in the **Events** column, then select in the **Actions** column and select ![Choose button](https://devnet.logianalytics.com/hc/article_attachments/4404856823191/btn_ellipsis1.gif) in the text box. In the Web Action List dialog box, bind a web action [the same as you do to web controls](https://devnet.logianalytics.com/hc/en-us/articles/1500010057562-Using-Basic-Web-Controls-in-a-Report#Action) in the library component. The web actions you can bind include Filter, Sort, Parameter, Property, and SendMessage.
+
+   You can select ![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404848403095/btn_add.gif) to add and define more web behaviors; if a web behavior is not required, select it and select ![Remove button](https://devnet.logianalytics.com/hc/article_attachments/4404848403351/btn_trashcan.gif) to delete it. Select a web behavior and select ![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4404848403735/btn_mvup.gif) or ![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4404856822935/btn_mvdwn.gif) to adjust the order of the behaviors, then at runtime, when an event that is bound with more than one action happens, JDashboard triggers the upper action first.
+7. Select **OK** to accept the changes and close the dialog box.
+
+## Formatting the Gauge/Pointer/Target Labels
+
+When a solid, dial, activity, or bar gauge chart displays the gauge labels, pointer labels, and target labels, you can format the labels accordingly, for example, edit the size and border of the labels, change the label font size, font color, and so on.
+
+1. Right-click any label of the required type and select **Format Gauge Label**/**Format Pointer Label**/**Format Target Label** from the shortcut menu, or double-click any label of the required type in the gauge chart. Designer displays the [Format Gauge Label dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010097061-Format-Gauge-Label-Dialog-Box), [Format Pointer Label dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010059302-Format-Pointer-Label-Dialog-Box), or [Format Target Label dialog box](https://devnet.logianalytics.com/hc/en-us/articles/1500010059382-Format-Target-Label-Dialog-Box).
+
+   The following takes the Format Pointer Label dialog box as an example.
+
+   ![Format Pointer Label dialog box - General](https://devnet.logianalytics.com/hc/article_attachments/4404848544151/fmtpntlbl_gnrl.gif)
+2. In the **General** tab, specify the general properties of the labels in the chart.
+
+   In the **Size** box, set the width and height of the labels, the horizontal and vertical coordinate of the top left corner of the labels relative to their parent container, the alignment of the text in the labels, and whether to enable the word wrap function for the label text.
+
+   In the **Fill** box, specify the color or effects and the transparency to fill the labels.
+
+   In the **Border** box, specify the properties for the border of the labels, including the type, color, line style, color transparency, thickness, ending style, line joint style, fill pattern, and dash size.
+
+   In the **Orientation** box, specify the angle in which to rotate the labels.
+3. In the **Font** tab, specify the font properties of the labels, including the font face, size, color, color transparency, rotation angle, shearing angle, and the font effects such as style, strikethrough, and underline.
+
+   ![Format Pointer Label dialog box - Font](https://devnet.logianalytics.com/hc/article_attachments/4404848544407/fmtpntlbl_font.gif)
+4. In the **Format** tab, specify the data format of the labels.
+
+   ![Format Pointer Label dialog box - Behaviors](https://devnet.logianalytics.com/hc/article_attachments/4404848544791/fmtpntlbl_fmt.gif)
+
+   Select a category from the **Category** box, then select a format from the **Format** box and select **Add** to add it to the **Stack** box (for more information about each format, [select here](https://devnet.logianalytics.com/hc/en-us/articles/1500010096081-Data-Format-Dialog-Box#DataFormat)). If the formats that Designer provides in the Format box cannot meet your requirement, you can define the format in the **Properties** text box and add it as the format of the selected category. You can add more than one format, but for each category, only one format is allowed. If you do not need a format any more, select it in the Stack box and select **Remove** to clear it.
+
+   Set the **Auto Scale in Number** option to specify whether to automatically scale the big and small Number values.
+5. Select **OK** to accept the changes and close the dialog box.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404856790679/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500010057022-Formatting-the-Rectangles-and-Rectangle-Titles-in-a-Heat-Map)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404856790935/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500010094621-Formatting-the-Surface-in-a-Surface-Chart)

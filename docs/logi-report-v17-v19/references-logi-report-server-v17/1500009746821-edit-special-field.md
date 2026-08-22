@@ -1,0 +1,117 @@
+---
+title: "Edit Special Field"
+id: 1500009746821
+section: "References Logi Report Server v17"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009746821-Edit-Special-Field
+updated_at: 2021-07-25T07:19:51Z
+---
+
+# Edit Special Field
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404936712471/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009720042-Edit-Label)[Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404942444695/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009720062-Edit-URL-Frame)
+
+# Edit Special Field
+
+The Edit Special Field dialog box is used to [edit the properties of the special field](https://devnet.logianalytics.com/hc/en-us/articles/1500009745021-Creating-and-Saving-Dashboards#SF) such as font, size, color, border, the way of aligning text, and so on. It appears when you hover the mouse pointer on a special field in the dashboard header and then select the Edit button ![Edit button](https://devnet.logianalytics.com/hc/article_attachments/4404942572695/btn_dshbrd_edt.gif) that appears around the special field.
+
+![Edit Special Field dialog](https://devnet.logianalytics.com/hc/article_attachments/4404942572951/edtspclfld.gif)
+
+**Field Type**
+
+The current special field is selected by default. If it is not User Name, a date or time format drop-down list will be displayed on the right for you to choose one.
+
+![Font Face](https://devnet.logianalytics.com/hc/article_attachments/4404936773527/btn_fontface.gif) **Font Face**
+
+Specifies the font of the text from the drop-down list.
+
+![Font Size](https://devnet.logianalytics.com/hc/article_attachments/4404942487319/btn_fontsize.gif) **Font Size**
+
+Specifies the font size of the text from the drop-down list.
+
+![Font Color](https://devnet.logianalytics.com/hc/article_attachments/4404942571415/btn_dshbrd_fontclr.gif) **Font Color**
+
+Specifies the color of the text.
+
+To change the color, select the color indicator to select a color, or select **More Colors** in the color indicator to access the [Color Picker](https://devnet.logianalytics.com/hc/en-us/articles/1500009719982-Color-Picker) dialog box in which you can select a color within a wider range.
+
+![Background Color](https://devnet.logianalytics.com/hc/article_attachments/4404936897431/btn_dshbrd_bkgrndclr.gif)**Background Color**
+
+Specifies the background color of the special field.
+
+To change the color, select the color indicator to select a color, or select **More Colors** in the color indicator to access the [Color Picker](https://devnet.logianalytics.com/hc/en-us/articles/1500009719982-Color-Picker) dialog box in which you can select a color within a wider range.
+
+![Bold](https://devnet.logianalytics.com/hc/article_attachments/4404936773783/btn_bold.gif)
+
+Specifies whether to make the text bold.
+
+![Italic](https://devnet.logianalytics.com/hc/article_attachments/4404936774039/btn_italic.gif)
+
+Specifies whether to make the text italic.
+
+**![Underline](https://devnet.logianalytics.com/hc/article_attachments/4404936774295/btn_underline.gif)**
+
+Specifies whether to underline the text.
+
+![Align Left](https://devnet.logianalytics.com/hc/article_attachments/4404942487575/btn_alignleft.gif) **Align Left**
+
+Specifies to align the text to the left.
+
+![Align Center](https://devnet.logianalytics.com/hc/article_attachments/4404936774551/btn_aligncntr.gif)**Align Center**
+
+Specifies to align the text in the center.
+
+![Align Right](https://devnet.logianalytics.com/hc/article_attachments/4404936774807/btn_alignright.gif)**Align Right**
+
+Specifies to align the text to the right.
+
+**Preview box**
+
+Displays a preview of the special field with the specified properties.
+
+**Width**
+
+Specifies the width of the special field.
+
+**Height**
+
+Specifies the height of the special field.
+
+**Border**
+
+Specifies the border properties of the special field.
+
+* **![Border Width](https://devnet.logianalytics.com/hc/article_attachments/4404942573207/btn_dshbrd_brdrwdth.gif) Border Width**  
+   Specifies the width of the border.
+* **![Border Line](https://devnet.logianalytics.com/hc/article_attachments/4404936901399/btn_dshbrd_brdrstyl.gif) Border Line**  
+   Specifies the line style of the border from the drop-down list.
+* **![Border Color](https://devnet.logianalytics.com/hc/article_attachments/4404942573463/btn_dshbrd_brdrclr.gif) Border Color**  
+   Specifies the color of the border.
+
+  To change the color, select the color indicator to select a color, or select **More Colors** in the color indicator to access the [Color Picker](https://devnet.logianalytics.com/hc/en-us/articles/1500009719982-Color-Picker) dialog box in which you can select a color within a wider range.
+
+**Padding**
+
+Specifies the space between the text and the borders of the special field.
+
+**OK**
+
+Closes this dialog box and applies the properties to the special field.
+
+**Cancel**
+
+Cancels the editing and closes this dialog box.
+
+**Apply**
+
+Applies the properties but does not close the dialog box.
+
+![Help button](https://devnet.logianalytics.com/hc/article_attachments/4404936816535/btn_help.gif)
+
+Displays the help document about this feature.
+
+![Close button](https://devnet.logianalytics.com/hc/article_attachments/4404942519575/btn_close.gif)
+
+Ignores the setting and closes this dialog box.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404936712471/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009720042-Edit-Label)[Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404942444695/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009720062-Edit-URL-Frame)

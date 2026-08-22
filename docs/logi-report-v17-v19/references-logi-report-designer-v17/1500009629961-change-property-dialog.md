@@ -1,0 +1,58 @@
+---
+title: "Change Property Dialog"
+id: 1500009629961
+section: "References - Logi Report Designer v17"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009629961-Change-Property-Dialog
+updated_at: 2021-07-24T16:04:59Z
+---
+
+# Change Property Dialog
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404911578903/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009607362-Change-Property-Web-Behavior-Dialog) [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404911579543/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009630021-Chart-Iterator-Dialog)
+
+# Change Property Dialog
+
+The Change Property dialog helps you to define to change properties of the current data component as [a response to the message the data component receives](https://devnet.logianalytics.com/hc/en-us/articles/1500009613362-Delivering-Messages-Between-Library-Components-#UProperty) at runtime. It appears when you select \*Property and then select OK in the [Web Action List](https://devnet.logianalytics.com/hc/en-us/articles/1500009633961-Web-Action-List-Dialog) dialog.
+
+![Change Property dialog](https://devnet.logianalytics.com/hc/article_attachments/4404904185367/chgpty.gif)
+
+The following are details about options in the dialog:
+
+![Add button](https://devnet.logianalytics.com/hc/article_attachments/4404904181783/btn_add.gif)
+
+Adds a new property line.
+
+![Remove button](https://devnet.logianalytics.com/hc/article_attachments/4404904182167/btn_rmv.gif)
+
+Removes the selected property line.
+
+![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4404904182551/btn_mvup.gif)
+
+Moves the selected property line one step up.
+
+![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4404904182807/btn_mvdwn.gif)
+
+Moves the selected property line one step down.
+
+**Properties**
+
+Specifies the property the value of which you want to change.
+
+**Value**
+
+Specifies the value of the property.
+
+**OK**
+
+Accepts the changes and closes the dialog.
+
+**Cancel**
+
+Does not retain any changes and closes the dialog.
+
+**Help**
+
+Displays the help document about this feature.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404911578903/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009607362-Change-Property-Web-Behavior-Dialog) [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404911579543/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009630021-Chart-Iterator-Dialog)

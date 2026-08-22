@@ -1,0 +1,33 @@
+---
+title: "Customizing the Web Report Studio Toolbar"
+id: 5741395390999
+section: "Working with APIs Logi Report Server v19"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/5741395390999-Customizing-the-Web-Report-Studio-Toolbar
+updated_at: 2022-10-31T17:15:53Z
+---
+
+# Customizing the Web Report Studio Toolbar
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/9905574448535/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/5741400164119-Configuring-the-Security-Cache-System)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/9905574466839/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/5741363965079-Customized-Implementation-of-the-Security-API)
+
+# Customizing the Web Report Studio Toolbar
+
+You can customize whether to show the toolbar and the buttons on the toolbar in Web Report Studio via API. The API includes WebUIConfig.java and WebUIConfigConstant.java in the com.jinfonet.web.ui.config package, and uses the two files JRStructuredClient.jar and JRStructuredEngine.jar in `<install_root>\lib`. This topic describes the API functions.
+
+* WebUIConfig config = WebUIConfig.getDefaultWebUIConfig();
+    
+  Gets the default toolbar configuration.
+* setToolbarVisible()
+    
+  Shows/hides the toolbar for View Mode and Edit Mode.
+* config.setToolbarButtonVisible()
+    
+  Shows/hides toolbar buttons for View Mode and Edit Mode.
+* WebUIConfigPreserver writer = new WebUIConfigPreserver();  
+  writer.saveTo(config, "d:\\temp\\demo.config");  
+  WebUIConfigLoader loader = new WebUIConfigLoader("d:\\temp\\demo.config");
+    
+  Stores the state of writer and loader that is in user implemented API.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/9905574448535/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/5741400164119-Configuring-the-Security-Cache-System)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/9905574466839/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/5741363965079-Customized-Implementation-of-the-Security-API)

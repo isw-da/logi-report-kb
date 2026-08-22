@@ -1,0 +1,781 @@
+---
+title: "Java API for a Servlet"
+id: 5741408671639
+section: "Working with APIs Logi Report Server v19"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/5741408671639-Java-API-for-a-Servlet
+updated_at: 2022-10-31T17:15:55Z
+---
+
+# Java API for a Servlet
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/9905574448535/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/5741408065175-Tour-of-the-Java-API)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/9905574466839/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/5741394666391-Java-API-for-an-Application)
+
+# Java API for a Servlet
+
+The Logi Report Server Java API provides a set of classes and methods for requesting reporting services, as well as a few utilities to handle data processing duties. This topic describes
+the standard patterns for making method calls to handle common tasks.
+
+The most common way to use Logi Report Server when extending a web application is to write code for a JSP file. This turns into a compiled servlet that runs when it is requested by an HTTP request. The context at runtime is within a Java Servlet container which provides the HTTP Request/Response and Session objects.
+
+This topic contains the following sections:
+
+* [Sending HTTP Request for Service](#Service)
+* [Connecting to the Report Server](#Connect)
+  + [Code Running in the Same JVM as the Report Server](#Same)
+  + [Code Running in a Different JVM Than the Report Server](#Different)
+* [Authentication](#Authentication)
+  + [Using Logi Report JSP-Style Authentication](#JSP)
+  + [Using Logi Report URL Query Parameter Authentication](#Query)
+  + [Using Application Authentication](#APP)
+* [Authorization](#Authorization)
+* [Starting a User Session](#Session)
+* [Running a Report](#Run)
+  + [Running a Report Using Java Method Call](#Java)
+  + [Running a Report Using a Servlet URL](#Servlet)
+
+## Sending HTTP Request for Service
+
+Native Java Servlet technology provide the basic operations needed for servlets. Processing the requesting URL and forming a response are typical activities. Occasionally, doing a redirect is needed. These can be done with native Java Servlet methods. Logi Report Engine provides other helpful methods to use in the context of a servlet container handling HTTP protocol while preparing to use other Logi Report Engine methods.
+
+These helper methods are packaged in the HttpUtil class.
+
+**HttpUtil.getParameters(request);  
+HttpUtil.getUser(request);**
+
+```
+        // Use native Java Servlet method to get specific parameter values  
+        // that are needed later to run the report  
+    String cat = request.getParameter(APIConst.TAG_CATALOG);  
+    String rptName = request.getParameter(APIConst.TAG_REPORT);  
+  
+        // Use Logi Report API method to extract parameters from URL,  
+        // and load them into a data structure of the needed type  
+ 
+        // for use in a later call to runReport().  
+        // getParameters() transforms multi-valued parameter values  
+        // from a vector of strings into a single string holding delimiter separated values.  
+    Properties ht = HttpUtil.getParameters(request);  
+  
+        // Use Logi Report API method to identify current user.  
+        // This code snippet assumes that the existence of a current user was checked earlier.  
+        // The method returns an empty string when the session does not have a current user known to Logi Report.  
+    String user = HttpUtil.getUser(request)  
+  
+        // use the gathered information to run the report.  
+    HttpRptServer httpRptServer = HttpUtil.getHttpRptServer()  
+    String rst = httpRptServer.runReport(user, cat, rptName, ht);
+```
+
+**HttpUtil.decodeEsc(string);**
+
+```
+        // Decode the URL-encode string.  Replace "%HexHex" with its character.  
+    String rescPath = HttpUtil.decodeEsc(request.getParameter(APIConst.TAG_PATH));
+```
+
+## Connecting to the Report Server
+
+All Java processes that want to use Logi Report Engine to process reports must connect to Logi Report Server and obtain a RptServer object that allows calls to the server. An instance of this object has methods to get attribute values of the server, submit scheduled tasks and remove them, run a report, and perform other report operations.
+
+A specialized version of the RptServer is available within the Servlet Container. This is the HttpRptServer object.
+
+The HttpRptServer object knows about the HTTP Request, the HTTP Response, and the Servlet Session, as well as Logi Report Server. The Servlet Session is used by Logi Report Engine to hold Logi Report state information between HTTP requests. This information can be accessed when using the HttpRptServer object.
+
+### Code Running in the Same JVM as the Report Server
+
+When a web application is deployed to same web server as Logi Report Server, the application's JSP pages and servlets run in the Java Virtual Machine (JVM) with Logi Report Server's JSP pages, servlets, and report server (for more information, see [Logi Report Server - Out-of-the-box - Ready to Run](https://devnet.logianalytics.com/hc/en-us/articles/5741408039575-Technical-Architecture#Box)).
+
+All programs in the JVM share a single instance of the report server. Each program that requests a connection will either start up an instance of the server if one is not running,
+or will connect with the instance that is running.
+
+**Not sure if the report server is running**
+
+An explicit call to start the server is provided in the HttpUtil class - *initEnv()*. The typical use case is to call this method to be sure a server instance is running, and then call the get-method that returns the HttpRptServer object.
+
+This example uses the simple *getHttpRptServer()* method without a parameter. It works fine when the code and report server are in the same JVM. This example is not showing best practice for writing portable code. To write code that works in all configurations, use [getHttpRptServer()](#getHttpRptServer).
+
+* **HttpUtil.initEnv();**  
+  **HttpUtil.getHttpRptServer();**
+
+  ```
+          // Set specific properties while starting a server, then get a handle to it.  
+          // When the server is already started, this does nothing.  
+      System.getProperties().put("reporthome", "C:\\LogiReport\\Server");  
+  		
+      HttpUtil.initEnv(System.getProperties()):  
+    
+      
+          // httpRptServer will be used for report processing within the servlet.  
+      HttpRptServer httpRptServer = HttpUtil.getHttpRptServer();  
+          
+          // it is good practice to verify the connection was successful  
+      if (httpRptServer == null) {  
+          return;  
+         
+          // replace return with code to handle the failure case.  
+      }
+  ```
+
+**Knowing that the report server is running**
+
+When working with a JSP file that always includes another JSP file that that calls *initEnv()*, the code can either contain another call to *initEnv()*, which will return without doing any added work, or can leave out that call.
+
+* **HttpUtil.getHttpRptServer();**
+
+  ```
+  <%@ include file="AuthCheck.jsp"%>  
+          // This assumes that the preceding code already did an initEnv();  
+          // Connect to the httpRptServer instance that was established by that call.  
+      HttpRptServer httpRptServer = HttpUtil.getHttpRptServer();  
+          // it is good practice to verify the connection was successful  
+      if (httpRptServer == null) {  
+          return;  
+          // replace return with code to handle the failure case.  
+      }
+  ```
+
+### Code Running in a Different JVM Than the Report Server
+
+When Logi Report Server is configured to have the report server running on a remote system from the web server, the JSP code running on the web server will connect to the backend system using RMI (for more information, see [Logi Report Server - Remote Dedicated Server](https://devnet.logianalytics.com/hc/en-us/articles/5741408039575-Technical-Architecture#Remote)).
+
+The JSP code that is written does not need to change in any way for this to happen. The same code that works with a report server in the same JVM will also work when the report server is
+configured to run in another JVM.
+
+A call to *initEnv()* will notice the REMOTE\_SERVER\_HOST and REMOTE\_SERVER\_PORT properties that define the remote server and will establish a connection with that server. A subsequent call to *getHttpRptServer()* will return an httpRptServer object to access the server across an RMI connection. No special code is needed to use the server across the RMI channel.
+
+However, if Logi Report Server is configured to have a cluster of remote servers, then the method for getting an HttpRptServer object must be different. It should use the one with this signature - *getHttpRptServer(request)*. This is the only special call needed to work across the RMI channel to the cluster of report servers.
+
+This method also works correctly for all other configurations. Best practice for portable code is to always use this method.
+
+This next snippet of code shows best practice for portable code that can be copied and pasted and will work for all situations within a servlet. It attempts to initialize the server environment in case it is not running, and it gets the server object using the method that works in all configurations.
+
+**HttpUtil.initEnv();**  
+**HttpUtil.getHttpRptServer(request);**
+
+```
+        // Set specific properties while starting a server, then get a handle to it.  
+        // When the server is already started, this does nothing.  
+    System.getProperties().put("reporthome", "C:\\LogiReport\\Server");  
+    HttpUtil.initEnv(System.getProperties()):  
+  
+        // httpRptServer will be used for report processing within the servlet.  
+    HttpRptServer httpRptServer = HttpUtil.getHttpRptServer(request);  
+  
+        // it is good practice to verify the connection was successful  
+    if (httpRptServer == null) {  
+        return;  
+        // replace return with code to handle the failure case.  
+    }
+```
+
+## Authentication
+
+Logi Report Server's JSP files and servlets follow a [well defined protocol](https://devnet.logianalytics.com/hc/en-us/articles/5741484187415-Security-for-Accessing-Web-Pages) to enforce that they only run when the HTTP Request comes from a Logi Report user who can sign in to the web session.
+
+One part of this protocol is defining a set of URL query parameters to use for passing in the username and password, as a way to submit credentials without needing to have a signing in form to specify the information (for more information, see [Using the Authentication Properties in URL](https://devnet.logianalytics.com/hc/en-us/articles/5741471314711-Using-the-Authentication-Properties-in-URL)).
+
+Another part of the protocol is to use HTTP Authentication for gathering a username and password from the browser and passing it to the JSP page using a field in the HTTP Request Header.
+
+You can read the details of the protocol at [Security for Accessing Web Pages](https://devnet.logianalytics.com/hc/en-us/articles/5741484187415-Security-for-Accessing-Web-Pages). Any authentication protocol based on passing credentials in the HTTP Request, as this one does, only gives security when used over a secure network (SSL) with a URL having "https".
+
+The Logi Report Server authentication scheme also provides a framework so developers can use an existing application's signing in system with Logi Report's. This Single Sign-on framework lets the developer provide an authorization scheme to control conditional access to JSP pages based on the user who signed in to the session through the application.
+
+Logi Report Server authentication does more than just control access to functionality. On a successfully signing in, Logi Report data structures associated with the user are created and stored in the Servlet session object. These data structures support several method calls that are useful to developers. It is good practice to use the Logi Report Server authentication system so that useful session data is created on signing in.
+
+### Using Logi Report JSP-Style Authentication
+
+If you want your JSP pages to follow the Logi Report Server protocol, you can include the same JSP file (AuthCheck.jsp) as is included in the Logi Report Server JSP pages. AuthCheck.jsp calls the *HttpUtil.checkLogin()* method to manage the authentication protocol that requires a user to sign in to the web session before the page can run. HttpUtil.checkLogin does nothing if a user already signed in. If no user signed in to the session, it looks in the request for valid signing in information in the request header or in the URL query parameters, and if so, it signs in the user. If there is no user signing in at that time, it starts an HTTP Authentication dialog box with the browser and does not return from the call.
+
+When *HttpUtil.checkLogin()* returns, there is always a session established with a Logi Report user signed in. One side effect of calling *HttpUtil.checkLogin()* is that on return there is an instance of the report server established that can be obtained by a call to *HttpUtil.getHttpRptServer()* without needing to call *HttpUtil.initEnv()*.
+
+See more information about *checkLogin()*.
+
+**include AuthCheck.jsp;**
+
+```
+<%@ page import="java.io.*, java.util.*,jet.cs.util.*" %>  
+<%@ page import="jet.server.api.http.*" %>   
+<%@ page import="jet.server.api.*" %>  
+<%@ page errorPage="errorpage.jsp" %>  
+<%@ include file="AuthCheck.jsp" %>  
+  
+        // Any code here will execute if and only if an authenticated Logi Report user signed in.  
+  
+        // The code can get an instance of HttpRptServer without calling initEnv().  
+    HttpRptServer httpRptServer = HttpUtil.getHttpRptServer(request);  
+....
+```
+
+### Using Logi Report URL Query Parameter Authentication
+
+Alternatively, you can follow the Logi Report JSP technique allowing signing in credentials to be passed in as URL query parameters, while maintaining control when a valid user is not identified.
+
+*HttpUserSessionManager.checkLogin()* will check if a user already signed in. If not, it will look for valid signing in credentials in the Request Header or in the URL query parameters. If such credentials exist, it will sign in that user and establish a signed-in session.
+
+It returns false if there is no signed-in session found. It does not initiate an HTTP Authentication dialog box with the browser. This enables you to handle the failure case in your own way, such as redirecting to the application's signing in page.
+
+**HttpUserSessionManager.checkLogin()**
+
+```
+        // Use Logi Report API method to extract parameters from URL and load them into  
+        // an object of the needed type for use in a later call to checkLogin().  
+        // This is here in case we are using the Logi Report URL Query protocol for passing  
+        // in username and password as a way to automatically sign in.  
+    Properties props = HttpUtil.getParameters(request);  
+  
+        // Make sure a Report Server is running.  
+    System.getProperties().put("reporthome", "C:\\LogiReport\\Server");  
+    HttpUtil.initEnv(System.getProperties()):  
+  
+        // Get a handle to a running Report Server.  
+  
+    HttpRptServer httpRptServer = HttpUtil.getHttpRptServer(request);  
+  
+        // This checkLogin() returns false if the session does not have a current user,  
+        // and the Header and Properties do not contain values that authenticate a user.  
+        // It returns true if the session has a current user or if the Header or Properties  
+        // identifies a valid username and password that allows checkLogin() to sign that user in.  
+  
+try{   
+    if (!httpRptServer.getHttpUserSessionManager().checkLogin(request,  
+            httpRptServer.getResourceManager().getRealm(), props)) {  
+        return;  
+        // Replace this return with code to handle the case of an unauthorized request.  
+        // For example: Redirect to the web applications signing in page.  
+    }  
+}catch(Throwable t){   
+    // failure to authenticate because of an exception  
+    return;  
+}  
+  
+    // The code here will execute if a Logi Report user signs in.
+```
+
+![Note icon](https://devnet.logianalytics.com/hc/article_attachments/9905612785687/noteicon.jpg)*HttpUtil.checkLogin()* and *HttpUserSessionManager.checkLogin()* both do more than shown in these examples. They both provide a framework for extending the authentication protocol based on the Java interface class ExternalAuthorized provided by Logi Report Server.
+This gives developers a way to have the application's signing in system handle the signing in of a user to the web session and have that identity flow into creating a Logi Report web session for the user without the user doing another signing in dialog box. This is a Single Sign-on system.
+
+**Tip:** See the sample JSP page loginIndex.jsp in `<install_root>\help\samples\APISecurity\LoginLogout`, which demonstrates how *checkLogin()* works. This is the entry point page. Read the source for more information.
+
+### Using Application Authentication
+
+Another alternative for handling authentication of JSP pages is to only run the page if someone already signed in, with no support for passing in credentials by URL query parameters nor engaging in HTTP Authentication to sign in. The approach would support a model that an existing application page is the single point of signing in to the application.
+
+The preceding example could handle this approach, but it does not enforce using URL query parameters to sign in. If a user were to pass in credentials by URL query parameters when no one signed in, the user would become signed in. If you want to enforce that this cannot happen, do not pass in the URL query parameters to *checkLogin()*.
+
+**HttpUserSessionManager.checkLogin()**
+
+```
+        // Make sure a Report Server is running.  
+    System.getProperties().put("reporthome", "C:\\LogiReport\\Server");  
+    HttpUtil.initEnv(System.getProperties()):  
+  
+        // Get a handle to a running Report Server.   
+ 
+    HttpRptServer httpRptServer = HttpUtil.getHttpRptServer(request);  
+  
+        // Create a properties that holds no credentials from the URL query parameters.  
+    Properties props = new Properties();  
+  
+try{   
+    if (!httpRptServer.getHttpUserSessionManager().checkLogin(request,  
+            httpRptServer.getResourceManager().getRealm(), props)) {  
+  
+            // User does not sign in.  
+            // Redirect this request to the application's signing in dialog box page  
+            // where the user can type name and password and submit to the signing in page.  
+            // For this example snippet, let's use "login.jsp" as the page name.  
+            // Production code would redirect to a secure signing in page having a "https" URL.  
+            // A sophisticated system would preserve the user's intent to run this page  
+            // and keep that state across HTTP requests so that after signing in  
+            // the user could be redirected back to this page.  
+            // One way to maintain the user's intent is to pass the URL for this page   
+            // as a parameter to the signing in page,  
+            // which would in-turn pass that along to the signing in page.  
+            // Another way would be to put the URL into the servlet session object where the   
+            // signing in page could access it before resetting the session to a new one  
+            // after a successful validation of signing in credentials.  
+  
+        String loginURL="login.jsp";  
+        response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);  
+        response.setHeader("Location", loginURL);  
+        response.setHeader("Content-Location", loginURL)  
+        return;  
+    }  
+}catch(Throwable t){   
+    // failure to authenticate because of an exception  
+    return;  
+}  
+  
+    // The code here will execute if a Logi Report user signs in.
+```
+
+## Authorization
+
+Logi Report Server does not provide any special system for managing authorization to run a particular JSP page. If a user can sign in to the web session, he can run a JSP page.
+
+However, Logi Report Server does provide a system for managing authorization at the level of a command and a target resource. For example, the admin can set permissions for a given user,
+allowing the user to run only a certain report, or preventing the user from running any report but allowing the user to view reports. So, when a JSP page is called to do certain operations,
+the operation may or may not be allowed by the user who signed in.
+
+This level of authorization can be checked by a JSP page. Specific URL query parameters are used to request certain operations and to indicate the target catalog and report resource.
+The JSP code can check permissions that the current user can do the requested command against the requested resource and reject requests that are not allowed.
+
+This authorization is performed by a call to HttpUtil.checkPermission(request). The request parameter contains user information and the URL query parameters that define the request.
+
+The parameters that are used for determining if the current user is authorized for the request include: jrs.cmd, jrs.path, jrs.catalog, jrs.lc, jrs.report and jrs.version\_number. These parameters give three aspects that define the operation and resource to permission-check: command, path to the resource, and version number of the resource. The jrs.cmd parameter holds the operational command (such as view and delete). jrs.path, jrs.catalog, jrs.lc and jrs.report work together to define the path to the resource. jrs.version\_number gives the version of the resource.
+
+**HttpUtil.checkPermission(request)**
+
+```
+        // Assume this JSP file is called with query parameters  
+        // that request an operation and indicate the report resource.  
+  
+        // Make sure a Report Server is running.  
+    System.getProperties().put("reporthome", "C:\\LogiReport\\Server");  
+    HttpUtil.initEnv(System.getProperties()):  
+  
+        // Get a handle to a running Report Server.  
+ 
+    HttpRptServer httpRptServer = HttpUtil.getHttpRptServer(request);  
+  
+        // Create a properties that holds no credentials from the URL query parameters.  
+        // Do not let the current URL do a signing in of the user.  
+    Properties props = new Properties();  
+  
+try{  
+ 
+    if (!httpRptServer.getHttpUserSessionManager().checkLogin(request,  
+                httpRptServer.getResourceManager().getRealm(), props)) {  
+  
+        String url="login.jsp";  
+ 
+        response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);  
+ 
+        response.setHeader("Location", url);  
+ 
+        response.setHeader("Content-Location", url)  
+ 
+        return;  
+ 
+    }  
+ 
+}catch(Throwable t){   
+ 
+    // failure to authenticate because of an exception  
+ 
+    return;  
+ 
+}  
+  
+ 
+    // The code here will execute if a Logi Report user signs in.  
+ 
+        // request holds session for this user, to provide user for permission check.  
+ 
+        // request holds URL for this page, to provide query parameters.  
+ 
+        // Parameters give three aspects that form the operation and resource to permission check.  
+ 
+        //  cmd, path to resource, version number of resource  
+ 
+        //    jrs.cmd param holds the operation request (run, view, )  
+ 
+        //    jrs.try_ve and jrs.try_web are two other operations beyond those that might be in jrs.cmd.  
+ 
+        //    jrs.path, jrs.catalog, jrs.lc, jrs.report work together to define the path to the resource.  
+ 
+        //    jrs.version_number gives the version of the resource.  
+  
+ 
+    boolean allowed = HttpUtil.checkPermission(request);  
+ 
+    if (!allowed) {  
+ 
+        // reject the requested operation.  
+ 
+        return;  
+ 
+    }  
+  
+ 
+    // The code here will execute if the current user is authorized to perform the request encoded in the query parameters.  
+ 
+....
+```
+
+## Starting a User Session
+
+The native Java Servlet technology provides a Session object that can hold state across HTTP requests. It is used to hold information about the signed-in user and the operation that the multiple HTTP requests are performing in the web application.
+
+Logi Report Engine places a Logi Report UserSession object into the Servlet Session when a user signs in. This is done within both *checkLogin()* methods. This UserSession object is available to you for accessing information about the user and the session.
+
+**httpRptServer.getHttpUserSessionManager().getUserSession()**
+
+```
+<%   
+   
+        // Assume the code is after an authentication check, so we know a user signs in.   
+  
+        // Get httpRptServer using the method that connects to an existing server  
+    HttpRptServer httpRptServer = HttpUtil.getHttpRptServer(request);  
+  
+        // User signs in so the UserSession object exists.  
+    UserSession userSession = httpRptServer.getHttpUserSessionManager().getUserSession(request);  
+    String user = userSession.getUserId();  
+    long startSessionValue = userSession.getCreateTime();  
+    String startSessionTime = dateUtil.getDateTime(startSessionTime);  
+%>  
+<p>  
+User Name: <%=user %><br>  
+Signed in: <%=startSessionTime %>  
+</p>
+```
+
+## Running a Report
+
+A major reason to use Logi Report Server is to extend an application so that users can run and view reports. A typical use case is having a front end JSP page interact with a user
+to gather control information and another action page or servlet perform the intended operation.
+
+The data entry form for interacting with the user is built with data entry fields having names that the action page will know about when getting parameters to use in running the report request.
+
+Logi Report Server uses a standard set of parameter names that are defined in the APIUtil class. These are ones used by Logi Report Server JSP pages and servlets. Use these names for fields in data entry forms and when writing new JSP action pages so that code is standard across application JSP pages and Logi Report Server JSP pages.
+
+### Running a Report Using Java Method Call
+
+**HttpRptServer.runReport()**
+
+This code shows the basic flow of an action page that makes a Java method call to run a report. The code is for a JSP page called with the intention to run a specified report and show it to the client through the browser getting a sequence of HTML pages. It will enforce that narrow charter.
+
+The JSP page would be called with a URL of this form:
+
+`http://abc.jsp?jrs.cmd=jrs.try_vw&jrs.result_type=1&jrs.path=/SampleReports/SampleReports.cat&jrs.catalog=/SampleReports/SampleReports.cat&jrs.report=/SampleReports/Employee Information List.cls`
+
+The intention of this code snippet is to show how to call an on-demand report using a Java method call, and then get it from a temporary file and pass it to the browser where the user can see it. Server performs the operation only for a signed-in user who has permission to run an on-demand report for the given report in the given catalog.
+
+```
+<%@ page import="java.io.*, java.util.*,jet.cs.util.*" %>  
+<%@ page import="jet.server.api.http.*" %>  
+<%@ page import="jet.server.api.*" %>  
+<%   
+        // Assume this JSP file is called with query parameters   
+        // that request the operation to run and view a report,   
+        // with the specified report type.   
+        // Only HTML type is allowed.  
+  
+        // Make sure a Report Server is running.  
+    System.getProperties().put("reporthome", "C:\\LogiReport\\Server");  
+    HttpUtil.initEnv(System.getProperties()):  
+  
+        // Get a handle to a running Report Server.   
+ 
+    HttpRptServer httpRptServer = HttpUtil.getHttpRptServer(request);  
+  
+        // Create a properties that holds no credentials from the URL query parameters.  
+        // Do not let the current URL do a signing in of the user.  
+    Properties props = new Properties();  
+  
+try{   
+    if (!httpRptServer.getHttpUserSessionManager().checkLogin(request,  
+                httpRptServer.getResourceManager().getRealm(), props)) {  
+  
+        String url="login.jsp";  
+        response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);  
+        response.setHeader("Location", url);  
+        response.setHeader("Content-Location", url)  
+        return;  
+    }  
+}catch(Throwable t){   
+    // failure to authenticate because of an exception  
+    return;  
+}  
+  
+    // The code here will execute if a Logi Report user signs in.  
+  
+try{   
+        // request holds session for this user, to provide user for permission check.  
+        // request holds URL for this page, to provide query parameters defining operation and resource.  
+    boolean allowed = HttpUtil.checkPermission(request);  
+    if (!allowed) {  
+        // reject the requested operation.  
+        return;  
+    }  
+  
+    // The code here will execute if the current user can do the operation on the target resource.  
+  
+    // The intended use is that the operation is jrs.try_vw,  
+    //    jrs.cmd=jrs.try_vw  
+    //  for the Employee Information List.cls report in the SampleReports/SampleReports.cat catalog   
+    //  with the HTML type.  
+  
+    String user = HttpUtil.getUser(request);    
+    String cmd = request.getParameter(APIConst.TAG_CMD);    
+        //   cmd = "jrs.try_vw";   
+  
+    if (! cmd.equals(APIConst.CMD_TRY_VIEW)) {  
+        return;  
+        // this JSP only does one type command  
+    }  
+  
+    String rstType = request.getParameter(APIConst.TAG_RESULT_TYPE);  
+    int intRstType = APIUtil.parseInt(rstType, -1);    
+        //  intRstType = 1; // APIConst.HTML  
+  
+    if (intRstTupe != APIConst.HTML) {  
+        return;  
+        // this JSP only does HTML type  
+    }  
+  
+    String cat = request.getParameter(APIConst.TAG_CATALOG);    
+        //   cat = "/SampleReports/SampleReports.cat";   
+  
+    if (cat == null || cat.trim().length() < 1) {  
+            // if not passed in, set it to this one.  
+        cat = "/SampleReports/SampleReports.cat";   
+    }  
+  
+    String rptName = request.getParameter(APIConst.TAG_REPORT);    
+        //  rptName = "Employee Information List.cls";   
+  
+    if (rptName == null || rptName.trim().length() < 1) {  
+            // if not passed in, set it to this one.  
+        rptName = "Employee Information List.cls";  
+ 
+    }  
+  
+    Properties ht = new Properties();   
+  
+        // Register intent to have HTML output. Property value is a String.  
+ 
+    ht.put(APIConst.TAG_RESULT_TYPE, rstType);   
+  
+        // Use Java method to run an on-demand report, and wait for it,   
+        //   with the intent to view the report as HTML.  
+        // runReport() returns the name of the temp file holding the first HTML output page.  
+  
+    String rst = httpRptServer.runReport(user, cat, rptName, ht);  
+    if (rst == null) {  
+ 
+        // Failure without throwing an exception.  
+        // Add code to recover.  
+        return;  
+    } else {   
+  
+            // Set the owner of the output file to be the current user.   
+        httpRptServer.getTempResultOwnerManager().registerOwner(user,  
+        HttpUtil.getTempResultKey(new File(rst).getName()));   
+  
+            // Make the URL to view the first HTML output page.  
+ 
+            // The "/sendfile/" is the path of built-in servlet of SendFileServlet  
+ 
+            // of Logi Report Server. This rstURL will redirect to the SendFileServlet.   
+            // The SendFileServlet will send the HTML output page to the client.   
+        String rstURL = request.getScheme() + "://" + request.getServerName() +   
+                ":" + request.getServerPort() +   
+                "/servlet/sendfile/result/" + HttpUtil.encodeEsc(new File(rst).getName());   
+  
+            // redirect to the rstURL  
+        response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);   
+        response.setHeader("Location", rstURL);   
+        response.setHeader("Content-Location", rstURL);   
+    }   
+}catch(RptServerException e){   
+    // output error   
+    e.printStackTrace();   
+}catch(Throwable t){   
+    // output error   
+    t.printStackTrace();   
+}  
+%>
+```
+
+### Running a Report Using a Servlet URL
+
+**HttpRptServer.runReport() and dhtmljsp servlet**
+
+The code is for a JSP page called with the intention to run a specified report. A parameter is passed in to indicate if it is to be viewed as a sequence of HTML pages or in Page Report Studio. If the request is to view it as a sequence of HTML pages, this will call *runReport()* in the same way the preceding example did. If the request is to view the report in Page Report Studio, this will "call" a servlet URL.
+The point of this example is to see how a URL to a Logi Report Server JSP page or servlet can be seen as high level "call".
+
+The JSP page would be called with a URL of this form:
+
+* Requesting the report as a sequence of HTML pages:
+
+  `http://abc.jsp?jrs.cmd=jrs.try_vw&jrs.result_type=1&jrs.path=/SampleReports/SampleReports.cat&jrs.catalog=/SampleReports/SampleReports.cat&jrs.report=/SampleReports/Employee Information List.cls`
+* Requesting the report in Page Report Studio:
+
+  `http://abc.jsp?jrs.cmd=jrs.try_vw&jrs.result_type=8&jrs.path=/SampleReports/SampleReports.cat&jrs.catalog=/SampleReports/SampleReports.cat&jrs.report=/SampleReports/Employee Information List.cls`
+
+The intention of this code snippet is to extend the previous example to show how to pass a request to another servlet that is dedicated to handling the type of request.
+
+```
+<%@ page import="java.io.*, java.util.*,jet.cs.util.*" %>  
+ 
+<%@ page import="jet.server.api.http.*" %>  
+ 
+<%@ page import="jet.server.api.*" %>  
+<%   
+        // Assume this JSP file is called with query parameters  
+ 
+        // that request the operation to run and view a report,   
+        // with the specified report type.  
+ 
+        // Only HTML type is allowed.  
+  
+        // Make sure a Report Server is running.  
+    System.getProperties().put("reporthome", "C:\\LogiReport\\Server");  
+    HttpUtil.initEnv(System.getProperties()):  
+  
+        // Get a handle to a running Report Server.  
+  
+    HttpRptServer httpRptServer = HttpUtil.getHttpRptServer(request);  
+  
+        // Create a properties that holds no credentials from the URL query parameters.  
+        // Do not let the current URL do a signing in of the user.  
+    Properties props = new Properties();  
+  
+try{  
+ 
+    if (!httpRptServer.getHttpUserSessionManager().checkLogin(request,  
+                httpRptServer.getResourceManager().getRealm(), props)) {  
+  
+        String url="login.jsp";  
+        response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);  
+        response.setHeader("Location", url);  
+        response.setHeader("Content-Location", url)  
+        return;  
+    }  
+}catch(Throwable t){   
+    // failure to authenticate because of an exception  
+    return;  
+}  
+  
+    // The code here will execute if a Logi Report user signs in.  
+  
+try{  
+ 
+        // request holds session for this user, to provide user for permission check.  
+        // request holds URL for this page, to provide query parameters defining operation and resource.  
+    boolean allowed = HttpUtil.checkPermission(request);  
+    if (!allowed) {  
+        // reject the requested operation.  
+        return;  
+    }  
+  
+    // The code here will execute if the current user can do the operation on the target resource.  
+  
+    // The intended use is that the operation is jrs.try_vw,  
+    //    jrs.cmd=jrs.try_vw  
+    //  for the Employee Information List.cls report in the SampleReports/SampleReports.cat catalog   
+    //  with the HTML type.  
+  
+    String user = HttpUtil.getUser(request);  
+    String cmd = request.getParameter(APIConst.TAG_CMD);  
+        //   cmd = "jrs.try_vw";  
+  
+ 
+    if (! cmd.equals(APIConst.CMD_TRY_VIEW)) {  
+        return;  
+        // this JSP only does one type command  
+    }  
+  
+    String cat = request.getParameter(APIConst.TAG_CATALOG);  
+  
+        //   cat = "/SampleReports/SampleReports.cat";  
+  
+    if (cat == null || cat.trim().length() < 1) {  
+            // if not passed in, set it to this one.  
+        cat = "/SampleReports/SampleReports.cat";  
+ 
+    }  
+  
+    String rptName = request.getParameter(APIConst.TAG_REPORT);  
+  
+        //  rptName = "Employee Information List.cls";  
+  
+ 
+    if (rptName == null || rptName.trim().length() < 1) {  
+            // if not passed in, set it to this one.  
+        rptName = "Employee Information List.cls";   
+    }  
+  
+    String rstType = request.getParameter(APIConst.TAG_RESULT_TYPE);  
+    int intRstType = APIUtil.parseInt(rstType, -1);  
+  
+        //  intRstType = 1; // APIConst.HTML  
+        //  intRstType = 8; // APIConst.DHTML  
+  
+    if (intRstTupe != APIConst.HTML) {  
+        if (intRstTupe != APIConst.DHTML) {  
+        return;  
+        // this JSP only does HTML or Page Report Result type  
+        }  
+  
+        // Here to handle request for Page Report Result.  
+        // Pass the request to the specialist for this type report.  
+  
+        String dhtmlURL = "/webos/app/pagestudio/run.jsp?jrs.catalog=" + cat + "&jrs.report=" + rptName;  
+        response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);  
+        response.setHeader("Location", dhmtlURL);  
+        response.setHeader("Content-Location", dhmtlURL);  
+        return;  
+  
+    }  
+  
+    // here when request is for HTML  
+  
+    Properties ht = new Properties();   
+  
+        // Register intent to have HTML output. Property value is a String.   
+    ht.put(APIConst.TAG_RESULT_TYPE, rstType);   
+  
+        // Use Java method to run an on-demand report, and wait for it,  
+ 
+        //   with the intent to view the report as HTML.  
+        // runReport() returns the name of the temp file holding the first HTML output page.  
+  
+    String rst = httpRptServer.runReport(user, cat, rptName, ht);  
+    if (rst == null) {   
+        // Failure without throwing an exception.  
+        // Add code to recover.  
+        return;  
+    } else {  
+  
+ 
+            // Set the owner of the output file to be the current user.  
+ 
+        httpRptServer.getTempResultOwnerManager().registerOwner(user,  
+        HttpUtil.getTempResultKey(new File(rst).getName()));  
+  
+ 
+            // make the URL to view the first HTML output page.   
+            // The "/sendfile/" is the path of built-in servlet of SendFileServlet   
+            // of Logi Report Server. This rstURL will redirect to the SendFileServlet.  
+ 
+            // The SendFileServlet will send the HTML output page to the client.  
+ 
+        String rstURL = request.getScheme() + "://" + request.getServerName() +  
+ 
+                ":" + request.getServerPort() +   
+                "/servlet/sendfile/result/" + HttpUtil.encodeEsc(new File(rst).getName());  
+  
+            // redirect to the rstURL  
+        response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);  
+ 
+        response.setHeader("Location", rstURL);   
+        response.setHeader("Content-Location", rstURL);   
+    }   
+}catch(RptServerException e){  
+ 
+    // output error  
+ 
+    e.printStackTrace();   
+}catch(Throwable t){   
+    // output error   
+    t.printStackTrace();  
+ 
+}  
+%>
+```
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/9905574448535/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/5741408065175-Tour-of-the-Java-API)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/9905574466839/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/5741394666391-Java-API-for-an-Application)

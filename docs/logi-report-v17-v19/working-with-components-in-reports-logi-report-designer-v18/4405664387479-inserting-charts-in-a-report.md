@@ -1,0 +1,300 @@
+---
+title: "Inserting Charts in a Report"
+id: 4405664387479
+section: "Working with Components in Reports - Logi Report Designer v18"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/4405664387479-Inserting-Charts-in-a-Report
+updated_at: 2022-03-28T07:09:09Z
+---
+
+# Inserting Charts in a Report
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4420394625303/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/4405664370839-How-Data-Is-Represented-in-a-Chart)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4420394625687/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/4405664389143-Modifying-Charts)
+
+# Inserting Charts in a Report
+
+You can create any charts in a report easily using the chart wizard, however, the wizard varies with the data resource type used for the chart: business view or query resource. In addition, Designer displays different options in some screens of the chart wizard according to different chart types. This topic introduces how you can create a chart with the chart wizard using different data resource. It also shows you how to define the data to display in some specific chart types.
+
+You can insert charts in the report areas listed in [Component Placement](https://devnet.logianalytics.com/hc/en-us/articles/4405664365463-Working-with-Components-in-Reports#Relationship). When you insert a chart into a banded object in a page report, you can use a [data container link](https://devnet.logianalytics.com/hc/en-us/articles/4405664367511-Setting-Up-Data-Container-Links-in-Banded-Objects) to define the relationship between the chart and its parent.
+
+![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4420394642839/noteicon.jpg) A page report can use either query resources or business views, which is determined by the Create Using Business View option at the time when [you create the page report](https://devnet.logianalytics.com/hc/en-us/articles/4405661926423-Creating-Reports#Page). Once defined, all the data components in the page report can only use the specified data resource type. You can only use the 3-D chart types in page reports that use query resources.
+
+This topic contains the following sections:
+
+* [Creating a Chart Based on a Business View](#BV)
+* [Creating a Chart Based on a Query Resource](#Query)
+* [Defining the Data for an Organization Chart](#Org)
+* [Defining the Data for a Heat Map](#HeatMap)
+* [Defining the Values to Be Compared on a Back-to-Back Chart](#Back)
+
+## Creating a Chart Based on a Business View
+
+1. In a report, position the mouse pointer at the destination where you want to insert the chart.
+2. Do either of the following:
+   * From the **Components** panel, drag the desired chart type icon in the **Visual** category to the destination.
+   * Navigate to **Insert** > **Chart** or **Home** > **Insert** > **Chart**.
+
+   Designer displays the [Create Chart dialog box](https://devnet.logianalytics.com/hc/en-us/articles/4405661481111-Create-Chart-Dialog-Box#BV), which contains a set of screens for helping you define a chart easily. You can use the Back and Next buttons or select the screen name on the screen navigation bar to switch between the screens.
+3. In the **Data** screen, select the business view in the current catalog that you want to use to create the chart.
+
+   If you have specified to insert the chart into any of the following panels in a banded object: banded header panel, banded footer panel, group header panel, or group footer panel, Designer displays the **Inherit from the Parent** option. Select it if you want the chart to inherit the business view that its parent banded object uses.
+
+   ![Create BV Chart - Data](https://devnet.logianalytics.com/hc/article_attachments/4420410820631/crtcht_dt_bv.gif)
+4. In the **Type** screen, specify the type of the chart. Designer automatically filters out the chart types that you cannot use in the report where you are inserting the chart and lists only the supported types.
+   * To create a single chart, select **Single chart**, and then select the required type from the **Chart Type** box and its subtype accordingly.
+
+     ![Create BV Chart - Single](https://devnet.logianalytics.com/hc/article_attachments/4420410820887/crtcht_type_bv.gif)
+   * To create a combo chart, select **Combo chart**. You can see that the **Chart Type Groups** box lists the two value axes: the primary axis (Y1) and the secondary axis (Y2), and an <Add Combo Type> item shows for each axis. Designer adds a default chart subtype to the primary axis. To add an additional subtype to an axis, select the corresponding **<Add Combo Type>**. To change any subtype listed in the box, select it, then choose your required chart type from the Chart Type box, and select the thumbnail for the subtype you want. To delete a subtype, select it and select **Remove**![Trash Can button](https://devnet.logianalytics.com/hc/article_attachments/4420402325015/btn_trashcan.gif). Most often, combo charts use a bar chart on the primary axis and a line chart on the secondary axis to make a readable chart.
+
+     ![Create BV Chart - Combo](https://devnet.logianalytics.com/hc/article_attachments/4420402603799/cmpnt_cht_inst_combo.gif)
+5. In the **Display** screen, define the data to display in the chart. You can specify a title for the chart in the **Title** text box.
+
+   ![Create BV Chart - Display](https://devnet.logianalytics.com/hc/article_attachments/4420402513943/crtcht_dsply_bv.gif)
+
+   The following shows defining the data for a chart generally. If you have selected the Org or Heat Map chart type, you need to specify data in the chart differently (for more information, see [Defining the Data for an Organization Chart](#Org) and [Defining the Data for a Heat Map](#HeatMap)).
+
+   The Resources box lists all the view elements in the specified business view, and the [dynamic formulas and aggregations](https://devnet.logianalytics.com/hc/en-us/articles/4405661937559-Using-Dynamic-Resources-and-Local-Parameters-in-Reports#Formula) that you have created for the business view in the current report. Add them to the category, series, and value axes of the chart respectively. You can also create more dynamic resources to use in the chart.
+
+   * To add the category field of the chart, select a group object ![Group icon](https://devnet.logianalytics.com/hc/article_attachments/4420410873495/bv_grp.gif), detail object ![Detail icon](https://devnet.logianalytics.com/hc/article_attachments/4420402567447/bv_detail.gif), dynamic formula used as Group ![Dynamic Formula as Group icon](https://devnet.logianalytics.com/hc/article_attachments/4420402567703/bv_dynfmla_grp.gif), or dynamic formula used as Detail ![Dynamic Formula as Detail icon](https://devnet.logianalytics.com/hc/article_attachments/4420402567959/bv_dynfmla_dtl.gif) in the **Resources** box and select **Add**![Add button](https://devnet.logianalytics.com/hc/article_attachments/4420410583703/btn_addarrow.gif) beside the **Category** box, or drag the object from the Resources box to the Category box. You can define [special group](https://devnet.logianalytics.com/hc/en-us/articles/4405664389143-Modifying-Charts#Special), [special function](https://devnet.logianalytics.com/hc/en-us/articles/4405664389143-Modifying-Charts#Group), and [Order/Select N condition](https://devnet.logianalytics.com/hc/en-us/articles/4405664389143-Modifying-Charts#SelectN) on the category field.
+   * To add the series field of the chart, select a group object ![Group icon](https://devnet.logianalytics.com/hc/article_attachments/4420410873495/bv_grp.gif) or dynamic formula used as Group ![Dynamic Formula as Group icon](https://devnet.logianalytics.com/hc/article_attachments/4420402567703/bv_dynfmla_grp.gif) in the **Resources** box and select **Add**![Add button](https://devnet.logianalytics.com/hc/article_attachments/4420410583703/btn_addarrow.gif) beside the **Series** box, or drag the object from the Resources box to the Series box. You can also define [special group](https://devnet.logianalytics.com/hc/en-us/articles/4405664389143-Modifying-Charts#Special), [special function](https://devnet.logianalytics.com/hc/en-us/articles/4405664389143-Modifying-Charts#Group), and [Order/Select N condition](https://devnet.logianalytics.com/hc/en-us/articles/4405664389143-Modifying-Charts#SelectN) on the series field.
+   * To add a field to the value axis of the chart, select an aggregation object ![Aggregation cion](https://devnet.logianalytics.com/hc/article_attachments/4420394888471/bv_agg.gif), a group object ![Group icon](https://devnet.logianalytics.com/hc/article_attachments/4420410873495/bv_grp.gif)/detail object ![Detail icon](https://devnet.logianalytics.com/hc/article_attachments/4420402567447/bv_detail.gif) that is of Numeric data type (an indicator chart also supports String or Boolean type), dynamic aggregation ![Aggregation cion](https://devnet.logianalytics.com/hc/article_attachments/4420394888471/bv_agg.gif), dynamic formula used as Aggregation ![Aggregation cion](https://devnet.logianalytics.com/hc/article_attachments/4420394888471/bv_agg.gif), dynamic formula used as Group ![Dynamic Formula as Group icon](https://devnet.logianalytics.com/hc/article_attachments/4420402567703/bv_dynfmla_grp.gif)/Detail ![Dynamic Formula as Detail icon](https://devnet.logianalytics.com/hc/article_attachments/4420402567959/bv_dynfmla_dtl.gif) that returns Numeric values (for an indicator chart, String or Boolean value too), or an [additional value](#Additional) in the **Resources** box and select **Add**![Add button](https://devnet.logianalytics.com/hc/article_attachments/4420410583703/btn_addarrow.gif) beside the **Show Values** box, or drag the object from the Resources box to the Show Values box. You can add multiple fields on the value axis and use **Move Up**![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4420410588439/btn_mvup.gif) and **Move Down**![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4420410588695/btn_mvdwn.gif) to adjust the display order of the fields on the axis. If you are creating a combo chart, specify the fields on the value axis of each subtype respectively.
+
+     For a bubble chart, the Show Values box contains three nodes: X-Axis, Y-Axis, and Size. You need to specify the fields to display on the bubble X axis and Y axis, and the field to determine the size of the bubbles respectively. When you add a field for the bubble X axis, the chart displays this field on the category axis instead of the one specified in the Category box, while it still includes the field defined in the Category box in data calculation. See [Creating Motion Charts](https://devnet.logianalytics.com/hc/en-us/articles/4405661369623-Creating-Motion-Charts) for a bubble chart example.
+
+     ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4420394642839/noteicon.jpg) When the category field is a detail object, you cannot use aggregation objects on the value axis, and vice versa. On the value axis, you cannot use group objects and detail objects together with aggregation objects, and for an indicator chart, you cannot mix group objects and detail objects that are of different data types either.
+
+   You can also make the chart a [real time chart](https://devnet.logianalytics.com/hc/en-us/articles/4405661371799-Creating-Real-Time-Charts) or a [motion chart](https://devnet.logianalytics.com/hc/en-us/articles/4405661369623-Creating-Motion-Charts).
+
+   **To add an additional value to the value axis**
+
+   1. From the Resources box, select **Constant Value**/**Average Value** in the **Additional Value** node and select **Add**![Add button](https://devnet.logianalytics.com/hc/article_attachments/4420410583703/btn_addarrow.gif) beside the **Show Values** box. Designer displays the [Edit Additional Value dialog box](https://devnet.logianalytics.com/hc/en-us/articles/4405664454935-Edit-Additional-Value-Dialog-Box).
+
+      ![Edit Additional Value dialog box](https://devnet.logianalytics.com/hc/article_attachments/4420410796311/edtaddtnvlu_cnst.gif)
+   2. In the **Name** text box, specify the display name for the constant/average value.
+   3. Type the constant value with Numeric type in the **Value** text box, or select a field based on which to calculate the average value from the **Based On** drop-down list.
+   4. Select **OK**, and Designer adds the defined constant/average value into the Show Values box.
+
+      If you want to further modify a constant/average value, select the value in the Show Values box, then select **Edit**![Edit button](https://devnet.logianalytics.com/hc/article_attachments/4420394656407/btn_edit.gif). In the Edit Additional Value dialog box, edit the value as required.
+6. In the **Filter** screen, apply a filter to reduce the data to display in the chart. You can select a [predefined filter](https://devnet.logianalytics.com/hc/en-us/articles/4405664681111-Creating-Business-Views-in-a-Catalog#Filter) of the specified business view from the **Filter** drop-down list to apply, or select **User Defined** in the list to define a new filter as required.
+
+   ![Create BV Chart - Filter](https://devnet.logianalytics.com/hc/article_attachments/4420394844951/crtcht_fltr_bv.gif)
+7. In the **Layout** screen, specify the [layout](#Layout) of the chart.
+
+   ![Create BV Chart - Layout](https://devnet.logianalytics.com/hc/article_attachments/4420410821911/crtcht_layout.gif)
+8. In the **Style** screen, select a style for the chart.
+
+   If you have specified to insert the chart into a banded object in a page report, by default, the chart [inherits its parent's style](https://devnet.logianalytics.com/hc/en-us/articles/4405661943319-Applying-Styles-to-Reports#Inherit); to apply another style to the chart, clear **Inherit Style** and select the required style from the **Style** box.
+
+   ![Create BV Chart - Style](https://devnet.logianalytics.com/hc/article_attachments/4420394845719/crtcht_sty.gif)
+9. Select **Finish** to insert the chart.
+
+   If you have selected a panel in a banded object as the chart destination, after finishing the dialog box, you need to select in the destination once again in order to insert the chart there.
+
+**Chart layout options**
+
+The following table describes the layout options in general. Some options are not available for certain chart types.
+
+| Option Type | Option Name | Description |
+| --- | --- | --- |
+| Data | Category Start Offset | Specifies the start offset of category from which to display the chart. |
+|  | Category End Offset | Specifies the end offset of category to which to display the chart. |
+|  | Series Start Offset | Specifies the start offset series from which to display the chart. |
+|  | Series End Offset | Specifies the end offset of series to which to display the chart. |
+|  | The preceding four options work together to control the range of the data the chart displays. [Select here](https://devnet.logianalytics.com/hc/en-us/articles/4405664650263-Chart-Properties#Offset) for more information. | |
+|  | Reverse Category | Specifies whether to reverse the display order of the categories. |
+|  | Reverse Series | Specifies whether to reverse the display order of the series. |
+|  | Swap Groups | Specifies to display values from different data fields by switching data between the category and series axes, the category and values axes. |
+| Title | Chart Title | Specifies the title of the chart. |
+|  | Category (X) Axis Title | Specifies the title of the X-axis. |
+|  | Value (Y) Axis Title | Specifies the title of the Y-axis. |
+|  | Value (Y2) Axis Title | Specifies the title of the Y2-axis. |
+| Axis | Show Category (X) Axis | Specifies whether to show the category (X) axis in this chart. |
+|  | Show Value (Y) Axis | Specifies whether to show the value (Y) axis in this chart. |
+|  | Show Value (Y2) Axis | Specifies whether to show the value (Y2) axis in this chart. |
+|  | Show Series (Z) Axis | Specifies whether to show the series (Z) axis in this chart. |
+|  | If you choose not to display a certain axis, the labels and tick marks along the axis are hidden as well. | |
+| Wall | Show Wall | Specifies whether to show the wall in this chart. |
+|  | Show Floor | Specifies whether to show the floor in this chart. |
+| Gridlines | Show Category (X) Axis Gridlines | Specifies whether to show the gridlines of category (X) axis. |
+|  | Show Value (Y) Axis Gridlines | Specifies whether to show the gridlines of value (Y) axis. |
+|  | Show Value (Y2) Axis Gridlines | Specifies whether to show the gridlines of value (Y2) axis. |
+|  | Show Series (Z) Axis Gridlines | Specifies whether to show the gridlines of series (Z) axis. |
+| Type | Top Down | Specifies to expand the org chart tree from top to bottom. |
+|  | Bottom Up | Specifies to expand the org chart tree from bottom to top. |
+|  | Left Right | Specifies to expand the org chart tree from left to right. |
+| Legend | Show Legend | Specifies whether to show the legend in this chart. |
+| Export | Mapping Component | Designer disables the option when you are creating a chart. You can use it to specify the component to which you want to map the chart. For more information, see [Creating Dynamic Charts in Excel](https://devnet.logianalytics.com/hc/en-us/articles/4405664371735-Creating-Dynamic-Charts-in-Excel). |
+
+## Creating a Chart Based on a Query Resource
+
+1. In a page report, position the mouse pointer at the destination where you want to insert the chart.
+2. Do either of the following:
+   * From the **Components** panel, drag the desired chart type icon in the **Visual** category to the destination.
+   * Navigate to **Insert** > **Chart** or **Home** > **Insert** > **Chart**.
+
+   Designer displays the [Create Chart dialog box](https://devnet.logianalytics.com/hc/en-us/articles/4405661481111-Create-Chart-Dialog-Box#Query), which contains a set of screens for helping you define a chart easily. You can use the Back and Next buttons or select the screen name on the screen navigation bar to switch between the screens.
+3. In the **Data** screen, select the data resource in the current catalog that you want to use to create the chart.
+
+   ![Create Query Chart - Data](https://devnet.logianalytics.com/hc/article_attachments/4420410822295/crtcht_dt.gif)
+
+   If the predefined data resources are not what you want, you can select the first item under a resource node to create a data resource of the type in the current catalog to use. When you select a query, you can select **Edit** to [modify the query](https://devnet.logianalytics.com/hc/en-us/articles/4405661917975-Creating-Queries-in-a-Catalog). Designer then automatically creates a [dataset](https://devnet.logianalytics.com/hc/en-us/articles/4405661914263-Creating-and-Managing-Datasets) based on the selected data resource in the page report.
+
+   If you want to use an existing dataset in the current page report to create the chart, select **More Options** and then:
+
+   * Select **Existing Dataset** and select a dataset. You can select **Edit** to modify the specified dataset in the [Dataset Editor dialog box](https://devnet.logianalytics.com/hc/en-us/articles/4405661501079-Dataset-Editor-Dialog-Box), or select **<New Dataset...>** to [create a dataset](https://devnet.logianalytics.com/hc/en-us/articles/4405661914263-Creating-and-Managing-Datasets#Create) in the page report to use. It is always better to use an existing dataset rather than create a new one. Even when the two datasets are based on the same query, Logi Report Engine still runs the query separately for each dataset.
+   * If you have specified to insert the chart into an object that already applies a dataset, such as a banded panel, Designer enables the **Current Dataset** radio button. Select it if you want the chart to inherit the dataset from the parent object.
+4. In the **Type** screen, specify the type of the chart. You can create either a [single chart or a combo chart](#Type).
+
+   ![Create Query Chart - Type](https://devnet.logianalytics.com/hc/article_attachments/4420402514583/crtcht_type.gif)
+5. In the **Display** screen, specify the fields on the category, series, and value axes of the chart respectively.
+
+   ![Create Query Chart - Display](https://devnet.logianalytics.com/hc/article_attachments/4420402515095/crtcht_dsply.gif)
+
+   The following shows defining the data for a chart generally. If you have selected the Org or Heat Map chart type, you need to specify data in the chart differently (for more information, see [Defining the Data for an Organization Chart](#Org) and [Defining the Data for a Heat Map](#HeatMap)).
+
+   The Resources box lists all the DBFields in the specified data resource, and the valid formulas and summaries of the DBFields in the current catalog. When the predefined formulas or summaries cannot meet your requirements, you can select **<New Formula...>** in the **Formulas** node to [create formulas](https://devnet.logianalytics.com/hc/en-us/articles/4405661763223-Creating-Formulas-in-a-Catalog), or **<New Summary...>** in the **Summaries** node to [create summaries](https://devnet.logianalytics.com/hc/en-us/articles/4405661767063-Working-with-Summaries#Create) to use in the chart (when you have specified to insert the chart in a banded object and the chart inherits the parent's dataset, make sure the summaries apply the Down group-by level if you want to use dynamic summaries). Add them to the chart axes to define the chart.
+
+   * To add a field to the category/series axis of the chart, select a DBField or formula in the **Resources** box and select **Add**![Add button](https://devnet.logianalytics.com/hc/article_attachments/4420410583703/btn_addarrow.gif) beside the **Category**/**Series** box, or drag the field from the Resources box to the target box. You can define [special group](https://devnet.logianalytics.com/hc/en-us/articles/4405664389143-Modifying-Charts#Special), [special function](https://devnet.logianalytics.com/hc/en-us/articles/4405664389143-Modifying-Charts#Group), and [Order/Select N condition](https://devnet.logianalytics.com/hc/en-us/articles/4405664389143-Modifying-Charts#SelectN) on the category/series field.
+   * To add a field to the value axis of the chart, select a summary, DBField of Numeric type (an indicator chart also supports String or Boolean type), formula that returns Numeric values (for an indicator chart, String or Boolean values too), or an [additional value](#Additional) in the **Resources** box and select **Add**![Add button](https://devnet.logianalytics.com/hc/article_attachments/4420410583703/btn_addarrow.gif) beside the **Show Values** box, or drag the field from the Resources box to the Show Values box. You can add multiple fields on the value axis and use **Move Up**![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4420410588439/btn_mvup.gif) and **Move Down**![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4420410588695/btn_mvdwn.gif) to adjust the display order of the fields on the axis. If you are creating a combo chart, you need to specify the fields on the value axis of each subtype respectively.
+
+     For a bubble chart, the Show Values box contains three nodes: X Axis, Y Axis, and Radius. You need to specify the fields to display on the bubble X axis and Y axis, and the field to determine the size of the bubbles respectively. When you add a field for the bubble X axis, the chart displays this field on the category axis instead of the one specified in the Category box, while it still includes the field defined in the Category box in data calculation. See [Creating Motion Charts](https://devnet.logianalytics.com/hc/en-us/articles/4405661369623-Creating-Motion-Charts) for a bubble chart example.
+
+     For a back-to-back chart, you need to specify how the comparison on the value axis of the chart is. For more information, see [Defining the Values to Be Compared on a Back-to-Back Chart](#Back).
+
+     ![Note icon](https://devnet.logianalytics.com/hc/article_attachments/4420394642839/noteicon.jpg)
+
+     + Whether you can use DBFields, formulas, and summaries together on the value axis depends on if they have the same group setting. If you add a DBField on the value axis, no summaries and group level formulas are allowed on the axis; if you add a summary, only formulas calculated on the same group level as the summary are allowed, and vice versa. For an indicator chart, you cannot mix DBFields and formulas that are of different data types on the value axis.
+     + If you have defined a subtype of the Stock type, you should add fields for the subtype in the order indicated by the subtype name, for example, if you define the Open-High-Low-Close 2-D subtype, you should add four fields to the Show Values box for this subtype, and arrange them to the order of Open-High-Low-Close.
+6. In the **Filter** screen, add filter conditions based on the fields you have added to the chart to reduce the data. [Select here](https://devnet.logianalytics.com/hc/en-us/articles/4405664691735-Filtering-Reports#DefineFilter) for how to define a filter.
+
+   ![Create Query Chart - Filter](https://devnet.logianalytics.com/hc/article_attachments/4420410822935/crtcht_fltr.gif)
+7. In the **Layout** screen, specify the [layout](#Layout) of the chart.
+
+   ![Create Query Chart - Layout](https://devnet.logianalytics.com/hc/article_attachments/4420410821911/crtcht_layout.gif)
+8. In the **Style** screen, select a style for the chart.
+
+   If you have specified to insert the chart into a banded object, by default, the chart [inherits its parent's style](https://devnet.logianalytics.com/hc/en-us/articles/4405661943319-Applying-Styles-to-Reports#Inherit); to apply another style to the chart, clear **Inherit Style** and select the required style from the **Style** box.
+
+   ![Create Query Chart - Style](https://devnet.logianalytics.com/hc/article_attachments/4420394845719/crtcht_sty.gif)
+9. Select **Finish** to insert the chart.
+
+   If you have selected a panel in a banded object as the chart destination, after finishing the dialog box, you need to select in the destination once again in order to insert the chart there.
+
+## Defining the Data for an Organization Chart
+
+An organization (org) chart is a tree-structure diagram showing hierarchical relationships of one people to another, one position to another, one department to another, and so on in an organization. You can define the hierarchical relationships by the node field and parent field. Logi Report displays the node field values as nodes in the org chart, and connects two nodes that have hierarchical relationship by a line. All the relationships finally go to one root node which presents the top level position. The closer a node is to the top root node, the higher its level is.
+
+Org chart nodes are also containers in which you can insert data objects, labels, and images. In this way, you can add the information you want to display in the nodes to get data about each node.
+
+To define the data to display in an org chart, in the Display screen of the Create Chart dialog box:
+
+![Org Display](https://devnet.logianalytics.com/hc/article_attachments/4420402514199/crtcht_dsply_org_bv.gif)
+
+1. From the **Node** drop-down list, select the field to be used as the node field.
+2. From the **Parent** drop-down list, select the field which defines the ownership or reporting to relationship among the node field values. The parent field should be of the same data type as the node field, and the values of the parent field should be a subset of those of the node field.
+
+   In the following example, the node field contains three employee names: Tony, Amanda, and Jack, and the parent field is also about employee names and contains Amanda who is the leader of Tony and Jack who is the leader of Amanda. Jack is the top root node of the org chart.
+
+   | Employee Name (node field) | Leader Name (parent field) |
+   | --- | --- |
+   | Tony | Amanda |
+   | Amanda | Jack |
+   | Jack |  |
+3. The **Properties** box displays a node model for specifying the information you want to display in each node in the org chart. You can add the data fields available in the Resources box and labels and images to display in the nodes.
+
+   To add an object, select it in the **Resources** box, then select **Add**![Add button](https://devnet.logianalytics.com/hc/article_attachments/4420410583703/btn_addarrow.gif) or drag it to the node model. You can resize the node model and adjust the position and size of the added objects in the node model as required, which you can also perform in the design area after you create the chart. To remove an unwanted object from the node model, select it and select **Remove**![Remove button](https://devnet.logianalytics.com/hc/article_attachments/4420394644119/btn_rmvarrow.gif) or select **Delete** on the keyboard.
+
+## Defining the Data for a Heat Map
+
+A heat map displays data in a matrix as rectangles marked by colors and sizes. Logi Report translates multiple group levels into rectangles representing a higher-level group and further divides them into smaller rectangles that represent the lower level group. Logi Report refers to the rectangles representing the lowest-level group as the innermost rectangles. You can add group-by fields and summarized data in the innermost rectangles for showing the group values and for calculating data of the groups. Each rectangle has a title which shows the corresponding group value and is by default hidden for better appearance (to show the title of a rectangle, locate its **Rectangle Title** node in the Report Inspector and set the **Invisible** property to **false**).
+
+To define the data to display in a heat map, in the Display screen of the Create Chart dialog box:
+
+![Heat Map Display](https://devnet.logianalytics.com/hc/article_attachments/4420410821527/crtcht_dsply_htmp_bv.gif)
+
+1. In the Resources box, choose a field as the group-by field and select **Add**![Add button](https://devnet.logianalytics.com/hc/article_attachments/4420410583703/btn_addarrow.gif) beside the **Area** box or drag the field from the Resources box to the Area box to add a group in the heat map. Repeat this to add more groups. You can use **Move Up**![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4420410588439/btn_mvup.gif) and **Move Down**![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4420410588695/btn_mvdwn.gif) to adjust the group levels.
+
+   When creating the heat map using a business view, you can use the group objects ![Group icon](https://devnet.logianalytics.com/hc/article_attachments/4420410873495/bv_grp.gif) in the specified business view or the dynamic formulas used as Group ![Dynamic Formula as Group icon](https://devnet.logianalytics.com/hc/article_attachments/4420402567703/bv_dynfmla_grp.gif) created for the business view in the current report as the group-by fields. When creating using a query resource, you can use any DBField or formula in the Resources box as the group-by fields.
+
+   In the Area box, select **Color By** for the groups that you want to use to determine the fill color of the rectangles, and **Label By** for the groups you want to display in the innermost rectangles.
+2. You can define [special group](https://devnet.logianalytics.com/hc/en-us/articles/4405664389143-Modifying-Charts#Special), [special function](https://devnet.logianalytics.com/hc/en-us/articles/4405664389143-Modifying-Charts#Group), and [Order/Select N condition](https://devnet.logianalytics.com/hc/en-us/articles/4405664389143-Modifying-Charts#SelectN) on each group.
+3. From the Resources box, add fields to the **Property** box to calculate data based on the lowest group of the heat map.
+
+   When creating the heap map using a business view, you can add aggregation objects ![Aggregation cion](https://devnet.logianalytics.com/hc/article_attachments/4420394888471/bv_agg.gif), dynamic aggregations ![Aggregation cion](https://devnet.logianalytics.com/hc/article_attachments/4420394888471/bv_agg.gif), and dynamic formulas used as Aggregation ![Aggregation cion](https://devnet.logianalytics.com/hc/article_attachments/4420394888471/bv_agg.gif) to calculate data. When creating using a query resource, if you do not add any group to the Area box, you can insert any dynamic summary or static summary, and Designer inserts the group-by field of the static summary into the Area box automatically; if there are multiple groups, the static summaries you want to use should match the lowest-level group. For example, if the group levels are A > B > C, you can insert the static summaries grouped by C, but cannot insert the static summaries grouped by A, B, or other fields.
+4. In the Property box, select **Size By** of one field to use it to determine the size of the rectangles (negative values of the size-by field are ignore in the heat map result); select **Color By** of one field to use it to determine the fill color of the rectangles; select **Label By** for these you want to display in the innermost rectangles. You should select at least one option for a field; otherwise, Designer does not use this field in the heat map.
+
+After you create a heat map, you can further edit it in the design area. Only the first rectangle which represents the lowest group level in the heap map is editable and can contain objects. You can insert the group fields of the heat map from the Data panel, and labels and images from the Components panel into it. For the objects in the rectangle, you can edit or delete them just like they do in a text box; however, the inserted objects do not support absolute position, because the width and height of the rectangle are determined dynamically at runtime.
+
+## Defining the Values to Be Compared on a Back-to-Back Bench Chart
+
+A back-to-back bench chart is for comparing values on the value axis. It displays and compares the contribution of each data value on the origin left and origin right across categories. For example, you may want a chart that compares the sales of each country in Latin America and North America, you can then use a back-to-back chart to display category Year and series Country, and define a condition on the series to make the Latin American countries display on the origin left of the category axis and North American countries on the origin right. Then you get to easily see not only the individual countries but can compare both regions.
+
+When you define how the comparison on the value axis of a back-to-back bench chart is created, you can either [add two values on the origin left and origin right of the value axis](#Value) to compare if it is a 2-D chart, or make the comparison based on the series field values if the chart contains a series field. When the comparison is based on series values, you need to further define the series values to display on the origin left and origin right of the value axis: either [manually](#SeriesValue) or [use a condition](#SeriesCondition).
+
+**To make the comparison based on fields displayed on the value axis of a 2-D back-to-back bench chart**
+
+1. In the Display screen of the Create Chart dialog box, select **Show Values**.
+
+   ![Compare by Show Values](https://devnet.logianalytics.com/hc/article_attachments/4420410927383/cmpnt_cht_inst_back1.gif)
+2. Specify where you want to display the field on the value axis, the origin left or right by selecting the chart type node in the **Left** or **Right** box, then select a DBField of Numeric type, a formula that returns Numeric values, or a summary in the **Resources** box and select **Add**![Add button](https://devnet.logianalytics.com/hc/article_attachments/4420410583703/btn_addarrow.gif) or drag the field from the Resources box to the Left or Right box.
+3. Select the chart type node in the opposite box and add the field to display on the opposite origin of the value axis. Only one field is allowed for one origin.
+
+**To compare based on the series field and define the series values manually**
+
+1. In the Display screen of the Create Chart dialog box, select **Series Values**.
+
+   ![Compare by Series Values](https://devnet.logianalytics.com/hc/article_attachments/4420402604055/cmpnt_cht_inst_back2.gif)
+2. Select **Add**![Add button](https://devnet.logianalytics.com/hc/article_attachments/4420394650391/btn_add.gif) above the **Left** or **Right** box to add a value line, then double-click in the line and type the required value of the series field.
+3. Repeat the preceding step to add more values. To delete a value, select it and select **Remove**![Trash Can button](https://devnet.logianalytics.com/hc/article_attachments/4420402325015/btn_trashcan.gif). You can also use **Move Up**![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4420410588439/btn_mvup.gif) and **Move Down**![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4420410588695/btn_mvdwn.gif) to adjust the display order of the values.
+4. In the **Show Values** box, add a DBField of Numeric data type, a formula that returns Numeric values, or a summary to display on the value axis of the chart.
+
+The chart then shows the specified series values on the origin left/right of the value axis, and displays the undefined values of the series field on the opposite origin.
+
+**To compare based on the series field and use a condition to define the series values**
+
+1. In the Display screen of the Create Chart dialog box, select **Series Conditions**.
+
+   ![Compare by Series Conditions](https://devnet.logianalytics.com/hc/article_attachments/4420402604311/cmpnt_cht_inst_back3.gif)
+2. Select **Edit**![Edit button](https://devnet.logianalytics.com/hc/article_attachments/4420394656407/btn_edit.gif) above the **Left** or **Right** box. Designer displays the [Edit Conditions dialog box](https://devnet.logianalytics.com/hc/en-us/articles/4405664456727-Edit-Conditions-Dialog-Box).
+
+   ![Edit Conditions dialog box](https://devnet.logianalytics.com/hc/article_attachments/4420410595607/edtcndtn.gif)
+3. Select **Add Condition** to add a condition line.
+4. Select the series field from the first drop-down list, from the operator drop-down list set the operator with which to compose the condition.
+5. All values of the series field are available in the third drop-down list. Select the value or values according to the selected operator, or specify the values by yourself. When you type the value, if multiple values are required, you should separate them with ","; if a value contains the character "," or "\", type the character as "\," or "\\".
+6. Repeat the preceding steps to add more condition lines and define the logic relationship between the condition lines: "And", "Or", "And Not", or "Or Not".
+
+   To group some condition lines, select them and select **Group**, Designer then adds the selected condition lines in one group and applies them as one line of filter expression (you can also group conditions and groups together); to take out any condition or group from a group, select it and select **Ungroup**; to adjust the priority of the condition lines, select it and select **Up** or **Down**; to delete a condition line, select it and select **Delete**.
+7. Select **OK** to finish defining the condition. Designer then displays the condition expression in the Left/Right box.
+8. In the **Show Values** box, add a DBField of Numeric type, a formula that returns Numeric values, or a summary to display on the value axis of the chart.
+
+The chart then shows the series values that meet the specified condition on the origin left/right of the value axis, and displays the remaining values of the series field on the opposite origin.
+
+**Example of creating a back-to-back bench chart**
+
+Suppose you want to use a chart to compare the sales for individual countries in Latin America and North America, you can create it as follows:
+
+1. Make sure **SampleReports.cat** is the currently open catalog file. If not, navigate to **File** > **Open Catalog** to open it from `<install_root>\Demo\Reports\SampleReports`.
+2. Navigate to **File** > **New** > **Page Report**.
+3. In the Select Component for Page Report dialog box, select **Chart** and select **OK**. Designer displays the Chart Wizard dialog box.
+4. In the Data screen, select **More Options** to expand the dataset selection panel.
+5. Select **Existing Dataset**, and select **<New Dataset...>**.
+6. In the New Dataset dialog box, select **WorldWideSales** from the **Queries** node, then select **OK** to create the dataset and close the dialog box. Designer adds a new [dataset](https://devnet.logianalytics.com/hc/en-us/articles/4405661914263-Creating-and-Managing-Datasets) WorldWideSales to the dataset list and selects it by default in the Data screen of the Chart Wizard dialog box.
+
+   Next, we filter the dataset to use data in the Latin America and North America regions only. By using dataset filter, we can ensure that the filter does not affect the reports that use the same data resource as the dataset.
+7. Select **Edit**. In the Dataset Editor dialog box, switch to the **Filter** tab, then [specify the filter condition](https://devnet.logianalytics.com/hc/en-us/articles/4405661914263-Creating-and-Managing-Datasets#Filter) as "Region = Latin America Or Region = North America" and select **OK**.
+
+   ![Filter Dataset](https://devnet.logianalytics.com/hc/article_attachments/4420394928279/cmpnt_cht_inst_backeg1.gif)
+8. Select **Next** in the Chart Wizard dialog box.
+9. In the **Type** screen, select the **Bench** chart type, then select the **Back to Back Bench 2-D** subtype. Select **Next**.
+10. In the **Display** screen, add **Country** in the Customers table to the **Clustering (Series)** box.
+11. Select **Series Conditions** and select **Edit**![Edit button](https://devnet.logianalytics.com/hc/article_attachments/4420394656407/btn_edit.gif) above the **Right** box.
+12. In the Edit Condition dialog box, specify the filter condition as "Country in Canada,Mexico,USA". Select **OK** to return to the Chart Wizard dialog box.
+13. Add the summary **Sum\_SalesbyYear** at the end of the resource tree to the **Bench Length (Show Values)** box. The summary is grouped by the formula **YearOfOrderDate**, so Designer adds the formula to the **Y-Axis (Category)** box automatically.
+
+    ![Add a Summary to the Chart](https://devnet.logianalytics.com/hc/article_attachments/4420402605463/cmpnt_cht_inst_backeg2.gif)
+14. Select **Finish** to create the chart.
+15. Save the report and select the **View** tab to preview the chart. You can see sales for countries in Latin America display on the origin left of the value axis and sales of North American countries on the origin right.
+
+    ![Preview the Report](https://devnet.logianalytics.com/hc/article_attachments/4420402605847/cmpnt_cht_inst_backeg3.gif)
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4420394625303/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/4405664370839-How-Data-Is-Represented-in-a-Chart)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4420394625687/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/4405664389143-Modifying-Charts)

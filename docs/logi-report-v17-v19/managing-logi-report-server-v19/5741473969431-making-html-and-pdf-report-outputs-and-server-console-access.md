@@ -1,0 +1,91 @@
+---
+title: "Making HTML and PDF Report Outputs and Server Console Accessible"
+id: 5741473969431
+section: "Managing Logi Report Server v19"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/5741473969431-Making-HTML-and-PDF-Report-Outputs-and-Server-Console-Accessible
+updated_at: 2022-10-31T17:18:04Z
+---
+
+# Making HTML and PDF Report Outputs and Server Console Accessible
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/9905574448535/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/5741474609303-Monitoring-the-Server-Performance)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/9905574466839/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/5741381172631-Working-with-APIs-Logi-Report-Server-v19)
+
+# Making HTML and PDF Report Outputs and Server Console Accessible
+
+You can export reports to accessible HTML and PDF outputs and enable the accessible version of Logi Report Server for people who experience disabilities or have special needs, so they can access the reports using assistive tools. This topic describes how you can add accessibility to HTML outputs, export reports to accessible PDF files, and enable the accessible version of Logi Report Server. It also briefly introduces the functionality of the accessible version of Logi Report Server.
+
+This topic contains the following sections:
+
+* [Exporting Reports to Accessible PDF Files](#PDF)
+* [Making HTML Format Report Output Accessible](#HTML)
+* [Visiting the Accessible Version of Logi Report Server](#Server)
+
+## Exporting Reports to Accessible PDF Files
+
+You can export reports to accessible PDF files, by enabling the Accessible PDF option which is available on all PDF export UIs in Logi Report, so that users of screen readers and those who have low vision can have their tagged PDF files read out aloud in appropriate language in the Adobe Acrobat software. The implementation standard is based on Web Content Accessibility Guidelines (WCAG) 2.0 (ISO/IEC 40500:2012) <http://www.w3.org/TR/WCAG/>and the PDF/UA (ISO 14289-1) standard <http://www.iso.org/standard/64599.html>.
+
+Logi Report supports these PDF tags: Document, Part, Sect, Div, P, H1, H2, H3, H4, H5, H6, Table, TR, TH, TD, Span, Link, and Figure. When you select Accessible PDF to export a report to an accessible PDF, Logi Report automatically adds appropriate tags to the report objects in the PDF output, according to their display sequence in the report structure tree in the Logi Report Designer's Inspector. For example, Logi Report adds the Document tag to the report body, the Part tag to a banded object in the report body, the Sect tag to a panel of the banded object, and the Div tag to a field in the banded panel. You can only customize the six heading tags using the Tag Name property for the following objects in Designer: DBFields, formula fields, parameter fields, summary fields, special fields, labels, and parameter controls.
+
+## Making HTML Format Report Output Accessible
+
+Logi Report supports accessibility related HTML attributes and a built-in accessible Server Console for displaying reports in HTML. The implementation standard is based on HTML specification 4.01 <http://www.w3.org/TR/WCAG10-HTML-TECHS/> and information on Section 508 Standards [http://www.access-board.gov](http://www.access-board.gov/).
+
+When designing a report in Logi Report Designer, you can add the accessibility related HTML attributes to the report elements in order to make the HTML format output more readable and accessible. You can find those attributes in the Accessibility category of the Report Inspector.
+
+**To add accessibility to a report in the HTML format:**
+
+1. Predefine necessary accessibility attributes when designing the report in Designer.
+2. Enable Section 508 compliant output when exporting the report to HTML format.
+
+   In the HTML export UI, select **Section 508 Compliant Output**. If you only want to convert table/crosstab components into HTML data table in the HTML format report output, select **Use HTML Data Table**.
+
+   The preceding two options are available on all HTML export UIs in Logi Report.
+
+## Visiting the Accessible Version of Logi Report Server
+
+You can visit the accessible version of Logi Report Server with simplified functionality to read reports by reader agent or other assistive tools. In the accessible version, Logi Report Server displays reports in the HTML format with accessibility attributes and displays table/crosstab components as HTML data tables.
+
+You can use the option - Use Accessible Version - to set the accessible version of Logi Report Server as the default portal UI. The default port for accessible version is 8888 which is also the default port for the Server Console in normal version. That is to say, the **Use Accessible Version** option controls switching between normal version and accessible version of Logi Report Server UI when signing in to port 8888. By default, this option is unselected and you are directed to the Server Console in normal version.
+
+The server administrator can activate the accessible version for all users or for an individual user:
+
+* **For all users:**
+  1. On the system toolbar of the Server Console, navigate to **Administration** > **Server Profile** > **Customize Server Preferences**.
+  2. Select the **Advanced** tab.
+  3. Select **Use Accessible Version**.
+  4. Select **OK** to apply the change.
+* **For an individual user:**
+  1. On the system toolbar of the Server Console, navigate to **Administration** > **Security** > **User**.
+  2. Locate the wanted user ID, then select **Preference** for the user.
+  3. In the Preference dialog box, go to the **Advanced** tab.
+  4. Select **Use Accessible Version**.
+  5. Select **OK** to save the change.
+
+You can also enable the accessible version for yourself in the following way:
+
+1. On the Server Console, navigate to **My Profile** > **Customize Server Preferences** on the system toolbar
+2. Select the **Advanced** tab.
+3. Select **Use Accessible Version**.
+4. Select **OK** to save the change.
+
+After you have been enabled the access to Accessible Version, you will be directed to the accessible version after signing in next time. You can navigate through the server resource to view the target report, with the help of reader agent.
+
+See the main options on the accessible version UI:
+
+* **Directory Path**  
+  The current directory where you have come to follow the server resource tree.
+* **Up to Higher Level Directory**  
+  Select to go to the parent level folder.
+* **Up to Top Level Directory**  
+  Select to go to the default portal page.
+* **Leave Accessible Version**  
+  Select to go to the normal version of the Server Console with full functionalities. You'd better not leave the accessible version unless having others' help. Once you leave the accessible version, there is no way to return unless you re-sign in.
+* **Select User Directory**  
+  You can choose to open either the My Reports folder or the Public Reports folder.
+* **Catalog**  
+  The catalogs in the current directory.
+* **Report List**  
+  The folders and reports in the current directory. You can select the hyperlinks in the **Name** column to open them.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/9905574448535/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/5741474609303-Monitoring-the-Server-Performance)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/9905574466839/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/5741381172631-Working-with-APIs-Logi-Report-Server-v19)

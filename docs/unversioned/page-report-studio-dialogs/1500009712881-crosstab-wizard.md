@@ -1,0 +1,130 @@
+---
+title: "Crosstab Wizard"
+id: 1500009712881
+section: "Page Report Studio Dialogs"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009712881-Crosstab-Wizard
+updated_at: 2021-11-03T06:58:18Z
+---
+
+# Crosstab Wizard
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4412131374359/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009687122-Crosstab-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4412139481879/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009712901-Customize-Gauge-Angle)
+
+# Crosstab Wizard
+
+The Crosstab Wizard guides you through the process of [creating a crosstab](https://devnet.logianalytics.com/hc/en-us/articles/1500009718121-Creating-Page-Reports#Crosstab). It contains the following screens: [Dat](#Data)a, [Display](#Display), [Query Filter](#Filter) and [Style](#Style).
+
+**Back**
+
+Returns to the previous tab.
+
+**Next**
+
+Goes to the next tab.
+
+**Finish**
+
+Creates the crosstab and closes the wizard.
+
+**Cancel**
+
+Closes the wizard without creating a crosstab.
+
+**Help**
+
+Displays the help document about this feature.
+
+## Data
+
+Specifies the business view to use to create the crosstab. This screen is hidden when there is only one business view in the current catalog.
+
+![Crosstab Wizard - Data screen](https://devnet.logianalytics.com/hc/article_attachments/4412131506199/crstbwzd_data.gif)
+
+**Available Data Resources**
+
+Lists all the available business views in the current catalog, with which you can create the crosstab.
+
+## Display
+
+Specifies the fields to be displayed in the crosstab.
+
+![Crosstab Wizard - Display screen](https://devnet.logianalytics.com/hc/article_attachments/4412112558103/crstbwzd_dsply.gif)
+
+**Resources**
+
+Displays the view elements in the selected business view. Select one non-folder resource each time and then select a proper arrow button to add it into the corresponding box.
+
+![Add Item button](https://devnet.logianalytics.com/hc/article_attachments/4412131391639/btn_additem.gif)
+
+Adds the selected group object ![Group Object](https://devnet.logianalytics.com/hc/article_attachments/4412112493463/btn_bvgrp.gif) to be displayed on the columns of the crosstab.
+
+![](https://devnet.logianalytics.com/hc/article_attachments/4412131392151/btn_addrow.gif)
+
+Adds the selected group object ![Group Object](https://devnet.logianalytics.com/hc/article_attachments/4412112493463/btn_bvgrp.gif) to be displayed on the rows of the crosstab.
+
+![](https://devnet.logianalytics.com/hc/article_attachments/4412112504343/btn_addsum.gif)
+
+Adds the selected aggregation object ![Aggregation Object](https://devnet.logianalytics.com/hc/article_attachments/4412131382167/btn_bvaggrgtn.gif) to be the aggregate field of the crosstab.
+
+**Columns/Rows**
+
+* **Field**  
+   Lists the group objects that will be displayed on the column/row headers of the crosstab.
+* **Display Name**  
+   Specifies the text of the labels for the column/row headers. You can select the text boxes to edit the label text, or check the Auto Map Field Name checkboxes beside the text boxes to automatically map the label text to the dynamic display names of the objects.
+* **Sort**  
+   Specifies the sort order of the group objects.
+* ![Add Compound Group](https://devnet.logianalytics.com/hc/article_attachments/4412131432087/btn_pgrpt_addparal.gif)  
+   Adds a column/row compound group.
+
+**Summaries**
+
+* **Field**  
+   Lists the aggregation objects that will be the aggregate fields of the crosstab.
+* **Display Name**  
+   Specifies the text of the labels for the aggregations. You can select the text boxes to edit the label text, or check the Auto Map Field Name checkboxes beside the text boxes to automatically map the label text to the dynamic display names of the objects.
+
+![Move Up button](https://devnet.logianalytics.com/hc/article_attachments/4412112497431/btn_mvup.gif)
+
+Moves the selected field or compound group one step up. For fields in a compound group, their order can be changed within the current group only.
+
+![Move Down button](https://devnet.logianalytics.com/hc/article_attachments/4412112497687/btn_mvdown.gif)
+
+Moves the selected field or compound group one step down. For fields in a compound group, their order can be changed within the current group only.
+
+![Delete button](https://devnet.logianalytics.com/hc/article_attachments/4412112484759/btn_delete.gif)
+
+Removes the selected field or compound group that is not required from the crosstab.
+
+## Query Filter
+
+Specifies the filter which you want to apply to the selected business view.
+
+![Crosstab Wizard - Query Filter screen](https://devnet.logianalytics.com/hc/article_attachments/4412112629015/crstbwzd_qryfltr.gif)
+
+In this screen, all the predefined filters of the business view are listed in the Query Filter drop-down list. You can choose one of them to apply. If you prefer to define a filter on your own, select **User-Defined** from the drop-down list, and then define it according to your requirements.
+
+If the selected business view contains parameters, you would be prompted with the [Enter Parameter Values](https://devnet.logianalytics.com/hc/en-us/articles/1500009687182-Enter-Parameter-Values) dialog to specify values to the parameters before the Query Filter screen is displayed.
+
+For details about options in the screen, refer to [Query Filter](https://devnet.logianalytics.com/hc/en-us/articles/1500009713701-Query-Filter) dialog.
+
+## Style
+
+Specifies the style of the crosstab. This screen is hidden when there is only one style available to be applied to the crosstab.
+
+![Crosstab Wizard - Style screen](https://devnet.logianalytics.com/hc/article_attachments/4412139602455/crstbwzd_style.gif)
+
+**Style**
+
+Lists all the available styles for you to select from.
+
+**Inherit Style**
+
+Specifies to take the style of the parent component. The option is available only when you specify to insert the crosstab into a banded object.
+
+**Preview**
+
+Shows a preview of the selected style.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4412131374359/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009687122-Crosstab-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4412139481879/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009712901-Customize-Gauge-Angle)

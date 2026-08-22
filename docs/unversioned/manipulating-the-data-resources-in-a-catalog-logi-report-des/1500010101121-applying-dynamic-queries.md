@@ -1,0 +1,101 @@
+---
+title: "Applying Dynamic Queries"
+id: 1500010101121
+section: "Manipulating the Data Resources in a Catalog - Logi Report Designer v17.1"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500010101121-Applying-Dynamic-Queries
+updated_at: 2021-07-23T19:16:46Z
+---
+
+# Applying Dynamic Queries
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404856790679/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500010062662-Using-Query-Modifiers)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404856790935/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500010101021-Working-with-Business-Views)
+
+# Applying Dynamic Queries
+
+You can build queries [using the Query Editor](https://devnet.logianalytics.com/hc/en-us/articles/1500010062582-Creating-Queries-in-a-Catalog) or [from SQL statements](https://devnet.logianalytics.com/hc/en-us/articles/1500010095181-Using-Imported-SQLs). Either way, you should predefine the queries; however, sometimes you may want to specify the query at runtime. For example, in the catalog, you build the query as `"select customers_id from customers"`, but at runtime, you may want to fetch data from another table - customers1. You should then update the query according to the table index, such as `"select customers_id from customers1"`. To help you achieve this, Logi Report provides the Dynamic Query feature, which enables you to generate queries dynamically so as to fetch data from different tables at runtime. This topic introduces the dynamic query interface and how you apply dynamic queries in Designer. It also presents an example using the demo program included in Designer to explain the usage of dynamic queries.
+
+This topic contains the following sections:
+
+* [Dynamic Query Interface](#Interface)
+* [Using Dynamic Queries](#Use)
+* [Dynamic Query Sample](#Sample)
+
+## Dynamic Query Interface
+
+The dynamic query interface SQLStmtCreator is available in the archive file - JREngine.jar in `<install_root>\lib`. It is contained in the package toolkit.db.api, and you can apply it to any existing query in a catalog.
+
+The following flowchart illustrates how the interface works when creating a dynamic query. The QueryInfo object is passed from Logi Report Engine to the interface as an input. Then, the completed SQL statement is returned from the interface. Finally, the completed SQL statement is sent to the database to get the result set for the report.
+
+![Interface Flowchart for Dynamic Query](https://devnet.logianalytics.com/hc/article_attachments/4404848428439/qury_dynmc_intfc.gif)
+
+This interface is very simple with only one method: *getSQLStmt(QueryInfo queryInfo)*. It receives information of a query and returns an SQL string. QueryInfo is a container that contains all information to build an SQL string. You can call the *getXXX()* methods to get all information step by step. For more information, refer to the toolkit.db.api.SQLStmtCreator interface in the Logi Report Javadoc.
+
+The structure of QueryInfo is as follows:
+
+* **ConnectionInfo**  
+  Driver, URL, User, Password, DateFormat, TimeFormat, TimestampFormat, TransactionIsolation level, ReadOnly, QualifiedNamePattern, ExtraNamePattern, EncodingPattern
+* **Column array**  
+  All the selected columns. Elements in this array are ColumnInfo object. ColumnInfo contains Mapping Name, Real Name, Table Info, and Expression (if this is a computed column).
+* **Tables(array)**  
+  Selected tables. Elements in this array are TableInfo objects. TableInfo contains Mapping Name, Real Name, Correlation Name, Schema, and Catalog.
+* **Joins(array)**   
+  Elements in this arrays are JoinInfo objects. JoinInfo includes Column from, Column to, Operator, and Join type.
+* **QBEs(array)**   
+  Part of the where condition. It is retrieved from the Query Editor. Elements in this array are QBEInfo objects. QBEInfo contains ColumnInfo with QBE condition bound to this column.
+* **Ands(array)**   
+   Part of the where condition. It is retrieved from the advanced search condition in the Query Editor. Elements in the array are AndInfo objects. AndInfo contains Left expression, Operator, Right expression, and Logic.
+* **SubLinks(array)**  
+   If the dynamic query is for a subreport, the SubLinks is used for the additional WHERE clause to filter data, and this is the way to link the dynamic query to the primary report. Elements in this array are composed of SubLinksInfo objects. SubLinkInfo contains Column, Operator, and Value.
+* **Parameters (array)**  
+  Parameters used for creating a query. You should encode parameters that the database can recognize. The elements in this array are ParameterInfo objects. ParameterInfo contains Name, Type, and Value.
+* **OrderBys(array)**  
+  Elements in the array are OrderByInfo objects. OrderByInfo contains Column and sort direction.
+* **Other Information**   
+  Query name, IsDistinct, and WherePortionString. The value of WherePortionString is set via *JRengine.setWherePortionString()*.
+
+## Using Dynamic Queries
+
+The following shows the basic procedure for using dynamic queries:
+
+1. Compile the Java file that you write and append the path of the compiled Java file with a valid path to the ADDCLASSPATH variable of setenv.bat/setenv.sh.
+2. Set the value of the connection property **SQL Statement Creator**. The dynamic query interface is set as a property in the JDBC connection object in a catalog.
+
+   In Designer, open the Catalog Manager, expand the data source node, select the JDBC connection, right-click it and select **Properties** from the shortcut menu to display the properties of the connection. You can then see the SQL Statement Creator property, which you can use to set the real class name of the dynamic query object.
+
+   Here are a couple of examples:
+
+   * You implement the interface by the class UserSQLStmtCreatorImpl, then specify the property value as **UserSQLStmtCreatorImpl;@param1;@param2**. "param1" and "param2" are type-in [parameters](https://devnet.logianalytics.com/hc/en-us/articles/1500010099721-Working-with-Parameters) you used to specify criteria while creating the query.
+   * School year which changes at runtime, requires to be inserted into the report template so that the input value for the runtime parameters can be passed to the dynamic query interface via the QueryInfo object, in order for a corresponding SQL statement to be returned.
+3. Set the value of the query property **Enable SQL Statement Creator**.
+
+   In the Catalog Manager, in the Properties sheet of a highlighted query, you can see the property Enable SQL Statement Creator, which indicates whether or not the query uses the dynamic query interface to get the result set. When it is set to true, the query can be regenerated at runtime using the dynamic query interface.
+
+## Dynamic Query Sample
+
+Designer provides a demo program, SQLStmtCreatorImpl.java in `<install_root>\help\samples\APIDynamicQuery`, which implements the dynamic query interface and changes the table name of the query sent to the database.
+
+The following explains how you can compile the required files in the demo program and apply dynamic queries for a report:
+
+1. Compile **SQLStmtCreatorImpl.java** (to compile the file, you need another file **MappingNameFinder.java** in the same folder.
+
+   Assume that you have installed Designer in `C:\(Undefined variable: Logi_Variables.LogiReport)\Designer`, and the class files of MappingNameFinder.java are in `C:\(Undefined variable: Logi_Variables.LogiReport)\Designer\help\samples\APIDynamicQuery`:
+
+   `javac -classpath C:\(Undefined variable: Logi_Variables.LogiReport)\Designer\lib\JREngine.jar;C:\(Undefined variable: Logi_Variables.LogiReport)\Designer\help\samples\APIDynamicQuery SQLStmtCreatorImpl.java`
+2. Modify the batch file **setenv.bat** in `<install_root>\bin` by appending the path of SQLStmtCreatorImpl.java into the batch file's ADDCLASSPATH variable:
+
+   `set ADDCLASSPATH=%JAVAHOME%\lib\tools.jar;C:\(Undefined variable: Logi_Variables.LogiReport)\Designer\help\samples\APIDynamicQuery;`
+3. Start Designer.
+4. Select **File** > **Open**. In the Open Report dialog box, select the **Browse** button to open the catalog file **SampleComponents.cat** in `<install_root>\Demo\Reports\SampleComponents`, then open the sample report **BandedObjectReport.cls**.
+5. Open the Catalog Manager, expand the **Data Source 1** node, right-click the **Parameters** node, select **New Parameter** on the shortcut menu to [create a type-in parameter](https://devnet.logianalytics.com/hc/en-us/articles/1500010099761-Creating-Parameters-in-a-Catalog) of String type named "pTableIndex" (leave the other settings to their default).
+
+   ![New Parameter](https://devnet.logianalytics.com/hc/article_attachments/4404848428695/qury_dynmc_prm.gif)
+6. Select the node of the JDBC connection in Data Source 1.
+7. Select **Show Properties** on the Catalog Manager toolbar to display the Properties sheet, then set the **SQL Statement Creator** property to **SQLStmtCreatorImpl;@pTableIndex**. The parameter "pTableIndex" is used to specify which table is to be selected at runtime.
+
+   ![SQL Statement Creator Property](https://devnet.logianalytics.com/hc/article_attachments/4404856844695/qury_dynmc_prpty.gif)
+8. Select the query **QueryForBandedObject** in the Catalog Manager, and set its **Enable SQL Statement Creator** property to **true**.
+9. Save the catalog and preview the report.
+10. In the Enter Parameter Values dialog box, type **1** as the value of pTableIndex, the report then runs on the table Customers1. When you specify nothing as the value of pTableIndex, the report runs on the table Customers.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404856790679/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500010062662-Using-Query-Modifiers)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404856790935/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500010101021-Working-with-Business-Views)

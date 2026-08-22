@@ -1,0 +1,31 @@
+---
+title: "Imported SQL Properties"
+id: 1500009568962
+section: "References - Logi JReport Designer 15"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009568962-Imported-SQL-Properties
+updated_at: 2021-07-24T05:54:23Z
+---
+
+# Imported SQL Properties
+
+[![](https://devnet.logianalytics.com/hc/article_attachments/4404889273495/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009568782-HDS-Column-Properties)  [Next Topic![](https://devnet.logianalytics.com/hc/article_attachments/4404889273751/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009568982-Imported-SQL-Column-Properties)
+
+# Imported SQL Properties
+
+The properties of an imported SQL file are as follows:
+
+| Property Name | Description |
+| --- | --- |
+| Connection Name | Specifies the connection to execute the imported SQL file. Data type: String |
+| Description | Specifies the description of the imported SQL file. Data type: String |
+| Maximum Duration | Specifies the maximum elapsed time allowed to fetch data from the data source when the SQL file runs, measured in seconds. If the value is set to zero or is blank, it means the time will be unlimited. For usage about the property, see [Limiting the Query Run Time and Number of Records](https://devnet.logianalytics.com/hc/en-us/articles/1500009592481-Data-Manager#Limit).  Data type: Integer |
+| Maximum Rows | Specifies the maximum number of rows that will be fetched from the data source when the imported SQL file runs. If the value is set to zero or is blank, it means the number will be unlimited. For usage about the property, see [Limiting the Query Run Time and Number of Records](https://devnet.logianalytics.com/hc/en-us/articles/1500009592481-Data-Manager#Limit).  Data type: Integer |
+| Name | Specifies the name of the imported SQL file. Data type: String |
+| Qualifier | Specifies the database's catalog name of the imported SQL file. Data type: String |
+| Read Only | Specifies whether or not the imported SQL file will be read only. Data type: Enumeration |
+| Transaction Mode | Specifies the transaction mode for the imported SQL file. Choose an option from the drop-down list.  * **default** - Indicates the transaction information cannot be got from JDBC connection. * **none** - Indicates that transactions are not supported. * **read uncommitted** - Dirty reads, non-repeatable reads and phantom reads can occur. This mode will speed up the transaction of the catalog. * **read committed** - Dirty reads are prevented; non-repeatable reads and phantom reads can occur. * **repeatable read** - Dirty reads and non-repeatable reads are prevented; phantom reads can occur. * **serializable** - Dirty reads, non-repeatable reads and phantom reads are prevented.   Data type: Enumeration |
+
+An imported SQL file contains several columns, the properties of which are shown in the following topic: [Imported SQL Column](https://devnet.logianalytics.com/hc/en-us/articles/1500009568982-Imported-SQL-Column-Properties)
+
+[![](https://devnet.logianalytics.com/hc/article_attachments/4404889273495/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009568782-HDS-Column-Properties)  [Next Topic![](https://devnet.logianalytics.com/hc/article_attachments/4404889273751/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009568982-Imported-SQL-Column-Properties)

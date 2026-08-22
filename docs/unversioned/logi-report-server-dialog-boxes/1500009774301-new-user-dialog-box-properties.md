@@ -1,0 +1,91 @@
+---
+title: "New User Dialog Box Properties"
+id: 1500009774301
+section: "Logi Report Server Dialog Boxes"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009774301-New-User-Dialog-Box-Properties
+updated_at: 2021-07-24T00:48:44Z
+---
+
+# New User Dialog Box Properties
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009774281-New-Trigger-Dialog-Box-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009746082-NLS-Editor-Dialog-Box-Properties)
+
+# New User Dialog Box Properties
+
+This topic describes how you can use the New User dialog box to create a [user](https://devnet.logianalytics.com/hc/en-us/articles/1500009749862-Managing-User-Accounts). Server displays the dialog box when an admin user selects the New User link in the Administration > Security > User page in the Server Console.
+
+![New User dialog](https://devnet.logianalytics.com/hc/article_attachments/4404880214295/nwuser.gif)
+
+**User Name**
+
+Specifies the name for the new user.
+
+**Full Name**
+
+Specifies the full name for the new user.
+
+**Description**
+
+Specifies the description for the new user.
+
+**E-mail**
+
+Specifies the e-mail address of the new user.
+
+**Password**
+
+Specifies the password of the new user.
+
+**Confirm Password**
+
+Confirms the password by typing it in again.
+
+**Account Disabled**
+
+If the option is selected, the user account will be disabled for the time being.
+
+**Password Life**
+
+Specifies the validity period of the password.
+
+* **Never Expires**  
+   The password will not expire.
+* **Expires in N days**  
+   Specifies a period of time during which the password is valid.
+
+**Password Length**
+
+Specifies the length of the password.
+
+* **Permit Blank**  
+   Specifies that the password can be blank.
+* **Minimum Length**  
+   Specifies the minimum number of characters that can be used in the password. The number you specify here should be between 0 and 20.
+
+**Ask user to change the password after expired**
+
+Specifies whether to prompt the user to change the password after the user logs in with the password that is expired.
+
+**Ask user to change the password after reset by administrator**
+
+Specifies whether to prompt the user to change the password after the user logs in with the password that has been reset by the administrator for the first time.
+
+**Privileges**
+
+Specifies whether the newly created user has the following privileges:
+
+* **Publish**  
+   The privilege of publishing resources to Logi Report Server.
+* **Advanced Properties**  
+   The privilege of viewing advanced version properties information, such as catalog connections and report related resources.
+
+**OK**
+
+Creates the user with the information you have specified.
+
+**Cancel**
+
+Cancels operations and closes the dialog box.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009774281-New-Trigger-Dialog-Box-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009746082-NLS-Editor-Dialog-Box-Properties)

@@ -1,0 +1,99 @@
+---
+title: "Dynamic Queries"
+id: 1500009636001
+section: "Manipulating the Data Resources in a Catalog - Logi Report Designer v17"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009636001-Dynamic-Queries
+updated_at: 2021-07-24T16:03:24Z
+---
+
+# Dynamic Queries
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404911578903/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009635961-Cached-Query-Results) [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404911579543/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009613182-Data-Manager)
+
+# Dynamic Queries
+
+You can build queries using the Query Editor or from an [imported SQL](https://devnet.logianalytics.com/hc/en-us/articles/1500009606822-Creating-and-Importing-SQL-Statements). Either way, the queries should be predefined. However, sometimes you may want to specify the query at runtime. For example, in the catalog, you build the query "select customers\_id from customers", but at runtime, you may want to fetch data from another table - customers1. The query should be updated according to the table index, such as "select customers\_id from customers1". Logi Report provides a feature called Dynamic Query. With this, queries can be dynamically generated, which allow you to fetch data from different tables at runtime.
+
+This topic includes the following sections:
+
+* [Dynamic Query Interface](#Interface)
+* [Using Dynamic Queries](#Use)
+* [Dynamic Query Sample](#Sample)
+
+## Dynamic Query Interface
+
+The dynamic query interface SQLStmtCreator is stored in the archive file - JREngine.jar in `<install_root>\lib`. It is contained in the package toolkit.db.api, and can be applied to any existing query in a catalog.
+
+The following flowchart illustrates how the interface works when creating a dynamic query. The QueryInfo object is passed from Logi Report Engine to the interface as an input. Then, the completed SQL statement is returned from the interface. Finally, the completed SQL statement is sent to the database to get the result set for the report.
+
+![Interface working flowchart when creating a dynamic query](https://devnet.logianalytics.com/hc/article_attachments/4404904195863/qury_dynmc.gif)
+
+This interface is very simple with only one method *getSQLStmt(QueryInfo queryInfo)*. It receives information of a query and returns an SQL string. QueryInfo is a container that contains all information to build an SQL string. You can call the *getXXX()* methods to get all information step by step. For detailed information, refer to the toolkit.db.api.SQLStmtCreator interface in the Logi Report Javadoc.
+
+The structure of QueryInfo is as follows:
+
+* **ConnectionInfo**  
+   Driver, URL, User, Password, DateFormat, TimeFormat, TimestampFormat, TransactionIsolation level, ReadOnly, QualifiedNamePattern, ExtraNamePattern, EncodingPattern
+* **Column array**  
+   All the selected columns. Elements in this array are ColumnInfo object. ColumnInfo contains Mapping Name, Real Name, Table Info and Expression (if this is a computed column).
+* **Tables(array)**  
+   Selected tables. Elements in this array are TableInfo objects. TableInfo contains Mapping Name, Real Name, Correlation Name, Schema, and Catalog.
+* **Joins(array)**   
+   Elements in this arrays are JoinInfo objects. JoinInfo includes Column from, Column to, Operator, and Join type.
+* **QBEs(array)**   
+   Part of the where condition. It is retrieved from the query builder. Elements in this array are QBEInfo objects. QBEInfo contains ColumnInfo with QBE condition bound to this column.
+* **Ands(array)**   
+   Part of the where condition. It is retrieved from the advanced search condition in the query builder. Elements in the array are AndInfo objects. AndInfo contains Left expression, Operator, Right expression, and Logic.
+* **SubLinks(array)**  
+   If the dynamic query is for a subreport, the SubLinks is used for the additional WHERE clause to filter data, and this is the way to link the dynamic query to the primary report. Elements in this array are composed of SubLinksInfo objects. SubLinkInfo contains Column, Operator and Value.
+* **Parameters (array)**  
+   Parameters used for creating a query. Users are required to encode parameters that the database can recognize. The elements in this array are ParameterInfo objects. ParameterInfo contains Name, Type and Value.
+* **OrderBys(array)**  
+   Elements in the array are OrderByInfo objects. OrderByInfo contains Column and sort direction.
+* **Other Information**   
+   Query name, IsDistinct, and WherePortionString. The value of WherePortionString is set via JRengine.setWherePortionString().
+
+## Using Dynamic Queries
+
+Before you can use dynamic queries, you are required to first make some preparations.
+
+1. Compile the Java file that you write and append the path of the compiled Java file with a valid path to the ADDCLASSPATH variable of setenv.bat/setenv.sh.
+2. Set the value of the connection property SQL Statement Creator. The dynamic query interface is set as a property in the JDBC connection object in a catalog.
+
+   In Logi Report Designer, open the Catalog Manager, expand the data source node, select the JDBC connection, right-click it and select **Properties** from the shortcut menu to display the properties of the connection. You will then see the SQL Statement Creator property, which is used to set the real class name of the dynamic query object.
+
+   Here are a couple of examples:
+
+   * You implemented the interface by the class UserSQLStmtCreatorImpl, then specified the property value as UserSQLStmtCreatorImpl;@param1;@param2. param1 and param2 are type-in [parameters](https://devnet.logianalytics.com/hc/en-us/articles/1500009611462-Parameters) used to specify criteria while creating the query.
+   * School year which changes at runtime, requires to be inserted into the report template so that the input value for the runtime parameters can be passed to the dynamic query interface via the QueryInfo object, in order for a corresponding SQL statement to be returned.
+3. Set the value of the query property Enable SQL Statement Creator.
+
+   In the Catalog Manager, in the Properties sheet of a highlighted query, there is a property named Enable SQL Statement Creator, which indicates whether or not the query uses the dynamic query interface to get the result set. When it is set to true, the query can be re-generated at runtime using the dynamic query interface.
+
+## Dynamic Query Sample
+
+Logi Report provides a demo program, SQLStmtCreatorImpl.java in `<install_root>\help\samples\APIDynamicQuery`, which implements the dynamic query interface. This demo is for changing the table name of the query sent to the database. Specifically, when you run the report, if you type 1 as the tableIndex parameter, the query will dynamically change to Customers1. If you do not specify anything, you will get the result set from the Customers table.
+
+The following example explains how to compile the required files and use dynamic queries in a report:
+
+1. Compile SQLStmtCreatorImpl.java.
+
+   Assume that Logi Report Designer has been installed in `C:\LogiReport\Designer`, and the class files of the MappingNameFinder.java are in `C:\LogiReport\Designer\help\samples\APIDynamicQuery`:
+
+   `javac -classpath C:\LogiReport\Designer\lib\JREngine.jar;C:\LogiReport\Designer\help\samples\APIDynamicQuery SQLStmtCreatorImpl.java`
+
+   **Note:** To compile SQLStmtCreatorImpl.java you will need another file MappingNameFinder.java in `<install_root>\help\samples\APIDynamicQuery`.
+2. Modify the batch file setenv.bat in `<install_root>\bin` by appending the SQLStmtCreatorImpl.java path into the batch file's ADDCLASSPATH variable:
+
+   `set ADDCLASSPATH=%JAVAHOME%\lib\tools.jar;C:\LogiReport\Designer\help\samples\APIDynamicQuery;`
+3. Start up Logi Report Designer.
+4. Select **File** > **Open**. In the Open Report dialog, select the **Browse** button to open the catalog file **SampleComponents.cat** in `<install_root>\Demo\Reports\SampleComponents`, then open the sample report **BandedObjectReport.cls**.
+5. Open the Catalog Manager, expand the **Data Source 1** node, right-click the **Parameters** node, select **New Parameter** on the shortcut menu, then [create a type-in parameter](https://devnet.logianalytics.com/hc/en-us/articles/1500009611502-Creating-Parameters-in-a-Catalog) of String type named pTableIndex (leave the other settings to their default).
+6. Expand the **Data Source 1** node and then select the JDBC connection.
+7. Select **Show Properties** on the Catalog Manager toolbar to display the Properties sheet, then set the SQL Statement Creator property to **SQLStmtCreatorImpl;@pTableIndex**. The parameter pTableIndex is used to specify which table is to be selected at runtime.
+8. Select the query **QueryForBandedObject** in the Catalog Manager, and set its Enable SQL Statement Creator property to **true**.
+9. Save the catalog and view this report. The Enter Parameter Values dialog appears.
+10. Type **1** as the value of pTableIndex, the report then runs on the table Customers1. When you specify nothing as the value of pTableIndex, the report will run on the table Customers.
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404911578903/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009635961-Cached-Query-Results) [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404911579543/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009613182-Data-Manager)

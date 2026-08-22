@@ -1,0 +1,55 @@
+---
+title: "Crosstab Properties"
+id: 1500009749242
+section: "Web Report Object Property Reference"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009749242-Crosstab-Properties
+updated_at: 2021-07-24T00:47:46Z
+---
+
+# Crosstab Properties
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009777961-Org-Chart-Node-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009777981-DBField-Properties)
+
+# Crosstab Properties
+
+This topic describes the properties of a Crosstab object.
+
+| Property Name | Description |
+| --- | --- |
+| General | |
+| Display Name | Specifies the display name of the object. Data type: String |
+| Instance Name | Shows the instance name of the object. This property is read only. |
+| Geometry | |
+| Height | Specifies the height of the object, in inches. Type a numeric value to change the height. Data type: Float |
+| Width | Specifies the width of the object, in inches. Type a numeric value to change the width. Data type: Float |
+| X | Specifies the horizontal coordinate of the top left corner of the object, relative to its parent container. This property is unavailable if the [Position](#Position) property is set to static. Type a numeric value to change the position in inches. Data type: Float |
+| Y | Specifies the vertical coordinate of the top left corner of the object, relative to its parent container. This property is unavailable if the [Position](#Position) property is set to static. Type a numeric value to change the position in inches. Data type: Float |
+| Color | |
+| Background | Specifies the background color of the object. Choose a color from the drop-down list or select Custom to define a color in the [Color Picker](https://devnet.logianalytics.com/hc/en-us/articles/1500009746842-Color-Picker-Dialog-Box-Properties) dialog box. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| Alternating Line Color | |
+| Direction | Specifies whether the color defined by the property Pattern List will apply to the fields in the same rows or columns in the crosstab.  * **vertical** - The value of the property Pattern List will take effect on the fields in the same columns, except for the total columns. * **horizontal** - The value of the property Pattern List will take effect on the fields in the same rows, except for the total rows.   Data type: Enumeration |
+| Show | Specifies whether to enable setting alternating line color for the crosstab. Only when it is set to true, the setting for the property Direction can take effect. Data type: Boolean  Note iconThe setting of the alternating line color function for crosstab can only take effect when all the aggregate fields in the crosstab have transparent background. |
+| Others | |
+| Auto Scale in Number | Specifies whether to automatically scale the values that are of the Number data type when the values fall into the two ranges:   * When 1000 <= value < 10^15, Logi Report uses the following quantity unit symbols of the International System of Units to scale the values: K (10^3), M (10^6), G (10^9), and T (10^12). * When 0 < value < 0.001 or value >= 10^15, Logi Report uses scientific notation to scale the values.   Data type: Boolean |
+| Enable Navigation | Specifies whether to enable scrollbars on the crosstab when the parent container cannot fully display the data of the crosstab. When this property is set to true, you can further specify the height and width of the frame for holding the crosstab, by setting the two properties Navigation Height and Navigation Width.  Data type: Boolean |
+| Export to CSV | Specifies whether to include the object when exporting the report to CSV. Data type: Boolean |
+| Export to Excel | Specifies whether to include the object when exporting the report to Excel. Data type: Boolean |
+| Export to HTML | Specifies whether to include the object when exporting the report to HTML. Data type: Boolean |
+| Export to PDF | Specifies whether to include the object when exporting the report to PDF. Data type: Boolean |
+| Export to PostScript | Specifies whether to include the object when exporting the report to PostScript. Data type: Boolean |
+| Export to Report Result | Specifies whether to include the object in Web Report Studio or when the report is opened in Web Report Result. Data type: Boolean |
+| Export to RTF | Specifies whether to include the object when exporting the report to RTF. Data type: Boolean |
+| Export to Text | Specifies whether to include the object when exporting the report to Text. Data type: Boolean |
+| Export to XML | Specifies whether to include the object when exporting the report to XML. Data type: Boolean |
+| Invisible | Specifies whether to show or hide the object. All formulas and calculations will still be performed if the property is set to true. You can also [use a formula to control](https://devnet.logianalytics.com/hc/en-us/articles/1500009778821-Making-Simple-Modifications-to-Web-Report-Components#Formula) whether to show the object. Data type: Boolean |
+| Navigation Height | Specifies the height of the frame for holding the crosstab. Type a numeric value to specify the height. If no value is given here, Logi Report will calculate the height. This property takes effect only when Enable Navigation is set to true. Data type: Float |
+| Navigation Width | Specifies the width of the frame for holding the crosstab. Type a numeric value to specify the width. If no value is given here, Logi Report will calculate the width. This property takes effect only when Enable Navigation is set to true. Data type: Float |
+| [Position](https://devnet.logianalytics.com/hc/en-us/articles/1500009778821-Making-Simple-Modifications-to-Web-Report-Components#Position) | Specifies the position of the object. Available when the object is directly contained in the report body or a tabular cell.  * **absolute** - The object's position will be decided by its X and Y property values. * **static** - The object will be positioned at the default location in its container. If selected, the X, Y and other position-related properties will be hidden or disabled.   Data type: Enumeration |
+| Crosstab Property | |
+| Column Totals on Left | Specifies whether to display the total columns on the left of the aggregates. Data type: Boolean |
+| Row Totals on Top | Specifies whether to display the total rows on the top of the aggregates. Data type: Boolean |
+| Suppress Column Header | Specifies whether to suppress the column header of the crosstab. Data type: Boolean |
+| Suppress Row Header | Specifies whether to suppress the row header of the crosstab. Data type: Boolean |
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009777961-Org-Chart-Node-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009777981-DBField-Properties)

@@ -1,0 +1,46 @@
+---
+title: "Org Chart Node Properties"
+id: 1500009777961
+section: "Chart Properties"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009777961-Org-Chart-Node-Properties
+updated_at: 2021-07-24T00:47:46Z
+---
+
+# Org Chart Node Properties
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009777941-Org-Chart-Line-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009749242-Crosstab-Properties)
+
+# Org Chart Node Properties
+
+This topic describes the properties of an Org Chart Node object in an org chart.
+
+| Property Name | Description |
+| --- | --- |
+| Geometry | |
+| Height | Specifies the height of the object, in inches. Type a numeric value to change the height. Data type: Float |
+| Width | Specifies the width of the object, in inches. Type a numeric value to change the width. Data type: Float |
+| Color | |
+| Background | Specifies the background color of the object. Choose a color from the drop-down list or select Custom to define a color in the [Color Picker](https://devnet.logianalytics.com/hc/en-us/articles/1500009746842-Color-Picker-Dialog-Box-Properties) dialog box. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| Others | |
+| Export to CSV | Specifies whether to include the object when exporting the report to CSV. Data type: Boolean |
+| Export to Excel | Specifies whether to include the object when exporting the report to Excel. Data type: Boolean |
+| Export to HTML | Specifies whether to include the object when exporting the report to HTML. Data type: Boolean |
+| Export to PDF | Specifies whether to include the object when exporting the report to PDF. Data type: Boolean |
+| Export to PostScript | Specifies whether to include the object when exporting the report to PostScript. Data type: Boolean |
+| Export to Report Result | Specifies whether to include the object in Web Report Studio or when the report is opened in Web Report Result. Data type: Boolean |
+| Export to RTF | Specifies whether to include the object when exporting the report to RTF. Data type: Boolean |
+| Export to Text | Specifies whether to include the object when exporting the report to Text. Data type: Boolean |
+| Export to XML | Specifies whether to include the object when exporting the report to XML. Data type: Boolean |
+| Minimum Leaf Distance | Specifies the minimum distance between two adjacent leaf nodes on the same level. For top-down and bottom-up layouts, it means horizontal distance. For left-right layout, it means vertical distance. Type a numeric value to specify the distance. Data type: Float |
+| Minimum Level Distance | Specifies the minimum distance between two adjacent levels. For top-down and bottom-up layouts, it means vertical distance. For left-right layout, it means horizontal distance. When running the report in Web Report format, if the value of Minimum Level Distance is less than that of [Line Thickness](https://devnet.logianalytics.com/hc/en-us/articles/1500009777941-Org-Chart-Line-Properties#Thickness) on org chart line, the former will be overridden by the latter. Data type: Float |
+| Vertical Alignment | Specifies the vertical justification of the objects in each node. Choose an option from the drop-down list. Data type: Enumeration |
+| Border | |
+| Border Color | Specifies the color of the border of the object. Choose a color from the drop-down list or select Custom to define a color in the [Color Picker](https://devnet.logianalytics.com/hc/en-us/articles/1500009746842-Color-Picker-Dialog-Box-Properties) dialog box. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| Border Thickness | Specifies the width of the border in inches. Type a numeric value to change the thickness. Data type: Float |
+| Bottom Line | Specifies the line style of the bottom border of the object. Choose a style from the drop-down list. Data type: Enumeration |
+| Left Line | Specifies the line style of the left border of the object. Choose a style from the drop-down list. Data type: Enumeration |
+| Right Line | Specifies the line style of the right border of the object. Choose a style from the drop-down list. Data type: Enumeration |
+| Top Line | Specifies the line style of the top border of the object. Choose a style from the drop-down list. Data type: Enumeration |
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009777941-Org-Chart-Line-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009749242-Crosstab-Properties)

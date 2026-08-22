@@ -1,0 +1,72 @@
+---
+title: "Label Properties"
+id: 1500009749262
+section: "Web Report Object Property Reference"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009749262-Label-Properties
+updated_at: 2021-07-24T00:47:45Z
+---
+
+# Label Properties
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009749282-Line-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009778141-Multimedia-Object-OLE-Object-Properties)
+
+# Label Properties
+
+This topic describes the properties of a Label object.
+
+| Property Name | Description |
+| --- | --- |
+| General | |
+| Display Name | Specifies the display name of the object. Data type: String |
+| Instance Name | Shows the instance name of the object. This property is read only. |
+| Reference | Shows the instance name of the field if the label is related to a field. This property is read only. |
+| Geometry | |
+| Height | Specifies the height of the object, in inches. Type a numeric value to change the height. Data type: Float |
+| Width | Specifies the width of the object, in inches. Type a numeric value to change the width. Data type: Float |
+| X | Specifies the horizontal coordinate of the top left corner of the object, relative to its parent container. This property is unavailable if the [Position](#Position) property is set to static. Type a numeric value to change the position in inches. Not available when the label is in a crosstab. Data type: Float |
+| Y | Specifies the vertical coordinate of the top left corner of the object, relative to its parent container. This property is unavailable if the [Position](#Position) property is set to static. Type a numeric value to change the position in inches. Not available when the label is in a crosstab. Data type: Float |
+| Color | |
+| Background | Specifies the background color of the object. Choose a color from the drop-down list or select Custom to define a color in the [Color Picker](https://devnet.logianalytics.com/hc/en-us/articles/1500009746842-Color-Picker-Dialog-Box-Properties) dialog box. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| Foreground | Specifies the foreground color of the object. Choose a color from the drop-down list or select Custom to define a color in the [Color Picker](https://devnet.logianalytics.com/hc/en-us/articles/1500009746842-Color-Picker-Dialog-Box-Properties) dialog box. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| Text Format | |
+| Auto Fit | Specifies whether to adjust the width and height of the object according to the contents. For performance concern, you should not set both Auto Fit and [Word Wrap](#WordWrap) to true when the label is in a crosstab. Data type: Boolean |
+| Auto Map Field Name | Enabled when the label is related to a field. It specifies whether to automatically map the label text to the [dynamic display name](https://devnet.logianalytics.com/hc/en-us/articles/1500009777181-Managing-Dynamic-Display-Names-of-Business-View-Elements) of the field. If true, the text specified via the [Text](#Text) property will be ignored. Data type: Boolean |
+| Bold | Specifies whether to make the text bold. Data type: Boolean |
+| Font Face | Specifies the font of the text. Choose an option from the drop-down list. Data type: Enumeration |
+| Font Size | Specifies the font size of the text. Type an integer value to change the size. Data type: Integer |
+| Horizontal Alignment | Specifies the horizontal justification of the text in the object. Choose an option from the drop-down list. Data type: Enumeration |
+| Marks content and feature updates for Logi Report v17.1. New feature new content.Ignore HTML Tag | Specifies whether or not to ignore the HTML tag elements that are included in the text of the object at runtime and in the HTML output of the report.  * **true** - Logi Report Engine does not parse the HTML tag elements so they display exactly as what they are. * **false** - Logi Report Engine transfers the HTML tag elements to the web browser so they are translated into HTML by the web browser.   **Note:** The property [Convert HTML Tag](#ConvertHTMLTag) has higher priority than Ignore HTML Tag.  Data type: Boolean |
+| Italic | Specifies whether to make the text italic. Data type: Boolean |
+| Strikethrough | Specifies whether to add a strikethrough line to the text. Data type: Boolean |
+| Text | Specifies the text in the label. Type a string to display as the label text. Data type: String |
+| Underline | Specifies whether to underline the text. Data type: Boolean |
+| Vertical Alignment | Specifies the vertical justification of the text in the object. Choose an option from the drop-down list. Data type: Enumeration |
+| Word Wrap | Specifies whether to wrap the text to the width. For performance concern, you should not set both [Auto Fit](#AutoFit) and Word Wrap to true when the label is in a crosstab. Data type: Boolean |
+| Border | |
+| Border Color | Specifies the color of the border of the object. Choose a color from the drop-down list or select Custom to define a color in the [Color Picker](https://devnet.logianalytics.com/hc/en-us/articles/1500009746842-Color-Picker-Dialog-Box-Properties) dialog box. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| Border Thickness | Specifies the width of the border in inches. Type a numeric value to change the thickness. Data type: Float |
+| Bottom Line | Specifies the line style of the bottom border of the object. Choose a style from the drop-down list. Data type: Enumeration |
+| Left Line | Specifies the line style of the left border of the object. Choose a style from the drop-down list. Data type: Enumeration |
+| Right Line | Specifies the line style of the right border of the object. Choose a style from the drop-down list. Data type: Enumeration |
+| Top Line | Specifies the line style of the top border of the object. Choose a style from the drop-down list. Data type: Enumeration |
+| Padding | |
+| Bottom Padding | Specifies the space between the text and the bottom border of the object, in inches. Type a numeric value to change the padding. Data type: Float |
+| Left Padding | Specifies the space between the text and the left border of the object, in inches. Type a numeric value to change the padding. Data type: Float |
+| Right Padding | Specifies the space between the text and the right border of the object, in inches. Type a numeric value to change the padding. Data type: Float |
+| Top Padding | Specifies the space between the text and the top border of the object, in inches. Type a numeric value to change the padding. Data type: Float |
+| Others | |
+| Export to CSV | Specifies whether to include the object when exporting the report to CSV. Data type: Boolean |
+| Export to Excel | Specifies whether to include the object when exporting the report to Excel. Data type: Boolean |
+| Export to HTML | Specifies whether to include the object when exporting the report to HTML. Data type: Boolean |
+| Export to PDF | Specifies whether to include the object when exporting the report to PDF. Data type: Boolean |
+| Export to PostScript | Specifies whether to include the object when exporting the report to PostScript. Data type: Boolean |
+| Export to Report Result | Specifies whether to include the object in Web Report Studio or when the report is opened in Web Report Result. Data type: Boolean |
+| Export to RTF | Specifies whether to include the object when exporting the report to RTF. Data type: Boolean |
+| Export to Text | Specifies whether to include the object when exporting the report to Text. Data type: Boolean |
+| Export to XML | Specifies whether to include the object when exporting the report to XML. Data type: Boolean |
+| Invisible | Specifies whether to show or hide the object. All formulas and calculations will still be performed if the property is set to true. For an independent label, you can also [use a formula to control](https://devnet.logianalytics.com/hc/en-us/articles/1500009778821-Making-Simple-Modifications-to-Web-Report-Components#Formula) whether to show it. Not available when the label is in a crosstab. Data type: Boolean |
+| [Position](https://devnet.logianalytics.com/hc/en-us/articles/1500009778821-Making-Simple-Modifications-to-Web-Report-Components#Position) | Specifies the position of the object. Available when the label is directly contained in the report body or a tabular cell.  * **absolute** - The object's position will be decided by its X and Y property values. * **static** - The object will be positioned at the default location in its container. If selected, the X, Y and other position-related properties will be hidden or disabled.   Data type: Enumeration |
+| Suppress Aggregate | This property is supported on labels (excluding summary labels) that are inside a crosstab only. It specifies whether to hide the Total row or column. Data type: Boolean |
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009749282-Line-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009778141-Multimedia-Object-OLE-Object-Properties)

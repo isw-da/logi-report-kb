@@ -1,0 +1,576 @@
+---
+title: "Array Functions"
+id: 1500009589501
+section: "References - Logi JReport Designer 15"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009589501-Array-Functions
+updated_at: 2021-07-24T05:54:39Z
+---
+
+# Array Functions
+
+[![](https://devnet.logianalytics.com/hc/article_attachments/4404889273495/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009568182-Built-in-Functions)  [Next Topic![](https://devnet.logianalytics.com/hc/article_attachments/4404889273751/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009568202-Date-Range-Functions)
+
+# Array Functions
+
+The Array functions are all used to summarize field data in several different ways.
+
+Below is a list of the Array functions used in Logi JReport Designer:
+
+> * [Any()](#Any)
+> * [Average()](#Average)
+> * [Count()](#Count)
+> * [DistinctCount()](#DistinctCount)
+> * [Every()](#Every)
+> * [Maximum()](#Maximum)
+> * [Minimum()](#Minimum)
+> * [PopulationStdDev()](#PopulationStdDev)
+> * [PopulationVariance()](#PopulationVariance)
+> * [StdDev()](#StdDev)
+> * [Sum()](#Sum)
+> * [UBound()](#UBound)
+> * [Variance()](#Variance)
+
+## Any()
+
+**Function**
+
+* Any(array\_variable);
+* Any(field\_variable);
+
+**Description**
+
+This function is used to check whether there is at least one element in the argument is true. If there is, return true; if there isn't, return false.
+
+**Arguments**
+
+* **field\_variable**  
+   field\_variable is a special variable in formula. It refers to a group of values of a database field or of a formula field.
+* **array\_variable**   
+   array\_variable refers to an array.
+
+**Return type**
+
+Returns a Boolean value.
+
+**Examples**
+
+* `Boolean x = Any([false, false, false, true, false, false])`
+* `Boolean x = Any(@isExcellent)`
+* `Boolean x = Any(@formula1)` (@formula is a formula which returns a Boolean array.)
+* `Boolean x = Any(@@ctf1)` (@@ctf1 is a crosstab formula which returns a Boolean array.)
+
+## Average()
+
+**Function**
+
+* Average(array\_variable);
+* Average(field\_variable);
+* Average(field\_variable, groupby);
+
+**Description**
+
+This function is used to return the average value of a group of values referred to by the first argument. The second argument, if there is one, returns the group by field name.
+
+**Arguments**
+
+* **field\_variable**   
+   field\_variable is a special variable in Formula. It refers to a group of values of a database field or of a formula field. Whatever source they come from, database or formula, they should be of Number or Currency data type.
+* **array\_variable**   
+   array\_variable refers to an array whose element is of the Number or Currency value.
+* **groupby**   
+   groupby can be a constant String which indicates the groupby field name or a field variable on which grouping occurs, or a parameter variable that can accept a different value before each execution of a report.
+
+**Return type**
+
+The result type relies on the first argument. It can be of the Number or Currency data type, if the data type of each element in the first argument is also of the Number or Currency data type respectively.
+
+**Examples**
+
+* `Number x = Average([1.0, 2.0, 3.0, 4.5, 45.0, 67.0])`
+* `Number x[6] = [1.0, 2.0, 3.0, 4.5, 45.0, 67.0]; Number y = Average(x)`
+* `Currency x = Average([$1, $2, $3.0, $4.5, $45, $67])`
+* `Currency x[] = [$1, $2, $3.0, $4.5, $45, $67]; Currency y = Average(x)`
+* `Number x = Average(@dbfield)`
+* `Number x = Average(@formula)`
+* `Number x = Average(@dbfield, "group_field")`
+* `Number x = Average(@dbfield, @"group_field")`
+* `Number x = Average(@dbfield, @parameter)`
+* `Currency x = Average(@dbfield)`
+* `Currency x = Average(@formula)`
+* `Currency x = Average(@formula, "group_field")`
+* `Currency x = Average(@formula, @"group_field")`
+* `Currency x = Average(@formula, @parameter)`
+
+**Note:** If a field\_variable is assigned to a variable, for example X, the variable X will lose the characteristic of representing a group of values. The following formula will then be treated as incorrect.
+
+`Number x = @dbfield;   
+ Number y = Average(x); // system will prompt you that there is no such kind of function.`
+
+## Count()
+
+**Function**
+
+* Count(array\_variable);
+* Count(field\_variable);
+* Count(field\_variable, groupby);
+
+**Description**
+
+This function is used to count the number of a group of values referred to by the first argument. The second argument, if there is one, returns the group by field name.
+
+**Arguments**
+
+* **field\_variable**   
+   field\_variable is a special variable in Formula. It refers to a group of values of a database field or of a formula field.
+* **array\_variable**  
+   array\_variable refers to an array.
+* **groupby**   
+   groupby can be a constant String to indicate the groupby field name, or a field variable on which the grouping occurs, or a parameter variable that can accept a different value before each execution of a report.
+
+**Return type**
+
+Returns a Number value.
+
+**Examples**
+
+* `Number x = Count([1.0, 2.0, 3.0, 4.5, 45.0, 67.0]).`
+* `Number x[6] = [1.0, 2.0, 3.0, 4.5, 45.0, 67.0];   
+   Number y = Count(x).`
+* `Number x = Count(["str1","str2","str3","str4","str5","str6"]).`
+* `Number x = Count(@dbfield).`
+* `Number x = Count(@formula).`
+* `Number x = Count(@dbfield, "group_field").`
+* `Number x = Count(@formula, @"group_field").`
+* `Number x = Count(@dbfield, @parameter).`
+
+**Note:** If a field\_variable is assigned to a variable, for example X, the variable X will lose the characteristic of representing a group of values. The following formula will then be treated as in correct.
+
+`Number x = @dbfield;   
+ Number y = Count(x); // system will prompt you that there is no such kind of function.`
+
+## DistinctCount()
+
+**Function**
+
+* DistinctCount(array\_variable);
+* DistinctCount(field\_variable);
+* DistinctCount(field\_variable, groupby);
+
+**Description**
+
+This function is used to count the number of distinct values referred to by the first argument together. The second argument, if there is one, gives the group by field name.
+
+**Arguments**
+
+* **field\_variable**  
+   field\_variable is a special variable in Formula, and refers to a group of values from a database or formula field.
+* **array\_variable**  
+   array\_variable refers to an array whose element should be a Number.
+* **groupby**   
+   groupby can be a constant String to indicate the groupby field name, or a field variable on which grouping occurs, or a parameter variable that can accept a different value before each execution of a report.
+
+**Return type**
+
+Returns a Number value.
+
+**Examples**
+
+* `Number x = DistinctCount([1.0, 1.0, 3.0, 4.5, 4.5, 67.0]) // result is 4`
+* `Number x[6] = [1.0, 1.0, 3.0, 4.5, 4.5, 67.0];  
+   Number y = DistinctCount(x)`
+* `Number x = DistinctCount(["str1","str1","str3","str4","str4","str6"])}`
+* `Number x = DistinctCount(@dbfield)`
+* `Number x = DistinctCount(@formula)`
+* `Number x = DistinctCount(@dbfield, "group_field")`
+* `Number x = DistinctCount(@formula, @"group_field")`
+* `Number x = DistinctCount(@dbfield, @parameter)`
+
+**Note:** If a field\_variable is assigned to a variable, for example X, the variable X will lose the characteristic of representing a group of values. The following formula will then be treated as incorrect.
+
+`Number x = @dbfield;   
+ Number y = DistinctCount(x); // system will prompt you that there is no such kind of function.`
+
+## Every()
+
+**Function**
+
+* Every(array\_variable);
+* Every(field\_variable);
+
+**Description**
+
+This function is used to check whether each element in the argument is true. If yes, return true; if not, return false.
+
+**Arguments**
+
+* **field\_variable**  
+   field\_variable is a special variable in formula. It refers to a group of values of a database field or of a formula field.
+* **array\_variable**  
+   array\_variable refers to an array.
+
+**Return type**
+
+Returns a Boolean value.
+
+**Examples**
+
+* `Boolean x = Every([false, false, false, true, false, false])`
+* `Boolean x = Every(@isExcellent)`
+* `Boolean x = Every(@formula1)` (@formula is a formula which returns a Boolean array.)
+* `Boolean x = Every(@@ctf1)` (@@ctf1 is a crosstab formula which returns a Boolean array.)
+
+## Maximum()
+
+**Function**
+
+* Maximum(array\_variable);
+* Maximum(field\_variable);
+* Maximum(field\_variable, groupby);
+
+**Description**
+
+This function is used to pick up the maximum value from a group of values referred to by the first argument. The groupby argument specifies the group by field name.
+
+**Arguments**
+
+* **field\_variable**  
+   field\_variable is a special variable in Formula, and refers to a group of values from a database or formula field.
+* **array\_variable**   
+   array\_variable refers to an array whose element should be Number.
+* **groupby**   
+   Groupby can be a constant String to indicate the groupby field name, or a field variable on which grouping occurs, or a parameter variable that can accept a different value before each execution of a report.
+
+**Return type**
+
+The result type relies on the first argument. It may be Number, Currency, String, Date, Time, DateTime, or Boolean if the datatype of each element in the first argument is Number, Currency, String, Date, Time, DateTime or Boolean respectively.
+
+**Examples**
+
+* `Number x = Maximum([1.0, 2.0, 3.0, 4.5, 45.0, 67.0])`
+* `Number x[6] = [1.0, 2.0, 3.0, 4.5, 45.0, 67.0];  
+   Number y = Maximum(x)`
+* `Number x = Maximum(@dbfield)`
+* `Date x = Maximum(@formula)`
+* `Time x = Maximum(@dbfield, "group_field")`
+* `DateTime x = Maximum(@dbfield, @"group_field")`
+* `String x = Maximum(@dbfield, @parameter)`
+* `Currency x = Maximum(@dbfield)`
+* `Boolean x = Maximum(@formula)`
+* `Date x = Maximum(@formula, "group_field")`
+* `Currency x = Maximum(@formula, @"group_field")`
+* `Currency x = Maximum(@formula, @parameter)`
+* `String x = Maximum(['1', '2', '3.0', '4.5', '45', '67'])`
+* `Date x = Maximum([toDate(1998, 1, 1), toDate(1997, 7, 1), toDate(1999, 1, 16)])`
+
+**Note:** If a field\_variable is assigned to another variable, for example X, the variable X will lose the characteristic of representing a group of values. The following formula will then be treated as incorrect.
+
+`Number x = @dbfield;  
+ Number y = Maximum(x); // system will prompt you that there is no such kind of function.`
+
+## Minimum()
+
+**Function**
+
+* Minimum(array\_variable);
+* Minimum(field\_variable);
+* Minimum(field\_variable, groupby);
+
+**Description**
+
+This function is used to pick up the minimum value from a group of values referred to by the first argument together. The second argument, if there is one, gives the group by field name.
+
+**Arguments**
+
+* **field\_variable**  
+   field\_variable is a special variable in Formula, and refers to a group of values from a database or formula field.
+* **array\_variable**  
+   array\_variable refers to an array whose element should be a Number.
+* **groupby**  
+   groupby can be a constant String to indicate the groupby field name, or a field variable on which grouping occurs, or a parameter variable that can accept a different value before each execution of a report.
+
+**Return type**
+
+The result type relies on the first argument. It may be Number, Currency, String, Date, Time, DateTime, or Boolean if the data type of each element in the first argument is Number, Currency, String, Date, Time, DateTime or Boolean respectively.
+
+**Examples**
+
+* `Number x = Minimum([1.0, 2.0, 3.0, 4.5, 45.0, 67.0])`
+* `Number x[6] = [1.0, 2.0, 3.0, 4.5, 45.0, 67.0];  
+   Number y = Minimum(x)`
+* `Number x = Minimum(@dbfield)`
+* `Date x = Minimum(@formula)`
+* `Time x = Minimum(@dbfield, "group_field")`
+* `DateTime x = Minimum(@dbfield, @"group_field")`
+* `String x = Minimum(@dbfield, @parameter)`
+* `Currency x = Minimum(@dbfield)`
+* `Boolean x = Minimum(@formula)`
+* `Date x = Minimum(@formula, "group_field")`
+* `Currency x = Minimum(@formula, @"group_field")`
+* `Currency x = Minimum(@formula, @parameter)`
+* `String x = Minimum(['1', '2', '3.0', '4.5', '45', '67'])`
+* `Date x = Minimum([toDate(1998, 1, 1), toDate(1997, 7, 1), toDate(1999, 1, 16)]`
+
+**Note:** If a field\_variable is assigned to a variable, for example X, the variable X will lose the characteristic of representing a group of values. The following formula will then be treated as incorrect.
+
+`Number x = @dbfield;  
+ Number y = Minimum(x); // system will prompt you that there is no such kind of function.`
+
+## PopulationStdDev()
+
+**Function**
+
+* PopulationStdDev(array\_variable);
+* PopulationStdDev(field\_variable);
+* PopulationStdDev(field\_variable, groupby);
+
+**Description**
+
+This function is used to find the population standard deviation of a group of values referred to by the first argument. The second argument, if there is one, gives the group by field name.
+
+**Arguments**
+
+* **field\_variable**   
+   field\_variable is a special variable in Formula, and refers to a group of values from a database or formula field. Whatever kind of source the data comes from, database or formula, it should be of the Number data type.
+* **array\_variable**   
+   array\_variable refers to an array whose element should be Number value.
+* **groupby**   
+   groupby can be a constant String to indicate the groupby field name, or a field variable on which grouping occurs, or a parameter variable that can accept a different value before each execution of a report.
+
+**Return type**
+
+Returns a Number value.
+
+**Examples**
+
+* `Number x = PopulationStdDev([1.0, 2.0, 3.0, 4.5, 45.0, 67.0])`
+* `Number x[6] = [1.0, 2.0, 3.0, 4.5, 45.0, 67.0];  
+   Number y = PopulationStdDev(x)`
+* `Number x = PopulationStdDev(@dbfield)`
+* `Number x = PopulationStdDev(@formula)`
+* `Number x = PopulationStdDev(@dbfield, "group_field")`
+* `Number x = PopulationStdDev(@dbfield, @"group_field")`
+* `Number x = PopulationStdDev(@dbfield, @parameter)`
+
+**Note:** If a field\_variable is assigned to a variable, for example X, the variable X will lose the characteristic of representing a group of values. The following formula will then be treated as incorrect.
+
+`Number x = @dbfield;  
+ Number y = PopulationStdDev(x); // system will prompt you that there is no such kind of function.`
+
+## PopulationVariance()
+
+**Function**
+
+* PopulationVariance(array\_variable);
+* PopulationVariance(field\_variable);
+* PopulationVariance(field\_variable, groupby);
+
+**Description**
+
+This function is used to find the population variance of a group of values referred to be the first argument. The second argument, if there is one, gives the group by field name.
+
+**Arguments**
+
+* **field\_variable**   
+   field\_variable is a special variable in Formula, and refers to a group of values from a database or formula field. Whatever kind of source the data comes from, database or formula, it should be of the Number data type.
+* **array\_variable**   
+   array\_variable refers to an array whose element should be Number value.
+* **groupby**   
+   groupby can be a constant String to indicate the groupby field name, or a field variable on which grouping occurs, or a parameter variable that can accept a different value before each execution of a report.
+
+**Return type**
+
+Returns a Number value.
+
+**Examples**
+
+* `Number x = PopulationVariance([1.0, 2.0, 3.0, 4.5, 45.0, 67.0])`
+* `Number x[6] = [1.0, 2.0, 3.0, 4.5, 45.0, 67.0];  
+   Number y = PopulationVariance(x)`
+* `Number x = PopulationVariance(@dbfield)`
+* `Number x = PopulationVariance(@formula)`
+* `Number x = PopulationVariance(@dbfield, "group_field")`
+* `Number x = PopulationVariance(@dbfield, @"group_field")`
+* `Number x = PopulationVariance(@dbfield, @parameter)`
+
+**Note:** If a field\_variable is assigned to a variable, for example X, the variable X will lose the characteristic of representing a group of values. The following formula will then be treated as incorrect.
+
+`Number x = @dbfield;   
+ Number y = PopulationVariance(x); // system will prompt you that there is no such kind of function.`
+
+## StdDev()
+
+**Function**
+
+* StdDev(array\_variable);
+* StdDev(field\_variable);
+* StdDev(field\_variable, groupby);
+
+**Description**
+
+This function is used to find the standard deviation of a group of values referred to by the first argument. The second argument, if there is one, gives the group by field name.
+
+**Arguments**
+
+* **field\_variable**   
+   field\_variable is a special variable in Formula, and refers to a group of values from a database or formula field. Whatever kind of source the data comes from, database or formula, it should be of the Number data type.
+* **array\_variable**   
+   array\_variable refers to an array whose element should be a Number value.
+* **groupby**   
+   groupby can be a constant String to indicate the groupby field name, or a field variable on which grouping occurs, or a parameter variable that can accept a different value before each execution of a report.
+
+**Return type**
+
+Returns a Number value.
+
+**Examples**
+
+* `Number x = StdDev([1.0, 2.0, 3.0, 4.5, 45.0, 67.0])`
+* `Number x[6] = [1.0, 2.0, 3.0, 4.5, 45.0, 67.0];  
+   Number y = StdDev(x)`
+* `Number x = StdDev(@dbfield)`
+* `Number x = StdDev(@formula)`
+* `Number x = StdDev(@dbfield, "group_field")`
+* `Number x = StdDev(@dbfield, @"group_field")`
+* `Number x = StdDev(@dbfield, @parameter)`
+
+**Note:** If a field\_variable is assigned to a variable, for example X, the variable X will lose the characteristic of representing a group of values. The following formula will then be treated as incorrect.
+
+`Number x = @dbfield;   
+ Number y = StdDev(x); // system will prompt you that there is no such kind of function.`
+
+## Sum()
+
+**Function**
+
+* Sum(array\_variable);
+* Sum(field\_variable);
+* Sum(field\_variable, groupby);
+
+**Description**
+
+This function is used to add a group of values (referred to by the first argument) together. The second argument, if there is one, gives the group by field name.
+
+**Arguments**
+
+* **field\_variable**  
+   field\_variable is a special variable in Formula, and refers to a group of values from a database or formula field. Whatever kind of source the data comes from, database or formula, it should be of the Number or Currency data type.
+* **array\_variable**  
+   array\_variable refers to an array whose element should be Number or Currency value.
+* **groupby**  
+   groupby may be a constant String to indicate the groupby field name, or a field variable on which grouping occurs, or a parameter variable that can accept a different value before each execution of a report.
+
+**Return type**
+
+The result type relies on the first argument. It may be Number or Currency if the data type of each element in the first argument is Number or Currency respectively.
+
+**Examples**
+
+* `Number x = Sum([1.0, 2.0, 3.0, 4.5, 45.0, 67.0])`
+* `Number x[6] = [1.0, 2.0, 3.0, 4.5, 45.0, 67.0];  
+   Number y = Sum(x)`
+* `Currency x = Sum([$1, $2, $3.0, $4.5, $45, $67])`
+* `Currency x[] = [$1, $2, $3.0, $4.5, $45, $67];  
+   Currency y = Sum(x)`
+* `Number x = Sum(@dbfield)`
+* `Number x = Sum(@formula)`
+* `Number x = Sum(@dbfield, "group_field")`
+* `Number x = Sum(@dbfield, @"group_field")`
+* `Number x = Sum(@dbfield, @parameter)`
+* `Currency x = Sum(@dbfield)`
+* `Currency x = Sum(@formula)`
+* `Currency x = Sum(@formula, "group_field")`
+* `Currency x = Sum(@formula, @"group_field")`
+* `Currency x = Sum(@formula, @parameter)`
+
+**Note:** If a field\_variable is assigned to a variable, for example X, the variable X will lose the characteristic of representing a group of values. The following formula will then be treated as incorrect.
+
+`Number x = @dbfield;   
+ Number y = Sum(x); // system will prompt you that there is no such kind of function.`
+
+## UBound()
+
+**Function**
+
+* UBound(array\_variable);
+
+**Description**
+
+This function is used to return the number of elements in an array.
+
+**Argument**
+
+* **array\_variable**   
+  array\_variable refers to an Array value, expression or variable.
+
+**Return value**
+
+Returns a Number value.
+
+**Examples**
+
+* The return value of the following statement is 5.
+
+  `integer a[] = [1,1,1,1,1];  
+   UBound(a)`
+* The return value of the following statement is 6.
+
+  `UBound([$1, $2, $3.0, $4.5, $45, $67])`.
+* `if(isNull(@"Customer Name"))then   
+  {   
+  return "No Data";   
+  }   
+  else{   
+  string s[]=StringSplit(@"Customer Name");   
+  string s1="Java";   
+  string s2[]=filter(s,s1);   
+  if (UBound(s2)!=0) then   
+  return right(s2[0],4)   
+  else   
+  return "No matching data ";  
+  }` 
+
+  This formula searchs for the customer names containing the word "Java".
+
+## Variance()
+
+**Function**
+
+* Variance(array\_variable);
+* Variance(field\_variable);
+* Variance(field\_variable, groupby);
+
+**Description**
+
+This function is used to find the variance of a group of values referred to by the first argument. The second argument, if there is one, gives the group by field name.
+
+**Arguments**
+
+* **field\_variable**   
+   field\_variable is a special variable in Formula, and refers to a group of values from a database or formula field. Whatever kind of source the data comes from, database or formula, it should be of the Number data type.
+* **array\_variable**   
+   array\_variable refers to an array whose element should be Number value.
+* **groupby**   
+   groupby can be a constant String to indicate the groupby field name, or a field variable on which grouping occurs, or a parameter variable that can accept a different value before each execution of a report.
+
+**Return type**
+
+Returns a Number value.
+
+**Examples**
+
+* `Number x = Variance([1.0, 2.0, 3.0, 4.5, 45.0, 67.0])`
+* `Number x[6] = [1.0, 2.0, 3.0, 4.5, 45.0, 67.0];  
+   Number y = Variance(x)`
+* `Number x = Variance(@dbfield)`
+* `Number x = Variance(@formula)`
+* `Number x = Variance(@dbfield, "group_field")`
+* `Number x = Variance(@dbfield, @"group_field")`
+* `Number x = Variance(@dbfield, @parameter)`
+
+**Note:** If a field\_variable is assigned to a variable, for example X, the variable X will lose the characteristic of representing a group of values. The following formula will then be treated as incorrect.
+
+`Number x = @dbfield;   
+ Number y = Variance(x); // system will prompt you that there is no such kind of function.`
+
+[![](https://devnet.logianalytics.com/hc/article_attachments/4404889273495/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009568182-Built-in-Functions)  [Next Topic![](https://devnet.logianalytics.com/hc/article_attachments/4404889273751/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009568202-Date-Range-Functions)

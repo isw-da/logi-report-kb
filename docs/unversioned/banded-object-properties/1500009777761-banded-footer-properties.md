@@ -1,0 +1,58 @@
+---
+title: "Banded Footer Properties"
+id: 1500009777761
+section: "Banded Object Properties"
+category: "Logi Report"
+url: https://devnet.logianalytics.com/hc/en-us/articles/1500009777761-Banded-Footer-Properties
+updated_at: 2021-07-24T00:47:48Z
+---
+
+# Banded Footer Properties
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009777721-Banded-Object-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009749162-Banded-Header-Properties)
+
+# Banded Footer Properties
+
+This topic describes the properties of a Banded Footer object in a banded object.
+
+| Property Name | Description |
+| --- | --- |
+| General | |
+| Data Inherit | Indicates whether the dataset for this object is inherited from another object. This property is read only. |
+| Display Name | Specifies the display name of the object. Data type: String |
+| Instance Name | Shows the instance name of the object. This property is read only. |
+| Geometry | |
+| Height | Shows the height of the object, in inches. This property is read only. Data type: Float |
+| Width | Specifies the width of the object, in inches. Type a numeric value to change the width. Data type: Float |
+| Color | |
+| Background | Specifies the background color of the object. Choose a color from the drop-down list or select Custom to customize a color. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| Border | |
+| Border Color | Specifies the color of the border of the object. Choose a color from the drop-down list or select Custom to customize a color. You can also type a hexadecimal RGB value (for example, 0xff0000) to specify a color. Data type: String |
+| Border Thickness | Specifies the width of the border. Type a numeric value to change the thickness. Data type: Float |
+| Bottom Line | Specifies the line style of the bottom border of the object. Choose a style from the drop-down list. Data type: Enumeration |
+| Left Line | Specifies the line style of the left border of the object. Choose a style from the drop-down list. Data type: Enumeration |
+| Right Line | Specifies the line style of the right border of the object. Choose a style from the drop-down list. Data type: Enumeration |
+| Top Line | Specifies the line style of the top border of the object. Choose a style from the drop-down list. Data type: Enumeration |
+| Others | |
+| Cross Page | Specifies whether the panel can be split across a page break.  * If false, the panel will be shown in the next page when it spans a large space vertically and cannot be wholly shown in a page. * If true, the panel will be split across a page break when it exceeds the page height.   This property is applied only when running or exporting the report in the formats that support page layout such as PDF and RTF.  Data type: Boolean |
+| Export to CSV | Specifies whether to include the object when exporting the report to CSV. Data type: Boolean |
+| Export to Excel | Specifies whether to include the object when exporting the report to Excel. Data type: Boolean |
+| Export to HTML | Specifies whether to include the object when exporting the report to HTML. Data type: Boolean |
+| Export to PDF | Specifies whether to include the object when exporting the report to PDF. Data type: Boolean |
+| Export to PostScript | Specifies whether to include the object when exporting the report to PostScript. Data type: Boolean |
+| Export to Report Result | Specifies whether to include in Web Report Studio or when the report is opened in Web Report Result. Data type: Boolean |
+| Export to RTF | Specifies whether to include the object when exporting the report to RTF. Data type: Boolean |
+| Export to Text | Specifies whether to include the object when exporting the report to Text. Data type: Boolean |
+| Export to XML | Specifies whether to include the object when exporting the report to XML. Data type: Boolean |
+| Fill Whole Page | Specifies whether to make the panel extended to the bottom of the page, so that the next panel starts on a new page. Data type: Boolean |
+| Invisible | Specifies whether to show or hide the object. All formulas and calculations will still be performed if the property is set to true. You can also [use a formula to control](https://devnet.logianalytics.com/hc/en-us/articles/1500009778821-Making-Simple-Modifications-to-Web-Report-Components#Formula) whether to show the object. Data type: Boolean |
+| Label | Specifies the popup text displayed when the mouse pointer hovers over the left edge of the panel. Data type: String |
+| On New Page | Specifies whether the panel starts on a new page. The default is false which means the panel starts on a new page only if the previous page is filled. This property is applied only when running or exporting the report in the formats that support page layout such as PDF and RTF. Data type: Boolean |
+| Record Location | Specifies the calculation point for the properties of the object which are controlled by formulas. Choose an option from the drop-down list.  * **Default** - The values of the properties are calculated in the default location where they are located. * **Page Header** - The values of the properties are calculated in the page header. * **Page Footer** - The values of the properties are calculated in the page footer.   Data type: Enumeration |
+| Suppress | Specifies whether to show the object in the report. All formulas and calculations will be skipped if the property is set to true. You can also use a formula to dynamically control whether to show the object. Data type: Boolean  Note iconWhen you set both the Invisible and Suppress properties of an object to true, Suppress has the higher priority. |
+| Suppress Blank Panel | Specifies whether a panel with no data is included in the report. The default is false which means an empty panel is shown. Data type: Boolean |
+| Suppress When No Records | Specifies whether to display the object in the report result when no record is returned to its parent data component. Data type: Boolean |
+| To Bottom | Specifies whether to move the banded object footer panel to the bottom of the page. The default is false, which means that the banded object footer appears at the end of the banded object. Data type: Boolean |
+| Underlay | Specifies whether the panel will be layered beneath the next panel in the banded object. A panel layered beneath a subsequent panel can be used to contain a background picture or watermark. Banded page header, page footer, or group footer panels cannot be layered. The default is false which means that the panel is not layered beneath the next panel. Data type: Boolean |
+
+[![Back](https://devnet.logianalytics.com/hc/article_attachments/4404880134167/back.png)Previous Topic](https://devnet.logianalytics.com/hc/en-us/articles/1500009777721-Banded-Object-Properties)  [Next Topic![Next](https://devnet.logianalytics.com/hc/article_attachments/4404880134423/forward.png)](https://devnet.logianalytics.com/hc/en-us/articles/1500009749162-Banded-Header-Properties)
