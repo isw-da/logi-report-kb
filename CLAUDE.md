@@ -35,7 +35,17 @@ surface at all: zero hits for "Logi Report", "JReport", "pixel-perfect" or
 If someone asks for pixel-perfect, paginated, banded, sub-reports, page headers
 and footers, bursting, or a Crystal Reports replacement, they want Logi Report.
 If they ask for interactive dashboards or embedded self-service analytics, they
-want Composer and this repo will not help them. Say so rather than improvising.
+want Composer, and for those questions this repo will not help them.
+
+**One real connection exists, and it is new.** From v26.2 (30 July 2026) Logi
+Report can import from Composer: `Composer Trusted Access Credentials` configures
+a shared Client ID and Secret used by Composer import in Catalog Studio,
+connection refresh, Composer Source import, and Server Console user or group
+import, and Composer source content can be translated into Business Views for
+"migration and reuse of existing Composer report definitions". Five v26 documents
+cover it, and nothing in v15 through v25 mentions Composer at all. Note that
+Report-side docs write plain "Composer", never "Logi Composer", so search for the
+short form or you will conclude wrongly that no integration exists.
 
 "Logi Symphony" is a deprecated name for Logi Composer. Do not use it as a live
 product name, even though insightsoftware's own public site still does.
@@ -55,13 +65,26 @@ Start with the index, not with grep over 13,235 files.
   anything of the form "how do I build X".**
 
 **The most important retrieval fact about this corpus: half of it is reference,
-not instructions.** 6,518 documents are property tables and dialog-box reference,
-against 1,719 procedural ones. So a title search for "chart" returns "Chart
-Legend Properties" long before it returns anything telling you how to add a
-chart. When the user wants to DO something, filter `doc_kind == "procedural"`
-first, and fall back to `reference` only for the specific property they need.
-Better still, start at [building-reports/README.md](building-reports/README.md),
-which exists precisely because raw retrieval over this corpus misleads.
+not instructions.** The three `doc_kind` buckets are 6,518 `reference`, 3,002
+`procedural` and 3,715 `other`. A title search for "chart" returns "Chart Legend
+Properties" long before anything telling you how to add a chart.
+
+When the user wants to DO something, **filter `doc_kind != "reference"`**, which
+keeps both `procedural` and `other`. Do not filter to `procedural` alone: an
+adversarial review found that advice discarded 57% of the documents this repo's
+own guides cite. `other` is a genuine bucket, not a dustbin, and holds a lot of
+narrative material that answers real questions.
+
+Reach for `reference` deliberately, when you need a specific property, field or
+dialog option. **That is not a lesser bucket, it is where every configuration
+detail lives.** The same review found the guides had no route at all into the
+3,186 `* Properties` documents, and as a result answered a question about secure
+file delivery with "FTP" when the corpus documents SFTP over SSH2, SCP and FTPS.
+If a question is about how something is CONFIGURED, go to `reference` first.
+
+Better still for a build task, start at
+[building-reports/README.md](building-reports/README.md), which exists precisely
+because raw retrieval over this corpus misleads.
 
 About 9% of the corpus is a byte-identical copy of another document, because
 upstream publishes the same article under several Zendesk ids, both across
@@ -77,7 +100,7 @@ python3 -c "
 import json
 m = json.load(open('MANIFEST.json'))
 for d in m['documents']:
-    if (d['is_canonical'] and d['doc_kind'] == 'procedural'
+    if (d['is_canonical'] and d['doc_kind'] != 'reference'
             and 'crosstab' in d['title'].lower()):
         print(d['era'], d['path'])
 "
@@ -188,9 +211,17 @@ disagree in either direction.
   through v24 at `reportkbase.logianalytics.com`, but not for v25 or v26.
   `api/` describes the surfaces from prose documentation, which is thinner than
   a class reference.
-- **No public REST admin API is documented.** If someone asks for one, the
-  answer is that the documented surfaces are the Java APIs, the JavaScript API
-  and URL invocation.
+- **A REST admin API EXISTS, but this corpus documents it by capability, not by
+  endpoint.** An earlier version of this file said no REST admin API was
+  documented, and an adversarial review caught it telling a prospect the product
+  could not do something it does. Logi Report ships modularised RESTful Web APIs
+  for the Server Console, with an openAPI definition shipped at
+  `<install_root>\help\webapi\logireportserver.yaml` and a generated JavaScript
+  client. They cover sign-in and sessions, resource CRUD and permissions, users,
+  groups, roles and organisations, server preferences, LDAP settings, triggers
+  and scheduling. See [api/rest-web-api.md](api/rest-web-api.md). What this repo
+  does NOT have is a path-and-verb reference; for that, read the yaml on a real
+  install. Say that, rather than denying the capability.
 - **Snapshot dated in `docs/current/PROVENANCE.json`.** Documentation changes.
   Re-run `scripts/pull_docs.py` before relying on it for anything current.
 - **JDashboard has been in maintenance mode since v19** ("we will not be adding

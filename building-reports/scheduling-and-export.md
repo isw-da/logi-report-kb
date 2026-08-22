@@ -97,6 +97,38 @@ the same lesson and
 [Scheduling to run a report](../docs/logi-report-v17-v19/running-and-scheduling-reports-logi-report-server-v19/5741463322647-scheduling-to-run-a-report.md).
 To Disk is unavailable to organisation users under multitenancy.
 
+### "FTP" means five protocols, including SFTP over SSH. Do not say plain FTP.
+
+This section previously stopped at the word FTP, and an adversarial review
+flagged it as the answer most likely to land badly: asked to schedule a PDF to a
+customer's SFTP server, an agent reading only this page would have said delivery
+is over FTP, in plain text, when the product has supported SSH key
+authentication for years.
+
+The FTP task's **Protocol Type** field offers:
+
+| Protocol | Default port | Note |
+| --- | --- | --- |
+| FTP (Standard File Transfer Protocol) | 21 | "Files are transferred in a non-secure (plain text) style" |
+| SFTP using SSH2 | 22 | "supported by most UNIX servers running SSH2" |
+| SCP (Secure Copy) | 22 | over SSH; you cannot create folders on the server with this type |
+| FTPS with TLS/SSL (Explicit) | 21 | |
+| FTPS with TLS/SSL (Implicit) | 990 | |
+
+For SFTP, **Logon Type** offers password, SSH key file, or both.
+
+Source: [Schedule Dialog Box Properties (v26)](../docs/current/v26/dialog-boxes-in-report-server/45203952895501-schedule-dialog-box-properties.md),
+and the same detail from v18 at
+[Schedule Dialog Box Properties (v18)](../docs/logi-report-v17-v19/dialog-boxes-in-logi-report-server-v18/4405683761815-schedule-dialog-box-properties.md).
+A v26.2 release note fixes a scheduled FTP/SFTP CSV export issue, so the path is
+actively maintained.
+
+**The general lesson, which applies well beyond this page:** every configuration
+detail in this product lives in a `* Properties` or `* Dialog Box Properties`
+document, and those are `doc_kind == "reference"`. If a question is about how
+something is configured rather than how it is done, go to the reference documents
+first. These guides route you to procedures and will otherwise under-answer you.
+
 ### The Schedule dialog, tab by tab
 
 - **General**: schedule name; for a page report, which report tabs to run, with

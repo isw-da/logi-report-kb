@@ -202,20 +202,42 @@ The separation is total:
   (board 520). Logi Info is a third, REPDEV.
 - Different repositories: `jreport-*` on Bitbucket under the logianalytics org.
 - Different documentation sites, and different Salesforce support dashboards.
-- **Zero shared documentation surface, verified in both directions.** Grepping
-  the current Composer v25 and v26 documentation (1,774 files) for "Logi Report",
-  "JReport", "Jinfonet", "pixel-perfect" and "Report Designer" returns zero files
-  for each. In the other direction, all 13,235 Logi Report articles in this repo,
-  v15 through v26, mention Logi Composer, Logi Info, Dundas, Izenda, Exago and
-  Zoomdata exactly zero times each. Two product families documented as though the
-  other does not exist. Reproduce with:
+- **They were documented in total isolation for a decade, and v26 is the first
+  release where they connect.** This claim was previously written as "zero shared
+  documentation surface in both directions" and an adversarial review refuted it.
+  The refutation matters, so the corrected position is stated in full:
+
+  *Composer to Report:* the current Composer v25 and v26 documentation (1,774
+  files) mentions "Logi Report", "JReport", "Jinfonet", "pixel-perfect" and
+  "Report Designer" zero times each. That direction is genuinely clean.
+
+  *Report to Composer:* **not clean.** Report-side documentation writes the
+  product name as plain "Composer", never "Logi Composer", so a grep for the full
+  name returns zero and looks like proof of isolation. Searching for "Composer"
+  alone finds five files, **all of them v26**:
 
   ```
   cd ~/logi-report-kb
-  for t in "Logi Composer" "Logi Info" "Dundas" "Izenda" "Exago" "Zoomdata"; do
-    echo "$t -> $(grep -ril "$t" docs | wc -l)"
+  for d in docs/jreport-v15-v16 docs/logi-report-v17-v19 docs/unversioned \
+           docs/current/v23-v25 docs/current/v26; do
+    echo "$d -> $(grep -rl 'Composer' $d --include='*.md' | wc -l)"
   done
+  # 0, 0, 0, 0, 5
   ```
+
+  What those five contain is a real product integration, new in v26.2 and dated
+  30 July 2026. `Composer Trusted Access Credentials` documents a system-level
+  Client ID and Client Secret "shared by every Composer import in Catalog Studio,
+  connection refresh, Composer Source import, and Server Console Composer User or
+  Group import". The v26.2 release notes add: "Composer source content can now be
+  translated to BV (Business View), enabling seamless migration and reuse of
+  existing Composer report definitions within the BV environment."
+
+  So the accurate statement is: separate products, separate lineages, separate
+  Jira projects and repositories, and no documentation overlap at all from v15
+  through v25. Then in v26 Logi Report gains the ability to import from Composer
+  and translate Composer sources into Business Views. Anyone selling or migrating
+  needs to know that path exists, and that it is only months old.
 - They share the number 26 because both sit on a common calendar release train.
   A customer seeing v26 on both must not infer a single product.
 

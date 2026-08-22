@@ -27,6 +27,7 @@ separate product with a separate documentation set and nothing here applies to i
 | export to PDF or Excel, or schedule delivery | [scheduling-and-export.md](scheduling-and-export.md) |
 | run a full demo end to end | [demo-recipes.md](demo-recipes.md) |
 | avoid the things that break demos | [gotchas.md](gotchas.md) |
+| answer "does upgrading break our reports?" | [upgrading.md](upgrading.md) |
 
 ## Straight to a source document
 

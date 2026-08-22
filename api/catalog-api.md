@@ -124,6 +124,20 @@ The v15 set is split into one article per task, starting at
 
 Between the v15 and v19 sets the Catalog API's structure of documentation changed more
 than the API did: v15 splits each operation into its own short article, v19 consolidates
-them. The v13.5 catalog split is present in both. Whether individual method signatures
-changed across the rename is not something this corpus lets me determine, because neither
-era includes the Javadoc.
+them.
+
+**Two corrections after adversarial review.**
+
+First, this section previously said the v13.5 split "is present in both". It is not.
+`MultipliedCatalogAPI` appears in **0** files under `docs/jreport-v15-v16/`, 10 under
+`docs/logi-report-v17-v19/` and 8 under `docs/current/`. The two-class split is
+documented from **v17 onward only**. `jet.api.CatalogAPI` alone does appear in the v15
+tree. Do not tell a v15 or v16 customer the split is documented for them.
+
+Second, this section previously said method signatures could not be compared across the
+rename because neither era ships the Javadoc. That is too pessimistic. The v16 article
+[Catalog API (v16)](../docs/jreport-v15-v16/working-with-apis-logi-jreport-designer-v16/1500010028402-catalog-api.md)
+carries a full signature listing, and comparing it against v19 shows signatures such as
+`insertBusinessView(String dataSourceName, String queriableName, String businessViewName,
+boolean isLogicView=false)` byte-identical across the two eras. v16 to v19 comparison is
+available; only v15 genuinely lacks it.

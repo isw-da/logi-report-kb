@@ -72,6 +72,28 @@ it as a class.
 
 Source: [Tour of the Java API (v19)](../docs/logi-report-v17-v19/working-with-apis-logi-report-server-v19/5741408065175-tour-of-the-java-api.md).
 
+## Export formats: what this surface can and cannot reach
+
+**Read this before adapting the examples below.** They export to PDF and to HTML,
+and the obvious next step is to guess the Excel constant. There is not one.
+
+The corpus names exactly these format constants for this API: `APIConst.PDF`,
+`APIConst.RST`, `APIConst.HTML`, `APIConst.DHTML`, plus the `TAG_HTML*` tags.
+Searching all 13,235 documents for `TAG_EXCEL` or `APIConst.EXCEL` returns zero.
+
+An adversarial review flagged this as the sharpest invention trap in the repo:
+`props.put(APIConst.TAG_EXCEL, "report.xls")` looks exactly as plausible as the
+two real examples and would be fabrication.
+
+**If you need Excel, use URL invocation instead**, which does document it:
+`jrs.result_type=4` is "To Excel", alongside 1 HTML, 2 PDF, 3 TEXT, 5 PostScript,
+6 RTF, 7 XML. See [url-invocation.md](url-invocation.md) and
+[URL properties (v26)](../docs/current/v26/working-on-report-server-via-url-report-server/45204033487757-url-properties-for-running-scheduling-and-viewing-reports-via-url.md).
+
+More generally: anything not named in this file is not documented in this corpus.
+No Javadoc is included, so a constant you cannot find here may still exist in the
+product. Say that, rather than inventing a name that compiles in the reader's head.
+
 ## Worked example: schedule a report to disk as PDF
 
 ```java

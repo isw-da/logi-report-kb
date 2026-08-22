@@ -1,5 +1,37 @@
 # Demo recipes
 
+## Version note: these recipes are written from the v19 tutorials
+
+Every step below is verified against the v19 tutorial lessons, which are the most
+detailed the corpus holds. An adversarial review pointed out, fairly, that this
+file cited `docs/current/` zero times while CLAUDE.md tells you to prefer current
+documentation, and that a v26 counterpart exists for every lesson used here.
+
+The review also diffed the two that matter most and found the procedures
+unchanged: the v26 wizard lesson still has Switch Row > Sales Quarter and
+Clustered Bar 2-D, and the v26 scheduling lesson still names the same six
+destinations. So these recipes are not stale. Check the v26 counterpart anyway
+before demoing to anyone on v23 or later:
+
+| Used here (v19) | v26 counterpart |
+| --- | --- |
+| Lesson 2, wizard / chart | [Lesson 4: Creating a Chart Report](../docs/current/v26/report-tutorial/45190390876813-lesson-4-creating-a-chart-report.md) |
+| Lesson 4, scheduling | [Lesson 4: Scheduling Reports](../docs/current/v26/report-tutorial/45190414969101-lesson-4-scheduling-reports.md) |
+| Crosstab lesson | [Lesson 6: Creating a Crosstab Report](../docs/current/v26/report-tutorial/45190368484877-lesson-6-creating-a-crosstab-report.md) |
+| Banded report | [Lesson 2: Creating a Horizontal Banded Report](../docs/current/v26/report-tutorial/45190400110093-lesson-2-creating-a-horizontal-banded-report.md) |
+| Publishing | [Lesson 2: Publishing Resources](../docs/current/v26/report-tutorial/45190367543565-lesson-2-publishing-resources.md) |
+
+The whole v26 tutorial set is in `../docs/current/v26/report-tutorial/`.
+
+## One join this file does not make for you
+
+Recipe 1 Route B builds its chart as a **web report** (`.wls`). Recipe 4 schedules
+a **page report** (`.cls`). If you are combining them into a single "grouped sales
+with a chart, scheduled to PDF" demo, settle the report type first: read
+[page-vs-web-reports.md](page-vs-web-reports.md) before you build, not during the
+demo. The review found this is exactly where the composite task breaks down.
+
+
 End-to-end walkthroughs of the reports a presales demo actually shows. Every step
 traces to a source document. Where the corpus does not cover something, it says so
 rather than guessing.

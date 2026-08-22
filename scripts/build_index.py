@@ -42,11 +42,25 @@ REF_RE = re.compile(r"(propert|dialog box|reference|appendix|\bdialogs?\b)", re.
 HOWTO_RE = re.compile(
     r"^(creating|create|adding|add|using|use|working|how to|setting|set|defining"
     r"|define|running|run|scheduling|schedule|installing|install|building|build"
-    r"|designing|design|editing|edit|publishing|import|export)", re.I)
+    r"|designing|design|editing|edit|publishing|import|export|configuring"
+    r"|configure|connecting|connect|deploying|deploy|starting|start|managing"
+    r"|manage|applying|apply|specifying|specify|customizing|customising|enabling"
+    r"|viewing|generating|generate|migrating|upgrading|troubleshooting)", re.I)
+
+# Tutorial material is the most step-by-step content in the corpus and the
+# previous classifier put ALL of it in "other": 233 titles starting "Lesson "
+# and 105 starting "Track ". An adversarial review found that following the
+# advice to filter doc_kind == "procedural" discarded 57% of the documents the
+# authored layer itself hand-picked, including every tutorial demo-recipes.md
+# is built from. Tutorials are procedural by definition.
+TUTORIAL_RE = re.compile(r"^(lesson|track|part|tutorial|getting started|"
+                         r"quick start|walkthrough|step \d)", re.I)
 
 
 def classify(title):
     t = (title or "").strip()
+    if TUTORIAL_RE.match(t):
+        return "procedural"
     if REF_RE.search(t):
         return "reference"
     if HOWTO_RE.match(t):

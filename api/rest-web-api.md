@@ -73,10 +73,23 @@ The CSRF whitelist property is the piece that makes a cross-origin call from A t
 
 ## Era note
 
-This surface is absent from the v15 Logi JReport documentation. The
-[v15 JavaScript article](../docs/jreport-v15-v16/working-with-apis-logi-jreport-server-v15/1500009667961-embedding-logi-jreport-server-guide-v15-with-javascript-apis.md)
-covers embedding only, with no Server Console REST section, no openAPI definition and no
-generated clients. Within the v17 to v19 era it is present from
-[v17.1](../docs/logi-report-v17-v19/working-with-apis-logi-report-server-v17-1/1500009770701-embedding-logi-report-server-console-and-reports-in-your-app.md)
-onward, with LDAP and trigger coverage flagged as new at 19.2. If a customer is on v15 or
-v16, do not promise them this API.
+**Corrected after adversarial review.** An earlier version of this file said the
+surface was absent from v15 and v16 and told you not to promise it to those
+customers. That is wrong for v16.
+
+`docs/jreport-v15-v16/working-on-logi-jreport-server-via-urls-logi-jreport-server/1500009686122-embedding-logi-jreport-with-javascript-apis.md`,
+whose section is "Working on Logi JReport Server via URLs Logi JReport Server
+v16", documents "modularized RESTful Web APIs", openAPI as the specification, the
+generated JavaScript client, and the definition file. So the API exists in the
+JReport era, under v16.
+
+What DID change at the rebrand is the definition file's name:
+
+| Era | Definition file | Files mentioning it |
+| --- | --- | --- |
+| v16 (JReport) | `jreportserver.yaml` | 1 |
+| v17.1 onward | `logireportserver.yaml` | 3 in v17-v19, 2 in current |
+
+The earlier error came from checking a single v15 article and generalising to the
+era. v15 alone genuinely lacks it; v16 does not. If a customer is on v15, check
+before promising. If they are on v16 or later, the API is documented.
