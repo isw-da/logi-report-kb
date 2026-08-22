@@ -20,6 +20,7 @@ CHECK_MANIFEST = [
     "no_composer_confusion",
     "era_labelled",
     "retrieval_smoke_test",
+    "retrieval_current_era",
 ]
 
 REQUIRED_PATHS = [
@@ -246,6 +247,33 @@ def check_smoke(disk):
            if unanswered else "all %d demo questions answerable from the corpus" % len(SMOKE))
 
 
+def check_smoke_current(disk):
+    """Stronger than retrieval_smoke_test: the same demo questions must be
+    answerable from docs/current alone. The corpus skews old (9,344 of 13,235
+    articles describe v15-v19), so a KB used for demos must not silently fall
+    back on decade-old guidance. If a refresh breaks the current pull, this is
+    the check that notices."""
+    cur = [r for r in disk if r.startswith(os.path.join("docs", "current"))]
+    if not cur:
+        record("retrieval_current_era", False, "docs/current is empty; run scripts/pull_docs.py")
+        return
+    index = []
+    for rel in cur:
+        try:
+            index.append(open(os.path.join(KB, rel), encoding="utf-8",
+                              errors="replace").read().lower())
+        except Exception:
+            pass
+    unanswered = [label for label, must, also in SMOKE
+                  if not any(all(t in b for t in must) and any(t in b for t in also)
+                             for b in index)]
+    record("retrieval_current_era", not unanswered,
+           "%d of %d unanswerable from docs/current: %s"
+           % (len(unanswered), len(SMOKE), unanswered) if unanswered
+           else "all %d demo questions answerable from the %d current-era docs"
+                % (len(SMOKE), len(cur)))
+
+
 def main():
     man = load_manifest()
     disk = doc_paths()
@@ -258,6 +286,7 @@ def main():
     check_composer_confusion()
     check_era(man)
     check_smoke(disk)
+    check_smoke_current(disk)
 
     print("=" * 70)
     print("LOGI REPORT KB GATE   (%d documents on disk)" % len(disk))
