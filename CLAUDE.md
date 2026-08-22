@@ -54,6 +54,15 @@ Start with the index, not with grep over 13,235 files.
 - `building-reports/README.md` — task-oriented routing. **Start here for
   anything of the form "how do I build X".**
 
+**The most important retrieval fact about this corpus: half of it is reference,
+not instructions.** 6,518 documents are property tables and dialog-box reference,
+against 1,719 procedural ones. So a title search for "chart" returns "Chart
+Legend Properties" long before it returns anything telling you how to add a
+chart. When the user wants to DO something, filter `doc_kind == "procedural"`
+first, and fall back to `reference` only for the specific property they need.
+Better still, start at [building-reports/README.md](building-reports/README.md),
+which exists precisely because raw retrieval over this corpus misleads.
+
 About 9% of the corpus is a byte-identical copy of another document, because
 upstream publishes the same article under several Zendesk ids, both across
 Designer and Server and across versions. Nothing has been deleted, because two
@@ -68,7 +77,8 @@ python3 -c "
 import json
 m = json.load(open('MANIFEST.json'))
 for d in m['documents']:
-    if d['is_canonical'] and 'crosstab' in d['title'].lower():
+    if (d['is_canonical'] and d['doc_kind'] == 'procedural'
+            and 'crosstab' in d['title'].lower()):
         print(d['era'], d['path'])
 "
 ```

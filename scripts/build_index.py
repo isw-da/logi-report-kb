@@ -18,6 +18,26 @@ ERA_LABEL = {
 
 FM = re.compile(r"^---\n(.*?)\n---\n", re.S)
 
+# Retrieval characteristic that matters more than any other in this corpus:
+# 48% of documents are property or dialog-box reference, only 20% are procedural.
+# Title-only search therefore lands on a property table about half the time, when
+# someone asking "how do I add a chart" wants a procedure. Classify so a consumer
+# can filter instead of discovering this the hard way.
+REF_RE = re.compile(r"(propert|dialog box|reference|appendix|\bdialogs?\b)", re.I)
+HOWTO_RE = re.compile(
+    r"^(creating|create|adding|add|using|use|working|how to|setting|set|defining"
+    r"|define|running|run|scheduling|schedule|installing|install|building|build"
+    r"|designing|design|editing|edit|publishing|import|export)", re.I)
+
+
+def classify(title):
+    t = (title or "").strip()
+    if REF_RE.search(t):
+        return "reference"
+    if HOWTO_RE.match(t):
+        return "procedural"
+    return "other"
+
 
 def parse_frontmatter(path):
     head = open(path, encoding="utf-8", errors="replace").read(4000)
@@ -69,6 +89,7 @@ def main():
                 # consumer see that without the run guessing an era the source
                 # never states.
                 "uses_jreport_naming": "Logi JReport" in body,
+                "doc_kind": classify(fm.get("title", "")),
                 "title": fm.get("title", ""),
                 "id": fm.get("id", ""),
                 "section": fm.get("section", section),
@@ -112,6 +133,7 @@ def main():
         "name": "logi-report-kb",
         "description": "Logi Report documentation and API knowledge base",
         "document_count": len(entries),
+        "doc_kinds": {},
         "duplication": {
             "documents_in_a_duplicate_group": n_dup_docs,
             "redundant_copies": n_redundant,
@@ -124,6 +146,10 @@ def main():
         "eras": {e: sum(1 for x in entries if x["era"] == e)
                  for e in sorted({x["era"] for x in entries})},
         "documents": entries,
+    }
+    manifest["doc_kinds"] = {
+        k: sum(1 for e in entries if e["doc_kind"] == k)
+        for k in ("procedural", "reference", "other")
     }
     with open(os.path.join(KB, "MANIFEST.json"), "w", encoding="utf-8") as fh:
         json.dump(manifest, fh, indent=1, ensure_ascii=False)
