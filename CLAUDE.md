@@ -60,6 +60,14 @@ Start with the index, not with grep over 13,235 files.
 - `llms.txt` — the same index grouped by era and section, in the llms.txt
   convention.
 - `ORIENTATION.md` — what the product is, the version map, the lineage.
+- `API-SURFACE.md` — the single index of everything programmable: entry points,
+  the licence key each family needs, which eras it appears in, and where the
+  samples are. **Start here for any "can it be automated" or "can we drive it
+  from our app" question.** The surface is Java (Design, Catalog and Server
+  APIs), a JavaScript viewer API, a servlet and URL path, and a RESTful Web API
+  for the Server Console that the corpus describes by capability rather than by
+  endpoint. The file also records the delta a JReport v16 customer faces on
+  upgrade, which is dependency and platform change rather than lost API surface.
 - `api/README.md` — which API surface to reach for.
 - `building-reports/README.md` — task-oriented routing. **Start here for
   anything of the form "how do I build X".**
@@ -197,6 +205,22 @@ scripts/
 After changing anything under `docs/`, run `python3 scripts/build_index.py` then
 `python3 scripts/verify_kb.py`. The gate fails if the manifest and the tree
 disagree in either direction.
+
+## Nothing refreshes this mirror on its own
+
+`scripts/pull_docs.py` is run by hand. There is no GitHub Action (no `.github/`
+directory exists), no cron entry and no launchd job. So the corpus is a snapshot
+whose age is the age of the last commit, and `git log -1 --format=%cI` is the
+number to check before you rely on anything version-sensitive.
+
+Two further limits on what a refresh even covers:
+
+- `pull_docs.py` pulls `docs/current/` only, from `docs-report.zendesk.com`
+  (v23-v25) and `logi-report-v26.insightsoftware.com` (v26). It does not touch
+  `docs/logi-report-v17-v19/`, `docs/jreport-v15-v16/` or `docs/unversioned/`.
+  Those trees are frozen at whatever the original capture held.
+- `docs/current/PROVENANCE.json` records the pull time and the per-host article
+  counts. Read it rather than assuming the tree is fresh.
 
 ## Honest limits, so you do not overclaim
 
