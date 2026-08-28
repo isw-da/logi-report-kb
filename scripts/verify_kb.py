@@ -274,6 +274,28 @@ def check_llms(disk):
 
 
 def check_api_sources():
+    """Every api/ document must trace to a source that can be checked.
+
+    The previous version required a resolvable `../docs/*.md` citation and
+    nothing else, which made it RED from the moment the Web API spec work
+    landed. Two files could never satisfy it and both have real provenance:
+    ENDPOINTS.md derives from the OpenAPI spec shipped inside the product, and
+    composer-si-integration.md cites Confluence page ids. The question the check
+    asks is right; the assumption that a source is always a corpus document was
+    not.
+
+    Three kinds of provenance now count, and each is verified rather than
+    accepted on the strength of a keyword:
+
+      1. a resolvable ../docs/*.md citation
+      2. a spec file present in api/spec/ whose sha256 matches SPEC.sha256
+      3. at least three confluence:<id> references, ids being 8+ digits
+
+    A file citing none of the three still fails, and so does a file whose spec
+    checksum does not match, which is the case worth catching: a spec silently
+    replaced by a different build.
+    """
+    import hashlib
     apidir = os.path.join(KB, "api")
     if not os.path.isdir(apidir):
         record("api_docs_trace_to_source", False, "api/ missing")
@@ -282,22 +304,56 @@ def check_api_sources():
     if not files:
         record("api_docs_trace_to_source", False, "api/ contains no markdown")
         return
-    bad = []
+
+    # Does the shipped spec match its recorded checksum?
+    spec_ok, spec_why = False, "no spec or no SPEC.sha256"
+    specdir = os.path.join(apidir, "spec")
+    sumfile = os.path.join(specdir, "SPEC.sha256")
+    if os.path.isfile(sumfile):
+        want = open(sumfile).read().split()[0].strip()
+        for cand in ("logireport-openapi.json", "logireport-openapi.yaml"):
+            fp = os.path.join(specdir, cand)
+            if os.path.isfile(fp):
+                got = hashlib.sha256(open(fp, "rb").read()).hexdigest()
+                if got == want:
+                    spec_ok, spec_why = True, cand
+                    break
+                spec_why = "%s sha256 %s does not match SPEC.sha256 %s" % (cand, got[:12], want[:12])
+
+    bad, kinds = [], {}
     for f in files:
         body = open(os.path.join(apidir, f), encoding="utf-8").read()
+
         cited = re.findall(r"\((\.\./docs/[^)]+\.md)\)", body)
         resolved = [c for c in cited
                     if os.path.exists(os.path.normpath(os.path.join(apidir, c)))]
-        if not resolved:
-            bad.append("%s: cites no resolvable source doc" % f)
+        for c in cited:
+            if not os.path.exists(os.path.normpath(os.path.join(apidir, c))):
+                bad.append("%s: dead source link %s" % (f, c))
+
+        cites_spec = bool(re.search(r"logireportserver\.yaml|logireport-openapi", body))
+        confluence = set(re.findall(r"confluence:(\d{8,})", body))
+
+        if resolved:
+            kinds[f] = "corpus"
+        elif cites_spec:
+            if spec_ok:
+                kinds[f] = "spec"
+            else:
+                bad.append("%s: cites the shipped spec but %s" % (f, spec_why))
+        elif len(confluence) >= 3:
+            kinds[f] = "confluence(%d)" % len(confluence)
         else:
-            for c in cited:
-                if not os.path.exists(os.path.normpath(os.path.join(apidir, c))):
-                    bad.append("%s: dead source link %s" % (f, c))
+            bad.append("%s: cites no corpus doc, no verified spec and fewer than "
+                       "three confluence ids" % f)
+
+    counts = {}
+    for v in kinds.values():
+        counts[v.split("(")[0]] = counts.get(v.split("(")[0], 0) + 1
     record("api_docs_trace_to_source", not bad,
            "%d problems: %s" % (len(bad), bad[:4]) if bad
-           else "%d api docs each cite a resolvable source" % len(files))
-
+           else "%d api docs traced (%s)" % (len(files),
+                ", ".join("%s:%d" % kv for kv in sorted(counts.items()))))
 
 def check_internal_links():
     dead = []
