@@ -8,6 +8,21 @@ Logi Report is a separate product from Logi Composer. They share no documentatio
 surface, and nothing in this corpus describes Composer. Do not answer a Logi Report
 API question with Composer knowledge, or the reverse.
 
+
+## Machine-readable spec (start here for anything programmatic)
+
+- **`ENDPOINTS.md`** — every one of the 225 Web API operations, grouped by tag
+- **`spec/logireport-openapi.yaml`** — the vendor's shipped spec, byte-identical
+  to the copy inside a running 26.2 SP1 server (Swagger 2.0, base path
+  `/jrserver/api/v1.2`)
+- **`spec/logireport-openapi.json`** — same content as JSON
+- **`spec/PROVENANCE.md`** — how it was obtained, how it compares with Composer's
+  OpenAPI 3.1 spec, and the two verification checks that were tried and discarded
+- **`composer-si-integration.md`** — what actually connects Logi Report, Composer
+  and Simba Intelligence, from Confluence
+
+Verify with `python3 scripts/verify_api.py` (6 checks, exits non-zero on failure).
+
 ## Eras
 
 Every claim below is drawn from one of these source trees, and the tree is the era label:
