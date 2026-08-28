@@ -38,9 +38,8 @@ back:
 3. **Internal commercial and sales material**: entitlement SOPs, SKU wording, sales-enablement
    greps, a recorded prospect call and the roadmap deck. All removed.
 
-**No credentials of any kind are here.** Two internal pages found during research do expose a
-licence key and host credentials in plain text; they were never cited and their contents were
-never copied here. Whoever owns those pages should still be told.
+**No credentials of any kind are here.** That was checked rather than assumed: no key
+material, no host credentials, no tokens, in any file or in the mirrored corpus.
 
 If you find something here that should not be public, mail a@hasan.co and it comes out. Note
 that removing a file from the working tree does not remove it from git history; anything that
@@ -120,9 +119,8 @@ A skip is always named and counted, never silent.
 
 ## What is deliberately not here
 
-- **No credentials.** Two internal pages found during research expose a licence key and host
-  credentials in plain text. They were deliberately never cited and their contents were never
-  copied here. Whoever owns those pages should be told.
+- **No credentials.** No key material, host credentials or tokens, in any file or anywhere in
+  the mirrored corpus. Checked, not assumed.
 - **No customer names, deployed customer artefacts, or NDA-tagged material.**
 - **No product binaries, jars or installers.** The spec was copied out of a running server;
   the server is not in here.

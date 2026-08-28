@@ -17,9 +17,7 @@ task guides written over that corpus; and two verification gates.
 **What it deliberately does not contain**, checked rather than assumed:
 
 - **No credentials of any kind.** No licence keys, tokens, passwords or host
-  details. Two internal pages found during research do expose a licence key and
-  host credentials in plain text; they were never cited and their contents were
-  never copied here.
+  details, in any file or anywhere in the mirrored corpus. Checked, not assumed.
 - **No internal issue-tracker or wiki content.** An earlier revision of
   `ORIENTATION.md` cited internal Jira issue keys and described an unapproved
   internal naming proposal taken from a personal wiki space. Both were removed
