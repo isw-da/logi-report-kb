@@ -29,8 +29,12 @@ jobs:
         with:
           python-version: '3.12'
 
-      # pull_docs.py and build_index.py are standard library only, so there is
-      # nothing to install and nothing that can drift underneath them.
+      # pull_docs.py and build_index.py are standard library only. The API
+      # gate is not: it parses the shipped Swagger spec and needs pyyaml. That
+      # was found by this workflow failing on its first run, having passed on a
+      # laptop where pyyaml happened to be installed globally.
+      - name: Install the gate's dependency
+        run: python -m pip install -r requirements.txt
 
       - name: Pull current documentation
         run: python scripts/pull_docs.py

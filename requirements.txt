@@ -1,0 +1,7 @@
+# verify_api.py parses the shipped Swagger spec, so pyyaml is a hard dependency
+# of the gate rather than of the mirror. pull_docs.py and build_index.py are
+# standard library only.
+#
+# Upper bound on purpose: an unpinned major has already broken a fresh clone in
+# a sibling repo, where mcp 2.x dropped the API that repo was built on.
+PyYAML>=6,<7
