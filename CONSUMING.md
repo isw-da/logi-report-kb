@@ -74,7 +74,7 @@ find the right page and answer from it, with the version era stated on every pag
 
 | Directory | What it is |
 |---|---|
-| `docs/` | 13,235 articles across four eras, each with frontmatter naming its era, source and last-updated date |
+| `docs/` | 13,235 articles across four eras. Every one carries `updated_at` in its frontmatter; `source_host` is on the 3,891 current articles only, and the era label lives in `MANIFEST.json` rather than in the frontmatter |
 | `api/` | The programmable surface: Catalog, Design, Server, Security, Information Bus, JavaScript, RMI, servlet integration, URL invocation, and the Server RESTful Web API |
 | `api/spec/` | The Server Web API as Swagger 2.0 and JSON, 124 paths and 225 operations, copied out of a running 26.2 SP1 container with its hash recorded |
 | `building-reports/` | The task-oriented layer over the corpus: how to actually build the thing |

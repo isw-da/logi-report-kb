@@ -4,6 +4,7 @@
 A skip is not a pass. A traceback is not a pass. Named checks are tracked
 against a blessed manifest so a deleted check cannot hide behind an added one.
 """
+import fnmatch
 import hashlib, json, os, re, sys, collections
 
 KB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,6 +35,8 @@ CHECK_MANIFEST = [
     "retrieval_current_era",
     "duplication_declared",
     "demo_layer_present",
+    "frontmatter_keys_as_documented",
+    "api_section_globs_reproduce",
 ]
 
 REQUIRED_PATHS = [
@@ -600,6 +603,81 @@ def check_demo_layer():
            % (len(mds), len(good)))
 
 
+def check_frontmatter_keys_documented(disk):
+    """CONSUMING.md tells a consumer which frontmatter keys it can filter on.
+
+    It claimed every document names its era, source and last-updated date. Only
+    the last is true of all of them: no document carries an `era:` key at all
+    (era lives in MANIFEST.json), and `source_host:` is written only by the
+    current-era pull. An agent told to filter on era from frontmatter finds
+    nothing, so the sentence has to match the files.
+    """
+    era = src = upd = 0
+    for p in disk:
+        try:
+            head = open(p, encoding="utf-8", errors="replace").read(600)
+        except OSError:
+            continue
+        if re.search(r"^era:", head, re.M):
+            era += 1
+        if re.search(r"^source_host:", head, re.M):
+            src += 1
+        if re.search(r"^updated_at:", head, re.M):
+            upd += 1
+    prose = open(os.path.join(KB, "CONSUMING.md"), encoding="utf-8").read()
+    bad = []
+    if era:
+        bad.append("%d docs now carry an era: key, so CONSUMING.md is wrong to say "
+                   "era lives in MANIFEST.json rather than the frontmatter" % era)
+    if upd != len(disk):
+        bad.append("updated_at on %d of %d docs, CONSUMING.md says every one" % (upd, len(disk)))
+    # Anchor on the whole sentence, not the bare number. "3,891 current
+    # articles" also appears in the generated toolkit table higher up the file,
+    # so a number-only match would pass on the wrong line.
+    sentence = ("`source_host` is on the %s current articles only, and the era label "
+                "lives in `MANIFEST.json` rather than in the frontmatter" % format(src, ","))
+    if sentence not in prose:
+        bad.append("CONSUMING.md no longer carries the docs/ row sentence naming "
+                   "source_host on %s articles and era in MANIFEST.json" % format(src, ","))
+    record("frontmatter_keys_as_documented", not bad,
+           "; ".join(bad) if bad else
+           "era: 0, source_host: %s, updated_at: %d, and CONSUMING.md says so"
+           % (format(src, ","), upd))
+
+
+def check_api_section_globs():
+    """API-SURFACE.md opens with counts and names the globs that produce them.
+
+    Both globs it named were wrong while both numbers were right, which is the
+    worst combination: the figure looks checkable, and checking it fails. This
+    recomputes each number from the glob actually printed beside it.
+    """
+    def count(pat):
+        n = 0
+        for dp, _, fn in os.walk(os.path.join(KB, "docs")):
+            if fnmatch.fnmatch(os.path.basename(dp), pat):
+                n += sum(1 for f in fn if f.endswith(".md"))
+        return n
+
+    prose = open(os.path.join(KB, "API-SURFACE.md"), encoding="utf-8").read()
+    expected = [("working-with-apis-*", 370), ("work-with-apis", 41),
+                ("*via-url*", 79), ("*-integration-*", 154)]
+    bad = []
+    for pat, claimed in expected:
+        actual = count(pat)
+        if actual != claimed:
+            bad.append("%s matches %d files, API-SURFACE.md says %d" % (pat, actual, claimed))
+        if ("`%s`" % pat) not in prose:
+            bad.append("API-SURFACE.md no longer names the glob %s" % pat)
+        if str(claimed) not in prose:
+            bad.append("API-SURFACE.md no longer states %d for %s" % (claimed, pat))
+    if count("working-with-apis-*") + count("work-with-apis") != 411:
+        bad.append("the two API-section globs no longer total the 411 stated")
+    record("api_section_globs_reproduce", not bad,
+           "; ".join(bad[:3]) if bad else
+           "370 + 41 = 411, via-url 79, integration 154, each from the glob printed beside it")
+
+
 def main():
     man = load_manifest()
     disk = doc_paths()
@@ -615,6 +693,8 @@ def main():
     check_smoke_current(disk)
     check_duplication(man, disk)
     check_demo_layer()
+    check_frontmatter_keys_documented(disk)
+    check_api_section_globs()
 
     print("=" * 70)
     print("LOGI REPORT KB GATE   (%d documents on disk)" % len(disk))

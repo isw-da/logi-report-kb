@@ -1,8 +1,9 @@
 # Logi Report programmable surface — index
 
-Source: this repo's own corpus, 13,235 articles. 411 articles sit in a
-`working-with-apis-*` section, 79 in a `*-via-url-*` section and 154 in a
-`*-integration-*` section, spread across four eras. Per-surface detail with worked
+Source: this repo's own corpus, 13,235 articles. 411 articles sit in an API section:
+370 under `working-with-apis-*` and 41 under `work-with-apis` in `docs/unversioned`,
+which spells it without the -ing. A further 79 sit in a `*via-url*` section and 154
+in a `*-integration-*` section, spread across four eras. Per-surface detail with worked
 examples: [`api/`](api/). Task-based routing: [`api/README.md`](api/README.md).
 
 Logi Report is organised by class and method rather than by HTTP verb, so this index
