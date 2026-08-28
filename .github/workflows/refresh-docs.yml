@@ -1,0 +1,104 @@
+name: Refresh documentation mirror
+
+# Runs unattended. Both sources are open Zendesk Help Centre APIs with no auth,
+# so this needs no secrets. The repository is public, so Actions minutes are
+# free, which is why this runs here rather than on a laptop that has to be on.
+on:
+  schedule:
+    # 07:00 UTC every Monday, an hour after isw-da/logi-si-docs, so the two
+    # mirrors do not refresh in the same minute. The upstream corpus moves in
+    # bulk republishes rather than continuously; daily would find nothing.
+    - cron: '0 7 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-docs
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # pull_docs.py and build_index.py are standard library only, so there is
+      # nothing to install and nothing that can drift underneath them.
+
+      - name: Pull current documentation
+        run: python scripts/pull_docs.py
+
+      - name: Rebuild MANIFEST.json and llms.txt
+        run: python scripts/build_index.py
+
+      # The gates run BEFORE anything is committed. A refresh that breaks the
+      # corpus should fail the job and leave main alone, not push and then
+      # report red on the next release.
+      - name: Gate, knowledge base
+        run: python scripts/verify_kb.py
+
+      - name: Gate, API surface
+        run: python scripts/verify_api.py
+
+      - name: Commit if anything moved
+        run: |
+          set -euo pipefail
+          git config user.name  "logi-report-kb bot"
+          git config user.email "noreply@github.com"
+
+          # pull_docs.py rewrites every article every run, but git records only
+          # the ones whose bytes actually changed. PROVENANCE.json is the
+          # exception: it carries pulled_utc, so it differs on every run even
+          # when upstream has not moved. Committing on that alone would produce
+          # a weekly commit that says nothing.
+          git status --porcelain > /tmp/status.txt
+          if [ ! -s /tmp/status.txt ]; then
+            echo "nothing changed upstream"
+            exit 0
+          fi
+          if [ "$(grep -vc 'docs/current/PROVENANCE.json' /tmp/status.txt || true)" = "0" ]; then
+            echo "only the pull timestamp moved; upstream is unchanged"
+            git checkout -- docs/current/PROVENANCE.json
+            exit 0
+          fi
+
+          NEW=$(grep -c '^??' /tmp/status.txt || true)
+          MOD=$(grep -c '^ M' /tmp/status.txt || true)
+          git add -A
+          git commit -m "Automated mirror refresh: ${NEW} new, ${MOD} updated
+
+          Fetched from the two Logi Report Zendesk Help Centre APIs by
+          scripts/pull_docs.py, index rebuilt by scripts/build_index.py.
+          Both gates were green before this commit was made."
+          git push
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Logi Report mirror refresh"
+            echo ""
+            echo "Run at $(date -u +'%Y-%m-%d %H:%M UTC')."
+            echo ""
+            echo "Refreshed: the 3,891 current articles under \`docs/current/\`,"
+            echo "from docs-report.zendesk.com (v23 to v25) and"
+            echo "logi-report-v26.insightsoftware.com (v26)."
+            echo ""
+            echo "**Not refreshed, and deliberately so:**"
+            echo ""
+            echo "- \`docs/devnet/\`, 9,344 articles. That host is dead, so the archive is"
+            echo "  frozen by definition. It is the larger half of the 13,235 total, and a"
+            echo "  green run here does NOT mean it was checked."
+            echo "- \`api/\`, the Server REST API surface. It comes from a running instance,"
+            echo "  which CI cannot reach. It is pulled by hand."
+            echo ""
+            echo "Articles removed upstream are not deleted here; the mirror only adds and"
+            echo "updates. A file present is not proof the page still exists."
+          } >> "$GITHUB_STEP_SUMMARY"
