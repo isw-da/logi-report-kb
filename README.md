@@ -26,6 +26,10 @@ Recommended home: a **private** repository under the `isw-da` organisation, wher
 ever wanted, strip the Jira citations and the FY27 proposal first, and settle the
 documentation licence question properly.
 
+**How to depend on this repo is in [`CONSUMING.md`](CONSUMING.md)**: how to get access, how
+to pin a version, how to run the gates, and what is deliberately not in here. It also records
+why this repo currently has no tagged release.
+
 
 A clean, searchable mirror of the Logi Report product documentation, organised so
 a person or an AI assistant can find the right page and answer from it, with the
@@ -105,16 +109,32 @@ Two steps, in order.
 
 ## How it is verified
 
-[`scripts/verify_kb.py`](scripts/verify_kb.py) is the gate. It exits 0 only when
-every named check both ran and passed; a skipped check is reported as RED, and
-the checks are tracked against a blessed manifest so a deleted check cannot hide
-behind an added one.
+Two gates.
+
+[`scripts/verify_kb.py`](scripts/verify_kb.py) covers the corpus. It exits 0 only
+when every named check both ran and passed; a skipped check is reported as RED,
+and the checks are tracked against a blessed manifest so a deleted check cannot
+hide behind an added one.
+
+[`scripts/verify_api.py`](scripts/verify_api.py) covers the Web API spec, in six
+checks. One of them compares the committed spec against the one inside a running
+Logi Report Server container, and reports NOT APPLICABLE, by name and counted,
+where no such container exists. Where the container is reachable and the hash
+differs, it still fails hard.
 
 ```
+python3 -m pip install pyyaml      # verify_api.py parses the Swagger spec
 python3 scripts/verify_kb.py
+echo $?
+python3 scripts/verify_api.py
+echo $?
 ```
 
-Ten checks, of which four are worth knowing about:
+**`verify_kb.py` is currently RED**, on one check, and has been since the Web API
+spec layer was added. `CONSUMING.md` sets out the cause and the two defensible
+ways to settle it. No release is cut while it is red, which is the system working.
+
+Thirteen checks in `verify_kb.py`, of which four are worth knowing about:
 
 - `no_orphan_files` and `manifest_matches_disk` compare the manifest and the
   tree in both directions, so neither a stale index nor an unindexed file

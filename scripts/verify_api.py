@@ -33,8 +33,16 @@ CONTAINER_PATH = "/opt/LogiReport/Server/help/webapi/logireportserver.yaml"
 
 results = []
 def check(name, ok, detail=""):
-    results.append((name, bool(ok), detail))
-    print(("PASS " if ok else "FAIL ") + name + (f"  [{detail}]" if detail else ""))
+    """ok: True pass, False fail, None NOT APPLICABLE.
+
+    NOT APPLICABLE is for a check whose subject is genuinely absent from this
+    machine, not for one that is inconvenient. It is printed, counted, and
+    summarised at the end. A silent skip reads as a pass, which is the failure
+    this gate exists to prevent.
+    """
+    results.append((name, ok, detail))
+    print({True: "PASS ", False: "FAIL ", None: "N/A  "}[ok] + name +
+          (f"  [{detail}]" if detail else ""))
 
 def ops_of(spec):
     return [(p, m) for p, it in (spec.get("paths") or {}).items()
@@ -62,13 +70,43 @@ def main():
     check("spec_matches_recorded_hash", recorded == digest,
           f"recorded={str(recorded)[:12]} actual={digest[:12]}")
 
-    # 4. provenance: identical to what the running server ships
+    # 4. provenance: identical to what the running server ships.
+    #
+    # This check needs a Logi Report Server container running on THIS machine.
+    # It is the strongest evidence in the file when it can run, and it can only
+    # run where the container is. Before this was split out, the check passed on
+    # the one laptop with the container up and failed everywhere else, including
+    # in CI, which made the gate a statement about the machine rather than about
+    # the repository.
+    #
+    # So: container reachable and hash differs is a hard FAIL and always will be.
+    # Container absent is NOT APPLICABLE, named and counted. Docker present but
+    # the container missing is also NOT APPLICABLE. A docker error that is
+    # neither of those still fails, because an unexplained error is not an
+    # absence.
     try:
-        out = subprocess.run(["docker", "exec", CONTAINER, "sha256sum", CONTAINER_PATH],
-                             capture_output=True, text=True, timeout=25)
-        live = out.stdout.split()[0] if out.returncode == 0 and out.stdout else None
-        check("matches_running_server_spec", live == digest,
-              f"server={str(live)[:12]}" if live else "container unreachable")
+        which = subprocess.run(["docker", "version", "--format", "{{.Server.Version}}"],
+                               capture_output=True, text=True, timeout=25)
+        if which.returncode != 0:
+            check("matches_running_server_spec", None,
+                  "no docker daemon on this machine")
+        else:
+            ps = subprocess.run(["docker", "ps", "--filter", f"name=^{CONTAINER}$",
+                                 "--format", "{{.Names}}"],
+                                capture_output=True, text=True, timeout=25)
+            if CONTAINER not in ps.stdout.split():
+                check("matches_running_server_spec", None,
+                      f"container '{CONTAINER}' is not running here")
+            else:
+                out = subprocess.run(["docker", "exec", CONTAINER, "sha256sum", CONTAINER_PATH],
+                                     capture_output=True, text=True, timeout=25)
+                live = out.stdout.split()[0] if out.returncode == 0 and out.stdout else None
+                check("matches_running_server_spec", live == digest,
+                      f"server={str(live)[:12]}" if live
+                      else f"container up but the spec could not be read: "
+                           f"{out.stderr.strip()[:60]}")
+    except FileNotFoundError:
+        check("matches_running_server_spec", None, "docker is not installed here")
     except Exception as e:
         check("matches_running_server_spec", False, str(e)[:60])
 
@@ -96,8 +134,12 @@ def main():
         print(f"\nFAIL gate_integrity: {len(results)} checks ran, MIN_CHECKS={MIN_CHECKS}")
         return 1
 
-    failed = [n for n, ok, _ in results if not ok]
-    print(f"\n{len(results) - len(failed)}/{len(results)} passed")
+    failed = [n for n, ok, _ in results if ok is False]
+    na = [n for n, ok, _ in results if ok is None]
+    print(f"\n{len(results) - len(failed) - len(na)}/{len(results)} passed, "
+          f"{len(na)} not applicable, {len(failed)} failed")
+    if na:
+        print("NOT APPLICABLE on this machine: " + ", ".join(na))
     if failed:
         print("GATE: RED -> " + ", ".join(failed)); return 1
     print("GATE: GREEN"); return 0
