@@ -199,21 +199,23 @@ building-reports/  task-oriented guides. The demo layer.
 scripts/
   build_index.py   regenerates MANIFEST.json and llms.txt
   pull_docs.py     refreshes docs/current/ from the live Zendesk APIs
-  verify_kb.py     the gate. Run it after any change.
+  verify_kb.py     the corpus gate. Run it after any change.
+  verify_api.py    the Web API spec gate. Needs pyyaml.
 ```
 
 After changing anything under `docs/`, run `python3 scripts/build_index.py` then
 `python3 scripts/verify_kb.py`. The gate fails if the manifest and the tree
 disagree in either direction.
 
-## Nothing refreshes this mirror on its own
+## Only half this mirror refreshes, and only weekly
 
-`scripts/pull_docs.py` is run by hand. There is no GitHub Action (no `.github/`
-directory exists), no cron entry and no launchd job. So the corpus is a snapshot
-whose age is the age of the last commit, and `git log -1 --format=%cI` is the
-number to check before you rely on anything version-sensitive.
+`.github/workflows/refresh-docs.yml` runs `scripts/pull_docs.py` and
+`scripts/build_index.py` at 07:00 UTC every Monday, runs both gates, and commits
+only if something actually moved upstream. `scripts/pull_docs.py` can also be run
+by hand. Either way the corpus is a snapshot, and `git log -1 --format=%cI` is
+the number to check before you rely on anything version-sensitive.
 
-Two further limits on what a refresh even covers:
+Two limits on what a refresh even covers:
 
 - `pull_docs.py` pulls `docs/current/` only, from `docs-report.zendesk.com`
   (v23-v25) and `logi-report-v26.insightsoftware.com` (v26). It does not touch

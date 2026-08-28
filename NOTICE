@@ -1,0 +1,55 @@
+NOTICE
+======
+
+This repository mixes material with two different owners, which is why it
+carries a NOTICE rather than a conventional open-source licence. Applying MIT
+or Apache here would purport to grant rights over documentation that is not
+mine to grant.
+
+What this is
+------------
+An unofficial, personal mirror of insightsoftware's published Logi Report and
+JReport documentation, maintained by Amin Hasan so the corpus can be searched
+offline and answered from with the version era attached to every page. It is
+not an insightsoftware product, not an official distribution, and not endorsed
+by insightsoftware.
+
+insightsoftware material
+------------------------
+Logi Report, JReport, Logi Composer, Logi Info, Simba Intelligence and Dundas
+are insightsoftware products. Everything under docs/ is insightsoftware's own
+documentation, converted from HTML to Markdown with the source URL recorded in
+each file's frontmatter. The Server Web API definition under api/spec/ is the
+vendor's own file, copied byte-for-byte out of a running server. None of it is
+relicensed by anything in this repository, and none of it is mine to relicense.
+
+The licence position, stated plainly
+------------------------------------
+The three source help centres are publicly readable, and the crawler policy on
+the current hosts permits fetching the article paths and the help centre API.
+A crawler policy is not a redistribution licence. No terms-of-use page granting
+one was found on any of the three hosts, so this mirror is published without an
+express permission to redistribute and without claiming one. It exists because
+the material is already public and a searchable local copy is useful. If
+insightsoftware would rather it were not here, it comes down.
+
+Original work
+-------------
+The orientation, API and task material written over the corpus is mine:
+README.md, ORIENTATION.md, CONSUMING.md, CLAUDE.md, API-SURFACE.md, the authored
+files under api/ and building-reports/, and the tooling in scripts/
+(pull_docs.py, build_index.py, verify_kb.py, verify_api.py). Colleagues and
+anyone else are welcome to clone, fork, pin and open issues against those.
+Where an authored file states a fact, it names the source document it came from,
+and the gates check that those citations still resolve.
+
+Not here
+--------
+No credentials of any kind: no licence keys, tokens, passwords or host details.
+No customer names, deployed customer artefacts or NDA-tagged material. No
+product binaries, jars or installers. No internal issue-tracker keys, wiki page
+identifiers or unreleased roadmap material; an earlier revision carried some and
+it was removed before this repository was shared. Removing it from the working
+tree does not remove it from git history, and that is a separate decision.
+
+Contact a@hasan.co if something here should not be public.

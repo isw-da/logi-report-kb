@@ -18,8 +18,6 @@ API question with Composer knowledge, or the reverse.
 - **`spec/logireport-openapi.json`** — same content as JSON
 - **`spec/PROVENANCE.md`** — how it was obtained, how it compares with Composer's
   OpenAPI 3.1 spec, and the two verification checks that were tried and discarded
-- **`composer-si-integration.md`** — what actually connects Logi Report, Composer
-  and Simba Intelligence, from Confluence
 
 Verify with `python3 scripts/verify_api.py` (6 checks, exits non-zero on failure).
 

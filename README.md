@@ -1,34 +1,39 @@
 # Logi Report documentation, made machine-readable
 
-## Confidentiality: this repository must not be public
+## What this repository is, and what is in it
 
-Decided from an audit of its own contents, not assumed. Three reasons:
+This repository is **public**. It is an unofficial, community mirror of
+insightsoftware's published Logi Report and JReport documentation, maintained by
+Amin Hasan so that a person or an AI assistant can search it offline and answer
+from the right version. It is not an insightsoftware product, it is not an
+official distribution, and nothing here is endorsed by insightsoftware. Ownership
+and the licence position are set out in [`NOTICE`](NOTICE).
 
-1. **It mirrors 13,235 pages of insightsoftware's product documentation** (166MB).
-   The source help centres are publicly readable and their `robots.txt` permits
-   crawling `/hc/`, but crawling permission is not a redistribution licence, and
-   no public terms-of-use page could be located. Republishing a vendor's complete
-   documentation set is a decision for someone with authority to make it.
-2. **`ORIENTATION.md` cites internal Jira issues** (JREP-3018, JREP-4494,
-   JREP-7524, JREP-38712). Useful provenance internally, an information leak
-   publicly.
-3. **`ORIENTATION.md` describes an unapproved internal FY27 naming proposal**,
-   drawn from a personal Confluence space explicitly marked "Not yet approved".
-   It is clearly labelled as a proposal, and it still must not leave the company.
+**What it contains.** 13,235 mirrored documentation articles, roughly 91MB of
+text, pulled from three publicly readable help centres; the Server Web API
+definition the product itself ships; a set of authored orientation, API and
+task guides written over that corpus; and two verification gates.
 
-Nothing here carries credentials. Two Confluence pages found during research do
-expose a licence key and host credentials in plain text; they were deliberately
-never cited and their contents were never copied into this repo. Whoever owns
-those pages should be told.
+**What it deliberately does not contain**, checked rather than assumed:
 
-Recommended home: a **private** repository under the `isw-da` organisation, where
-`composer-mcp` and `simba-intelligence-skill` already live. If a public version is
-ever wanted, strip the Jira citations and the FY27 proposal first, and settle the
-documentation licence question properly.
+- **No credentials of any kind.** No licence keys, tokens, passwords or host
+  details. Two internal pages found during research do expose a licence key and
+  host credentials in plain text; they were never cited and their contents were
+  never copied here.
+- **No internal issue-tracker or wiki content.** An earlier revision of
+  `ORIENTATION.md` cited internal Jira issue keys and described an unapproved
+  internal naming proposal taken from a personal wiki space. Both were removed
+  before this repository was shared. Where the underlying fact is supportable
+  from a public source, it was kept and re-cited to that source; where it was
+  not, it was dropped.
+- **No customer names, deployed customer artefacts or NDA-tagged material.**
+- **No product binaries, jars or installers.** The API spec was copied out of a
+  running server; the server is not here.
 
-**How to depend on this repo is in [`CONSUMING.md`](CONSUMING.md)**: how to get access, how
-to pin a version, how to run the gates, and what is deliberately not in here. It also records
-why this repo currently has no tagged release.
+Anything that should not be public, tell a@hasan.co and it comes out.
+
+**How to depend on this repo is in [`CONSUMING.md`](CONSUMING.md)**: how to pin a
+version, how to run the gates, and what is deliberately not in here.
 
 
 A clean, searchable mirror of the Logi Report product documentation, organised so
@@ -130,9 +135,10 @@ python3 scripts/verify_api.py
 echo $?
 ```
 
-**`verify_kb.py` is currently RED**, on one check, and has been since the Web API
-spec layer was added. `CONSUMING.md` sets out the cause and the two defensible
-ways to settle it. No release is cut while it is red, which is the system working.
+Both gates are green at `master`. `verify_kb.py` was red for a period after the
+Web API spec layer was added, on `api_docs_trace_to_source`; that is settled and
+`CONSUMING.md` records how. No release is cut while a gate is red, which is the
+system working.
 
 Thirteen checks in `verify_kb.py`, of which four are worth knowing about:
 
@@ -165,8 +171,9 @@ Thirteen checks in `verify_kb.py`, of which four are worth knowing about:
 - **Reference boilerplate is thin by design.** The largest per-widget property
   and dialog-box sections of the devnet corpus were low-yield and are not the
   strength of this mirror.
-- **Licence.** This mirrors insightsoftware's documentation. The source content
-  is insightsoftware's. robots.txt on both current hosts permits fetching the
-  article paths and the help centre API, but robots policy is not a licence, and
-  whether this may be republished is a question this repository does not answer.
-  Treat it as an internal working asset.
+- **Licence.** This mirrors insightsoftware's documentation, and that content
+  remains insightsoftware's. The crawler policy on the current hosts permits
+  fetching the article paths and the help centre API, but a crawler policy is not
+  a redistribution licence, and no terms-of-use page granting one was found. The
+  full position, including what is and is not being claimed, is in
+  [`NOTICE`](NOTICE).

@@ -69,14 +69,15 @@ set stayed flat across the boundary, 45 topics at v16, 45 at v17, 46 by v17.1,
 and the single net-new topic in that whole span is Flexible Time Zone Options.
 Every other v16-to-v17 title change is a rename.
 
-**A Jira issue names the rename as an event.** JREP-4494, raised June 2020,
-reads `After rename "JReport" to "Logi Report"` and was fixed in Logi Report 17
-Update 1. The v17 fix version is recorded as "Logi Report 17 (Lambo)" on the
-May 2020 rebranding tickets, and pre-v17 report templates carried the logos
-JINFONET and JReport until that work removed them.
+**The vendor acknowledges the lineage in the current documentation.** The v26
+Designer Guide overview opens "Report Designer (formerly Logi JReport Designer)
+is a Swing-based Integrated Development Environment", which is insightsoftware
+naming the predecessor itself rather than a reader inferring it.
 
-**The product URL changed at the same moment.** JREP-3018, May 2020, changes the
-product URL from jinfonet.com to logianalytics.com.
+**The documentation host moved off the Jinfonet domain in the same era.** Every
+v15 to v19 article in this mirror was published on `devnet.logianalytics.com`,
+so by the time the v17 pages went up the product already sat under the Logi
+Analytics domain rather than jinfonet.com.
 
 The devnet documentation index agrees on the boundary: v17 and above are labelled
 Logi Report, v16 and v15 Logi JReport.
@@ -86,10 +87,6 @@ Logi Report, v16 and v15 Logi JReport.
 Six years on, the JReport name is load-bearing in the build, the code and the
 order-to-cash tooling:
 
-- The Jira project key is still **JREP** (board 451).
-- The Bitbucket repositories under the logianalytics org are still
-  `jreport-engine`, `jreport-designer`, `jreport-server`, `jreport-installer`,
-  `jreport-help`, `jreport-ci`.
 - The JavaScript API is still one file called **`jreportapi.js`**, documented as
   such on the live v26 site, shipped at
   `<install_root>\public_html\webos\jsvm\lib`. The demo pages are
@@ -104,15 +101,11 @@ order-to-cash tooling:
   (`jrs.report`, `jrs.catalog`, `jrs.cmd`, `jrs.result_type`, `jrs.param$…`).
   Catalog classes carry a `JetU` prefix (`JetUJDBCConnection`, `JetUTableView`,
   `JetUFileQuery`, `JetUPrejoin`).
-- JREP-7524, raised October 2020 to stop showing "jreport" and "Jinfonet" to
-  customers, is still Open/Backlog.
-- The insightsoftware licensing system still labels the entitlements "JReport
-  Licenses", per an order-fulfilment SOP updated October 2025.
 
-Commercially, though, the old name is gone: a grep for "JReport" across the 2025
-and 2026 seller-facing Highspot corpus returns zero. A second rebranding
-programme (JREP-38712, opened 29 July 2026, targeting 26.3) is working through
-Installer, Designer, Server, Engine, Help and Demo Reports.
+Commercially the old name has receded: current v26 documentation drops the "Logi"
+prefix entirely and speaks of Report Designer and Report Server. Inside the
+product the JReport and Jinfonet strings are still the correct, current ones, so
+reproduce them exactly rather than "correcting" them.
 
 ## The name collision, which is a live trap
 
@@ -146,26 +139,23 @@ built by Jinfonet, renamed in 2020.
     24.x   25.x (25.1 31 Mar 2025, 25.3 30 Sep 2025)
     26.x   26.1  26.2 (30 Jun 2026)  <- current
 
-**There was never a v20, v21 or v22.** The internal Release History table places
-19.2.3 and 23.1 adjacent, both dated 31 January 2023, with nothing between them.
-Externally the same hole shows up twice: paging all 2,418 article titles on
+**There was never a v20, v21 or v22.** The release line runs 19.2.3 straight
+into 23.1, both dated 31 January 2023, with nothing between them. The hole shows
+up twice in the public documentation: paging all 2,418 article titles on
 docs-report.zendesk.com, a regex for v20, v21 or v22 returns nothing (release
 notes run v23.1, v23.2, v23.3, v23.4, v24.1, v24.3, v25.1, v25.3), and scanning
 all 314 devnet section names returns nothing either. The v19 series gave way to
 year-dot-quarter calendar versioning at 23.1.
 
-Current is **26.2**, released 30 June 2026. The product is not sunset: JREP
-issues were still being opened on 21 August 2026 against fix versions 26.2.2,
-26.3 and 26.4, and a patch was closed against v15.6 on 18 August 2026. A JQL
-sweep of JREP for end of life, EOL, sunset, end of support and deprecation
-returned 48 issues, all about Flash, JDashboard, Digest Authentication, VM
-clients or rebranding, and none about sunsetting the product. No published
-end-of-life or end-of-support date for Logi Report was found anywhere.
+Current is **26.2**, released 30 June 2026. The product is not sunset: the v26
+documentation carries dated release notes through 2026, and the 26.2 line was
+still shipping updates when this snapshot was taken. No published end-of-life or
+end-of-support date for Logi Report was found on any of the three documentation
+hosts.
 
-Two feature-level closures are worth knowing, because they are not product EOL:
-JDashboard was sunset in the documentation at v19.1 (though a module of that name
-still ships at v26), and the Dashboard, Mobile, Visual Analysis and Chinese
-Version features are sold to renewals only, no net new customers.
+One feature-level closure is worth knowing, because it is not product EOL:
+JDashboard was sunset in the documentation at v19.1, though a module of that name
+still ships at v26.
 
 ## Why the documentation is split across hosts
 
@@ -198,10 +188,10 @@ The canonical ids are 45189079491341 (Designer) and 45202990176141 (Server).
 of each other, not tiers of each other, and not a successor and predecessor pair.
 The separation is total:
 
-- Different Jira projects: **JREP** (board 451) against Composer's **ZP**
-  (board 520). Logi Info is a third, REPDEV.
-- Different repositories: `jreport-*` on Bitbucket under the logianalytics org.
-- Different documentation sites, and different Salesforce support dashboards.
+- Separate engineering histories: Logi Report descends from Jinfonet's JReport,
+  Composer from a different acquisition entirely, and the two are tracked,
+  built and supported as separate products.
+- Different documentation sites, with no shared publishing pipeline.
 - **They were documented in total isolation for a decade, and v26 is the first
   release where they connect.** This claim was previously written as "zero shared
   documentation surface in both directions" and an adversarial review refuted it.
@@ -233,9 +223,8 @@ The separation is total:
   translated to BV (Business View), enabling seamless migration and reuse of
   existing Composer report definitions within the BV environment."
 
-  So the accurate statement is: separate products, separate lineages, separate
-  Jira projects and repositories, and no documentation overlap at all from v15
-  through v25. Then in v26 Logi Report gains the ability to import from Composer
+  So the accurate statement is: separate products, separate lineages, and no
+  documentation overlap at all from v15 through v25. Then in v26 Logi Report gains the ability to import from Composer
   and translate Composer sources into Business Views. Anyone selling or migrating
   needs to know that path exists, and that it is only months old.
 - They share the number 26 because both sit on a common calendar release train.
@@ -257,18 +246,14 @@ bursting.
 Logi Report, by contrast, is the banded, paginated engine: `.cls` page reports
 and `.wls` web reports against `.cat` catalogs, smart pagination, automatic
 subtotals, Table of Contents with page numbers, barcode symbologies (PDF417 and
-Datamatrix added recently), and export to PDF, Excel, RTF, PostScript and Fax.
-insightsoftware's own Composer and Dundas Product Vision (May 2026) states that
-pixel-perfect reporting sits with Logi Report.
+Datamatrix added recently), and export to PDF, Excel, RTF, PostScript and Fax. Pixel-perfect, paginated
+output is what Logi Report is sold to do, and Composer's own documentation does
+not claim it.
 
-**This section exists because the confusion is real and recorded.** On a
-recorded insightsoftware discovery call on 12 August 2026, all 289 transcript
-sentences were read: the paginated product was called "logi reporter" and
-"reporting" and was never named correctly once. "Logi Report", "JReport",
-"pixel-perfect" and "paginated" appear nowhere in the transcript. The prospect
-was left asking what "logi vdd" and "logi MD" meant. The company's Gong keyword
-trackers have no tracker for Logi Report, JReport, paginated or pixel-perfect
-either, so nothing catches it.
+**This section exists because the confusion is real.** The product is routinely
+referred to by approximations such as "logi reporter" or just "reporting", which
+leaves the listener unable to tell which product is being described. Use the full
+name, and say "paginated" or "pixel-perfect" when that is what is meant.
 
 ### Naming hygiene
 
@@ -278,11 +263,8 @@ Logi Report page still does, in a FAQ heading contrasting Logi Report
 "Reporting" with Logi Symphony "Reporting" (accessed 22 August 2026), so a
 customer may well arrive using it.
 
-An **unapproved internal proposal** for FY27, sitting in a personal Confluence
-space and explicitly marked "Not yet approved - input provided into 2027 annual
-planning", would rename Logi Report to "Pixel Perfect Reporting". Treat that as
-a proposal only. It is not the product name, and it must never be stated as fact
-or used with a customer.
+The current product name is **Logi Report**, and the current documentation calls
+its two components Report Designer and Report Server. Use those.
 
 ## Who else ships it
 
@@ -293,21 +275,21 @@ InterSystems Reports 24.1 bundles Logi Report 24.1SP2. So a customer describing
 InterSystems Reports behaviour is describing Logi Report behaviour, on a version
 that tracks the Logi Report release.
 
-OEM is a first-class channel here, not an accident: the product uses server-based
-licensing, and the SKU list carries "Report Enterprise Server (also seen as
-Report OEM)" alongside Report Designer, Report Designer API and Report Server
-Designer API.
+OEM is a first-class channel here rather than an accident: the product uses
+server-based licensing, and the documentation describes the Design API and Server
+Design API as separately licensed surfaces intended for exactly that kind of
+embedding.
 
 ## What this briefing does not settle
 
-- No end-of-life or end-of-support date exists for Logi Report, in Jira or
-  Confluence, and none is published. Absence of a date is the finding; do not
-  invent one, and do not read it as a guarantee either.
-- Per-version supported-platform matrices were not found in the sources swept;
-  they may live in Zendesk or Salesforce.
-- An internal product-profile table transposes the founding years (it places
-  2000/LogiXML under Report and 1998/Jinfonet under Info, inverting the known
-  origins). Do not cite that table for per-product attribution.
+- No end-of-life or end-of-support date for Logi Report is published on any of
+  the three documentation hosts. Absence of a date is the finding; do not invent
+  one, and do not read it as a guarantee either.
+- Per-version supported-platform matrices were not found in the documentation
+  swept for this mirror.
+- Secondary summaries of the Logi product family routinely transpose the founding
+  years of Jinfonet (1998) and LogiXML (2000) between Logi Report and Logi Info.
+  Check any per-product attribution against the acquisition announcements above.
 
 ## Where to go next
 

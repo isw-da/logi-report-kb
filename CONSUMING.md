@@ -19,54 +19,42 @@ welcome to clone, pin, fork or open an issue against them.
 
 <!-- /toolkit-table -->
 
-## This repo is private, and must stay private
+## This repo is public, and here is what that means
 
-Decided from an audit of its own contents, not assumed. `README.md` sets out the full
-reasoning; the short version:
+This repository is open on GitHub. It is an unofficial mirror of insightsoftware's
+**published** Logi Report and JReport documentation, maintained by Amin Hasan. It is not an
+insightsoftware product and it is not an official distribution. Ownership and the licence
+position are in [`NOTICE`](NOTICE); `README.md` sets out the contents.
 
-1. **It mirrors 13,235 pages of insightsoftware's product documentation.** The source help
-   centres are publicly readable and their `robots.txt` permits crawling, but crawling
-   permission is not a redistribution licence.
-2. **`ORIENTATION.md` cites internal Jira issues**, which is useful provenance internally and
-   an information leak publicly.
-3. **`ORIENTATION.md` describes an unapproved internal FY27 naming proposal**, drawn from a
-   Confluence space explicitly marked "not yet approved".
+Because it is public, three things were stripped before it was shared, and must not come
+back:
 
-Nothing here carries credentials.
+1. **Internal issue-tracker references.** An earlier revision of `ORIENTATION.md` cited Jira
+   issue keys, board numbers and internal repository names. They are gone. Where the fact
+   they supported is visible in the public documentation, it was kept and re-cited there.
+2. **An unapproved internal naming proposal** taken from a personal wiki space and marked
+   "not yet approved". Removed entirely. It was never a product name and stating it as one
+   would have been wrong even internally.
+3. **Internal commercial and sales material**: entitlement SOPs, SKU wording, sales-enablement
+   greps, a recorded prospect call and the roadmap deck. All removed.
 
-**To get access**, ask Amin Hasan or anyone with owner rights on the `isw-da` organisation to
-add you to the repo. If you want a public version, the Jira citations and the FY27 proposal
-have to come out first and the documentation licence question has to be settled properly.
-That is a decision for someone with the authority to make it, and it has not been made.
+**No credentials of any kind are here.** Two internal pages found during research do expose a
+licence key and host credentials in plain text; they were never cited and their contents were
+never copied here. Whoever owns those pages should still be told.
 
-## Current status: this repo has no release, and here is exactly why
+If you find something here that should not be public, mail a@hasan.co and it comes out. Note
+that removing a file from the working tree does not remove it from git history; anything that
+needs to leave the history is a separate, deliberate rewrite.
 
-`scripts/verify_kb.py` is **RED at `master`**, and has been since commit `e18200e`, which
-added the Web API spec layer. It fails one check, `api_docs_trace_to_source`:
+## Current status
 
-```
-FAIL api_docs_trace_to_source: 2 problems:
-  ['ENDPOINTS.md: cites no resolvable source doc',
-   'composer-si-integration.md: cites no resolvable source doc']
-```
-
-The check requires every file in `api/` to cite at least one resolvable `../docs/*.md`. Both
-of those files have real provenance that is not a corpus document: `ENDPOINTS.md` is derived
-from `logireportserver.yaml` shipped inside the server, and `composer-si-integration.md`
-cites Confluence page ids. So the finding is not "these files are unsourced", it is "the
-check asks a question these two files cannot answer".
-
-Either answer is defensible and both are somebody's call, not a formality:
-
-- **Give the two files a corpus citation** if an honest one exists, or
-- **Widen the check** so a file may instead declare a provenance the gate can verify: the
-  spec file exists and its hash matches `SPEC.sha256`, or the Confluence ids are present and
-  the file says the claim rests on them.
-
-What is not defensible is deleting the check or exempting the files by name, which would turn
-a real question into a green tick. Until it is settled, pushing a `v*` tag will run the
-workflow, the workflow will run both gates, and the release will not be cut. That is the
-system working.
+Both gates are green at `master`, and `v0.2.0` is tagged. `verify_kb.py` was red for a period
+after commit `e18200e` added the Web API spec layer, on `api_docs_trace_to_source`: the check
+requires every file in `api/` to cite at least one resolvable `../docs/*.md`, and two files
+had real provenance that was not a corpus document. That was settled by widening the check to
+accept a verifiable spec provenance, and by holding back the file whose only provenance was
+internal wiki pages. The check itself was not deleted and no file is exempted by name, which
+would have turned a real question into a green tick.
 
 ## Pin a version, do not track a branch
 
@@ -74,11 +62,11 @@ Every repo cuts tagged releases. The default branch moves, sometimes several tim
 and it moves because something turned out to be wrong. Pin unless you want that.
 
 ```bash
-git clone --branch v0.1.0 --depth 1 https://github.com/isw-da/logi-report-kb.git
+git clone --branch v0.2.0 --depth 1 https://github.com/isw-da/logi-report-kb.git
 ```
 
-This repo has no tag yet, for the reason above. Until it does, clone `master` and run the
-gates yourself.
+`v0.2.0` is the current tag. Run the gates yourself after cloning either way; they are the
+thing that proves the claims.
 
 ## What this repo holds
 
@@ -132,9 +120,9 @@ A skip is always named and counted, never silent.
 
 ## What is deliberately not here
 
-- **No credentials.** Two Confluence pages found during research expose a licence key and
-  host credentials in plain text. They were deliberately never cited and their contents were
-  never copied here. Whoever owns those pages should be told.
+- **No credentials.** Two internal pages found during research expose a licence key and host
+  credentials in plain text. They were deliberately never cited and their contents were never
+  copied here. Whoever owns those pages should be told.
 - **No customer names, deployed customer artefacts, or NDA-tagged material.**
 - **No product binaries, jars or installers.** The spec was copied out of a running server;
   the server is not in here.
@@ -148,6 +136,8 @@ Open an issue or a pull request. Two asks:
 
 1. **Run the gates before you open it.** If your change makes a claim, the gate should be
    the thing that proves it, and if no existing check covers your claim, add one.
-2. **Say how you know.** A file and line, a command and its output, a Confluence page id or
-   a Jira key. "I believe" is fine as long as it says so; the corpus already contains several
-   confident claims that turned out to be wrong, and each one cost somebody a day.
+2. **Say how you know.** A file and line, a command and its output, or a public source URL.
+   "I believe" is fine as long as it says so; the corpus already contains several confident
+   claims that turned out to be wrong, and each one cost somebody a day. Because this repo is
+   public, cite a public source: do not paste internal issue keys, wiki page ids or customer
+   detail into it.
