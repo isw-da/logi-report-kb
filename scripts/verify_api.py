@@ -94,7 +94,15 @@ def main():
             ps = subprocess.run(["docker", "ps", "--filter", f"name=^{CONTAINER}$",
                                  "--format", "{{.Names}}"],
                                 capture_output=True, text=True, timeout=25)
-            if CONTAINER not in ps.stdout.split():
+            if ps.returncode != 0:
+                # docker answered `version` and then refused `ps`. Permission
+                # denied on the socket is the realistic case. Empty stdout would
+                # otherwise read as "the container is not here", which turns a
+                # broken environment into a clean NOT APPLICABLE. An error is not
+                # an absence.
+                check("matches_running_server_spec", False,
+                      f"docker ps failed: {ps.stderr.strip()[:70]}")
+            elif CONTAINER not in ps.stdout.split():
                 check("matches_running_server_spec", None,
                       f"container '{CONTAINER}' is not running here")
             else:
