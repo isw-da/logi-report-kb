@@ -116,8 +116,10 @@ matching whole words in body text only.
 
 `verify_api.py` runs 6 checks. One of them, `matches_running_server_spec`, compares the
 committed spec against the one inside a running Logi Report Server container. That check now
-reports **NOT APPLICABLE** where no such container exists, by name and counted in the
-summary, rather than failing. Before that split it passed on the one laptop with the
+reports **NOT APPLICABLE** where no docker daemon or no such container exists, by name and
+counted in the summary, rather than failing. A docker that answers `version` and then refuses
+`ps`, which is what a permission problem on the socket looks like, still fails: an error is
+not an absence, and a fresh review caught that case reading as a clean skip. Before that split it passed on the one laptop with the
 container up and failed everywhere else, which made the gate a statement about the machine
 rather than about the repository. Where the container IS reachable and the hash differs, it
 still fails hard, and always will.
